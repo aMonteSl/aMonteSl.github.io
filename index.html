@@ -4,30 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio de aMonteSl</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Bienvenido a mi portafolio</h1>
-    </header>
-    <section>
-        <h2>Sobre mí</h2>
-        <p>Descripción breve sobre ti.</p>
-    </section>
-    <section>
-        <h2>Proyectos</h2>
-        <ul>
-            <li>Proyecto 1: Descripción y <a href="enlace_proyecto_1">enlace</a></li>
-            <li>Proyecto 2: Descripción y <a href="enlace_proyecto_2">enlace</a></li>
-        </ul>
-    </section>
-    <footer>
-        <p>Contacto: tuemail@example.com</p>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">aMonteSl</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre mí</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <header class="my-5">
+            <h1 class="text-center">Bienvenido a mi portafolio</h1>
+        </header>
+        <section id="about" class="my-5">
+            <h2>Sobre mí</h2>
+            <p>Descripción breve sobre ti.</p>
+        </section>
+        <section id="projects" class="my-5">
+            <h2>Proyectos</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Proyecto 1</h5>
+                            <p class="card-text">Descripción y <a href="enlace_proyecto_1">enlace</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Proyecto 2</h5>
+                            <p class="card-text">Descripción y <a href="enlace_proyecto_2">enlace</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="my-5">
+            <h2>Contacto</h2>
+            <p>Correo electrónico: <a href="mailto:tuemail@example.com">tuemail@example.com</a></p>
+        </section>
+    </div>
+    <footer class="text-center py-4 bg-dark text-white">
+        <p>&copy; 2024 aMonteSl. Todos los derechos reservados.</p>
     </footer>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-
-
-
-
