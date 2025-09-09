@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { SEOHead } from './SEOHead'
 import { Header } from './Header'
-import { Footer } from '@/components/sections/Footer'
-import { trackPageView } from '@/lib/analytics'
+import { Footer } from '../components/sections/Footer'
+import AnimatedBackground from '../components/background/AnimatedBackground'
+import { trackPageView } from '../lib/analytics'
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -17,7 +18,10 @@ export function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <SEOHead />
-      <div className="min-h-screen bg-bg text-ink">
+      <div className="min-h-screen bg-bg text-ink relative overflow-x-hidden">
+        {/* Animated background */}
+        <AnimatedBackground intensity="medium" />
+        
         {/* Skip to content link for accessibility */}
         <a
           href="#home"
@@ -28,7 +32,7 @@ export function RootLayout({ children }: RootLayoutProps) {
         
         <Header />
         
-        <main className="relative">
+        <main className="relative z-10">
           {children}
         </main>
         

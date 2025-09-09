@@ -27,23 +27,8 @@
   }
   
   body {
-    /* Rich textured background */
-    background: var(--bg);
-    background-image: 
-      /* Subtle grain texture */
-      radial-gradient(circle at 1px 1px, rgba(210, 182, 161, 0.025) 1px, transparent 0),
-      /* Organic noise pattern */
-      radial-gradient(circle at 50% 50%, rgba(220, 162, 147, 0.01) 0%, transparent 50%),
-      /* Diagonal stripes for depth */
-      linear-gradient(135deg, transparent 49%, rgba(210, 182, 161, 0.005) 50%, transparent 51%);
-    background-size: 
-      20px 20px,
-      200px 200px,
-      60px 60px;
-    background-position:
-      0 0,
-      25px 25px,
-      10px 10px;
+    /* Dark background to make animation visible */
+    background: #000;
     color: var(--ink);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(0.95rem, 0.35vw + 0.85rem, 1.125rem);
@@ -126,34 +111,30 @@
     height: 100dvh;
   }
 
-  /* Alternating section backgrounds for visual separation */
+  /* Fondos oscuros para que se vea la animación */
   section:nth-child(even) {
-    background: linear-gradient(
-      135deg,
-      rgba(11, 13, 16, 0.6) 0%,
-      rgba(17, 20, 24, 0.4) 100%
-    );
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(0.5px);
+  }
+
+  section:nth-child(odd):not(:first-child) {
+    background: rgba(5, 5, 5, 0.92);
     backdrop-filter: blur(0.5px);
   }
 
   /* Add subtle borders between sections */
   section + section {
-    border-top: 1px solid rgba(210, 182, 161, 0.08);
+    border-top: 1px solid rgba(210, 182, 161, 0.12);
   }
 
-  /* Hero section gets special treatment */
+  /* Hero section - fondo muy oscuro para mostrar animación */
   section:first-child {
-    background: linear-gradient(
-      135deg,
-      rgba(4, 3, 4, 0.95) 0%,
-      rgba(11, 13, 16, 0.9) 50%,
-      rgba(17, 20, 24, 0.85) 100%
-    );
+    background: rgba(0, 0, 0, 0.9);
     position: relative;
     overflow: hidden;
   }
 
-  /* Add a subtle glow effect behind text content */
+  /* Efecto sutil para legibilidad del texto */
   section:first-child::before {
     content: '';
     position: absolute;
@@ -163,12 +144,12 @@
     height: 600px;
     background: radial-gradient(
       ellipse at center,
-      rgba(210, 182, 161, 0.03) 0%,
-      transparent 70%
+      rgba(0, 0, 0, 0.3) 0%,
+      transparent 60%
     );
     transform: translate(-50%, -50%);
     pointer-events: none;
-    z-index: 0;
+    z-index: 1;
   }
 }
 
