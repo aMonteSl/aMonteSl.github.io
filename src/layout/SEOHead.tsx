@@ -1,11 +1,28 @@
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import { generatePageSEO, generateMetaTags } from '@/lib/seo'
 
 export function SEOHead() {
-  const location = useLocation()
-  const pageName = location.pathname === '/' ? 'home' : location.pathname.slice(1)
-  const seoData = generatePageSEO(pageName)
+  const [currentSection, setCurrentSection] = useState('home')
+  
+  useEffect(() => {
+    // Get current section from hash or default to home
+    const updateSection = () => {
+      const hash = window.location.hash.slice(1) || 'home'
+      setCurrentSection(hash)
+    }
+    
+    // Initial section
+    updateSection()
+    
+    // Listen for hash changes
+    window.addEventListener('hashchange', updateSection)
+    
+    return () => {
+      window.removeEventListener('hashchange', updateSection)
+    }
+  }, [])
+  
+  const seoData = generatePageSEO(currentSection)
   const metaTags = generateMetaTags(seoData)
 
   useEffect(() => {
@@ -54,7 +71,7 @@ export function SEOHead() {
         meta.content = tag.content
       }
     })
-  }, [seoData, metaTags])
+  }, [seoData, metaTags, currentSection])
 
   return null
 }

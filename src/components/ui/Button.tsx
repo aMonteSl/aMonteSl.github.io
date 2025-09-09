@@ -21,13 +21,7 @@ interface ButtonAsLink extends BaseButtonProps, Omit<React.AnchorHTMLAttributes<
   children: React.ReactNode
 }
 
-interface ButtonAsRouterLink extends BaseButtonProps {
-  as: typeof import('react-router-dom').Link
-  to: string
-  children: React.ReactNode
-}
-
-type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsRouterLink
+type ButtonProps = ButtonAsButton | ButtonAsLink
 
 export function Button({ 
   variant = 'primary',
@@ -94,15 +88,7 @@ export function Button({
     )
   }
 
-  if (as !== 'button') {
-    const Component = as
-    const linkProps = props as any
-    return (
-      <Component className={baseClasses} {...linkProps}>
-        {content}
-      </Component>
-    )
-  }
+
 
   const buttonProps = props as React.ButtonHTMLAttributes<HTMLButtonElement>
   return (

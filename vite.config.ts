@@ -19,7 +19,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
+          // router chunk no longer needed
           animation: ['framer-motion'],
         },
       },
