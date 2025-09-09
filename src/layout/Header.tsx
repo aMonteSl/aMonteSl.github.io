@@ -29,10 +29,10 @@ export function Header() {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-20 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-bg/90 backdrop-blur-md border-b border-surface-2/50 py-3'
-          : 'bg-transparent py-4'
+          ? 'bg-surface-2/60 backdrop-blur-lg border-b border-surface-2/50 py-3'
+          : 'bg-surface-1/20 backdrop-blur-sm py-4'
       }`}
       initial={prefersReducedMotion ? false : { y: -100 }}
       animate={{ y: 0 }}

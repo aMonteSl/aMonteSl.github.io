@@ -26,9 +26,9 @@
     scroll-padding-top: 120px;
   }
   
-  body {
-    /* Dark background to make animation visible */
-    background: #000;
+  html, body {
+    /* Guarantee base contrast for animated background */
+    background: #040304;
     color: var(--ink);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: clamp(0.95rem, 0.35vw + 0.85rem, 1.125rem);
@@ -100,6 +100,13 @@
     scrollbar-color: var(--muted) transparent;
   }
 
+  /* Print styles - disable animated background */
+  @media print {
+    [aria-hidden="true"] {
+      display: none !important;
+    }
+  }
+
   /* Handle dynamic viewport units */
   .min-h-screen {
     min-height: 100vh;
@@ -111,45 +118,27 @@
     height: 100dvh;
   }
 
-  /* Fondos oscuros para que se vea la animación */
+  /* Subtle section contrast for readability over animated background */
   section:nth-child(even) {
-    background: rgba(0, 0, 0, 0.92);
+    background: rgba(11, 13, 16, 0.2);
     backdrop-filter: blur(0.5px);
   }
 
   section:nth-child(odd):not(:first-child) {
-    background: rgba(5, 5, 5, 0.92);
+    background: rgba(17, 20, 24, 0.15);
     backdrop-filter: blur(0.5px);
   }
 
-  /* Add subtle borders between sections */
+  /* Subtle borders between sections */
   section + section {
-    border-top: 1px solid rgba(210, 182, 161, 0.12);
+    border-top: 1px solid rgba(210, 182, 161, 0.08);
   }
 
-  /* Hero section - fondo muy oscuro para mostrar animación */
+  /* Hero section - minimal overlay for text readability */
   section:first-child {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(4, 3, 4, 0.1);
     position: relative;
     overflow: hidden;
-  }
-
-  /* Efecto sutil para legibilidad del texto */
-  section:first-child::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 800px;
-    height: 600px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.3) 0%,
-      transparent 60%
-    );
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 1;
   }
 }
 

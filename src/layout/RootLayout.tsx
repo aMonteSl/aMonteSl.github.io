@@ -18,10 +18,10 @@ export function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <SEOHead />
-      <div className="min-h-screen bg-bg text-ink relative overflow-x-hidden">
-        {/* Animated background */}
-        <AnimatedBackground intensity="medium" />
-        
+      {/* Global animated background - covers entire site */}
+      <AnimatedBackground />
+      
+      <div className="min-h-screen text-ink relative z-10">
         {/* Skip to content link for accessibility */}
         <a
           href="#home"
@@ -32,7 +32,7 @@ export function RootLayout({ children }: RootLayoutProps) {
         
         <Header />
         
-        <main className="relative z-10">
+        <main className="relative">
           {children}
         </main>
         

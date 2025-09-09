@@ -22,7 +22,6 @@
     "@tailwindcss/typography": "^0.5.16",
     "framer-motion": "^10.16.5",
     "lucide-react": "^0.542.0",
-    "ogl": "^1.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1",
