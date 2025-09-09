@@ -7,19 +7,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand colors with exact values
+        // Brand colors with new palette
         brand: {
           black: '#040304',
           brown: '#D2B6A1',
+          'brown-light': '#EFD2BC',
+          secondary: '#DCA293',
         },
-  // semantic variables mapped to CSS vars
-  bg: 'var(--bg)',
-  'surface-1': 'var(--surface-1)',
-  'surface-2': 'var(--surface-2)',
-  ink: 'var(--ink)',
-  muted: 'var(--muted)',
-  accent: 'var(--accent)',
-  'accent-2': 'var(--accent-2)',
+        // Semantic variables mapped to CSS vars
+        bg: 'var(--bg)',
+        'surface-1': 'var(--surface-1)',
+        'surface-2': 'var(--surface-2)',
+        ink: 'var(--ink)',
+        muted: 'var(--muted)',
+        accent: 'var(--accent)',
+        'accent-2': 'var(--accent-2)',
+        'accent-3': 'var(--accent-3)',
         // CSS Variables approach for consistent theming
       },
       screens: {

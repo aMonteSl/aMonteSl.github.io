@@ -17,7 +17,7 @@ export function Badge({
   const variantClasses = {
     default: 'bg-surface-1 text-muted border-surface-2',
     primary: 'bg-accent/20 text-accent border-accent/30',
-    secondary: 'bg-accent-2/20 text-accent-2 border-accent-2/30',
+    secondary: 'bg-accent-3/20 text-accent-3 border-accent-3/30',
     success: 'bg-green-500/20 text-green-400 border-green-500/30',
     warning: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
     danger: 'bg-red-500/20 text-red-400 border-red-500/30',

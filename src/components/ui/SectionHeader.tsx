@@ -33,7 +33,7 @@ export function SectionHeader({
       transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
     >
       {/* Gradient accent line */}
-      <div className="w-16 h-0.5 bg-gradient-to-r from-accent to-accent-2 mx-auto mb-6" />
+      <div className="w-16 h-0.5 bg-gradient-to-r from-accent via-accent-3 to-accent-2 mx-auto mb-6" />
       
       {subtitle && (
         <p className="text-accent font-medium text-sm uppercase tracking-wider">
@@ -41,7 +41,7 @@ export function SectionHeader({
         </p>
       )}
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-ink">
-        <span className="bg-gradient-to-r from-ink via-accent to-accent-2 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-r from-ink via-accent-3 to-accent bg-clip-text text-transparent">
           {title}
         </span>
       </h2>

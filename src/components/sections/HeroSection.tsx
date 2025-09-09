@@ -9,8 +9,23 @@ export function HeroSection() {
   const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-br from-bg via-surface-1/50 to-bg">
-      <div className="max-w-4xl mx-auto text-center">
+    <section id="home" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+      {/* Animated Background Gradient */}
+      <div className="absolute inset-0 opacity-30">
+        <div 
+          className={`absolute inset-0 bg-gradient-to-br from-accent via-accent-3 to-accent-2 ${
+            prefersReducedMotion ? '' : 'animate-gradient-shift'
+          }`}
+          style={{
+            background: prefersReducedMotion 
+              ? 'linear-gradient(135deg, #D2B6A1 0%, #DCA293 50%, #EFD2BC 100%)'
+              : undefined
+          }}
+        />
+        <div className="absolute inset-0 bg-bg/85" />
+      </div>
+      
+      <div className="max-w-4xl mx-auto text-center relative z-10">
         {/* Profile Image */}
         <motion.div
           initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.8 }}
@@ -18,8 +33,8 @@ export function HeroSection() {
           transition={{ duration: prefersReducedMotion ? 0 : 0.8 }}
           className="mb-8"
         >
-          <div className="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 mx-auto rounded-full overflow-hidden ring-4 ring-accent/20 shadow-2xl shadow-accent/10">
-            <img
+          <div className="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 mx-auto rounded-full overflow-hidden ring-4 ring-accent-3/30 shadow-2xl shadow-accent-3/20 hover:ring-accent/40 transition-all duration-500">
+            <motion.img
               src="/src/assets/profile.jpg"
               alt={profile.name}
               width="224"
@@ -27,6 +42,8 @@ export function HeroSection() {
               className="w-full h-full object-cover"
               loading="eager"
               decoding="async"
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+              transition={{ duration: 0.3 }}
             />
           </div>
         </motion.div>
@@ -39,7 +56,7 @@ export function HeroSection() {
           className="space-y-6"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-ink mb-4">
-            <span className="bg-gradient-to-r from-accent via-ink to-accent-2 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-accent via-accent-3 to-accent-2 bg-clip-text text-transparent animate-gradient-x">
               {profile.name}
             </span>
           </h1>

@@ -7,7 +7,7 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 ## 🎨 Design Features
 
 - **Single-Page Layout**: Smooth scrolling between sections with sticky navigation header
-- **Dark Theme**: Elegant dark aesthetic with warm brown accent colors (#D2B6A1) and steel blue secondary (#6E8CA0)
+- **Dark Theme**: Elegant dark aesthetic with new brown palette (#D2B6A1, #EFD2BC) and coral secondary (#DCA293)
 - **Responsive Design**: Mobile-first approach with collapsible hamburger menu on smaller screens
 - **Smooth Animations**: Framer Motion powered micro-interactions with respect for prefers-reduced-motion
 - **Accessibility**: WCAG compliant with proper focus management, semantic HTML, and keyboard navigation
@@ -248,6 +248,31 @@ This project is open source and available under the [MIT License](LICENSE).
 3. Make your changes
 4. Run tests and linting
 5. Submit a pull request
+
+## 🎨 Brand Colors & Customization
+
+### Color Palette
+The portfolio uses a carefully curated brown palette:
+- **Base Background**: `#040304`
+- **Primary Brown**: `#D2B6A1` 
+- **Light Brown**: `#EFD2BC`
+- **Coral Accent**: `#DCA293`
+- **Surfaces**: `#0B0D10`, `#111418`
+- **Text**: `#E6EDF3` (ink), `#A9B1BB` (muted)
+
+### Hero Animation Features
+- **Animated Background**: Subtle gradient shift with brown palette
+- **Profile Image**: Hover effects with ring animation  
+- **Gradient Text**: Animated gradient on name text
+- **Reduced Motion**: All animations respect `prefers-reduced-motion`
+
+### Customization Guide
+1. **Profile Photo**: Replace `src/assets/profile.jpg` with your actual photo (400x400px recommended)
+2. **Gallery Images**: Add real project screenshots to `src/assets/gallery/`
+3. **Content Updates**: Modify data files in `src/data/` for your information
+4. **Colors**: Update CSS variables in `src/styles/index.css` for different palette
+5. **Hero Animation**: Modify `HeroSection.tsx` to change background effects
+6. **Custom Domain**: Optional setup with CNAME file and DNS configuration
 
 ## 📞 Support
 

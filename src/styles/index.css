@@ -4,15 +4,15 @@
 
 @layer base {
   :root {
-    /* Brand colors - exact values */
+    /* Brand colors - updated palette */
     --bg: #040304;
     --surface-1: #0B0D10;
     --surface-2: #111418;
     --ink: #E6EDF3;
     --muted: #A9B1BB;
     --accent: #D2B6A1;
-  /* Secondary accent (muted steel-blue) */
-  --accent-2: #6E8CA0;
+    --accent-2: #EFD2BC;
+    --accent-3: #DCA293;
     
     /* Safe area insets for mobile */
     --safe-area-inset-top: env(safe-area-inset-top, 0);
@@ -244,6 +244,45 @@
   ::selection {
     background-color: rgba(210, 182, 161, 0.2);
     color: var(--ink);
+  }
+
+  /* Gradient animations */
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  .animate-gradient-shift {
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 3s ease infinite;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gradient-shift,
+    .animate-gradient-x {
+      animation: none;
+    }
   }
 
   /* Text wrapping utilities */

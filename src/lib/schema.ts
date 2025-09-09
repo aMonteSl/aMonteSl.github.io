@@ -7,6 +7,7 @@ export interface PersonSchema {
   name: string
   email: string
   url: string
+  image: string
   sameAs: string[]
   address: {
     '@type': string
@@ -45,6 +46,7 @@ export function generatePersonSchema(): PersonSchema {
     name: profile.name,
     email: profile.email,
     url: 'https://amontesl.github.io',
+    image: 'https://amontesl.github.io/src/assets/profile.jpg',
     sameAs: [
       `https://${profile.linkedin}`,
       `https://${profile.github}`,

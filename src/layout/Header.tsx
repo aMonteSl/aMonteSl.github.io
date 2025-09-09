@@ -45,7 +45,7 @@ export function Header() {
           className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-accent rounded-lg p-1"
         >
           {/* Avatar */}
-          <div className={`rounded-full overflow-hidden ring-2 ring-accent/20 transition-all duration-300 ${
+          <div className={`rounded-full overflow-hidden ring-2 ring-accent-3/20 transition-all duration-300 ${
             isScrolled ? 'w-8 h-8' : 'w-10 h-10'
           }`}>
             <img
@@ -54,7 +54,7 @@ export function Header() {
               width="40"
               height="40"
               className="w-full h-full object-cover"
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
           </div>
