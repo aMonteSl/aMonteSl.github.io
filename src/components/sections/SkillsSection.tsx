@@ -22,7 +22,7 @@ export function SkillsSection() {
   return (
     <section 
       id="skills" 
-      className="min-h-screen py-section-y px-section-x container-responsive"
+      className="py-20 px-6 bg-gradient-to-b from-surface-1/20 to-bg"
     >
       <div className="max-w-content mx-auto">
         <SectionHeader

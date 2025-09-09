@@ -40,10 +40,10 @@ export function Button({
   ...props 
 }: ButtonProps) {
   const variantClasses = {
-    primary: 'bg-primary text-background hover:bg-blue-500 focus:ring-primary',
-    secondary: 'bg-surface text-text-primary border border-border hover:bg-border-hover focus:ring-secondary',
-    ghost: 'text-text-muted hover:text-text-primary hover:bg-surface focus:ring-secondary',
-    outline: 'border border-border text-text-primary hover:bg-surface focus:ring-primary'
+    primary: 'bg-accent text-bg hover:bg-accent/90 focus:ring-accent',
+    secondary: 'bg-surface-1 text-ink border border-surface-2 hover:bg-surface-2 focus:ring-accent',
+    ghost: 'text-muted hover:text-ink hover:bg-surface-1 focus:ring-accent',
+    outline: 'border border-surface-2 text-ink hover:bg-surface-1 focus:ring-accent'
   }
 
   const sizeClasses = {
@@ -53,8 +53,8 @@ export function Button({
   }
 
   const baseClasses = cn(
-    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background',
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 gap-2',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-bg',
     'disabled:opacity-50 disabled:cursor-not-allowed',
     variantClasses[variant],
     sizeClasses[size],

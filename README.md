@@ -6,20 +6,21 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 
 ## 🎨 Design Features
 
-- **Two-Pane Layout**: Fixed left sidebar with portrait and contact info, scrollable right content area
-- **Dark Theme**: Elegant dark aesthetic with warm brown accent colors derived from headshot background
-- **Responsive Design**: Mobile-first approach with collapsible drawer navigation on smaller screens
-- **Smooth Animations**: Framer Motion powered micro-interactions and page transitions
-- **Accessibility**: WCAG compliant with proper focus management and semantic HTML
+- **Single-Page Layout**: Smooth scrolling between sections with sticky navigation header
+- **Dark Theme**: Elegant dark aesthetic with warm brown accent colors (#D2B6A1) and steel blue secondary (#6E8CA0)
+- **Responsive Design**: Mobile-first approach with collapsible hamburger menu on smaller screens
+- **Smooth Animations**: Framer Motion powered micro-interactions with respect for prefers-reduced-motion
+- **Accessibility**: WCAG compliant with proper focus management, semantic HTML, and keyboard navigation
 
 ## 🚀 Technology Stack
 
 - **Frontend**: React 18 + TypeScript
-- **Styling**: Tailwind CSS with custom CSS variables
+- **Styling**: Tailwind CSS with custom CSS variables and container queries
 - **Build Tool**: Vite for fast development and optimized builds
-- **Animations**: Framer Motion for smooth transitions
+- **Animations**: Framer Motion for smooth transitions with accessibility support
+- **Image Gallery**: Yet Another React Lightbox for accessible image viewing
 - **Icons**: Lucide React for consistent iconography
-- **Code Quality**: ESLint + Prettier
+- **Code Quality**: ESLint + Prettier + TypeScript strict mode
 
 ## 📁 Project Structure
 

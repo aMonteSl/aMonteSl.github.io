@@ -13,7 +13,7 @@ export function EducationSection() {
   return (
     <section 
       id="education" 
-      className="min-h-screen py-section-y px-section-x container-responsive"
+      className="py-20 px-6 bg-gradient-to-b from-surface-1/30 to-bg"
     >
       <div className="max-w-content mx-auto">
         <SectionHeader

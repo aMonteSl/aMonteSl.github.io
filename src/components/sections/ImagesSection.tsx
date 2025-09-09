@@ -1,116 +1,95 @@
-import React, { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
-import { SectionHeader } from '../ui/SectionHeader';
-import { Card } from '../ui/Card';
-import { gallery } from '../../data/gallery';
-import { usePrefersReducedMotion } from '../../hooks/useMediaQuery';
+import React, { useState } from 'react'
+import { motion } from 'framer-motion'
+import Lightbox from 'yet-another-react-lightbox'
+import 'yet-another-react-lightbox/styles.css'
+import { SectionHeader } from '../ui/SectionHeader'
+import { Card } from '../ui/Card'
+import { Badge } from '../ui/Badge'
+import { gallery } from '../../data/gallery'
+import { usePrefersReducedMotion } from '../../hooks/useMediaQuery'
 
 export function ImagesSection() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+  const prefersReducedMotion = usePrefersReducedMotion()
 
-  const openLightbox = useCallback((index: number) => setLightboxIndex(index), []);
-  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
-  const showPrev = useCallback(() => setLightboxIndex(i => (i === null ? null : (i - 1 + gallery.length) % gallery.length)), []);
-  const showNext = useCallback(() => setLightboxIndex(i => (i === null ? null : (i + 1) % gallery.length)), []);
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index)
+    setLightboxOpen(true)
+  }
 
-  // Keyboard navigation for lightbox
-  React.useEffect(() => {
-    if (lightboxIndex === null) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') showPrev();
-      if (e.key === 'ArrowRight') showNext();
-    }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [lightboxIndex, closeLightbox, showPrev, showNext]);
+  const lightboxSlides = gallery.map(item => ({
+    src: item.src,
+    alt: item.alt,
+    width: item.width,
+    height: item.height
+  }))
 
   return (
-    <section id="images" className="py-section-y px-section-x container-responsive">
-      <div className="max-w-content mx-auto">
-        <SectionHeader title="Images" subtitle="Gallery & screenshots" />
+    <section id="images" className="py-20 px-6 bg-gradient-to-b from-surface-1/30 to-bg">
+      <div className="max-w-7xl mx-auto">
+        <SectionHeader
+          title="Images & Portfolio"
+          subtitle="Visual showcase of projects, achievements, and professional journey"
+        />
 
         <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 mt-12"
           initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: prefersReducedMotion ? 0 : 0.6 }}
-          className="cards-grid"
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.2 }}
         >
-          {gallery.map((item, idx) => (
-            <Card key={item.src} className="overflow-hidden">
-              <button
-                onClick={() => openLightbox(idx)}
-                className="w-full text-left"
-                aria-label={`Open image ${item.alt}`}
-              >
-                <picture>
-                  {item.sources?.map(s => (
-                    <source key={s.src} srcSet={s.src} type={s.type} media={`(min-width: ${s.width}px)`} />
-                  ))}
+          {gallery.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.4, delay: index * 0.1 }}
+              whileHover={prefersReducedMotion ? {} : { y: -4 }}
+            >
+              <Card className="group cursor-pointer overflow-hidden" onClick={() => openLightbox(index)}>
+                <div className="aspect-[3/2] overflow-hidden">
                   <img
                     src={item.src}
+                    alt={item.alt}
                     width={item.width}
                     height={item.height}
                     loading="lazy"
                     decoding="async"
-                    alt={item.alt}
-                    className="w-full h-auto block object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                </picture>
-                {item.caption && <div className="p-3 text-sm text-muted">{item.caption}</div>}
-              </button>
-            </Card>
+                </div>
+                <div className="p-4">
+                  {item.category && (
+                    <Badge variant="secondary" className="mb-2">
+                      {item.category}
+                    </Badge>
+                  )}
+                  {item.caption && (
+                    <p className="text-sm text-muted leading-relaxed">
+                      {item.caption}
+                    </p>
+                  )}
+                </div>
+              </Card>
+            </motion.div>
           ))}
         </motion.div>
-
-        {/* Minimal Lightbox */}
-        {lightboxIndex !== null && (
-          <div
-            role="dialog"
-            aria-modal="true"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-            onClick={closeLightbox}
-          >
-            <div className="max-w-4xl w-full">
-              <div className="relative">
-                <button
-                  onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
-                  className="absolute top-3 right-3 z-20 p-2 rounded bg-surface-1/80 text-accent"
-                  aria-label="Close"
-                >
-                  ✕
-                </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); showPrev(); }}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded bg-surface-1/80 text-accent"
-                  aria-label="Previous"
-                >
-                  ‹
-                </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); showNext(); }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 p-2 rounded bg-surface-1/80 text-accent"
-                  aria-label="Next"
-                >
-                  ›
-                </button>
-                <img
-                  src={gallery[lightboxIndex].src}
-                  alt={gallery[lightboxIndex].alt}
-                  width={gallery[lightboxIndex].width}
-                  height={gallery[lightboxIndex].height}
-                  className="w-full h-auto rounded shadow-xl mx-auto"
-                />
-                {gallery[lightboxIndex].caption && (
-                  <div className="mt-3 text-center text-muted">{gallery[lightboxIndex].caption}</div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        index={lightboxIndex}
+        slides={lightboxSlides}
+        animation={{ fade: prefersReducedMotion ? 0 : 250 }}
+        carousel={{ finite: true }}
+        toolbar={{
+          buttons: ['close']
+        }}
+      />
     </section>
-  );
+  )
 }

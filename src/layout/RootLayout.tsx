@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { SEOHead } from './SEOHead'
-import { Navbar } from '@/components/sections/Navbar'
+import { Header } from './Header'
 import { Footer } from '@/components/sections/Footer'
 import { trackPageView } from '@/lib/analytics'
 
@@ -10,31 +9,26 @@ interface RootLayoutProps {
 }
 
 export function RootLayout({ children }: RootLayoutProps) {
-  const location = useLocation()
-
   useEffect(() => {
     // Track page views
     trackPageView()
-    
-    // Scroll to top on route change
-    window.scrollTo(0, 0)
-  }, [location])
+  }, [])
 
   return (
     <>
       <SEOHead />
-      <div className="min-h-screen bg-background text-text-primary">
+      <div className="min-h-screen bg-bg text-ink">
         {/* Skip to content link for accessibility */}
         <a
-          href="#main-content"
-          className="skip-link"
+          href="#home"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-accent focus:text-bg focus:rounded-lg focus:font-medium"
         >
           Skip to main content
         </a>
         
-        <Navbar />
+        <Header />
         
-        <main id="main-content" className="flex-1">
+        <main className="relative">
           {children}
         </main>
         

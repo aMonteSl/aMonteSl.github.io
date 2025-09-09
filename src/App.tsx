@@ -1,33 +1,27 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { RootLayout } from './components/layout/RootLayout'
-import { Home } from './pages/Home'
-import { Projects } from './pages/Projects'
-import { Education } from './pages/Education'
-import { Skills } from './pages/Skills'
-import { Activities } from './pages/Activities'
-import { Languages } from './pages/Languages'
-import ImagesPage from './pages/Images'
-import { Contact } from './pages/Contact'
-import { Resume } from './pages/Resume'
-import { NotFound } from './pages/NotFound'
+import { RootLayout } from './layout/RootLayout'
+import { HeroSection } from './components/sections/HeroSection'
+import { ProjectsSection } from './components/sections/ProjectsSection'
+import { EducationSection } from './components/sections/EducationSection'
+import { ActivitiesSection } from './components/sections/ActivitiesSection'
+import { SkillsSection } from './components/sections/SkillsSection'
+import { LanguagesSection } from './components/sections/LanguagesSection'
+import { ImagesSection } from './components/sections/ImagesSection'
+import { ContactSection } from './components/sections/ContactSection'
+import { ResumeSection } from './components/sections/ResumeSection'
 
 function App() {
   return (
     <RootLayout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/skills" element={<Skills />} />
-        <Route path="/activities" element={<Activities />} />
-        <Route path="/languages" element={<Languages />} />
-        <Route path="/images" element={<ImagesPage />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="*" element={<Navigate to="/404" replace />} />
-      </Routes>
+      <HeroSection />
+      <ProjectsSection />
+      <EducationSection />
+      <ActivitiesSection />
+      <SkillsSection />
+      <LanguagesSection />
+      <ImagesSection />
+      <ContactSection />
+      <ResumeSection />
     </RootLayout>
   )
 }

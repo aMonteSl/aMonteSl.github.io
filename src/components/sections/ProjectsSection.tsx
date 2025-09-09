@@ -13,7 +13,7 @@ export function ProjectsSection() {
   return (
     <section 
       id="projects" 
-      className="min-h-screen py-section-y px-section-x container-responsive"
+      className="py-20 px-6 bg-gradient-to-b from-bg to-surface-1/30"
     >
       <div className="max-w-content mx-auto">
         <SectionHeader
