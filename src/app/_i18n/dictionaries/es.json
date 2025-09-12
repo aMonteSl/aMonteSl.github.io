@@ -44,24 +44,15 @@
   },
   "projects": {
     "title": "Proyectos destacados",
-    "items": {
-      "codexr": {
-        "title": "Code-XR",
-        "summary": "Visualización XR/3D/AR de métricas de software con análisis estático (ej. CCN), modos LivePanel/XR, persistencia JSON."
-      },
-      "docs": {
-        "title": "Code-XR Docs",
-        "summary": "Sitio de documentación Vite + Tailwind enfocado en DX y despliegue continuo."
-      },
-      "portfolio": {
-        "title": "Portfolio",
-        "summary": "Este sitio: Next.js + Tailwind, exportación estática, SEO/OG, accesibilidad y animaciones sutiles."
-      },
-      "xr": {
-        "title": "Experimentos XR",
-        "summary": "Prototipos para HUDs e interacciones WebXR enfocados en rendimiento y legibilidad."
-      }
-    }
+    "subtitle": "Trabajo seleccionado y casos de estudio",
+    "ctaAll": "Ver detalles",
+    "empty": "Próximamente.",
+    "back": "Volver a proyectos",
+    "overview": "Resumen",
+    "highlights": "Puntos clave",
+    "role": "Rol y contribuciones",
+    "tech": "Tecnologías",
+    "links": { "repo": "Repositorio", "demo": "Demo" }
   },
   "experience": {
     "title": "Experiencia / Colaboraciones",

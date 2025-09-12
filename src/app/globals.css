@@ -251,3 +251,43 @@ body::before {
   content-visibility: auto;
   contain-intrinsic-size: 1px 1000px;
 }
+
+/* Fullpage scroll-snap styles - activated only when 'fullpage' class is added */
+html.fullpage, body.fullpage {
+  height: 100%;
+  scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
+}
+
+main.fullpage {
+  height: 100svh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+section[data-snap] {
+  min-height: 100svh; /* Uses 100svh for better iOS support */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Prevent header from covering anchor starts */
+section[data-snap] { 
+  scroll-margin-top: 84px; /* Adjust to actual header height */
+}
+
+/* Smooth transitions for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html.fullpage, body.fullpage {
+    scroll-behavior: auto;
+  }
+  
+  main.fullpage {
+    scroll-snap-type: none;
+  }
+  
+  section[data-snap] {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+}

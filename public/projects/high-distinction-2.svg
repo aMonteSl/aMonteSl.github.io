@@ -1,0 +1,42 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#1e293b"/>
+  <rect x="50" y="50" width="700" height="500" fill="#334155" stroke="#64748b" stroke-width="2" rx="8"/>
+  
+  <!-- Advanced Graduation Cap with Tassel -->
+  <polygon points="400,140 310,175 490,175" fill="#fbbf24"/>
+  <rect x="395" y="130" width="10" height="45" fill="#92400e"/>
+  <circle cx="410" cy="130" r="8" fill="#dc2626"/>
+  <path d="M410,130 Q420,135 415,145" stroke="#dc2626" stroke-width="3" fill="none"/>
+  
+  <!-- Double Excellence Stars -->
+  <circle cx="280" cy="240" r="35" fill="#8b5cf6" opacity="0.9"/>
+  <text x="280" y="250" font-family="system-ui" font-size="20" fill="white" text-anchor="middle">★★</text>
+  
+  <circle cx="520" cy="240" r="35" fill="#10b981" opacity="0.9"/>
+  <text x="520" y="250" font-family="system-ui" font-size="18" fill="white" text-anchor="middle" font-weight="bold">HD</text>
+  
+  <!-- Advanced Books Stack -->
+  <rect x="340" y="320" width="120" height="18" fill="#8b5cf6" rx="3"/>
+  <rect x="345" y="302" width="110" height="18" fill="#06b6d4" rx="3"/>
+  <rect x="350" y="284" width="100" height="18" fill="#f59e0b" rx="3"/>
+  <rect x="355" y="266" width="90" height="18" fill="#ef4444" rx="3"/>
+  
+  <!-- Diploma/Certificate -->
+  <rect x="330" y="340" width="140" height="20" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" rx="2"/>
+  <circle cx="345" cy="350" r="6" fill="#fbbf24"/>
+  
+  <!-- Project Title -->
+  <text x="400" y="410" font-family="system-ui" font-size="32" fill="#f1f5f9" text-anchor="middle" font-weight="bold">High Distinction</text>
+  <text x="400" y="440" font-family="system-ui" font-size="20" fill="#94a3b8" text-anchor="middle">Advanced Achievement</text>
+  <text x="400" y="465" font-family="system-ui" font-size="16" fill="#64748b" text-anchor="middle">Course 2</text>
+  
+  <!-- Advanced Achievement Badges -->
+  <rect x="220" y="510" width="90" height="30" fill="#dc2626" rx="15"/>
+  <text x="265" y="530" font-family="system-ui" font-size="11" fill="white" text-anchor="middle">Mastery</text>
+  
+  <rect x="330" y="510" width="100" height="30" fill="#7c3aed" rx="15"/>
+  <text x="380" y="530" font-family="system-ui" font-size="11" fill="white" text-anchor="middle">Leadership</text>
+  
+  <rect x="450" y="510" width="110" height="30" fill="#059669" rx="15"/>
+  <text x="505" y="530" font-family="system-ui" font-size="11" fill="white" text-anchor="middle">Distinction</text>
+</svg>

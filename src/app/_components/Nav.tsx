@@ -7,6 +7,7 @@ import { useI18n } from '../_i18n/I18nProvider'
 
 const navigation = [
   { nameKey: 'home', href: '#home' },
+  { nameKey: 'projects', href: '#projects' },
 ]
 
 export function Nav() {
@@ -61,6 +62,21 @@ export function Nav() {
     }
   }, [])
 
+  const handleNavClick = (href: string, event: React.MouseEvent) => {
+    const sectionId = href.replace('#', '')
+    const targetElement = document.getElementById(sectionId)
+    const isFullpage = document.documentElement.classList.contains('fullpage')
+    
+    if (targetElement && isFullpage) {
+      // Prevent default link behavior in fullpage mode
+      event.preventDefault()
+      
+      // Use scrollIntoView to navigate to the section within main.fullpage
+      targetElement.scrollIntoView({ behavior: 'smooth' })
+    }
+    // If not fullpage mode, let the default link behavior work
+  }
+
   return (
     <nav className="flex items-center space-x-1" role="navigation" aria-label="Navegación principal">
       {navigation.map(({ nameKey, href }) => {
@@ -71,6 +87,7 @@ export function Nav() {
           <Link
             key={href}
             href={href}
+            onClick={(event) => handleNavClick(href, event)}
             className={cn(
               "px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg",
               "hover:text-fg hover:bg-card/50",

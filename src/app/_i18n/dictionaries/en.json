@@ -43,28 +43,15 @@
   },
   "projects": {
     "title": "Featured projects",
-    "items": {
-      "codexr": { 
-        "title": "Code-XR", 
-        "summary": "XR/3D/AR visualization of software metrics with static analysis (e.g., CCN), LivePanel/XR modes, JSON persistence.", 
-        "tags": ["React","A-Frame","babia-xr","Python","VS Code API"] 
-      },
-      "docs": { 
-        "title": "Code-XR Docs", 
-        "summary": "Vite + Tailwind documentation site focused on DX and continuous deployment.", 
-        "tags": ["Vite","Tailwind","GitHub Pages"] 
-      },
-      "portfolio": { 
-        "title": "Portfolio", 
-        "summary": "This site: Next.js + Tailwind, static export, SEO/OG, accessibility, and subtle animations.", 
-        "tags": ["Next.js","Tailwind"] 
-      },
-      "xr": { 
-        "title": "XR Experiments", 
-        "summary": "Prototypes for HUDs and WebXR interactions focused on performance and legibility.", 
-        "tags": ["WebXR","A-Frame"] 
-      }
-    }
+    "subtitle": "Selected work and case studies",
+    "ctaAll": "See details",
+    "empty": "Projects coming soon.",
+    "back": "Back to projects",
+    "overview": "Overview",
+    "highlights": "Highlights",
+    "role": "Role & contributions",
+    "tech": "Tech stack",
+    "links": { "repo": "Repository", "demo": "Live demo" }
   },
   "experience": {
     "title": "Experience / Collaborations",
