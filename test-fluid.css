@@ -1,0 +1,8 @@
+/* Test file to see generated fluid classes */
+.test-fluid-sizes {
+  @apply text-fluid-xs text-fluid-sm text-fluid-base text-fluid-lg text-fluid-xl text-fluid-2xl text-fluid-3xl text-fluid-4xl text-fluid-5xl;
+}
+
+.test-spacing {
+  @apply p-fluid-xs p-fluid-sm p-fluid-base p-fluid-lg p-fluid-xl;
+}

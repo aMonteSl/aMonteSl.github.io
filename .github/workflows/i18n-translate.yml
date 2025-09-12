@@ -1,0 +1,97 @@
+name: I18n Translation
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+  # Auto trigger when en.json changes
+  push:
+    paths:
+      - 'src/app/_i18n/dictionaries/en.json'
+    branches:
+      - main
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Need full history for proper diff
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run translation script
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+          CI: true
+        run: node scripts/translate.mjs
+      
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if git diff --quiet HEAD src/app/_i18n/dictionaries/es.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create Pull Request
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: '🌍 Update Spanish translations (auto-generated)'
+          title: '🌍 Update Spanish translations'
+          body: |
+            ## Automatic Translation Update
+            
+            This PR was automatically generated to update Spanish translations based on changes to the English dictionary.
+            
+            ### Changes
+            - 📝 Updated `src/app/_i18n/dictionaries/es.json`
+            - 🤖 Generated using automated translation service
+            - ✅ Ready for review and merge
+            
+            ### Review Checklist
+            - [ ] Check translation quality
+            - [ ] Verify no keys were lost or added
+            - [ ] Test website functionality with new translations
+            
+            ---
+            *This PR was created automatically by the i18n translation workflow.*
+          branch: i18n/es-update
+          branch-suffix: timestamp
+          delete-branch: true
+          labels: |
+            i18n
+            auto-generated
+            spanish
+          draft: false
+      
+      - name: Log translation results
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          echo "✅ Translation completed successfully"
+          echo "📝 Spanish dictionary updated"
+          echo "🔄 Pull request created for review"
+      
+      - name: Log no changes
+        if: steps.verify-changed-files.outputs.changed == 'false'
+        run: |
+          echo "ℹ️ No changes detected in Spanish translations"
+          echo "🎯 Dictionary is already up to date"

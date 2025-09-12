@@ -1,0 +1,36 @@
+{
+  "projects": [
+    {
+      "titleKey": "codexr",
+      "period": "2024-2025",
+      "summaryKey": "codexr",
+      "tags": ["React", "A-Frame", "babia-xr", "Python", "VS Code API"],
+      "repoUrl": "https://github.com/aMonteSl/Code-XR",
+      "demoUrl": null
+    },
+    {
+      "titleKey": "docs",
+      "period": "2024",
+      "summaryKey": "docs",
+      "tags": ["Vite", "Tailwind", "GitHub Pages"],
+      "repoUrl": "https://github.com/aMonteSl/Code-XR-docs",
+      "demoUrl": "https://amontesl.github.io/Code-XR-docs/"
+    },
+    {
+      "titleKey": "portfolio",
+      "period": "2025",
+      "summaryKey": "portfolio",
+      "tags": ["Next.js", "Tailwind"],
+      "repoUrl": "https://github.com/aMonteSl/amontesl.github.io",
+      "demoUrl": "https://amontesl.github.io"
+    },
+    {
+      "titleKey": "xr",
+      "period": "2023-2024",
+      "summaryKey": "xr",
+      "tags": ["WebXR", "A-Frame"],
+      "repoUrl": "TODO:URL",
+      "demoUrl": null
+    }
+  ]
+}

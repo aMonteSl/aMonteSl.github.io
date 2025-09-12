@@ -1,0 +1,66 @@
+{
+  "groups": [
+    {
+      "name": "Lenguajes",
+      "nameKey": "languages",
+      "skills": [
+        { "name": "C/C++", "level": "Avanzado" },
+        { "name": "Python", "level": "Avanzado" },
+        { "name": "JavaScript/TypeScript", "level": "Avanzado" },
+        { "name": "Kotlin", "level": "Intermedio" },
+        { "name": "HTML/CSS", "level": "Avanzado" },
+        { "name": "Bash", "level": "Intermedio" },
+        { "name": "RISC-V asm", "level": "Intermedio" },
+        { "name": "Pascal", "level": "Intermedio" },
+        { "name": "Matlab", "level": "Intermedio" }
+      ]
+    },
+    {
+      "name": "Frontend",
+      "nameKey": "frontend",
+      "skills": [
+        { "name": "React", "level": "Avanzado" },
+        { "name": "Next.js", "level": "Avanzado" },
+        { "name": "Vite", "level": "Avanzado" },
+        { "name": "Tailwind CSS", "level": "Avanzado" },
+        { "name": "Bootstrap", "level": "Intermedio" }
+      ]
+    },
+    {
+      "name": "Backend/DB",
+      "nameKey": "backend",
+      "skills": [
+        { "name": "Node.js", "level": "Avanzado" },
+        { "name": "PostgreSQL", "level": "Intermedio" }
+      ]
+    },
+    {
+      "name": "XR/3D",
+      "nameKey": "xr",
+      "skills": [
+        { "name": "WebXR", "level": "Avanzado" },
+        { "name": "A-Frame", "level": "Avanzado" },
+        { "name": "babia-xr", "level": "Avanzado" }
+      ]
+    },
+    {
+      "name": "Tooling/DevOps",
+      "nameKey": "tooling",
+      "skills": [
+        { "name": "Git/GitHub", "level": "Avanzado" },
+        { "name": "GitHub Actions", "level": "Avanzado" },
+        { "name": "Linux", "level": "Avanzado" },
+        { "name": "VS Code", "level": "Avanzado" },
+        { "name": "LaTeX", "level": "Intermedio" }
+      ]
+    },
+    {
+      "name": "Otros",
+      "nameKey": "other",
+      "skills": [
+        { "name": "Django", "level": "Intermedio" },
+        { "name": "ROS2", "level": "Intermedio" }
+      ]
+    }
+  ]
+}

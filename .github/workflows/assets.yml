@@ -1,0 +1,72 @@
+name: 'Assets Generation'
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'public/images/profile/original.jpg'
+      - 'scripts/generate-images.mjs'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  generate-assets:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: 'Install dependencies'
+        run: npm ci
+        
+      - name: 'Generate image variants'
+        run: npm run gen:images
+        
+      - name: 'Check for changes'
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain public/images/profile/)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Image variants have been updated"
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected in image variants"
+          fi
+        
+      - name: 'Create Pull Request'
+        if: steps.changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: '🖼️ Auto-generate responsive image variants'
+          title: '🖼️ Update responsive image variants'
+          body: |
+            ## Auto-generated Image Variants
+            
+            This PR was automatically created because changes were detected in the original profile image or the generation script.
+            
+            ### Generated variants:
+            - Avatar (header): 40px, 80px @2x
+            - Hero (main): 196px, 392px @2x  
+            - Spares: 256px, 320px (+ @2x variants)
+            
+            ### Formats:
+            - ✅ AVIF (best compression)
+            - ✅ WebP (modern fallback)
+            - ✅ JPEG (universal fallback)
+            
+            All variants include 1x and 2x (retina) versions for crisp display on high-DPI screens.
+            
+            ---
+            _This PR was created automatically by the Assets Generation workflow._
+          branch: 'auto/update-image-variants'
+          delete-branch: true
+          draft: false

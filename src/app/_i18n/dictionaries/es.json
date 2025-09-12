@@ -1,0 +1,98 @@
+{
+  "_comment": "GENERATED – do not edit",
+  "meta": {
+    "title": "Adrián Montes — Portfolio",
+    "description": "Estudiante de Ingeniería Telemática enfocado en arquitecturas limpias, visualizaciones XR/3D/AR de métricas de software y UX pragmática."
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Competencias",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "education": "Formación",
+    "publications": "Publicaciones",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Adrián Montes Linares",
+    "subtitle1": "Ingeniería Telemática — Estudiante",
+    "subtitle2": "Backend • Frontend • Ingeniería de Software • XR",
+    "tagline": "Estudiante de Ingeniería Telemática (URJC), pendiente solo de prácticas y de presentar el TFG en octubre de 2025. Busco prácticas para aportar desde el primer día. Autor de Code-XR (plugin open source para VS Code), desarrollado de extremo a extremo y acompañado de documentación, demos y divulgación técnica para atraer usuarios y recoger feedback.",
+    "ctaProjects": "Ver proyectos",
+    "ctaResume": "Descargar CV",
+    "alternativeTitle": "Ingeniería Telemática",
+    "bullet1": "VISSOFT 2025 aceptado",
+    "bullet2": "Code-XR (código abierto)"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "p1": "Soy estudiante de Ingeniería Telemática (URJC) y autor de Code-XR, un ecosistema que conecta análisis estático con visualización inmersiva de métricas.",
+    "p2": "Nuestro trabajo ha sido aceptado para VISSOFT 2025 (co-localizado con ICSME 2025). Estoy preparando la tesis y consolidando documentación y herramientas para su evolución.",
+    "p3": "Me preocupo por el código limpio, la arquitectura modular y un DX/UX sólido. Busco sistemas que escalen y puedan mantenerse."
+  },
+  "skills": {
+    "title": "Competencias",
+    "groups": {
+      "languages": "Lenguajes",
+      "frontend": "Frontend",
+      "backend": "Backend y Bases de Datos",
+      "xr": "XR / 3D",
+      "tooling": "Herramientas / DevOps",
+      "other": "Otros"
+    }
+  },
+  "projects": {
+    "title": "Proyectos destacados",
+    "items": {
+      "codexr": {
+        "title": "Code-XR",
+        "summary": "Visualización XR/3D/AR de métricas de software con análisis estático (ej. CCN), modos LivePanel/XR, persistencia JSON."
+      },
+      "docs": {
+        "title": "Code-XR Docs",
+        "summary": "Sitio de documentación Vite + Tailwind enfocado en DX y despliegue continuo."
+      },
+      "portfolio": {
+        "title": "Portfolio",
+        "summary": "Este sitio: Next.js + Tailwind, exportación estática, SEO/OG, accesibilidad y animaciones sutiles."
+      },
+      "xr": {
+        "title": "Experimentos XR",
+        "summary": "Prototipos para HUDs e interacciones WebXR enfocados en rendimiento y legibilidad."
+      }
+    }
+  },
+  "experience": {
+    "title": "Experiencia / Colaboraciones",
+    "intro": "Mi enfoque ha sido desarrollo académico-aplicado y proyectos personales con impacto medible."
+  },
+  "education": {
+    "title": "Formación",
+    "urjc": "URJC — Ingeniería Telemática (2020–2025)",
+    "bach": "Bachillerato — Ciencias y Tecnología (previo al ingreso universitario)"
+  },
+  "publications": {
+    "title": "Publicaciones / Méritos",
+    "item1": "Artículo aceptado para VISSOFT 2025 (co-localizado con ICSME 2025): visualización de métricas de software en XR. Preparando camera-ready."
+  },
+  "contact": {
+    "title": "Contacto",
+    "copy": "¿Colaboramos? Busco entornos donde el diseño de software y la visualización creen ventajas reales.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados.",
+    "by": "Diseño y desarrollo por Adrián Montes Linares",
+    "quickLinks": "Enlaces rápidos",
+    "description": "Estudiante de Ingeniería Telemática enfocado en backend, frontend, software engineering y tecnologías XR."
+  },
+  "buttons": {
+    "view": "Ver",
+    "demo": "Demo",
+    "repo": "Repositorio",
+    "download": "Descargar"
+  }
+}
