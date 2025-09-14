@@ -307,7 +307,24 @@ async function main() {
     }
     
     if (!translatedFlat) {
-      throw new Error('No se pudo traducir con ninguno de los servicios disponibles')
+      console.log('⚠️ No se pudieron usar servicios de traducción externos')
+      console.log('💡 Verificando archivo español existente...')
+      
+      try {
+        const esContent = await readFile(ES_FILE, 'utf-8')
+        const esData = JSON.parse(esContent)
+        
+        if (Object.keys(esData).length > 1) {
+          console.log('✅ Archivo español existente es funcional')
+          console.log(`📚 Contiene ${Object.keys(esData).length} secciones`)
+          console.log('🎯 Continuando con traducciones existentes')
+          return // Exit successfully
+        }
+      } catch (readError) {
+        console.log('📄 No se pudo leer archivo español existente')
+      }
+      
+      throw new Error('No se pudo traducir con ninguno de los servicios disponibles y no hay archivo español válido')
     }
 
     // Reconstruir objeto jerárquico

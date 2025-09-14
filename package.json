@@ -7,7 +7,10 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "gen:images": "node scripts/generate-images.mjs"
+    "gen:images": "node scripts/generate-images.mjs",
+    "deploy": "gh-pages -d out",
+    "translate": "node scripts/translate.mjs",
+    "check-translations": "node scripts/check-translations.mjs"
   },
   "dependencies": {
     "@react-three/fiber": "^9.3.0",
@@ -28,6 +31,7 @@
     "@types/three": "^0.180.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
+    "gh-pages": "^6.3.0",
     "sharp": "^0.34.3",
     "tailwindcss": "^4",
     "tailwindcss-fluid-spacing": "^0.4.0",
