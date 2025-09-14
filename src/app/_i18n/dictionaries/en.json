@@ -79,6 +79,11 @@
     "quickLinks": "Quick Links",
     "description": "Telematics Engineering student focused on backend, frontend, software engineering, and XR technologies."
   },
+  "development": {
+    "title": "🚧 Under development",
+    "message": "Hi there! My portfolio is under construction. For now, you can only see the main page, but soon the rest of the sections with my projects, experience, and more information about me will be available.",
+    "thanks": "Thanks for your patience! 😊"
+  },
   "buttons": { 
     "view": "View", 
     "demo": "Demo", 

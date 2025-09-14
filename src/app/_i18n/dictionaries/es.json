@@ -67,12 +67,17 @@
     "title": "Publicaciones / Méritos",
     "item1": "Artículo aceptado para VISSOFT 2025 (co-localizado con ICSME 2025): visualización de métricas de software en XR. Preparando camera-ready."
   },
-  "contact": {
+    "contact": {
     "title": "Contacto",
-    "copy": "¿Colaboramos? Busco entornos donde el diseño de software y la visualización creen ventajas reales.",
-    "email": "Email",
-    "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "subtitle": "¿Hablamos?",
+    "location": "Madrid, España",
+    "availability": "Disponible para prácticas",
+    "university": "Universidad Rey Juan Carlos"
+  },
+  "development": {
+    "title": "🚧 En desarrollo",
+    "message": "¡Hola! Mi portfolio está en construcción. Por ahora solo puedes ver la página principal, pero pronto estará disponible el resto de secciones con mis proyectos, experiencia y más información sobre mí.",
+    "thanks": "¡Gracias por tu paciencia! 😊"
   },
   "footer": {
     "copyright": "Todos los derechos reservados.",
