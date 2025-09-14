@@ -7,8 +7,10 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "gen:images": "node scripts/generate-images.mjs",
+    "export": "next build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d out",
+    "gen:images": "node scripts/generate-images.mjs",
     "translate": "node scripts/translate.mjs",
     "check-translations": "node scripts/check-translations.mjs"
   },
