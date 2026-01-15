@@ -14,16 +14,25 @@
     "contact": "Contacto"
   },
   "hero": {
+    "name": "Adrián Montes Linares",
+    "headline": "Backend / Full-Stack Engineer",
+    "headlineSub": "DevTools y XR",
     "title": "Adrián Montes Linares",
     "subtitle1": "Ingeniería Telemática — Estudiante",
     "subtitle2": "Backend • Frontend • Ingeniería de Software • XR",
-    "tagline": "Estudiante de Ingeniería Telemática (URJC), pendiente solo de prácticas y de presentar el TFG en octubre de 2025. Busco prácticas para aportar desde el primer día. Autor de Code-XR (plugin open source para VS Code), desarrollado de extremo a extremo y acompañado de documentación, demos y divulgación técnica para atraer usuarios y recoger feedback.",
-    "ctaProjects": "Ver proyectos",
+    "tagline": "Estudiante de Ingeniería Telemática (URJC), pendiente solo de prácticas y defensa del TFG. Autor de Code-XR, una extensión open source de VS Code para visualización XR de métricas de software.",
+    "ctaProjects": "Ver Proyectos",
     "ctaResume": "Descargar CV",
     "alternativeTitle": "Ingeniería Telemática",
-    "bullet1": "VISSOFT 2025 aceptado",
-    "bullet2": "Code-XR (código abierto)",
-    "openToWork": "Abierto a prácticas"
+    "bullet1": "Paper aceptado en VISSOFT 2025",
+    "bullet2": "Autor de Code-XR open-source",
+    "bullet3": "Defensor de arquitectura limpia",
+    "openToWork": "Abierto a prácticas",
+    "credentials": {
+      "vissoft": "VISSOFT 2025",
+      "codeXr": "Code-XR (Open Source)",
+      "stack": "TypeScript · Next.js · Tailwind"
+    }
   },
   "about": {
     "title": "Sobre mí",

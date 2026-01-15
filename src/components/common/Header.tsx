@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Nav } from './Nav'
 import { LanguageSwitcher } from '@/features/language/LanguageSwitcher'
 import { Avatar } from '@/components/ui'
+import { cn } from '@/lib/utils'
 
 export function Header() {
   const [hasScrolled, setHasScrolled] = useState(false)
@@ -20,33 +21,32 @@ export function Header() {
 
   return (
     <header
-      className={`header sticky top-0 z-50 w-full bg-bg/80 backdrop-blur-sm border-b border-border ${hasScrolled ? 'has-shadow' : ''}`}
+      className={cn(
+        'sticky top-0 z-50 w-full transition-all duration-300',
+        'border-b backdrop-blur-md',
+        hasScrolled
+          ? 'bg-[var(--bg)]/80 border-[var(--border)]/50 shadow-sm'
+          : 'bg-transparent border-transparent'
+      )}
     >
       <div className="container flex h-16 items-center justify-between">
         <Link
           href="/"
           aria-label="Go to home"
-          className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg rounded-lg"
+          className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg"
         >
           <Avatar size="sm" />
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
           <Nav />
+          <div className="h-5 w-px bg-[var(--border)]/50" aria-hidden="true" />
           <LanguageSwitcher />
         </div>
 
         {/* Mobile menu with language switcher */}
         <div className="flex items-center gap-3 md:hidden">
           <LanguageSwitcher />
-          <button
-            className="p-2 text-fg-muted hover:text-fg transition-colors"
-            aria-label="Open navigation menu"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
         </div>
       </div>
     </header>

@@ -65,10 +65,11 @@ export function Nav() {
             key={key}
             href={href}
             className={cn(
-              'px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200',
+              'relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+              'after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:rounded-full after:bg-[var(--accent)] after:transition-all after:duration-200',
               isActive
-                ? 'text-fg bg-card/50'
-                : 'text-fg-muted hover:text-fg hover:bg-card/30'
+                ? 'text-[var(--fg)] after:w-4 after:opacity-100'
+                : 'text-[var(--fg-muted)] after:w-0 after:opacity-0 hover:text-[var(--fg)] hover:bg-[var(--card)]/30'
             )}
             aria-current={isActive ? 'page' : undefined}
           >

@@ -1,6 +1,7 @@
 'use client'
 
-import { useLocale, locales, localeFlags, Locale } from '@/i18n'
+import { useLocale, locales, localeFlags, localeNames, Locale } from '@/i18n'
+import { cn } from '@/lib/utils'
 
 export function LanguageSwitcher() {
   const { locale, setLocale } = useLocale()
@@ -10,25 +11,38 @@ export function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1" role="group" aria-label="Language selection">
-      {locales.map((loc) => (
-        <button
-          key={loc}
-          onClick={() => handleLanguageChange(loc)}
-          aria-label={`Change language to ${loc === 'en' ? 'English' : 'Spanish'}`}
-          aria-pressed={locale === loc}
-          title={loc === 'en' ? 'English' : 'Español'}
-          className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:ring-offset-[var(--bg)] ${
-            locale === loc
-              ? 'ring-2 ring-[var(--accent)] bg-[var(--accent)]/10 text-[var(--fg)]'
-              : 'text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)]'
-          }`}
-        >
-          <span className="text-lg" role="img" aria-label={loc === 'en' ? 'British flag' : 'Spanish flag'}>
-            {localeFlags[loc]}
-          </span>
-        </button>
-      ))}
+    <div
+      className="flex items-center gap-0.5 rounded-full bg-[var(--card)]/50 p-0.5 backdrop-blur-sm"
+      role="group"
+      aria-label="Language selection"
+    >
+      {locales.map((loc) => {
+        const isActive = locale === loc
+        return (
+          <button
+            key={loc}
+            onClick={() => handleLanguageChange(loc)}
+            aria-label={`Switch to ${localeNames[loc]}`}
+            aria-pressed={isActive}
+            title={localeNames[loc]}
+            className={cn(
+              'relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5',
+              'text-xl transition-all duration-200',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
+              isActive
+                ? 'bg-[var(--accent)]/15 shadow-sm'
+                : 'opacity-60 hover:opacity-100 hover:bg-[var(--card)]'
+            )}
+          >
+            <span role="img" aria-hidden="true">
+              {localeFlags[loc]}
+            </span>
+            {isActive && (
+              <span className="sr-only">(current language)</span>
+            )}
+          </button>
+        )
+      })}
     </div>
   )
 }

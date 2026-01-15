@@ -14,16 +14,25 @@
     "contact": "Contact"
   },
   "hero": {
+    "name": "Adrián Montes Linares",
+    "headline": "Backend / Full-Stack Engineer",
+    "headlineSub": "DevTools & XR",
     "title": "Adrián Montes Linares",
     "subtitle1": "Telematics Engineering — Student",
     "subtitle2": "Backend • Frontend • Software Engineering • XR",
-    "tagline": "Telematics Engineering student (URJC), pending only the internship and the thesis defense in October 2025. I'm seeking an internship to contribute from day one. Author of Code-XR (an open-source plugin for VS Code), developed end-to-end and accompanied by documentation, demos, and technical outreach to attract users and gather feedback.",
-    "ctaProjects": "View projects",
+    "tagline": "Telematics Engineering student (URJC), pending only the internship and thesis defense. Author of Code-XR, an open-source VS Code extension for XR visualization of software metrics.",
+    "ctaProjects": "View Projects",
     "ctaResume": "Download CV",
     "alternativeTitle": "Telematics Engineering",
-    "bullet1": "VISSOFT 2025 accepted",
-    "bullet2": "Code-XR (open source)",
-    "openToWork": "Open to internship"
+    "bullet1": "VISSOFT 2025 accepted paper",
+    "bullet2": "Code-XR open-source author",
+    "bullet3": "Clean architecture advocate",
+    "openToWork": "Open to internship",
+    "credentials": {
+      "vissoft": "VISSOFT 2025",
+      "codeXr": "Code-XR (Open Source)",
+      "stack": "TypeScript · Next.js · Tailwind"
+    }
   },
   "about": {
     "title": "About me",
