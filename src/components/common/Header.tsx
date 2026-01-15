@@ -30,12 +30,17 @@ export function Header() {
       )}
     >
       <div className="container flex h-16 items-center justify-between">
+        {/* Brand: Avatar + Name */}
         <Link
           href="/"
           aria-label="Go to home"
-          className="inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg"
+          className="inline-flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
         >
           <Avatar size="sm" />
+          <span className="font-semibold text-sm sm:text-base text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors duration-200">
+            <span className="hidden sm:inline">Adrián Montes</span>
+            <span className="sm:hidden">Adrián M.</span>
+          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-6">

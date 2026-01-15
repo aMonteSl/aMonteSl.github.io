@@ -15,12 +15,12 @@
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Backend / Full-Stack Engineer",
+    "headline": "Telematics Engineer / Software Engineer",
     "headlineSub": "DevTools & XR",
     "title": "Adrián Montes Linares",
     "subtitle1": "Telematics Engineering — Student",
     "subtitle2": "Backend • Frontend • Software Engineering • XR",
-    "tagline": "Telematics Engineering student (URJC), pending only the internship and thesis defense. Author of Code-XR, an open-source VS Code extension for XR visualization of software metrics.",
+    "tagline": "Author of Code-XR, an open-source VS Code extension for XR visualization of software metrics. Focused on clean architectures and developer experience.",
     "ctaProjects": "View Projects",
     "ctaResume": "Download CV",
     "alternativeTitle": "Telematics Engineering",
@@ -91,6 +91,10 @@
     "by": "Design & development by Adrián Montes Linares",
     "quickLinks": "Quick Links",
     "description": "Telematics Engineering student focused on backend, frontend, software engineering, and XR technologies."
+  },
+  "journey": {
+    "title": "Professional Journey",
+    "subtitle": "Experience, education, and key milestones"
   },
   "development": {
     "title": "🚧 Under development",

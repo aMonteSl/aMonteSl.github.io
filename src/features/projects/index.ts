@@ -1,3 +1,5 @@
 export { ProjectPageClient } from './ProjectPageClient'
+export { ProjectCard } from './ProjectCard'
+export { FeaturedProjectsSection } from './FeaturedProjectsSection'
 export type { Project } from './types'
 export { getLocalizedProject } from './types'

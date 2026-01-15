@@ -50,14 +50,14 @@ export function Hero() {
   ]
 
   return (
-    <section id="home" className="min-h-[calc(100vh-4rem)] flex items-center py-16 md:py-24">
-      <Container size="lg" className="w-full">
+    <section id="home" className="min-h-[calc(100vh-4rem)] flex items-center py-12 sm:py-16 md:py-20 lg:py-24">
+      <Container size="xl" className="w-full">
         {/* Two-column grid: visual left, copy right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 xl:gap-20 items-center">
           {/* Left Column — Visual */}
           <motion.div
             {...(animate ? fadeInUp(0) : {})}
-            className="lg:col-span-5 flex flex-col items-center lg:items-center"
+            className="lg:col-span-5 flex flex-col items-center"
           >
             {/* Avatar with enhanced styling */}
             <motion.div
@@ -67,29 +67,29 @@ export function Hero() {
               role="img"
               aria-label="Profile photo of Adrián Montes"
             >
-              {/* Outer glow ring */}
-              <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              {/* Outer glow ring - scales with avatar */}
+              <div className="absolute -inset-4 sm:-inset-5 md:-inset-6 rounded-full bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
-              {/* Primary ring */}
-              <div className="absolute inset-0 rounded-full ring-2 ring-[var(--accent)]/40 ring-offset-4 ring-offset-[var(--bg)] transition-all duration-300 group-hover:ring-[var(--accent)]/60 group-hover:ring-offset-6" />
+              {/* Primary ring - responsive offset */}
+              <div className="absolute inset-0 rounded-full ring-2 ring-[var(--accent)]/40 ring-offset-4 sm:ring-offset-6 md:ring-offset-8 ring-offset-[var(--bg)] transition-all duration-300 group-hover:ring-[var(--accent)]/60" />
 
-              {/* Avatar container */}
-              <div className="relative shine-on-hover rounded-full overflow-hidden shadow-2xl shadow-black/20">
-                <Avatar size="lg" loading="eager" fetchPriority="high" />
+              {/* Avatar container with new hero size */}
+              <div className="relative shine-on-hover rounded-full overflow-hidden shadow-2xl shadow-black/30">
+                <Avatar size="hero" loading="eager" fetchPriority="high" />
               </div>
 
-              {/* Floating accent dot */}
+              {/* Floating accent dot - responsive size */}
               <motion.div
-                animate={{ y: [0, -6, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-2 -right-2 h-5 w-5 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/30"
+                className="absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/30"
               />
             </motion.div>
 
-            {/* Credential chips below avatar (visible on mobile & desktop) */}
+            {/* Credential chips below avatar */}
             <motion.div
               {...(animate ? fadeInUp(0.15) : {})}
-              className="mt-8 flex flex-wrap justify-center gap-2"
+              className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 max-w-xs sm:max-w-sm"
             >
               {credentials.map((cred, i) => (
                 <motion.div
@@ -109,33 +109,41 @@ export function Hero() {
           {/* Right Column — Copy */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             {/* Open to internship badge */}
-            <motion.div {...(animate ? fadeInUp(0.05) : {})} className="mb-4">
+            <motion.div {...(animate ? fadeInUp(0.05) : {})} className="mb-4 sm:mb-5">
               <span className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium bg-[var(--accent)]/10 text-[var(--accent)] ring-1 ring-[var(--accent)]/20">
                 <span className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse" />
                 {t('openToWork')}
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <motion.div {...(animate ? fadeInUp(0.08) : {})} className="mb-3">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight text-[var(--fg)] leading-tight">
-                {t('headline')}
-                <span className="block text-[var(--accent)] mt-1">{t('headlineSub')}</span>
-              </h1>
-            </motion.div>
-
-            {/* Name subheading */}
-            <motion.h2
-              {...(animate ? fadeInUp(0.1) : {})}
-              className="text-lg md:text-xl text-[var(--fg-muted)] font-medium mb-6"
+            {/* Name - now more prominent */}
+            <motion.h1
+              {...(animate ? fadeInUp(0.08) : {})}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-[var(--fg)] leading-[1.1] mb-3 sm:mb-4"
             >
               {t('name')}
+            </motion.h1>
+
+            {/* Headline - role/title */}
+            <motion.h2
+              {...(animate ? fadeInUp(0.1) : {})}
+              className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-[var(--fg-muted)] mb-2"
+            >
+              {t('headline')}
             </motion.h2>
+
+            {/* Subline - DevTools & XR */}
+            <motion.p
+              {...(animate ? fadeInUp(0.12) : {})}
+              className="text-base sm:text-lg md:text-xl text-[var(--accent)] font-medium mb-5 sm:mb-6"
+            >
+              {t('headlineSub')}
+            </motion.p>
 
             {/* Bullets */}
             <motion.ul
-              {...(animate ? fadeInUp(0.12) : {})}
-              className="flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-2 mb-6 text-sm text-[var(--fg-muted)]"
+              {...(animate ? fadeInUp(0.14) : {})}
+              className="flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-2 mb-5 sm:mb-6 text-sm text-[var(--fg-muted)]"
             >
               {bullets.map((text, i) => (
                 <motion.li
@@ -151,10 +159,10 @@ export function Hero() {
               ))}
             </motion.ul>
 
-            {/* Tagline paragraph */}
+            {/* Tagline paragraph - limited width for readability */}
             <motion.p
-              {...(animate ? fadeInUp(0.14) : {})}
-              className="text-base md:text-lg text-[var(--fg-muted)] max-w-xl leading-relaxed mb-8"
+              {...(animate ? fadeInUp(0.16) : {})}
+              className="text-sm sm:text-base md:text-lg text-[var(--fg-muted)] max-w-md lg:max-w-lg xl:max-w-xl leading-relaxed mb-6 sm:mb-8"
             >
               {t('tagline')}
             </motion.p>
@@ -162,7 +170,7 @@ export function Hero() {
             {/* CTA Buttons */}
             <motion.div
               {...(animate ? fadeInUp(0.18) : {})}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8"
+              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6 sm:mb-8"
             >
               <Button asChild size="lg">
                 <a href="#projects">{t('ctaProjects')}</a>
@@ -188,7 +196,7 @@ export function Hero() {
                     target={link.key === 'email' ? undefined : '_blank'}
                     rel={link.key === 'email' ? undefined : 'noopener noreferrer'}
                     aria-label={link.key}
-                    className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--card)]/60 text-[var(--fg-muted)] ring-1 ring-[var(--border)]/50 backdrop-blur-sm transition-all duration-200 hover:text-[var(--fg)] hover:ring-[var(--accent)]/50 hover:bg-[var(--card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                    className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[var(--card)]/60 text-[var(--fg-muted)] ring-1 ring-[var(--border)]/50 backdrop-blur-sm transition-all duration-200 hover:text-[var(--fg)] hover:ring-[var(--accent)]/50 hover:bg-[var(--card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                   >
                     {Icon && <Icon className="w-5 h-5" />}
                   </a>

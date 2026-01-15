@@ -15,12 +15,12 @@
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Backend / Full-Stack Engineer",
+    "headline": "Ingeniero Telemático / Ingeniero de Software",
     "headlineSub": "DevTools y XR",
     "title": "Adrián Montes Linares",
     "subtitle1": "Ingeniería Telemática — Estudiante",
     "subtitle2": "Backend • Frontend • Ingeniería de Software • XR",
-    "tagline": "Estudiante de Ingeniería Telemática (URJC), pendiente solo de prácticas y defensa del TFG. Autor de Code-XR, una extensión open source de VS Code para visualización XR de métricas de software.",
+    "tagline": "Autor de Code-XR, una extensión open-source de VS Code para visualización XR de métricas de software. Enfocado en arquitecturas limpias y experiencia de desarrollador.",
     "ctaProjects": "Ver Proyectos",
     "ctaResume": "Descargar CV",
     "alternativeTitle": "Ingeniería Telemática",
@@ -91,6 +91,10 @@
     "by": "Diseño y desarrollo por Adrián Montes Linares",
     "quickLinks": "Enlaces rápidos",
     "description": "Estudiante de Ingeniería Telemática enfocado en backend, frontend, software engineering y tecnologías XR."
+  },
+  "journey": {
+    "title": "Trayectoria Profesional",
+    "subtitle": "Experiencia, formación y logros clave"
   },
   "development": {
     "title": "🚧 En desarrollo",

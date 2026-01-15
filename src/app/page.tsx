@@ -1,22 +1,22 @@
 'use client'
 
 import { Hero, AnimatedBackground } from '@/features/landing'
-import { DevelopmentModal, useScrollGuard } from '@/features/constructionNotice'
+import { FeaturedProjectsSection } from '@/features/projects'
+import { ProfessionalJourneySection } from '@/features/journey'
 
 export default function Home() {
-  const { showModal, closeModal } = useScrollGuard()
-
   return (
     <>
       <AnimatedBackground />
 
-      {/* Landing page only - during development */}
-      <div className="min-h-screen">
-        <Hero />
-      </div>
+      {/* Hero section */}
+      <Hero />
 
-      {/* Development modal */}
-      <DevelopmentModal isOpen={showModal} onClose={closeModal} />
+      {/* Featured Projects section */}
+      <FeaturedProjectsSection />
+
+      {/* Professional Journey section */}
+      <ProfessionalJourneySection />
     </>
   )
 }
