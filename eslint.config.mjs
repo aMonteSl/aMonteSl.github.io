@@ -19,10 +19,11 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
       "src/types/**",
+      "src_old/**",
     ],
   },
   {
-    files: ["src/app/_components/Silk.tsx"],
+    files: ["src/features/landing/Silk.tsx", "src_old/**"],
     rules: {
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-explicit-any": "off",

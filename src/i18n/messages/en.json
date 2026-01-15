@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "title": "Adrián Montes — Portfolio",
+    "description": "Telematics Engineering student focusing on clean architectures, XR/3D/AR visualizations of software metrics, and pragmatic UX."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "education": "Education",
+    "publications": "Publications",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Adrián Montes Linares",
+    "subtitle1": "Telematics Engineering — Student",
+    "subtitle2": "Backend • Frontend • Software Engineering • XR",
+    "tagline": "Telematics Engineering student (URJC), pending only the internship and the thesis defense in October 2025. I'm seeking an internship to contribute from day one. Author of Code-XR (an open-source plugin for VS Code), developed end-to-end and accompanied by documentation, demos, and technical outreach to attract users and gather feedback.",
+    "ctaProjects": "View projects",
+    "ctaResume": "Download CV",
+    "alternativeTitle": "Telematics Engineering",
+    "bullet1": "VISSOFT 2025 accepted",
+    "bullet2": "Code-XR (open source)",
+    "openToWork": "Open to internship"
+  },
+  "about": {
+    "title": "About me",
+    "p1": "I am a Telematics Engineering student (URJC) and the author of Code-XR, an ecosystem that connects static analysis with immersive visualization of metrics.",
+    "p2": "Our work has been accepted for VISSOFT 2025 (co-located with ICSME 2025). I am preparing the thesis and consolidating documentation and tooling for its evolution.",
+    "p3": "I care about clean code, modular architecture, and a strong DX/UX. I aim for systems that scale and can be maintained."
+  },
+  "skills": {
+    "title": "Skills",
+    "groups": {
+      "languages": "Languages",
+      "frontend": "Frontend",
+      "backend": "Backend & Databases",
+      "xr": "XR / 3D",
+      "tooling": "Tooling / DevOps",
+      "other": "Other"
+    }
+  },
+  "projects": {
+    "title": "Featured projects",
+    "subtitle": "Selected work and case studies",
+    "ctaAll": "See details",
+    "empty": "Projects coming soon.",
+    "back": "Back to projects",
+    "overview": "Overview",
+    "highlights": "Highlights",
+    "role": "Role & contributions",
+    "tech": "Tech stack",
+    "links": {
+      "repo": "Repository",
+      "demo": "Live demo"
+    }
+  },
+  "experience": {
+    "title": "Experience / Collaborations",
+    "intro": "My focus has been academic-applied development and personal projects with measurable impact."
+  },
+  "education": {
+    "title": "Education",
+    "urjc": "URJC — Telematics Engineering (2020–2025)",
+    "bach": "Baccalaureate — Science & Technology (prior to university entry)"
+  },
+  "publications": {
+    "title": "Publications / Merits",
+    "item1": "Paper accepted for VISSOFT 2025 (co-located with ICSME 2025): visualization of software metrics in XR. Preparing camera-ready."
+  },
+  "contact": {
+    "title": "Contact",
+    "copy": "Shall we collaborate? I look for environments where software design and visualization create real advantages.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "by": "Design & development by Adrián Montes Linares",
+    "quickLinks": "Quick Links",
+    "description": "Telematics Engineering student focused on backend, frontend, software engineering, and XR technologies."
+  },
+  "development": {
+    "title": "🚧 Under development",
+    "message": "Hi there! My portfolio is under construction. For now, you can only see the main page, but soon the rest of the sections with my projects, experience, and more information about me will be available.",
+    "thanks": "Thanks for your patience! 😊",
+    "dismiss": "Got it"
+  },
+  "buttons": {
+    "view": "View",
+    "demo": "Demo",
+    "repo": "Repository",
+    "download": "Download"
+  }
+}
