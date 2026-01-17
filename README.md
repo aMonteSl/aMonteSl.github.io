@@ -1,6 +1,6 @@
 # amontesl.github.io
 
-Personal portfolio website for **Adrián Montesinos López**.
+Personal portfolio website for **Adrián Montes Linares**.
 
 🌐 **Live**: [amontesl.github.io](https://amontesl.github.io/)
 
