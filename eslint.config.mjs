@@ -22,7 +22,7 @@ const eslintConfig = [
     ],
   },
   {
-    files: ["src/app/_components/Silk.tsx"],
+    files: ["src/features/landing/Silk.tsx"],
     rules: {
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-explicit-any": "off",

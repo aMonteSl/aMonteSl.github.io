@@ -1,4 +1,4 @@
-import { MeshProps, Object3DNode } from '@react-three/fiber'
+import { Object3DNode } from '@react-three/fiber'
 import { Mesh, PlaneGeometry, ShaderMaterial } from 'three'
 
 declare module '@react-three/fiber' {

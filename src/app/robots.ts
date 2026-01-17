@@ -1,15 +1,14 @@
 import { MetadataRoute } from 'next'
+import { LINKS } from '@/lib/constants'
 
 export const dynamic = 'force-static'
- 
+
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://amontesl.github.io'
-  
   return {
     rules: {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${LINKS.website}/sitemap.xml`,
   }
 }

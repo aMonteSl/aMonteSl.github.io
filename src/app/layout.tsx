@@ -1,30 +1,37 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { Header } from "./_components/Header";
-import { Footer } from "./_components/Footer";
-import { I18nProvider } from "./_i18n/I18nProvider";
-import { MetaClient } from "./_components/MetaClient";
-import ScrollProgress from "./_components/ScrollProgress";
-import ScrollGuard from "./_components/ScrollGuard";
+import type { Metadata } from 'next'
+import './globals.css'
+import { I18nProvider } from '@/i18n'
+import { Footer } from '@/components/common/Footer'
+import { SITE, LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: "Adrián Montes — Portfolio",
-  description: "Portfolio de Adrián Montes Linares, estudiante de Ingeniería Telemática especializado en React, visualización XR y software engineering. Autor de Code-XR.",
-  keywords: ["Adrián Montes", "Ingeniería Telemática", "React", "XR", "WebXR", "Software Engineering", "Portfolio", "Code-XR"],
-  authors: [{ name: "Adrián Montes Linares" }],
-  creator: "Adrián Montes Linares",
+  title: 'Adrián Montes — Portfolio',
+  description: 'Portfolio of Adrián Montes Linares, Telematics Engineering student specialized in React, XR visualization and software engineering. Author of Code-XR.',
+  keywords: ['Adrián Montes', 'Telematics Engineering', 'React', 'XR', 'WebXR', 'Software Engineering', 'Portfolio', 'Code-XR'],
+  authors: [{ name: SITE.author }],
+  creator: SITE.author,
+  manifest: '/favicons/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicons/favicon.ico', sizes: '48x48' },
+    ],
+    apple: [
+      { url: '/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
-    type: "website",
-    locale: "es_ES",
-    url: "https://amontesl.github.io",
-    title: "Adrián Montes — Portfolio",
-    description: "Portfolio de Adrián Montes Linares, estudiante de Ingeniería Telemática especializado en React, visualización XR y software engineering.",
-    siteName: "Adrián Montes Portfolio",
+    type: 'website',
+    locale: 'en_US',
+    url: SITE.url,
+    title: 'Adrián Montes — Portfolio',
+    description: 'Portfolio of Adrián Montes Linares, Telematics Engineering student specialized in React, XR visualization and software engineering.',
+    siteName: SITE.name,
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Adrián Montes — Portfolio",
-    description: "Portfolio de Adrián Montes Linares, estudiante de Ingeniería Telemática especializado en React, visualización XR y software engineering.",
+    card: 'summary_large_image',
+    title: 'Adrián Montes — Portfolio',
+    description: 'Portfolio of Adrián Montes Linares, Telematics Engineering student specialized in React, XR visualization and software engineering.',
   },
   robots: {
     index: true,
@@ -37,70 +44,66 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-};
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${SITE.url}/#person`,
+      name: SITE.author,
+      jobTitle: 'Telematics Engineering Student',
+      description: 'Specialized in React, XR visualization and software engineering. Author of Code-XR.',
+      url: SITE.url,
+      sameAs: [
+        LINKS.github,
+        LINKS.linkedin
+      ],
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'Universidad Rey Juan Carlos',
+        url: 'https://www.urjc.es'
+      },
+      knowsAbout: [
+        'React',
+        'Next.js',
+        'WebXR',
+        'Software Engineering',
+        'Data Visualization',
+        'Telematics Engineering'
+      ]
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: `Personal portfolio of ${SITE.author}`,
+      publisher: {
+        '@id': `${SITE.url}/#person`
+      },
+      inLanguage: 'en'
+    }
+  ]
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "@id": "https://amontesl.github.io/#person",
-        "name": "Adrián Montes Linares",
-        "jobTitle": "Estudiante de Ingeniería Telemática",
-        "description": "Especializado en React, visualización XR y software engineering. Autor de Code-XR.",
-        "url": "https://amontesl.github.io",
-        "sameAs": [
-          "https://github.com/aMonteSl",
-          "https://linkedin.com/in/adrian-montes-linares"
-        ],
-        "alumniOf": {
-          "@type": "EducationalOrganization",
-          "name": "Universidad Rey Juan Carlos",
-          "url": "https://www.urjc.es"
-        },
-        "knowsAbout": [
-          "React",
-          "Next.js",
-          "WebXR",
-          "Software Engineering",
-          "Visualización de datos",
-          "Ingeniería Telemática"
-        ]
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://amontesl.github.io/#website",
-        "url": "https://amontesl.github.io",
-        "name": "Adrián Montes Portfolio",
-        "description": "Portfolio personal de Adrián Montes Linares",
-        "publisher": {
-          "@id": "https://amontesl.github.io/#person"
-        },
-        "inLanguage": "es"
-      }
-    ]
-  };
-
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Theme color */}
         <meta name="theme-color" content="#040304" />
-        
-        {/* Preload hero image variants */}
-        <link 
-          rel="preload" 
+        <link
+          rel="preload"
           as="image"
           imageSrcSet="/images/profile/hero-196.avif 1x, /images/profile/hero-196@2x.avif 2x"
           imageSizes="196px"
-          href="/images/profile/hero-196.avif" 
+          href="/images/profile/hero-196.avif"
         />
-        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -108,13 +111,9 @@ export default function RootLayout({
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <I18nProvider>
-          <MetaClient />
           <a href="#main-content" className="skip-to-content">
-            Saltar al contenido principal
+            Skip to main content
           </a>
-          <Header />
-          <ScrollGuard />
-          <ScrollProgress />
           <main id="main-content">
             {children}
           </main>
@@ -122,5 +121,5 @@ export default function RootLayout({
         </I18nProvider>
       </body>
     </html>
-  );
+  )
 }

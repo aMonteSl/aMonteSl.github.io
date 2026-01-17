@@ -1,0 +1,438 @@
+{
+  "meta": {
+    "title": "Adrián Montes — Portfolio",
+    "description": "Telematics Engineering student focusing on clean architectures, XR/3D/AR visualizations of software metrics, and pragmatic UX."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "journey": "Professional Journey",
+    "experience": "Experience",
+    "education": "Education",
+    "publications": "Publications",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Adrián Montes Linares",
+    "headline": "Telematics Engineer / Software Engineer",
+    "headlineSub": "DevTools & XR",
+    "title": "Adrián Montes Linares",
+    "subtitle1": "Telematics Engineering — Student",
+    "subtitle2": "Backend • Frontend • Software Engineering • XR",
+    "tagline": "Author of Code-XR, an open-source VS Code extension for XR visualization of software metrics. Focused on clean architectures and developer experience.",
+    "ctaProjects": "View Projects",
+    "ctaResume": "Download CV",
+    "alternativeTitle": "Telematics Engineering",
+    "bullet1": "VISSOFT 2025 accepted paper",
+    "bullet2": "Code-XR open-source author",
+    "bullet3": "Clean architecture advocate",
+    "openToWork": "Open to internship",
+    "credentials": {
+      "vissoft": "VISSOFT 2025",
+      "codeXr": "Code-XR (Open Source)",
+      "stack": "TypeScript · Next.js · Tailwind"
+    }
+  },
+  "about": {
+    "title": "About me",
+    "p1": "I am a Telematics Engineering student (URJC) and the author of Code-XR, an ecosystem that connects static analysis with immersive visualization of metrics.",
+    "p2": "Our work has been accepted for VISSOFT 2025 (co-located with ICSME 2025). I am preparing the thesis and consolidating documentation and tooling for its evolution.",
+    "p3": "I care about clean code, modular architecture, and a strong DX/UX. I aim for systems that scale and can be maintained."
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Technologies and tools I use regularly",
+    "topStack": {
+      "typescript": "TypeScript",
+      "react": "React",
+      "express": "Express",
+      "postgresql": "PostgreSQL",
+      "azure": "Azure"
+    },
+    "actions": {
+      "viewDetails": "View details",
+      "close": "Close",
+      "back": "Back to overview",
+      "next": "Next skill",
+      "prev": "Previous skill"
+    },
+    "drawer": {
+      "title": "Details"
+    },
+    "carousel": {
+      "goTo": "Go to slide {index}"
+    },
+    "showcase": {
+      "viewMore": "View details",
+      "nextGroup": "Next category",
+      "prevGroup": "Previous category"
+    },
+    "tags": {
+      "academic": "Academic",
+      "internship": "Internship",
+      "open_source": "Open Source",
+      "regular_use": "Regular use",
+      "production_like": "Production-like"
+    },
+    "proficiency": {
+      "basic": "Basic",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "purposeTags": {
+      "learning": "Learning",
+      "academic": "Academic",
+      "internship": "Internship",
+      "open_source": "Open Source",
+      "production_like": "Production-like"
+    },
+    "usedIn": {
+      "projects": "Projects",
+      "journey": "Journey",
+      "codeXr": "Code-XR"
+    },
+    "categories": {
+      "languages": {
+        "label": "Languages",
+        "desc": "Core programming languages from coursework and personal tooling."
+      },
+      "backend": {
+        "label": "Backend",
+        "desc": "Server-side frameworks and API tooling used in personal projects."
+      },
+      "frontend": {
+        "label": "Frontend",
+        "desc": "UI frameworks and build tools for modern web experiences."
+      },
+      "xrRobotics": {
+        "label": "XR & Robotics",
+        "desc": "XR visualization and robotics foundations applied in research prototypes."
+      },
+      "databasesCloud": {
+        "label": "Databases & Cloud",
+        "desc": "Relational databases and cloud services explored in coursework."
+      },
+      "tools": {
+        "label": "Tools",
+        "desc": "Everyday developer tools for systems, security, and delivery."
+      },
+      "other": {
+        "label": "Other",
+        "desc": "Workflow accelerators and AI-assisted practices."
+      }
+    },
+    "items": {
+      "pascal": {
+        "label": "Pascal",
+        "summary": "Used in academic coursework for structured programming practice.",
+        "purpose": "Used to learn structured programming fundamentals.",
+        "h1": "Implemented foundational algorithms in lab work.",
+        "h2": "Practiced disciplined debugging and control flow."
+      },
+      "c": {
+        "label": "C",
+        "summary": "Used for low-level programming exercises and systems coursework.",
+        "purpose": "Built low-level foundations and memory awareness.",
+        "h1": "Built memory-aware utilities and lab assignments.",
+        "h2": "Strengthened understanding of pointers and data layout."
+      },
+      "cpp": {
+        "label": "C++",
+        "summary": "Used in academic projects involving data structures and algorithms.",
+        "purpose": "Applied OOP and data structure practice in coursework.",
+        "h1": "Implemented object-oriented patterns in coursework.",
+        "h2": "Worked with STL for efficient data handling."
+      },
+      "riscv": {
+        "label": "RISC-V ASM",
+        "summary": "Explored assembly fundamentals in architecture coursework.",
+        "purpose": "Understood instruction-level execution and CPU flow.",
+        "h1": "Built small routines to understand instruction flow.",
+        "h2": "Validated outputs with step-by-step debugging."
+      },
+      "python": {
+        "label": "Python",
+        "summary": "Used for scripting, analysis, and tooling in personal projects.",
+        "purpose": "Fast scripting and analysis for research tooling.",
+        "h1": "Automated data parsing and experiment pipelines.",
+        "h2": "Integrated scripts with XR visualization workflows."
+      },
+      "kotlin": {
+        "label": "Kotlin",
+        "summary": "Used for academic mobile development exercises.",
+        "purpose": "Android coursework and app prototyping.",
+        "h1": "Built UI flows for course assignments.",
+        "h2": "Applied Android app architecture basics."
+      },
+      "jsTs": {
+        "label": "JavaScript / TypeScript",
+        "summary": "Primary language for web tooling and UI experiences.",
+        "purpose": "Typed web development and UI tooling.",
+        "h1": "Structured UI logic with typed modules.",
+        "h2": "Integrated build tooling for maintainable frontends."
+      },
+      "htmlCss": {
+        "label": "HTML / CSS",
+        "summary": "Used to craft accessible layouts and responsive UI.",
+        "purpose": "Structured layouts and responsive UI design.",
+        "h1": "Built responsive pages and UI sections.",
+        "h2": "Maintained visual consistency with utility styles."
+      },
+      "matlab": {
+        "label": "MATLAB",
+        "summary": "Used in academic contexts for numerical computing tasks.",
+        "purpose": "Numerical computing for academic exercises.",
+        "h1": "Solved signal-processing and math exercises.",
+        "h2": "Visualized outputs to validate results."
+      },
+      "go": {
+        "label": "Go",
+        "summary": "Explored for backend exercises and lightweight tooling.",
+        "purpose": "Learning systems tooling and concurrency basics.",
+        "h1": "Built small CLI utilities during coursework.",
+        "h2": "Practiced concurrency basics with goroutines."
+      },
+      "django": {
+        "label": "Django",
+        "summary": "Used to build APIs and web backends for projects.",
+        "purpose": "Academic and personal backend projects.",
+        "h1": "Designed REST endpoints and data models.",
+        "h2": "Implemented authentication and admin workflows."
+      },
+      "express": {
+        "label": "Express.js",
+        "summary": "Used to prototype lightweight APIs for web projects.",
+        "purpose": "Fast Node.js API prototyping.",
+        "h1": "Built middleware pipelines for validation.",
+        "h2": "Integrated services with client applications."
+      },
+      "react": {
+        "label": "React",
+        "summary": "Primary UI library for personal web products.",
+        "purpose": "Reusable UI systems for web products.",
+        "h1": "Built reusable component systems.",
+        "h2": "Iterated on UX with hooks and state patterns."
+      },
+      "vite": {
+        "label": "Vite",
+        "summary": "Used for fast iteration in frontend prototypes.",
+        "purpose": "Fast frontend iteration and tooling.",
+        "h1": "Set up build pipelines for quick feedback.",
+        "h2": "Optimized dev workflows with modern tooling."
+      },
+      "tailwind": {
+        "label": "Tailwind CSS",
+        "summary": "Primary styling system for design consistency.",
+        "purpose": "Consistent, scalable styling for UI work.",
+        "h1": "Built responsive layouts with utility classes.",
+        "h2": "Maintained a cohesive visual language."
+      },
+      "bootstrap": {
+        "label": "Bootstrap",
+        "summary": "Used in academic projects for rapid UI scaffolding.",
+        "purpose": "Rapid UI prototyping for coursework.",
+        "h1": "Prototyped layouts and components quickly.",
+        "h2": "Customized themes for coursework demos."
+      },
+      "aframe": {
+        "label": "A-Frame",
+        "summary": "Used to build XR scenes for visualization work.",
+        "purpose": "XR prototyping for research demos.",
+        "h1": "Mapped metrics to interactive 3D scenes.",
+        "h2": "Prototyped XR demos for research contexts."
+      },
+      "babiaXr": {
+        "label": "Babia-XR",
+        "summary": "Used for XR data visualization with Code-XR.",
+        "purpose": "XR visual encodings for Code-XR.",
+        "h1": "Integrated metric streams into XR layouts.",
+        "h2": "Configured visual encodings for clarity."
+      },
+      "ros2": {
+        "label": "ROS 2",
+        "summary": "Explored robotics middleware in academic contexts.",
+        "purpose": "Robotics middleware foundations in coursework.",
+        "h1": "Worked with nodes, topics, and simulation.",
+        "h2": "Built simple integrations for coursework."
+      },
+      "sql": {
+        "label": "SQL",
+        "summary": "Used for relational modeling and structured queries.",
+        "purpose": "Structured data modeling and querying.",
+        "h1": "Designed schemas for coursework projects.",
+        "h2": "Wrote joins and aggregations for reporting."
+      },
+      "postgresql": {
+        "label": "PostgreSQL",
+        "summary": "Used in personal projects requiring relational storage.",
+        "purpose": "Reliable relational storage for APIs.",
+        "h1": "Managed schemas and migrations for APIs.",
+        "h2": "Connected services with reliable persistence."
+      },
+      "azureCosmos": {
+        "label": "Azure Cosmos DB",
+        "summary": "Explored cloud document storage in coursework.",
+        "purpose": "Cloud document storage experiments.",
+        "h1": "Modeled data for distributed storage.",
+        "h2": "Evaluated access patterns and queries."
+      },
+      "azureBlob": {
+        "label": "Azure Blob Storage",
+        "summary": "Used for cloud storage experiments and demos.",
+        "purpose": "Object storage practice in cloud labs.",
+        "h1": "Uploaded and managed blob assets.",
+        "h2": "Tested access controls and lifecycle basics."
+      },
+      "git": {
+        "label": "Git",
+        "summary": "Daily tool for version control and collaboration.",
+        "purpose": "Version control for daily development.",
+        "h1": "Managed branching and code reviews.",
+        "h2": "Maintained clean commit history."
+      },
+      "linux": {
+        "label": "Linux",
+        "summary": "Primary environment for systems and development tasks.",
+        "purpose": "Main OS for development and scripting.",
+        "h1": "Configured tooling and scripting workflows.",
+        "h2": "Troubleshot system-level issues."
+      },
+      "vscode": {
+        "label": "VS Code",
+        "summary": "Main IDE for development and tooling.",
+        "purpose": "Daily IDE for coding and extensions.",
+        "h1": "Customized workflows with extensions.",
+        "h2": "Built and tested Code-XR features."
+      },
+      "androidStudio": {
+        "label": "Android Studio",
+        "summary": "Used in academic mobile app assignments.",
+        "purpose": "Android tooling for coursework.",
+        "h1": "Built Android UI flows for coursework.",
+        "h2": "Debugged apps with emulator tooling."
+      },
+      "wireshark": {
+        "label": "Wireshark",
+        "summary": "Used to inspect and understand network traffic.",
+        "purpose": "Network analysis during labs.",
+        "h1": "Captured packets for protocol analysis.",
+        "h2": "Validated networking lab exercises."
+      },
+      "nmap": {
+        "label": "nmap",
+        "summary": "Used for network scanning exercises in coursework.",
+        "purpose": "Security scanning basics in labs.",
+        "h1": "Mapped services in lab environments.",
+        "h2": "Documented results for security labs."
+      },
+      "openssl": {
+        "label": "OpenSSL",
+        "summary": "Used for cryptography labs and tooling.",
+        "purpose": "Crypto tooling practice in coursework.",
+        "h1": "Generated keys and certificates.",
+        "h2": "Explored encryption basics in practice."
+      },
+      "gpg": {
+        "label": "GPG",
+        "summary": "Used for encryption exercises and secure workflows.",
+        "purpose": "Signing and encryption practice.",
+        "h1": "Signed artifacts and verified integrity.",
+        "h2": "Practiced secure key handling."
+      },
+      "iptables": {
+        "label": "iptables",
+        "summary": "Used to understand firewall rules in coursework.",
+        "purpose": "Firewall rule practice in labs.",
+        "h1": "Configured rule sets for lab setups.",
+        "h2": "Validated traffic filtering behavior."
+      },
+      "ufw": {
+        "label": "UFW",
+        "summary": "Used for simplified firewall management in labs.",
+        "purpose": "Basic firewall management.",
+        "h1": "Applied baseline security policies.",
+        "h2": "Documented configurations for coursework."
+      },
+      "promptEngineering": {
+        "label": "Prompt Engineering",
+        "summary": "Used to improve AI-assisted workflows and research.",
+        "purpose": "Refined prompts for reliable AI output.",
+        "h1": "Refined prompts for consistent outputs.",
+        "h2": "Documented reusable prompt patterns."
+      },
+      "aiModels": {
+        "label": "Multiple AI Models",
+        "summary": "Used to compare outputs and speed up ideation.",
+        "purpose": "Compare model behavior for task fit.",
+        "h1": "Evaluated model behavior for specific tasks.",
+        "h2": "Integrated AI assistance into workflows."
+      },
+      "githubCopilot": {
+        "label": "GitHub Copilot",
+        "summary": "Used to accelerate coding and exploration.",
+        "purpose": "Code acceleration and rapid iteration.",
+        "h1": "Generated scaffolds and refactors quickly.",
+        "h2": "Reviewed suggestions for accuracy and style."
+      }
+    }
+  },
+  "projects": {
+    "title": "Featured projects",
+    "subtitle": "Selected work and case studies",
+    "ctaAll": "See details",
+    "empty": "Projects coming soon.",
+    "back": "Back to projects",
+    "overview": "Overview",
+    "highlights": "Highlights",
+    "role": "Role & contributions",
+    "tech": "Tech stack",
+    "links": {
+      "repo": "Repository",
+      "demo": "Live demo"
+    }
+  },
+  "experience": {
+    "title": "Experience / Collaborations",
+    "intro": "My focus has been academic-applied development and personal projects with measurable impact."
+  },
+  "education": {
+    "title": "Education",
+    "urjc": "URJC — Telematics Engineering (2020–2025)",
+    "bach": "Baccalaureate — Science & Technology (prior to university entry)"
+  },
+  "publications": {
+    "title": "Publications / Merits",
+    "item1": "Paper accepted for VISSOFT 2025 (co-located with ICSME 2025): visualization of software metrics in XR. Preparing camera-ready."
+  },
+  "contact": {
+    "title": "Contact",
+    "copy": "Shall we collaborate? I look for environments where software design and visualization create real advantages.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "by": "Design & development by Adrián Montes Linares",
+    "quickLinks": "Quick Links",
+    "description": "Telematics Engineering student focused on backend, frontend, software engineering, and XR technologies."
+  },
+  "journey": {
+    "title": "Professional Journey",
+    "subtitle": "Experience, education, and key milestones"
+  },
+  "development": {
+    "title": "🚧 Under development",
+    "message": "Hi there! My portfolio is under construction. For now, you can only see the main page, but soon the rest of the sections with my projects, experience, and more information about me will be available.",
+    "thanks": "Thanks for your patience! 😊",
+    "dismiss": "Got it"
+  },
+  "buttons": {
+    "view": "View",
+    "demo": "Demo",
+    "repo": "Repository",
+    "download": "Download"
+  }
+}
