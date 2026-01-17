@@ -16,7 +16,9 @@ export const LINKS = {
     'https://marketplace.visualstudio.com/items?itemName=aMonteSl.codexr',
 
   // Publications
-  vissoftPaper: 'https://doi.org/PLACEHOLDER', // Update when available
+  // TODO: Update with actual DOI once VISSOFT 2025 paper is published
+  // This is intentionally a placeholder until the conference proceedings are available
+  vissoftPaper: 'https://doi.org/PLACEHOLDER'
 } as const
 
 // Credentials / chips for hero section
