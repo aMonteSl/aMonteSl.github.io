@@ -1,7 +1,15 @@
 'use client'
 
-import { useLocale, locales, localeFlags, localeNames, Locale } from '@/i18n'
+import { useLocale, locales, localeNames, Locale } from '@/i18n'
 import { cn } from '@/lib/utils'
+import { GB, ES } from 'country-flag-icons/react/3x2'
+import type { ReactElement } from 'react'
+
+// Map locales to their flag components
+const FlagComponents: Record<Locale, () => ReactElement> = {
+  en: () => <GB className="w-6 h-4 rounded-sm" />,
+  es: () => <ES className="w-6 h-4 rounded-sm" />,
+}
 
 export function LanguageSwitcher() {
   const { locale, setLocale } = useLocale()
@@ -18,6 +26,7 @@ export function LanguageSwitcher() {
     >
       {locales.map((loc) => {
         const isActive = locale === loc
+        const FlagIcon = FlagComponents[loc]
         return (
           <button
             key={loc}
@@ -27,15 +36,15 @@ export function LanguageSwitcher() {
             title={localeNames[loc]}
             className={cn(
               'relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5',
-              'text-xl transition-all duration-200',
+              'transition-all duration-200',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
               isActive
                 ? 'bg-[var(--accent)]/15 shadow-sm'
                 : 'opacity-60 hover:opacity-100 hover:bg-[var(--card)]'
             )}
           >
-            <span role="img" aria-hidden="true">
-              {localeFlags[loc]}
+            <span aria-hidden="true">
+              <FlagIcon />
             </span>
             {isActive && (
               <span className="sr-only">(current language)</span>

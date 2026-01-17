@@ -71,3 +71,33 @@ export const shouldAnimate = (): boolean => {
   if (typeof window === 'undefined') return true
   return !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
+
+// Route transition overlay variants
+export const overlayVariants = {
+  default: {
+    hidden: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
+        ease: EASING_OUT,
+      },
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.25,
+        ease: EASING,
+      },
+    },
+  },
+  reduced: {
+    hidden: {
+      opacity: 0,
+      transition: { duration: 0.05 },
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.05 },
+    },
+  },
+}

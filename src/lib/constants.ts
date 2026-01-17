@@ -30,6 +30,8 @@ export const CREDENTIALS = [
 export const NAV_ITEMS = [
   { key: 'home', href: '#home' },
   { key: 'projects', href: '#projects' },
+  { key: 'skills', href: '#skills' },
+  { key: 'journey', href: '#journey' },
 ] as const
 
 // Social links for footer/contact

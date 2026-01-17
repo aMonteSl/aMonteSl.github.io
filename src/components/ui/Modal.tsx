@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, ReactNode } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export interface ModalProps {
@@ -13,6 +13,7 @@ export interface ModalProps {
 
 export function Modal({ isOpen, onClose, children, className }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
+  const reduceMotion = useReducedMotion()
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -88,10 +89,10 @@ export function Modal({ isOpen, onClose, children, className }: ModalProps) {
           {/* Modal */}
           <motion.div
             ref={modalRef}
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
+            animate={reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+            exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
+            transition={reduceMotion ? { duration: 0.12 } : { type: 'spring', damping: 25, stiffness: 300 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
             role="dialog"
             aria-modal="true"

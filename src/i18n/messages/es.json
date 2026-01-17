@@ -8,6 +8,7 @@
     "about": "Sobre mí",
     "skills": "Competencias",
     "projects": "Proyectos",
+    "journey": "Trayectoria profesional",
     "experience": "Experiencia",
     "education": "Formación",
     "publications": "Publicaciones",
@@ -42,13 +43,339 @@
   },
   "skills": {
     "title": "Competencias",
-    "groups": {
-      "languages": "Lenguajes",
-      "frontend": "Frontend",
-      "backend": "Backend y Bases de Datos",
-      "xr": "XR / 3D",
-      "tooling": "Herramientas / DevOps",
-      "other": "Otros"
+    "subtitle": "Tecnologías y herramientas que uso habitualmente",
+    "topStack": {
+      "typescript": "TypeScript",
+      "react": "React",
+      "express": "Express",
+      "postgresql": "PostgreSQL",
+      "azure": "Azure"
+    },
+    "actions": {
+      "viewDetails": "Ver detalles",
+      "close": "Cerrar",
+      "back": "Volver al resumen",
+      "next": "Siguiente habilidad",
+      "prev": "Habilidad anterior"
+    },
+    "drawer": {
+      "title": "Detalles"
+    },
+    "carousel": {
+      "goTo": "Ir a la diapositiva {index}"
+    },
+    "showcase": {
+      "viewMore": "Ver detalles",
+      "nextGroup": "Siguiente categoría",
+      "prevGroup": "Categoría anterior"
+    },
+    "tags": {
+      "academic": "Académico",
+      "internship": "Prácticas",
+      "open_source": "Código abierto",
+      "regular_use": "Uso habitual",
+      "production_like": "Similar a producción"
+    },
+    "proficiency": {
+      "basic": "Básico",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "purposeTags": {
+      "learning": "Aprendizaje",
+      "academic": "Académico",
+      "internship": "Prácticas",
+      "open_source": "Código abierto",
+      "production_like": "Similar a producción"
+    },
+    "usedIn": {
+      "projects": "Proyectos",
+      "journey": "Trayectoria",
+      "codeXr": "Code-XR"
+    },
+    "categories": {
+      "languages": {
+        "label": "Lenguajes",
+        "desc": "Lenguajes base trabajados en asignaturas y prácticas personales."
+      },
+      "backend": {
+        "label": "Backend",
+        "desc": "Frameworks y APIs usadas en proyectos personales."
+      },
+      "frontend": {
+        "label": "Frontend",
+        "desc": "Frameworks UI y herramientas de build para web moderna."
+      },
+      "xrRobotics": {
+        "label": "XR y Robótica",
+        "desc": "XR y robótica aplicadas a prototipos de investigación."
+      },
+      "databasesCloud": {
+        "label": "Bases de datos y Cloud",
+        "desc": "Bases de datos relacionales y servicios cloud explorados en la carrera."
+      },
+      "tools": {
+        "label": "Herramientas",
+        "desc": "Herramientas diarias para sistemas, seguridad y entrega."
+      },
+      "other": {
+        "label": "Otros",
+        "desc": "Aceleradores de flujo de trabajo y prácticas con IA."
+      }
+    },
+    "items": {
+      "pascal": {
+        "label": "Pascal",
+        "summary": "Usado en asignaturas para practicar programación estructurada.",
+        "purpose": "Usado para aprender fundamentos de programación estructurada.",
+        "h1": "Implementé algoritmos base en prácticas.",
+        "h2": "Trabajé el control de flujo y depuración."
+      },
+      "c": {
+        "label": "C",
+        "summary": "Usado en ejercicios de bajo nivel y sistemas.",
+        "purpose": "Base de programación de bajo nivel y memoria.",
+        "h1": "Construí utilidades con gestión de memoria.",
+        "h2": "Reforcé punteros y organización de datos."
+      },
+      "cpp": {
+        "label": "C++",
+        "summary": "Usado en proyectos académicos de estructuras y algoritmos.",
+        "purpose": "Aplicación de OOP y estructuras en la carrera.",
+        "h1": "Apliqué patrones orientados a objetos.",
+        "h2": "Usé STL para manejo eficiente de datos."
+      },
+      "riscv": {
+        "label": "ASM RISC-V",
+        "summary": "Exploré fundamentos de ensamblador en arquitectura.",
+        "purpose": "Comprender ejecución a nivel de instrucción.",
+        "h1": "Escribí rutinas básicas para entender instrucciones.",
+        "h2": "Validé resultados con depuración paso a paso."
+      },
+      "python": {
+        "label": "Python",
+        "summary": "Usado para scripting, análisis y herramientas en proyectos.",
+        "purpose": "Scripting y análisis rápido para tooling.",
+        "h1": "Automaticé parsing y pipelines experimentales.",
+        "h2": "Integré scripts en flujos XR."
+      },
+      "kotlin": {
+        "label": "Kotlin",
+        "summary": "Usado en prácticas académicas de desarrollo móvil.",
+        "purpose": "Desarrollo móvil en prácticas académicas.",
+        "h1": "Construí flujos UI para tareas.",
+        "h2": "Apliqué bases de arquitectura Android."
+      },
+      "jsTs": {
+        "label": "JavaScript / TypeScript",
+        "summary": "Lenguaje principal para tooling web y UI.",
+        "purpose": "Desarrollo web tipado y tooling UI.",
+        "h1": "Estructuré lógica UI con módulos tipados.",
+        "h2": "Integré toolchains modernas para frontends."
+      },
+      "htmlCss": {
+        "label": "HTML / CSS",
+        "summary": "Usado para layouts accesibles y responsive.",
+        "purpose": "Layouts responsivos y estructura UI.",
+        "h1": "Construí páginas y secciones adaptativas.",
+        "h2": "Mantuve consistencia visual con utilidades."
+      },
+      "matlab": {
+        "label": "MATLAB",
+        "summary": "Usado en contexto académico para cálculo numérico.",
+        "purpose": "Cálculo numérico para ejercicios académicos.",
+        "h1": "Resolví ejercicios de señal y matemáticas.",
+        "h2": "Visualicé salidas para validar resultados."
+      },
+      "go": {
+        "label": "Go",
+        "summary": "Explorado en ejercicios backend y tooling ligero.",
+        "purpose": "Aprendizaje de tooling y concurrencia.",
+        "h1": "Creé utilidades CLI pequeñas.",
+        "h2": "Practiqué concurrencia básica con goroutines."
+      },
+      "django": {
+        "label": "Django",
+        "summary": "Usado para construir APIs y backends web.",
+        "purpose": "Backend académico y proyectos personales.",
+        "h1": "Diseñé endpoints REST y modelos.",
+        "h2": "Implementé autenticación y admin."
+      },
+      "express": {
+        "label": "Express.js",
+        "summary": "Usado para prototipar APIs ligeras.",
+        "purpose": "Prototipado rápido de APIs Node.",
+        "h1": "Construí middlewares de validación.",
+        "h2": "Integré servicios con el cliente."
+      },
+      "react": {
+        "label": "React",
+        "summary": "Librería principal para UI en proyectos personales.",
+        "purpose": "UI reutilizable en productos web.",
+        "h1": "Creé sistemas de componentes reutilizables.",
+        "h2": "Iteré UX con hooks y patrones de estado."
+      },
+      "vite": {
+        "label": "Vite",
+        "summary": "Usado para iteración rápida en frontends.",
+        "purpose": "Iteración rápida y tooling moderno.",
+        "h1": "Configuré pipelines de build ágiles.",
+        "h2": "Optimicé el flujo de desarrollo."
+      },
+      "tailwind": {
+        "label": "Tailwind CSS",
+        "summary": "Sistema principal de estilos para consistencia.",
+        "purpose": "Estilos consistentes y escalables.",
+        "h1": "Construí layouts responsivos con utilidades.",
+        "h2": "Mantuve lenguaje visual coherente."
+      },
+      "bootstrap": {
+        "label": "Bootstrap",
+        "summary": "Usado en trabajos académicos para prototipar UI.",
+        "purpose": "Prototipado rápido en trabajos académicos.",
+        "h1": "Monté componentes y layouts rápidamente.",
+        "h2": "Personalicé temas para demos."
+      },
+      "aframe": {
+        "label": "A-Frame",
+        "summary": "Usado para construir escenas XR de visualización.",
+        "purpose": "Prototipado XR para demos de investigación.",
+        "h1": "Mapeé métricas a escenas 3D interactivas.",
+        "h2": "Prototipé demos XR en investigación."
+      },
+      "babiaXr": {
+        "label": "Babia-XR",
+        "summary": "Usado para visualización XR en Code-XR.",
+        "purpose": "Codificaciones XR para Code-XR.",
+        "h1": "Integré flujos de métricas en XR.",
+        "h2": "Configuré codificaciones visuales."
+      },
+      "ros2": {
+        "label": "ROS 2",
+        "summary": "Explorado como middleware de robótica.",
+        "purpose": "Bases de middleware en robótica.",
+        "h1": "Trabajé con nodos, topics y simulación.",
+        "h2": "Construí integraciones básicas."
+      },
+      "sql": {
+        "label": "SQL",
+        "summary": "Usado para modelado relacional y consultas.",
+        "purpose": "Modelado relacional y consultas estructuradas.",
+        "h1": "Diseñé esquemas para proyectos.",
+        "h2": "Escribí joins y agregaciones."
+      },
+      "postgresql": {
+        "label": "PostgreSQL",
+        "summary": "Usado en proyectos personales con persistencia.",
+        "purpose": "Persistencia relacional para APIs.",
+        "h1": "Gestioné esquemas y migraciones.",
+        "h2": "Conecté servicios con fiabilidad."
+      },
+      "azureCosmos": {
+        "label": "Azure Cosmos DB",
+        "summary": "Explorado en almacenamiento documental cloud.",
+        "purpose": "Almacenamiento documental en prácticas cloud.",
+        "h1": "Modelé datos para almacenamiento distribuido.",
+        "h2": "Evalué patrones de acceso y consultas."
+      },
+      "azureBlob": {
+        "label": "Azure Blob Storage",
+        "summary": "Usado en pruebas de almacenamiento cloud.",
+        "purpose": "Almacenamiento de objetos en cloud.",
+        "h1": "Subí y gestioné assets en blobs.",
+        "h2": "Probé controles de acceso básicos."
+      },
+      "git": {
+        "label": "Git",
+        "summary": "Herramienta diaria de control de versiones.",
+        "purpose": "Control de versiones en el día a día.",
+        "h1": "Gestioné ramas y revisiones.",
+        "h2": "Mantengo historial limpio de commits."
+      },
+      "linux": {
+        "label": "Linux",
+        "summary": "Entorno principal para sistemas y desarrollo.",
+        "purpose": "Sistema principal para desarrollo y scripts.",
+        "h1": "Configuré tooling y scripts.",
+        "h2": "Resolví incidencias de sistema."
+      },
+      "vscode": {
+        "label": "VS Code",
+        "summary": "IDE principal para desarrollo y tooling.",
+        "purpose": "IDE principal para codificar y probar.",
+        "h1": "Personalicé flujos con extensiones.",
+        "h2": "Construí y probé funciones en Code-XR."
+      },
+      "androidStudio": {
+        "label": "Android Studio",
+        "summary": "Usado en prácticas de apps móviles.",
+        "purpose": "Tooling Android en prácticas académicas.",
+        "h1": "Creé flujos UI para tareas.",
+        "h2": "Depuré apps con emulador."
+      },
+      "wireshark": {
+        "label": "Wireshark",
+        "summary": "Usado para inspección y análisis de tráfico.",
+        "purpose": "Análisis de tráfico en prácticas de red.",
+        "h1": "Capturé paquetes para análisis de protocolos.",
+        "h2": "Validé prácticas de redes."
+      },
+      "nmap": {
+        "label": "nmap",
+        "summary": "Usado para escaneo de red en laboratorio.",
+        "purpose": "Escaneo de red en prácticas de seguridad.",
+        "h1": "Mapeé servicios en entornos de prácticas.",
+        "h2": "Documenté resultados para seguridad."
+      },
+      "openssl": {
+        "label": "OpenSSL",
+        "summary": "Usado en prácticas de criptografía.",
+        "purpose": "Herramienta de criptografía en prácticas.",
+        "h1": "Generé claves y certificados.",
+        "h2": "Exploré cifrado en ejercicios."
+      },
+      "gpg": {
+        "label": "GPG",
+        "summary": "Usado en ejercicios de cifrado y firmas.",
+        "purpose": "Firmas y cifrado en prácticas.",
+        "h1": "Firmé artefactos y verifiqué integridad.",
+        "h2": "Practiqué gestión segura de claves."
+      },
+      "iptables": {
+        "label": "iptables",
+        "summary": "Usado para reglas de firewall en prácticas.",
+        "purpose": "Reglas de firewall para laboratorios.",
+        "h1": "Configuré reglas para laboratorios.",
+        "h2": "Validé filtrado de tráfico."
+      },
+      "ufw": {
+        "label": "UFW",
+        "summary": "Usado para gestión simple de firewall.",
+        "purpose": "Gestión básica de firewall.",
+        "h1": "Apliqué políticas básicas de seguridad.",
+        "h2": "Documenté configuraciones en prácticas."
+      },
+      "promptEngineering": {
+        "label": "Ingeniería de prompts",
+        "summary": "Usado para mejorar flujos con IA.",
+        "purpose": "Mejorar resultados de IA con prompts.",
+        "h1": "Refiné prompts para salidas consistentes.",
+        "h2": "Documenté patrones reutilizables."
+      },
+      "aiModels": {
+        "label": "Modelos de IA múltiples",
+        "summary": "Usado para comparar resultados y acelerar ideación.",
+        "purpose": "Comparar modelos para tareas concretas.",
+        "h1": "Evalué comportamiento de modelos por tarea.",
+        "h2": "Integré asistencia IA en el flujo."
+      },
+      "githubCopilot": {
+        "label": "GitHub Copilot",
+        "summary": "Usado para acelerar desarrollo y exploración.",
+        "purpose": "Acelerar desarrollo con asistencia IA.",
+        "h1": "Generé scaffolds y refactors rápido.",
+        "h2": "Revisé sugerencias por precisión."
+      }
     }
   },
   "projects": {

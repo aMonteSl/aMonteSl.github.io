@@ -38,7 +38,8 @@ export function Header() {
         >
           <Avatar size="sm" />
           <span className="font-semibold text-sm sm:text-base text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors duration-200">
-            <span className="hidden sm:inline">Adrián Montes</span>
+            <span className="hidden lg:inline">Adrián Montes Linares</span>
+            <span className="hidden sm:inline lg:hidden">Adrián Montes</span>
             <span className="sm:hidden">Adrián M.</span>
           </span>
         </Link>

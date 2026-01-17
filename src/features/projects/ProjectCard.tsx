@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Badge, Button } from '@/components/ui'
 import { shouldAnimate, fadeInUp } from '@/lib/motion'
 import { useTranslations } from '@/i18n'

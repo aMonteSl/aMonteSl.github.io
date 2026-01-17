@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { I18nProvider } from '@/i18n'
-import { Header } from '@/components/common/Header'
 import { Footer } from '@/components/common/Footer'
 import { SITE, LINKS } from '@/lib/constants'
 
@@ -11,6 +10,16 @@ export const metadata: Metadata = {
   keywords: ['Adrián Montes', 'Telematics Engineering', 'React', 'XR', 'WebXR', 'Software Engineering', 'Portfolio', 'Code-XR'],
   authors: [{ name: SITE.author }],
   creator: SITE.author,
+  manifest: '/favicons/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicons/favicon.ico', sizes: '48x48' },
+    ],
+    apple: [
+      { url: '/favicons/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -105,7 +114,6 @@ export default function RootLayout({
           <a href="#main-content" className="skip-to-content">
             Skip to main content
           </a>
-          <Header />
           <main id="main-content">
             {children}
           </main>

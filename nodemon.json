@@ -1,0 +1,6 @@
+{
+  "watch": ["src", "scripts"],
+  "ext": "ts,tsx,js,jsx",
+  "ignore": ["node_modules", "public", ".next"],
+  "delay": "250ms"
+}
