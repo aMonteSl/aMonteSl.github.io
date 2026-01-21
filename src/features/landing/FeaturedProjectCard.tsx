@@ -1,7 +1,6 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Badge } from '@/components/ui'
 import { useTranslations } from '@/i18n'
 import type { FeaturedProject } from '@/content/featuredProjects'
 

@@ -424,7 +424,24 @@
     "links": {
       "repo": "Repository",
       "demo": "Live demo"
-    }
+    },
+    "quickFacts": {
+      "title": "Quick facts",
+      "type": "Type",
+      "period": "Period",
+      "roleLabel": "Role"
+    },
+    "types": {
+      "openSource": "Open Source",
+      "academic": "Academic",
+      "personal": "Personal",
+      "internal": "Internal"
+    },
+    "navigation": {
+      "prev": "Previous project",
+      "next": "Next project"
+    },
+    "gallery": "Project gallery"
   },
   "experience": {
     "title": "Experience / Collaborations",

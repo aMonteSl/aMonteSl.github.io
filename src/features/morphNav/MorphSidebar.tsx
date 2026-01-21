@@ -10,10 +10,10 @@ import {
   backdropVariants,
 } from '@/features/morphNav/morphVariants'
 import { LanguageSwitcher } from '@/features/language'
-import { Avatar } from '@/components/ui'
+import { Avatar, Button } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import { NAV_ITEMS, SOCIAL_LINKS } from '@/lib/constants'
-import { useTranslations } from '@/i18n'
+import { NAV_ITEMS, SOCIAL_LINKS, getCvUrl } from '@/lib/constants'
+import { useTranslations, useLocale } from '@/i18n'
 
 // Social icon components
 function GitHubIcon() {
@@ -70,6 +70,8 @@ export function MorphSidebar() {
   const { isMorphed, scrollToSection, activeSection, prefersReducedMotion } = useMorphNav()
   const t = useTranslations('nav')
   const tHero = useTranslations('hero')
+  const { locale } = useLocale()
+  const cvUrl = getCvUrl(locale)
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
@@ -136,6 +138,15 @@ export function MorphSidebar() {
           )
         })}
       </motion.div>
+
+      {/* Download CV button */}
+      <div className="mb-6">
+        <Button asChild className="w-full justify-center shadow-md shadow-[var(--accent)]/20 hover:shadow-[var(--accent)]/40 transition-shadow">
+          <a href={cvUrl} download rel="noopener">
+            {tHero('ctaResume')}
+          </a>
+        </Button>
+      </div>
 
       {/* Divider */}
       <div className="h-px bg-[var(--border)]/50 mb-6" />

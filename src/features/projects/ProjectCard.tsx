@@ -5,12 +5,15 @@ import { motion } from 'framer-motion'
 import { Badge, Button } from '@/components/ui'
 import { shouldAnimate, fadeInUp } from '@/lib/motion'
 import { useTranslations } from '@/i18n'
+import { RotatingThumbnail } from './components/RotatingThumbnail'
 
 export interface ProjectCardProps {
   slug: string
   title: string
   summary: string
   tags: string[]
+  /** Array of full image paths for rotating thumbnail */
+  images: string[]
   index?: number
 }
 
@@ -19,6 +22,7 @@ export function ProjectCard({
   title,
   summary,
   tags,
+  images,
   index = 0,
 }: ProjectCardProps) {
   const animate = shouldAnimate()
@@ -29,10 +33,14 @@ export function ProjectCard({
       {...(animate ? fadeInUp(0.1 + index * 0.08) : {})}
       className="group relative flex flex-col h-full rounded-2xl bg-[var(--card)]/50 ring-1 ring-[var(--border)]/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:ring-[var(--accent)]/30 hover:shadow-lg hover:shadow-black/10"
     >
-      {/* Image placeholder */}
-      <div className="aspect-video bg-gradient-to-br from-[var(--accent)]/10 to-[var(--card)] flex items-center justify-center">
-        <span className="text-4xl opacity-50">🚀</span>
-      </div>
+      {/* Rotating thumbnail */}
+      <RotatingThumbnail
+        images={images}
+        alt={title}
+        interval={3500 + index * 500}
+        showDots={images.length > 1}
+        className="rounded-t-2xl"
+      />
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-5 sm:p-6">

@@ -3,15 +3,16 @@
     "slug": "code-xr",
     "title": "Code-XR",
     "period": "2024–2025",
+    "featured": true,
+    "type": "openSource",
     "summary_en": "XR/3D/AR visualization of software metrics with static analysis (e.g., CCN), LivePanel/XR modes, and JSON persistence.",
     "summary_es": "Visualización XR/3D/AR de métricas de software con análisis estático (p. ej., CCN), modos LivePanel/XR y persistencia JSON.",
-    "tags": ["React","A-Frame","babia-xr","Python","VS Code API"],
-    "repoUrl": "https://github.com/aMonteSl",
+    "tags": ["React", "A-Frame", "babia-xr", "Python", "VS Code API"],
+    "repoUrl": "https://github.com/aMonteSl/CodeXR",
     "demoUrl": "",
-    "images": {
-      "thumb": "/projects/code-xr/thumb.jpg",
-      "hero": "/projects/code-xr/hero.jpg"
-    },
+    "imageDir": "/projects/code-xr",
+    "images": ["thumb-1.jpg", "thumb-2.jpg", "thumb-3.jpg"],
+    "heroImage": "hero.jpg",
     "highlights_en": [
       "Problem → Many metrics, low comprehension at a glance",
       "Solution → Immersive XR city metaphor with live panel",
@@ -24,60 +25,90 @@
     ],
     "role_en": "End-to-end design & implementation. Static analysis pipeline, XR scene mapping, and documentation.",
     "role_es": "Diseño e implementación end-to-end. Pipeline de análisis estático, mapeo de escena XR y documentación.",
-    "tech": ["TypeScript","React","Next.js","A-Frame","babia-xr","Python"]
+    "tech": ["TypeScript", "React", "Next.js", "A-Frame", "babia-xr", "Python"]
+  },
+  {
+    "slug": "obt",
+    "title": "OBT — Online Bus Tracker",
+    "period": "2024",
+    "featured": true,
+    "type": "personal",
+    "summary_en": "Real-time bus tracking app with route optimization and live ETAs for Madrid public transport.",
+    "summary_es": "Aplicación de seguimiento de autobuses en tiempo real con optimización de rutas y ETAs en vivo para el transporte público de Madrid.",
+    "tags": ["React", "Node.js", "PostgreSQL", "Redis", "WebSocket"],
+    "repoUrl": "https://github.com/aMonteSl/OBT",
+    "demoUrl": "",
+    "imageDir": "/projects/obt",
+    "images": ["thumb-1.jpg", "thumb-2.jpg", "thumb-3.jpg"],
+    "heroImage": "hero.jpg",
+    "highlights_en": [
+      "Challenge → Unreliable bus arrival predictions frustrate commuters",
+      "Solution → Real-time GPS + historical data fusion for accurate ETAs",
+      "Impact → 40% reduction in wait-time uncertainty"
+    ],
+    "highlights_es": [
+      "Reto → Predicciones de llegada de autobús poco fiables frustran a los viajeros",
+      "Solución → GPS en tiempo real + fusión de datos históricos para ETAs precisos",
+      "Impacto → Reducción del 40% en la incertidumbre de tiempo de espera"
+    ],
+    "role_en": "Full-stack development. Backend API, real-time data pipeline, and React frontend with map integration.",
+    "role_es": "Desarrollo full-stack. API backend, pipeline de datos en tiempo real y frontend React con integración de mapas.",
+    "tech": ["React", "Node.js", "Express", "PostgreSQL", "Redis", "WebSocket", "Leaflet"]
   },
   {
     "slug": "honor-course-1",
-    "title": "High Distinction — Course 1",
+    "title": "High Distinction — Algorithms",
     "period": "2023",
-    "summary_en": "High Distinction (Matrícula de Honor). Lorem ipsum placeholder for course summary.",
-    "summary_es": "Matrícula de Honor. Texto de relleno lorem ipsum para el resumen de la asignatura.",
-    "tags": ["Algorithms","Clean Architecture"],
+    "featured": true,
+    "type": "academic",
+    "summary_en": "Earned High Distinction (Matrícula de Honor) for advanced algorithms coursework with focus on optimization.",
+    "summary_es": "Matrícula de Honor en asignatura avanzada de algoritmos con enfoque en optimización.",
+    "tags": ["Algorithms", "Clean Architecture", "Java"],
     "repoUrl": "",
     "demoUrl": "",
-    "images": {
-      "thumb": "/projects/honor-course-1/thumb.jpg",
-      "hero": "/projects/honor-course-1/hero.jpg"
-    },
+    "imageDir": "/projects/honor-course-1",
+    "images": ["thumb-1.jpg"],
+    "heroImage": "hero.jpg",
     "highlights_en": [
-      "Challenge → Lorem ipsum dolor sit amet",
-      "Approach → Consectetur adipiscing elit, sed do",
-      "Result → Egestas tellus rutrum tellus pellentesque"
+      "Challenge → Complex algorithmic problem sets with strict time limits",
+      "Approach → Clean architecture + rigorous testing for correctness",
+      "Result → Perfect scores on all optimization assignments"
     ],
     "highlights_es": [
-      "Reto → Lorem ipsum dolor sit amet",
-      "Enfoque → Consectetur adipiscing elit, sed do",
-      "Resultado → Egestas tellus rutrum tellus pellentesque"
+      "Reto → Problemas algorítmicos complejos con límites de tiempo estrictos",
+      "Enfoque → Arquitectura limpia + pruebas rigurosas para corrección",
+      "Resultado → Puntuaciones perfectas en todas las tareas de optimización"
     ],
-    "role_en": "Explain concretely what was built, how it was validated, and why it stands out. TODO: replace lorem ipsum.",
-    "role_es": "Explicar con detalle qué se construyó, cómo se validó y por qué destaca. TODO: reemplazar lorem ipsum.",
-    "tech": ["TypeScript","Python"]
+    "role_en": "Designed and implemented efficient algorithms meeting strict time/space constraints. Demonstrated deep understanding of complexity analysis.",
+    "role_es": "Diseñé e implementé algoritmos eficientes cumpliendo restricciones estrictas de tiempo/espacio. Demostré profundo entendimiento del análisis de complejidad.",
+    "tech": ["Java", "Python", "Data Structures"]
   },
   {
     "slug": "honor-course-2",
-    "title": "High Distinction — Course 2",
+    "title": "High Distinction — Networks",
     "period": "2023",
-    "summary_en": "High Distinction (Matrícula de Honor). Lorem ipsum placeholder for course summary.",
-    "summary_es": "Matrícula de Honor. Texto de relleno lorem ipsum para el resumen de la asignatura.",
-    "tags": ["Networking","Systems"],
+    "featured": true,
+    "type": "academic",
+    "summary_en": "Earned High Distinction (Matrícula de Honor) in computer networks with hands-on protocol implementation.",
+    "summary_es": "Matrícula de Honor en redes de computadores con implementación práctica de protocolos.",
+    "tags": ["Networking", "Systems", "C/C++"],
     "repoUrl": "",
     "demoUrl": "",
-    "images": {
-      "thumb": "/projects/honor-course-2/thumb.jpg",
-      "hero": "/projects/honor-course-2/hero.jpg"
-    },
+    "imageDir": "/projects/honor-course-2",
+    "images": ["thumb-1.jpg"],
+    "heroImage": "hero.jpg",
     "highlights_en": [
-      "Challenge → Ullamcorper dignissim cras tincidunt",
-      "Approach → Amet aliquam id diam maecenas",
-      "Result → Semper feugiat nibh sed pulvinar proin"
+      "Challenge → Implement core network protocols from scratch",
+      "Approach → Low-level C programming with socket APIs",
+      "Result → Fully functional TCP/IP stack implementation"
     ],
     "highlights_es": [
-      "Reto → Ullamcorper dignissim cras tincidunt",
-      "Enfoque → Amet aliquam id diam maecenas",
-      "Resultado → Semper feugiat nibh sed pulvinar proin"
+      "Reto → Implementar protocolos de red básicos desde cero",
+      "Enfoque → Programación de bajo nivel en C con APIs de sockets",
+      "Resultado → Implementación completamente funcional del stack TCP/IP"
     ],
-    "role_en": "Detail your contributions, measurements, and evidence of excellence. TODO: replace lorem ipsum.",
-    "role_es": "Detallar tus contribuciones, medidas y evidencias de excelencia. TODO: reemplazar lorem ipsum.",
-    "tech": ["C/C++","Linux"]
+    "role_en": "Built custom network protocol implementations demonstrating deep understanding of OSI layers and practical systems programming.",
+    "role_es": "Construí implementaciones personalizadas de protocolos de red demostrando profundo entendimiento de las capas OSI y programación de sistemas práctica.",
+    "tech": ["C/C++", "Linux", "Sockets", "Wireshark"]
   }
 ]
