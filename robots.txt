@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://amontesl.github.io/sitemap.xml
