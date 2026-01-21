@@ -2,11 +2,14 @@
 
 import { motion } from 'framer-motion'
 import { fadeInUp, avatarHover, shouldAnimate } from '@/lib/motion'
-import { Container, Avatar, Button, Badge } from '@/components/ui'
-import { useTranslations } from '@/i18n'
-import { LINKS, SOCIAL_LINKS } from '@/lib/constants'
+import { Container, Avatar, Button } from '@/components/ui'
+import { useTranslations, useLocale } from '@/i18n'
+import { SOCIAL_LINKS, getCvUrl } from '@/lib/constants'
+import { FEATURED_PROJECTS } from '@/content/featuredProjects'
+import { useFeaturedRotation } from './useFeaturedRotation'
+import { FeaturedProjectCard } from './FeaturedProjectCard'
 
-// Social icon components
+// Icons
 function GithubIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -32,6 +35,25 @@ function EmailIcon({ className }: { className?: string }) {
   )
 }
 
+function DownloadIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  )
+}
+
+function BriefcaseIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  )
+}
+
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
   github: GithubIcon,
   linkedin: LinkedinIcon,
@@ -40,17 +62,24 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
 
 export function Hero() {
   const t = useTranslations('hero')
+  const { locale } = useLocale()
   const animate = shouldAnimate()
 
-  const bullets = [t('bullet1'), t('bullet2'), t('bullet3')]
-  const credentials = [
-    { key: 'vissoft', label: t('credentials.vissoft') },
-    { key: 'codeXr', label: t('credentials.codeXr') },
-    { key: 'stack', label: t('credentials.stack') },
-  ]
+  // Featured projects rotation
+  const {
+    activeItem: activeProject,
+    activeIndex,
+    goToIndex,
+    pause,
+    resume,
+    total,
+  } = useFeaturedRotation(FEATURED_PROJECTS)
+
+  // CV URL based on current locale
+  const cvUrl = getCvUrl(locale)
 
   return (
-    <section id="home" className="min-h-[calc(100vh-4rem)] flex items-center py-12 sm:py-16 md:py-20 lg:py-24">
+    <section id="home" className="min-h-[calc(100vh-4rem)] flex items-center pt-20 sm:pt-16 md:pt-20 lg:pt-24 pb-12 sm:pb-16 md:pb-20 lg:pb-24">
       <Container size="xl" className="w-full">
         {/* Two-column grid: visual left, copy right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-16 xl:gap-20 items-center">
@@ -67,141 +96,129 @@ export function Hero() {
               role="img"
               aria-label="Profile photo of Adrián Montes"
             >
-              {/* Outer glow ring - scales with avatar */}
-              <div className="absolute -inset-4 sm:-inset-5 md:-inset-6 rounded-full bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              {/* Outer glow ring */}
+              <div className="absolute -inset-5 sm:-inset-6 md:-inset-8 rounded-full bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
-              {/* Primary ring - responsive offset */}
+              {/* Primary ring */}
               <div className="absolute inset-0 rounded-full ring-2 ring-[var(--accent)]/40 ring-offset-4 sm:ring-offset-6 md:ring-offset-8 ring-offset-[var(--bg)] transition-all duration-300 group-hover:ring-[var(--accent)]/60" />
 
-              {/* Avatar container with new hero size */}
+              {/* Avatar container */}
               <div className="relative shine-on-hover rounded-full overflow-hidden shadow-2xl shadow-black/30">
                 <Avatar size="hero" loading="eager" fetchPriority="high" />
               </div>
 
-              {/* Floating accent dot - responsive size */}
+              {/* Floating accent dot */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/30"
+                className="absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-full bg-[var(--accent)] shadow-lg shadow-[var(--accent)]/30"
               />
             </motion.div>
 
-            {/* Credential chips below avatar */}
+            {/* Featured Project Card with rotation — hidden on mobile */}
             <motion.div
-              {...(animate ? fadeInUp(0.15) : {})}
-              className="mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 max-w-xs sm:max-w-sm"
+              {...(animate ? fadeInUp(0.2) : {})}
+              className="hidden lg:block mt-8 w-full max-w-sm"
             >
-              {credentials.map((cred, i) => (
-                <motion.div
-                  key={cred.key}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2 + i * 0.08, duration: 0.3 }}
-                >
-                  <Badge variant="outline" className="text-xs backdrop-blur-sm">
-                    {cred.label}
-                  </Badge>
-                </motion.div>
-              ))}
+              <FeaturedProjectCard
+                project={activeProject}
+                activeIndex={activeIndex}
+                total={total}
+                onDotClick={goToIndex}
+                onMouseEnter={pause}
+                onMouseLeave={resume}
+              />
             </motion.div>
           </motion.div>
 
           {/* Right Column — Copy */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
-            {/* Open to internship badge */}
-            <motion.div {...(animate ? fadeInUp(0.05) : {})} className="mb-4 sm:mb-5">
-              <span className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium bg-[var(--accent)]/10 text-[var(--accent)] ring-1 ring-[var(--accent)]/20">
-                <span className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse" />
-                {t('openToWork')}
-              </span>
-            </motion.div>
-
-            {/* Name - now more prominent */}
+            {/* H1: Name */}
             <motion.h1
-              {...(animate ? fadeInUp(0.08) : {})}
+              {...(animate ? fadeInUp(0.05) : {})}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight text-[var(--fg)] leading-[1.1] mb-3 sm:mb-4"
             >
               {t('name')}
             </motion.h1>
 
-            {/* Headline - role/title */}
+            {/* H2: Role */}
             <motion.h2
-              {...(animate ? fadeInUp(0.1) : {})}
-              className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-[var(--fg-muted)] mb-2"
+              {...(animate ? fadeInUp(0.08) : {})}
+              className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-3xl font-semibold text-[var(--fg-muted)] mb-4 sm:mb-5"
             >
               {t('headline')}
             </motion.h2>
 
-            {/* Subline - DevTools & XR */}
+            {/* Badges row - availability + location */}
+            <motion.div
+              {...(animate ? fadeInUp(0.1) : {})}
+              className="flex flex-wrap justify-center lg:justify-start items-center gap-3 mb-5 sm:mb-6"
+            >
+              {/* Availability badge */}
+              <div className="inline-flex items-center gap-2.5 rounded-full px-4 py-2 bg-[var(--accent)]/10 backdrop-blur-sm ring-1 ring-[var(--accent)]/25">
+                <BriefcaseIcon className="w-4 h-4 text-[var(--accent)]" />
+                <span className="flex items-center gap-2 text-sm">
+                  <span className="font-semibold text-[var(--accent)]">{t('availabilityLabel')}</span>
+                  <span className="text-[var(--fg-muted)]">·</span>
+                  <span className="text-[var(--fg-muted)]">{t('availabilityText')}</span>
+                </span>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--accent)] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--accent)]" />
+                </span>
+              </div>
+
+              {/* Location badge */}
+              <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-white/5 backdrop-blur-sm ring-1 ring-white/10 text-sm text-[var(--fg-muted)]">
+                <span>{t('location')}</span>
+                <span>·</span>
+                <span>{t('language')}</span>
+              </div>
+            </motion.div>
+
+            {/* About Me paragraph */}
             <motion.p
               {...(animate ? fadeInUp(0.12) : {})}
-              className="text-base sm:text-lg md:text-xl text-[var(--accent)] font-medium mb-5 sm:mb-6"
+              className="text-sm sm:text-base text-[var(--fg-muted)] max-w-prose leading-relaxed mb-6 sm:mb-8"
             >
-              {t('headlineSub')}
+              {t('aboutMe')}
             </motion.p>
 
-            {/* Bullets */}
-            <motion.ul
-              {...(animate ? fadeInUp(0.14) : {})}
-              className="flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-2 mb-5 sm:mb-6 text-sm text-[var(--fg-muted)]"
-            >
-              {bullets.map((text, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.15 + i * 0.05, duration: 0.3 }}
-                  className="flex items-center gap-2"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
-                  {text}
-                </motion.li>
-              ))}
-            </motion.ul>
-
-            {/* Tagline paragraph - limited width for readability */}
-            <motion.p
-              {...(animate ? fadeInUp(0.16) : {})}
-              className="text-sm sm:text-base md:text-lg text-[var(--fg-muted)] max-w-md lg:max-w-lg xl:max-w-xl leading-relaxed mb-6 sm:mb-8"
-            >
-              {t('tagline')}
-            </motion.p>
-
-            {/* CTA Buttons */}
+            {/* CTA Buttons + Social Icons */}
             <motion.div
-              {...(animate ? fadeInUp(0.18) : {})}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6 sm:mb-8"
+              {...(animate ? fadeInUp(0.14) : {})}
+              className="flex flex-wrap justify-center lg:justify-start items-center gap-3 mb-4"
             >
-              <Button asChild size="lg">
-                <a href="#projects">{t('ctaProjects')}</a>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <a href={LINKS.cv} download rel="noopener">
+              {/* Primary: Download CV — prominent with glow */}
+              <Button asChild size="lg" className="group relative overflow-hidden shadow-lg shadow-[var(--accent)]/20 hover:shadow-[var(--accent)]/40 transition-shadow">
+                <a href={cvUrl} download rel="noopener">
                   {t('ctaResume')}
                 </a>
               </Button>
-            </motion.div>
 
-            {/* Social Links */}
-            <motion.div
-              {...(animate ? fadeInUp(0.22) : {})}
-              className="flex items-center gap-3"
-            >
-              {SOCIAL_LINKS.map((link) => {
-                const Icon = iconMap[link.icon]
-                return (
-                  <a
-                    key={link.key}
-                    href={link.href}
-                    target={link.key === 'email' ? undefined : '_blank'}
-                    rel={link.key === 'email' ? undefined : 'noopener noreferrer'}
-                    aria-label={link.key}
-                    className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[var(--card)]/60 text-[var(--fg-muted)] ring-1 ring-[var(--border)]/50 backdrop-blur-sm transition-all duration-200 hover:text-[var(--fg)] hover:ring-[var(--accent)]/50 hover:bg-[var(--card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                  >
-                    {Icon && <Icon className="w-5 h-5" />}
-                  </a>
-                )
-              })}
+              {/* Secondary: View Projects */}
+              <Button asChild variant="outline" size="lg">
+                <a href="#projects">{t('ctaProjects')}</a>
+              </Button>
+
+              {/* Social Icons - aligned with buttons */}
+              <div className="flex items-center gap-2 ml-0 lg:ml-2">
+                {SOCIAL_LINKS.map((link) => {
+                  const Icon = iconMap[link.icon]
+                  return (
+                    <a
+                      key={link.key}
+                      href={link.key === 'email' ? `${link.href}?subject=Contact%20%E2%80%94%20Adri%C3%A1n%20Montes%20Linares` : link.href}
+                      target={link.key === 'email' ? undefined : '_blank'}
+                      rel={link.key === 'email' ? undefined : 'noopener noreferrer'}
+                      aria-label={link.key}
+                      className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[var(--card)]/60 text-[var(--fg-muted)] ring-1 ring-[var(--border)]/50 backdrop-blur-sm transition-all duration-200 hover:text-[var(--fg)] hover:ring-[var(--accent)]/50 hover:bg-[var(--card)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                    >
+                      {Icon && <Icon className="w-5 h-5" />}
+                    </a>
+                  )
+                })}
+              </div>
             </motion.div>
           </div>
         </div>

@@ -5,9 +5,9 @@ import { Footer } from '@/components/common/Footer'
 import { SITE, LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Adrián Montes — Portfolio',
-  description: 'Portfolio of Adrián Montes Linares, Telematics Engineering student specialized in React, XR visualization and software engineering. Author of Code-XR.',
-  keywords: ['Adrián Montes', 'Telematics Engineering', 'React', 'XR', 'WebXR', 'Software Engineering', 'Portfolio', 'Code-XR'],
+  title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
+  description: 'Portfolio of Adrián Montes Linares — Telecommunications & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Author of Code-XR (VISSOFT @ ICSME 2025).',
+  keywords: ['Adrián Montes Linares', 'Adrián Montes', 'Telecommunications Engineer', 'Software Engineer', 'React', 'TypeScript', 'Node.js', 'XR', 'WebXR', 'Code-XR', 'VISSOFT', 'ICSME 2025', 'Portfolio'],
   authors: [{ name: SITE.author }],
   creator: SITE.author,
   manifest: '/favicons/site.webmanifest',
@@ -24,14 +24,17 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: SITE.url,
-    title: 'Adrián Montes — Portfolio',
-    description: 'Portfolio of Adrián Montes Linares, Telematics Engineering student specialized in React, XR visualization and software engineering.',
+    title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
+    description: 'Portfolio of Adrián Montes Linares — Telecommunications & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Code-XR author.',
     siteName: SITE.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Adrián Montes — Portfolio',
-    description: 'Portfolio of Adrián Montes Linares, Telematics Engineering student specialized in React, XR visualization and software engineering.',
+    title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
+    description: 'Portfolio of Adrián Montes Linares — Telecommunications & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR.',
+  },
+  alternates: {
+    canonical: SITE.url,
   },
   robots: {
     index: true,
@@ -52,10 +55,13 @@ const jsonLd = {
     {
       '@type': 'Person',
       '@id': `${SITE.url}/#person`,
-      name: SITE.author,
-      jobTitle: 'Telematics Engineering Student',
-      description: 'Specialized in React, XR visualization and software engineering. Author of Code-XR.',
+      name: 'Adrián Montes Linares',
+      givenName: 'Adrián',
+      familyName: 'Montes Linares',
+      jobTitle: ['Telecommunications Engineer', 'Software Engineer'],
+      description: 'Full-Stack developer (TypeScript/Node/React), DevTools & XR specialist. Author of Code-XR, presented at VISSOFT @ ICSME 2025.',
       url: SITE.url,
+      email: 'adrian.monteslinares@gmail.com',
       sameAs: [
         LINKS.github,
         LINKS.linkedin
@@ -66,13 +72,23 @@ const jsonLd = {
         url: 'https://www.urjc.es'
       },
       knowsAbout: [
+        'TypeScript',
+        'Node.js',
         'React',
         'Next.js',
+        'Express',
         'WebXR',
         'Software Engineering',
         'Data Visualization',
-        'Telematics Engineering'
-      ]
+        'Azure',
+        'DevTools',
+        'Telecommunications'
+      ],
+      hasCredential: {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'VISSOFT @ ICSME 2025 Publication',
+        description: 'Paper accepted at VISSOFT 2025, co-located with ICSME'
+      }
     },
     {
       '@type': 'WebSite',

@@ -5,19 +5,29 @@ export const LINKS = {
   // Personal
   github: 'https://github.com/aMonteSl',
   linkedin: 'https://linkedin.com/in/adrian-montes-linares',
-  email: 'mailto:adrian.monteslinares@gmail.com',
+  email: 'mailto:adrian.adyra@gmail.com',
   website: 'https://amontesl.github.io',
-  cv: '/cv/AdrianMontesLinares_CV.pdf',
 
-  // Projects
+  // Projects - Code-XR
   codeXrRepo: 'https://github.com/aMonteSl/CodeXR',
-  codeXrDemo: 'https://amontesl.github.io/CodeXR',
+  codeXrDocs: 'https://amontesl.github.io/code-xr-docs/',
   codeXrMarketplace:
     'https://marketplace.visualstudio.com/items?itemName=aMonteSl.codexr',
 
   // Publications
   vissoftPaper: 'https://doi.org/PLACEHOLDER', // Update when available
 } as const
+
+// CV files per locale
+export const CV_FILES = {
+  en: '/cv/CV_Color_Adrian_Montes_Linares_ENG.pdf',
+  es: '/cv/CV_Color_Adrian_Montes_Linares.pdf',
+} as const
+
+/** Helper to get the CV URL for a given locale */
+export function getCvUrl(locale: string): string {
+  return locale === 'es' ? CV_FILES.es : CV_FILES.en
+}
 
 // Credentials / chips for hero section
 export const CREDENTIALS = [

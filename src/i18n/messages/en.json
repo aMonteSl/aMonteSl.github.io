@@ -16,19 +16,52 @@
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Telematics Engineer / Software Engineer",
-    "headlineSub": "DevTools & XR",
+    "headline": "Telecommunications Engineer",
+    "headlineSub": "Full-Stack (TypeScript/Node/React) · DevTools & XR",
+    "aboutMe": "Telecommunications Engineer (URJC, 2026) with experience delivering real software solutions end-to-end—from analysis and implementation to documentation and delivery. Creator of Code-XR (open source) for VS Code, linked to VISSOFT @ ICSME 2025. Graduated and, within the current academic year, eligible for extracurricular internships (up to 550 hours) or full-time employment. Motivated to keep growing and explore different professional domains.",
     "title": "Adrián Montes Linares",
     "subtitle1": "Telematics Engineering — Student",
     "subtitle2": "Backend • Frontend • Software Engineering • XR",
     "tagline": "Author of Code-XR, an open-source VS Code extension for XR visualization of software metrics. Focused on clean architectures and developer experience.",
     "ctaProjects": "View Projects",
     "ctaResume": "Download CV",
+    "ctaContact": "Contact",
     "alternativeTitle": "Telematics Engineering",
-    "bullet1": "VISSOFT 2025 accepted paper",
-    "bullet2": "Code-XR open-source author",
-    "bullet3": "Clean architecture advocate",
-    "openToWork": "Open to internship",
+    "availabilityLabel": "Available",
+    "availabilityText": "Internships (up to 550h) or employment",
+    "location": "Madrid, ES",
+    "language": "English B2 (TOEIC)",
+    "metaLine": "Madrid, ES · English B2 (TOEIC)",
+    "highlights": {
+      "vissoft": "VISSOFT @ ICSME 2025 (accepted) · Code-XR (OSS)",
+      "downloads": "Code-XR: 300+ downloads",
+      "availability": "Available: internships (up to 550h) or full-time"
+    },
+    "topStack": {
+      "typescript": "TypeScript",
+      "nodejs": "Node.js",
+      "express": "Express",
+      "react": "React",
+      "tailwind": "Tailwind",
+      "azure": "Azure"
+    },
+    "featuredProject": {
+      "badge": "Featured",
+      "codeXr": {
+        "title": "Code-XR",
+        "subtitle": "VS Code extension for XR visualization of software metrics",
+        "metric": "300+ downloads",
+        "vissoft": "Linked to VISSOFT @ ICSME 2025"
+      },
+      "obt": {
+        "title": "OBT",
+        "subtitle": "Internal VBGroup tool delivered end-to-end: backend in Express/TypeScript with cloud integrations; frontend in React + Tailwind. Focused on security, automation, and delivery.",
+        "metric": "Internal tool"
+      },
+      "github": "GitHub",
+      "docs": "Docs",
+      "internal": "Internal"
+    },
     "credentials": {
       "vissoft": "VISSOFT 2025",
       "codeXr": "Code-XR (Open Source)",

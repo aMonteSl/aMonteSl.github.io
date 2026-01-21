@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@react-three/fiber": "^9.3.0",
+    "@swc/helpers": "^0.5.18",
     "clsx": "^2.1.1",
     "country-flag-icons": "^1.6.4",
     "framer-motion": "^12.23.12",
