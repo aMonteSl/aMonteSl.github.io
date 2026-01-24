@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { useTranslations } from '@/i18n'
 import type { SkillCategory, SkillDetail } from '@/content/skills'

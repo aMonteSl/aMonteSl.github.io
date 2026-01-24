@@ -1,7 +1,7 @@
 'use client'
 
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/i18n'
 import { useAnimationFrame, useMotionValue, useReducedMotion } from 'framer-motion'
 import { useTranslations } from '@/i18n'
 import { SKILL_CATEGORIES, SKILLS } from '@/content/skills'

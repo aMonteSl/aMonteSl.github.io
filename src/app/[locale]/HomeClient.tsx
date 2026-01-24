@@ -6,7 +6,7 @@ import { ProfessionalJourneySection } from '@/features/journey'
 import { SkillsSection } from '@/features/skills'
 import { MorphNavProvider, MorphHeader, MorphSidebar } from '@/features/morphNav'
 
-export default function Home() {
+export function HomeClient() {
   return (
     <MorphNavProvider morphStart={100} morphEnd={450}>
       <AnimatedBackground />

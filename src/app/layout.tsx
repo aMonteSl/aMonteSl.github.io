@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { I18nProvider } from '@/i18n'
 import { Footer } from '@/components/common/Footer'
 import { SITE, LINKS } from '@/lib/constants'
+import { ReactNode } from 'react'
 
 export const metadata: Metadata = {
   title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
@@ -107,10 +107,10 @@ const jsonLd = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#040304" />
         <link
@@ -126,15 +126,13 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>
-        <I18nProvider>
-          <a href="#main-content" className="skip-to-content">
-            Skip to main content
-          </a>
-          <main id="main-content">
-            {children}
-          </main>
-          <Footer />
-        </I18nProvider>
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+        <main id="main-content">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   )

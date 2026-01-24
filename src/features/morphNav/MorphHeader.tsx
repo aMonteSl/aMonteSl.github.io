@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { Link } from '@/i18n'
 import { useMorphNav } from '@/features/morphNav/MorphNavProvider'
 import { headerVariants } from '@/features/morphNav/morphVariants'
 import { LanguageSwitcher } from '@/features/language'

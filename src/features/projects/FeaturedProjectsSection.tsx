@@ -10,7 +10,7 @@ import type { Project } from './types'
 
 export function FeaturedProjectsSection() {
   const t = useTranslations('projects')
-  const { locale } = useLocale()
+  const locale = useLocale()
 
   // Filter featured projects and get localized content
   const featuredProjects = (projectsData as Project[])

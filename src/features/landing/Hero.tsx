@@ -52,7 +52,7 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
 
 export function Hero() {
   const t = useTranslations('hero')
-  const { locale } = useLocale()
+  const locale = useLocale()
   const animate = shouldAnimate()
 
   // Featured projects rotation

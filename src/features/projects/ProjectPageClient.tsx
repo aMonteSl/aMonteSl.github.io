@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from '@/i18n'
 import { Badge, Button } from '@/components/ui'
@@ -81,7 +81,7 @@ function getTypeBadgeVariant(type?: ProjectType): 'default' | 'outline' {
 
 export function ProjectPageClient({ project }: ProjectPageClientProps) {
   const t = useTranslations('projects')
-  const { locale } = useLocale()
+  const locale = useLocale()
 
   const highlights = locale === 'es' ? project.highlights_es : project.highlights_en
   const role = locale === 'es' ? project.role_es : project.role_en

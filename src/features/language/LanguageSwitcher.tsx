@@ -1,6 +1,9 @@
 'use client'
 
-import { useLocale, locales, localeNames, Locale } from '@/i18n'
+import { useLocale } from 'next-intl'
+import { usePathname } from '@/i18n'
+import { Link } from '@/i18n'
+import { locales, localeNames, Locale } from '@/i18n/config'
 import { cn } from '@/lib/utils'
 import { GB, ES } from 'country-flag-icons/react/3x2'
 import type { ReactElement } from 'react'
@@ -12,11 +15,8 @@ const FlagComponents: Record<Locale, () => ReactElement> = {
 }
 
 export function LanguageSwitcher() {
-  const { locale, setLocale } = useLocale()
-
-  const handleLanguageChange = (newLocale: Locale) => {
-    setLocale(newLocale)
-  }
+  const currentLocale = useLocale()
+  const pathname = usePathname()
 
   return (
     <div
@@ -24,16 +24,17 @@ export function LanguageSwitcher() {
       role="group"
       aria-label="Language selection"
     >
-      {locales.map((loc) => {
-        const isActive = locale === loc
-        const FlagIcon = FlagComponents[loc]
+      {locales.map((locale) => {
+        const isActive = currentLocale === locale
+        const FlagIcon = FlagComponents[locale]
         return (
-          <button
-            key={loc}
-            onClick={() => handleLanguageChange(loc)}
-            aria-label={`Switch to ${localeNames[loc]}`}
-            aria-pressed={isActive}
-            title={localeNames[loc]}
+          <Link
+            key={locale}
+            href={pathname}
+            locale={locale}
+            aria-label={`Switch to ${localeNames[locale]}`}
+            aria-current={isActive ? 'true' : undefined}
+            title={localeNames[locale]}
             className={cn(
               'relative inline-flex items-center justify-center rounded-full px-2.5 py-1.5',
               'transition-all duration-200',
@@ -49,7 +50,7 @@ export function LanguageSwitcher() {
             {isActive && (
               <span className="sr-only">(current language)</span>
             )}
-          </button>
+          </Link>
         )
       })}
     </div>

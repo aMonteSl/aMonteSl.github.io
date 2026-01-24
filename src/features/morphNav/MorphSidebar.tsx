@@ -70,7 +70,7 @@ export function MorphSidebar() {
   const { isMorphed, scrollToSection, activeSection, prefersReducedMotion } = useMorphNav()
   const t = useTranslations('nav')
   const tHero = useTranslations('hero')
-  const { locale } = useLocale()
+  const locale = useLocale()
   const cvUrl = getCvUrl(locale)
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
