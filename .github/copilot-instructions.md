@@ -5,7 +5,7 @@
 This is a **personal portfolio website** deployed on GitHub Pages.
 - Framework: Next.js 15 (App Router) with static export
 - Styling: Tailwind CSS v4
-- i18n: next-intl (EN primary, ES secondary)
+- i18n: next-intl (client-side with localStorage)
 - Animation: Framer Motion
 
 ## Code Style Preferences
@@ -19,21 +19,24 @@ This is a **personal portfolio website** deployed on GitHub Pages.
 - Functional components only
 - Named exports for components
 - Props interfaces named `{ComponentName}Props`
+- Mark client components with `'use client'` directive
 
 ### Tailwind
 - Use utility classes directly in JSX
 - Use `cn()` helper from `@/lib/utils` for conditional classes
+- CSS variables for theming: `var(--bg)`, `var(--fg)`, `var(--accent)`, etc.
 - Avoid `@apply` unless creating base component styles
 
 ### File Organization
 - Components in `components/ui/` (presentational) or `components/common/` (layout)
 - Feature logic in `features/{featureName}/`
 - Shared utilities in `lib/`
+- All imports use `@/*` path alias
 
 ## Workflow Guidelines
 
 1. **Incremental changes**: Make small, focused edits
-2. **Verify often**: Test after each significant change
+2. **Verify often**: Test after each significant change with `npm run dev`
 3. **Preserve behavior**: When refactoring, ensure UI/UX remains identical
 4. **Follow existing patterns**: Check similar code before adding new patterns
 5. **No massive rewrites**: Prefer iterative improvements
@@ -51,7 +54,7 @@ This is a **personal portfolio website** deployed on GitHub Pages.
 3. Use `useTranslations('namespace')` in component
 
 ### Adding a new page
-1. Create in `src/app/[locale]/{route}/page.tsx`
+1. Create in `src/app/{route}/page.tsx`
 2. Use default export (Next.js requirement)
 3. Delegate rendering to feature components
 
