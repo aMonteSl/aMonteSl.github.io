@@ -6,6 +6,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "profile": "Profile",
     "skills": "Skills",
     "projects": "Projects",
     "journey": "Professional Journey",
@@ -62,6 +63,10 @@
       "docs": "Docs",
       "internal": "Internal"
     },
+    "links": {
+      "doi": "DOI"
+    },
+    "publication": "Publication",
     "credentials": {
       "vissoft": "VISSOFT 2025",
       "codeXr": "Code-XR (Open Source)",
@@ -73,6 +78,25 @@
     "p1": "I am a Telematics Engineering student (URJC) and the author of Code-XR, an ecosystem that connects static analysis with immersive visualization of metrics.",
     "p2": "Our work has been accepted for VISSOFT 2025 (co-located with ICSME 2025). I am preparing the thesis and consolidating documentation and tooling for its evolution.",
     "p3": "I care about clean code, modular architecture, and a strong DX/UX. I aim for systems that scale and can be maintained."
+  },
+  "profile": {
+    "title": "About Me",
+    "subtitle": "Get to know the person behind the code",
+    "imageAlt": "Adrián Montes profile photo",
+    "name": "Adrián Montes Linares",
+    "role": "Telecommunications Engineer & Full-Stack Developer",
+    "bio1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "bio2": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    "stats": {
+      "experience": "Experience",
+      "experienceValue": "3+ years coding",
+      "education": "Education",
+      "educationValue": "Telecommunications Eng.",
+      "location": "Location",
+      "locationValue": "Madrid, Spain",
+      "focus": "Current Focus",
+      "focusValue": "XR & DevTools"
+    }
   },
   "skills": {
     "title": "Skills",
@@ -114,6 +138,8 @@
       "intermediate": "Intermediate",
       "advanced": "Advanced"
     },
+    "proficiencyLabel": "Level",
+    "highlights": "Key points",
     "purposeTags": {
       "learning": "Learning",
       "academic": "Academic",
@@ -150,6 +176,10 @@
       "tools": {
         "label": "Tools",
         "desc": "Everyday developer tools for systems, security, and delivery."
+      },
+      "methodologies": {
+        "label": "Methodologies",
+        "desc": "Development & delivery practices used in projects (CI/CD, Agile)."
       },
       "other": {
         "label": "Other",
@@ -210,6 +240,34 @@
         "label": "HTML / CSS",
         "summary": "Used to craft accessible layouts and responsive UI.",
         "purpose": "Structured layouts and responsive UI design.",
+        "h1": "Built responsive pages and UI sections.",
+        "h2": "Maintained visual consistency with utility styles."
+      },
+      "javascript": {
+        "label": "JavaScript",
+        "summary": "Primary language for web tooling and UI experiences.",
+        "purpose": "Scripting and dynamic web behavior for frontends.",
+        "h1": "Implemented dynamic UI logic and tooling integrations.",
+        "h2": "Used in runtime and build-time tooling."
+      },
+      "typescript": {
+        "label": "TypeScript",
+        "summary": "Typed superset of JavaScript for safer, scalable frontends.",
+        "purpose": "Typed web development and large-scale UI tooling.",
+        "h1": "Structured UI logic with typed modules.",
+        "h2": "Integrated type-safety into build pipelines."
+      },
+      "html": {
+        "label": "HTML",
+        "summary": "Used to craft accessible layouts and semantic structure.",
+        "purpose": "Structured markup for accessible UI.",
+        "h1": "Built semantic, accessible page structure.",
+        "h2": "Optimized markup for SEO and screen readers."
+      },
+      "css": {
+        "label": "CSS",
+        "summary": "Used for responsive layout and visual styling.",
+        "purpose": "Styling, layout and responsive design.",
         "h1": "Built responsive pages and UI sections.",
         "h2": "Maintained visual consistency with utility styles."
       },
@@ -408,6 +466,20 @@
         "purpose": "Code acceleration and rapid iteration.",
         "h1": "Generated scaffolds and refactors quickly.",
         "h2": "Reviewed suggestions for accuracy and style."
+      },
+      "azureDevOps": {
+        "label": "Microsoft Azure DevOps",
+        "summary": "CI/CD and project-delivery platform used for pipelines, repos and boards.",
+        "purpose": "Continuous integration, delivery and project automation.",
+        "h1": "Configured pipelines and automated releases.",
+        "h2": "Integrated repos, artifacts and work-tracking for delivery."
+      },
+      "agileScrum": {
+        "label": "Agile (Scrum)",
+        "summary": "Agile delivery practices (Scrum) used for iterative product development.",
+        "purpose": "Incremental delivery, sprint planning and teamwork.",
+        "h1": "Applied sprint planning, retrospectives and incremental delivery.",
+        "h2": "Organized work with backlogs, stories and acceptance criteria."
       }
     }
   },
@@ -423,8 +495,14 @@
     "tech": "Tech stack",
     "links": {
       "repo": "Repository",
-      "demo": "Live demo"
+      "demo": "Live demo",
+      "doi": "DOI (Publication)",
+      "ieee": "IEEE Xplore"
     },
+    "linksTitle": "Links",
+    "publication": "Publication",
+    "publicationVenue": "VISSOFT @ ICSME 2025 (IEEE)",
+    "publicationDoi": "DOI: {doi}",
     "quickFacts": {
       "title": "Quick facts",
       "type": "Type",

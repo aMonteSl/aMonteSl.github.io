@@ -87,7 +87,7 @@ export function Hero() {
               aria-label="Profile photo of Adrián Montes"
             >
               {/* Outer glow ring */}
-              <div className="absolute -inset-5 sm:-inset-6 md:-inset-8 rounded-full bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+              <div className="absolute -inset-5 sm:-inset-6 md:-inset-8 rounded-full bg-gradient-to-br from-[var(--accent)]/20 via-transparent to-[var(--accent)]/10 opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
 
               {/* Primary ring */}
               <div className="absolute inset-0 rounded-full ring-2 ring-[var(--accent)]/40 ring-offset-4 sm:ring-offset-6 md:ring-offset-8 ring-offset-[var(--bg)] transition-all duration-300 group-hover:ring-[var(--accent)]/60" />

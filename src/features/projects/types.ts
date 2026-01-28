@@ -1,3 +1,19 @@
+// Dynamic image manifest (generated at build time)
+import projectImagesManifest from '@/content/projectImages.json'
+
+// Type for the manifest
+interface ProjectImagesEntry {
+  images: string[]
+  heroImage: string | null
+}
+
+type ProjectImagesManifest = Record<string, ProjectImagesEntry>
+
+const imageManifest = projectImagesManifest as ProjectImagesManifest
+
+// Placeholder image path
+const PLACEHOLDER_IMAGE = '/projects/placeholder.svg'
+
 // Project type definition
 export type ProjectType = 'openSource' | 'academic' | 'personal' | 'internal'
 
@@ -50,12 +66,42 @@ export function getLocalizedProject(project: Project, locale: string): Localized
   }
 }
 
-// Get full image paths for a project
+// Get full image paths for a project (dynamically from manifest)
 export function getProjectImagePaths(project: Project): string[] {
-  return project.images.map(img => `${project.imageDir}/${img}`)
+  const manifestEntry = imageManifest[project.slug]
+  
+  // If no manifest entry or no images, return placeholder
+  if (!manifestEntry || manifestEntry.images.length === 0) {
+    return [PLACEHOLDER_IMAGE]
+  }
+  
+  // Build full paths from manifest
+  return manifestEntry.images.map(img => `${project.imageDir}/${img}`)
 }
 
-// Get hero image path
+// Get hero image path (logo.png if exists, else first image, else placeholder)
 export function getProjectHeroPath(project: Project): string {
-  return `${project.imageDir}/${project.heroImage}`
+  const manifestEntry = imageManifest[project.slug]
+  
+  if (!manifestEntry) {
+    return PLACEHOLDER_IMAGE
+  }
+  
+  // Use logo.png (heroImage) if available
+  if (manifestEntry.heroImage) {
+    return `${project.imageDir}/${manifestEntry.heroImage}`
+  }
+  
+  // Fallback to first image in the list
+  if (manifestEntry.images.length > 0) {
+    return `${project.imageDir}/${manifestEntry.images[0]}`
+  }
+  
+  return PLACEHOLDER_IMAGE
+}
+
+// Check if project has real images (not just placeholder)
+export function projectHasImages(project: Project): boolean {
+  const manifestEntry = imageManifest[project.slug]
+  return !!manifestEntry && manifestEntry.images.length > 0
 }

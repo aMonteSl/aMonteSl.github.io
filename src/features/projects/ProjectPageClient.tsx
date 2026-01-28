@@ -3,11 +3,12 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from '@/i18n'
-import { Badge, Button } from '@/components/ui'
+import { Badge, Button, ImageCarousel } from '@/components/ui'
 import { AnimatedBackground } from '@/features/landing'
-import { ProjectImageCarousel } from './components/ProjectImageCarousel'
+import { TechTag } from './components/TechTag'
 import type { Project, ProjectType } from './types'
 import projectsData from '@/content/projects.json'
+import { LINKS } from '@/lib/constants'
 
 // Icons
 function ArrowLeftIcon({ className }: { className?: string }) {
@@ -87,6 +88,7 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
   const role = locale === 'es' ? project.role_es : project.role_en
   const summary = locale === 'es' ? project.summary_es : project.summary_en
   const { prev, next } = getAdjacentProjects(project.slug)
+  const isCodeXr = project.slug === 'code-xr'
 
   return (
     <>
@@ -167,12 +169,18 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mb-12"
             >
-              <ProjectImageCarousel
-                basePath={project.imageDir}
+              <ImageCarousel
                 images={project.images}
-                altBase={project.title}
-                autoplayMs={7000}
-                className="shadow-2xl"
+                basePath={project.imageDir}
+                alt={project.title}
+                interval={7000}
+                aspectRatio="video"
+                showProgress={true}
+                showCounter={true}
+                showDots={true}
+                showArrows={true}
+                keyboardNavigation={true}
+                className="shadow-2xl ring-1 ring-[var(--border)]/50"
               />
             </motion.div>
 
@@ -263,18 +271,16 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
-                        <Badge key={tech} variant="outline" className="text-xs">
-                          {tech}
-                        </Badge>
+                        <TechTag key={tech} tech={tech} />
                       ))}
                     </div>
                   </div>
 
                   {/* Links card (if any) */}
-                  {(project.repoUrl || project.demoUrl) && (
+                  {(project.repoUrl || project.demoUrl || isCodeXr) && (
                     <div className="bg-[var(--card)]/80 backdrop-blur-sm rounded-2xl p-6 border border-[var(--border)]">
                       <h3 className="text-lg font-semibold text-[var(--fg)] mb-4">
-                        Links
+                        {t('linksTitle')}
                       </h3>
                       <div className="flex flex-col gap-3">
                         {project.repoUrl && (
@@ -299,7 +305,44 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
                             {t('links.demo')}
                           </Button>
                         )}
+                        {isCodeXr && (
+                          <>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => window.open(LINKS.codeXrDoi, '_blank')}
+                            >
+                              <ExternalLinkIcon className="w-4 h-4" />
+                              {t('links.doi')}
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full justify-start gap-2"
+                              onClick={() => window.open(LINKS.codeXrIeee, '_blank')}
+                            >
+                              <ExternalLinkIcon className="w-4 h-4" />
+                              {t('links.ieee')}
+                            </Button>
+                          </>
+                        )}
                       </div>
+                    </div>
+                  )}
+
+                  {/* Publication card */}
+                  {isCodeXr && (
+                    <div className="bg-[var(--card)]/80 backdrop-blur-sm rounded-2xl p-6 border border-[var(--border)] space-y-3">
+                      <h3 className="text-lg font-semibold text-[var(--fg)]">
+                        {t('publication')}
+                      </h3>
+                      <p className="text-sm text-[var(--fg-muted)]">
+                        {t('publicationVenue')}
+                      </p>
+                      <p className="text-sm font-mono text-[var(--fg)] break-all">
+                        {t('publicationDoi', { doi: '10.1109/VISSOFT67405.2025.00034' })}
+                      </p>
                     </div>
                   )}
                 </motion.div>

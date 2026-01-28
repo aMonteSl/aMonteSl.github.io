@@ -6,6 +6,7 @@
   "nav": {
     "home": "Inicio",
     "about": "Sobre mí",
+    "profile": "Perfil",
     "skills": "Competencias",
     "projects": "Proyectos",
     "journey": "Trayectoria profesional",
@@ -62,6 +63,10 @@
       "docs": "Docs",
       "internal": "Interno"
     },
+    "links": {
+      "doi": "DOI"
+    },
+    "publication": "Publicación",
     "credentials": {
       "vissoft": "VISSOFT 2025",
       "codeXr": "Code-XR (Open Source)",
@@ -73,6 +78,25 @@
     "p1": "Soy estudiante de Ingeniería Telemática (URJC) y autor de Code-XR, un ecosistema que conecta análisis estático con visualización inmersiva de métricas.",
     "p2": "Nuestro trabajo ha sido aceptado para VISSOFT 2025 (co-localizado con ICSME 2025). Estoy preparando la tesis y consolidando documentación y herramientas para su evolución.",
     "p3": "Me preocupo por el código limpio, la arquitectura modular y un DX/UX sólido. Busco sistemas que escalen y puedan mantenerse."
+  },
+  "profile": {
+    "title": "Sobre Mí",
+    "subtitle": "Conoce a la persona detrás del código",
+    "imageAlt": "Foto de perfil de Adrián Montes",
+    "name": "Adrián Montes Linares",
+    "role": "Ingeniero Telemático & Desarrollador Full-Stack",
+    "bio1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "bio2": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    "stats": {
+      "experience": "Experiencia",
+      "experienceValue": "3+ años programando",
+      "education": "Formación",
+      "educationValue": "Ing. Telemática",
+      "location": "Ubicación",
+      "locationValue": "Madrid, España",
+      "focus": "Enfoque actual",
+      "focusValue": "XR y DevTools"
+    }
   },
   "skills": {
     "title": "Competencias",
@@ -114,6 +138,8 @@
       "intermediate": "Intermedio",
       "advanced": "Avanzado"
     },
+    "proficiencyLabel": "Nivel",
+    "highlights": "Puntos clave",
     "purposeTags": {
       "learning": "Aprendizaje",
       "academic": "Académico",
@@ -150,6 +176,10 @@
       "tools": {
         "label": "Herramientas",
         "desc": "Herramientas diarias para sistemas, seguridad y entrega."
+      },
+      "methodologies": {
+        "label": "Metodologías",
+        "desc": "Prácticas de desarrollo y entrega utilizadas en proyectos (CI/CD, Agile)."
       },
       "other": {
         "label": "Otros",
@@ -198,19 +228,45 @@
         "purpose": "Desarrollo móvil en prácticas académicas.",
         "h1": "Construí flujos UI para tareas.",
         "h2": "Apliqué bases de arquitectura Android."
-      },
-      "jsTs": {
+      },      "jsTs": {
         "label": "JavaScript / TypeScript",
-        "summary": "Lenguaje principal para tooling web y UI.",
-        "purpose": "Desarrollo web tipado y tooling UI.",
+        "summary": "Lenguaje principal para tooling web y experiencias UI.",
+        "purpose": "Desarrollo web tipado y tooling a escala.",
         "h1": "Estructuré lógica UI con módulos tipados.",
-        "h2": "Integré toolchains modernas para frontends."
+        "h2": "Integré seguridad de tipos en pipelines de build."
       },
       "htmlCss": {
         "label": "HTML / CSS",
-        "summary": "Usado para layouts accesibles y responsive.",
-        "purpose": "Layouts responsivos y estructura UI.",
-        "h1": "Construí páginas y secciones adaptativas.",
+        "summary": "Usado para estructuras semánticas y diseño responsivo.",
+        "purpose": "Marcado estructural y diseño responsivo.",
+        "h1": "Construí páginas responsivas y secciones UI.",
+        "h2": "Mantuve consistencia visual con utilidades."
+      },      "javascript": {
+        "label": "JavaScript",
+        "summary": "Lenguaje principal para tooling web y experiencias UI.",
+        "purpose": "Scripting y comportamiento dinámico en el frontend.",
+        "h1": "Implementé lógica UI dinámica e integraciones de tooling.",
+        "h2": "Usado en tiempo de ejecución y en herramientas de build."
+      },
+      "typescript": {
+        "label": "TypeScript",
+        "summary": "Superset tipado de JavaScript para frontends escalables.",
+        "purpose": "Desarrollo web tipado y tooling a escala.",
+        "h1": "Estructuré lógica UI con módulos tipados.",
+        "h2": "Integré seguridad de tipos en pipelines de build."
+      },
+      "html": {
+        "label": "HTML",
+        "summary": "Usado para estructuras semánticas y accesibles.",
+        "purpose": "Marcado estructural para UI accesible.",
+        "h1": "Construí estructura semántica y accesible.",
+        "h2": "Optimicé marcado para SEO y lectores de pantalla."
+      },
+      "css": {
+        "label": "CSS",
+        "summary": "Usado para layout responsivo y estilo visual.",
+        "purpose": "Estilado, layout y diseño responsivo.",
+        "h1": "Construí páginas responsivas y secciones UI.",
         "h2": "Mantuve consistencia visual con utilidades."
       },
       "matlab": {
@@ -408,6 +464,20 @@
         "purpose": "Acelerar desarrollo con asistencia IA.",
         "h1": "Generé scaffolds y refactors rápido.",
         "h2": "Revisé sugerencias por precisión."
+      },
+      "azureDevOps": {
+        "label": "Microsoft Azure DevOps",
+        "summary": "Plataforma de CI/CD y entrega para pipelines, repos y planificación.",
+        "purpose": "Integración continua, despliegue y automatización de entregas.",
+        "h1": "Configuré pipelines y automatizaciones de release.",
+        "h2": "Integré repositorios, artefactos y seguimiento de trabajo."
+      },
+      "agileScrum": {
+        "label": "Agile (Scrum)",
+        "summary": "Prácticas ágiles (Scrum) para desarrollo iterativo de producto.",
+        "purpose": "Entrega incremental, planificación de sprints y trabajo en equipo.",
+        "h1": "Apliqué planificación de sprints, retrospectivas y entrega incremental.",
+        "h2": "Organicé el trabajo con backlogs, historias y criterios de aceptación."
       }
     }
   },
@@ -423,8 +493,14 @@
     "tech": "Tecnologías",
     "links": {
       "repo": "Repositorio",
-      "demo": "Demo"
+      "demo": "Demo",
+      "doi": "DOI (Publicación)",
+      "ieee": "IEEE Xplore"
     },
+    "linksTitle": "Enlaces",
+    "publication": "Publicación",
+    "publicationVenue": "VISSOFT @ ICSME 2025 (IEEE)",
+    "publicationDoi": "DOI: {doi}",
     "quickFacts": {
       "title": "Datos rápidos",
       "type": "Tipo",

@@ -1,20 +1,12 @@
+// Main section
 export { SkillsSection } from './SkillsSection'
-export { getSkillIcon } from './skillIconMap'
-export type { SkillIconKey } from '@/content/skills'
-export { SkillsDetailsModalController } from './SkillsDetailsModalController'
-export { SkillsShowcaseController } from './SkillsShowcaseController'
-export { SkillsCategoryCard } from './components/SkillsCategoryCard'
-export { SkillsDetailsModal } from './components/SkillsDetailsModal'
-export { SkillsCarousel } from './components/SkillsCarousel'
-export { SkillSlide } from './components/SkillSlide'
-export { SkillsShowcaseCard } from './components/SkillsShowcaseCard'
-export { CarouselNavArrows } from './components/CarouselNavArrows'
-export { GroupCarouselHeader } from './components/GroupCarouselHeader'
-export { ShowcaseSkillChip } from './components/ShowcaseSkillChip'
-export { GroupDotsIndicator } from './components/GroupDotsIndicator'
-export { Tooltip } from './components/Tooltip'
-export { ProficiencyDots } from './components/ProficiencyDots'
-export { ExperienceTag } from './components/ExperienceTag'
-export { UsedInChip } from './components/UsedInChip'
-export { ProficiencyBadge } from './components/ProficiencyBadge'
-export { AutoplayProgressBar } from './components/AutoplayProgressBar'
+
+// Bento Grid Components
+export { BentoSkillsGrid } from './components/BentoSkillsGrid'
+export { BentoCategoryCard } from './components/BentoCategoryCard'
+export { SkillChip } from './components/SkillChip'
+export { SkillDetailModal } from './components/SkillDetailModal'
+
+// Icons
+export { getSkillIcon, SKILL_FALLBACK_ICON } from './skillIconMap'
+

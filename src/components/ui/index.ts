@@ -18,4 +18,7 @@ export { Chip } from './Chip'
 export type { ChipProps } from './Chip'
 
 export { SectionHeading } from './SectionHeading'
+
+export { ImageCarousel } from './ImageCarousel'
+export type { ImageCarouselProps, AspectRatioPreset } from './ImageCarousel'
 export type { SectionHeadingProps } from './SectionHeading'

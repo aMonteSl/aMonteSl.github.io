@@ -9,6 +9,7 @@ export interface FeaturedProject {
   links?: {
     github?: string
     docs?: string
+    doi?: string
   }
 }
 
@@ -19,6 +20,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     links: {
       github: LINKS.codeXrRepo,
       docs: LINKS.codeXrDocs,
+      doi: LINKS.codeXrDoi,
     },
   },
   {

@@ -96,14 +96,12 @@ export function MorphSidebar() {
         <motion.button
           onClick={handleAvatarClick}
           className="mb-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] cursor-pointer group"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           aria-label="Go to home"
         >
-          <div className="relative">
+          <div className="relative rounded-full ring-2 ring-[var(--accent)]/0 group-hover:ring-[var(--accent)]/40 transition-colors duration-300">
             <Avatar size="lg" />
-            {/* Hover glow effect */}
-            <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ring-2 ring-[var(--accent)]/50 ring-offset-2 ring-offset-[var(--bg)]" />
           </div>
         </motion.button>
         <motion.h2
@@ -210,7 +208,7 @@ export function MorphSidebar() {
         }}
         className={cn(
           'fixed left-0 top-0 bottom-0 z-30 w-64 hidden lg:flex flex-col',
-          'bg-[var(--bg)]/90 backdrop-blur-md border-r border-[var(--border)]/50',
+          'bg-[var(--bg)]/90 backdrop-blur-md',
           'pt-20' // Space for potential minimal header
         )}
         aria-hidden={!isMorphed}
@@ -264,7 +262,7 @@ export function MorphSidebar() {
               variants={drawerVariants}
               className={cn(
                 'fixed left-0 top-0 bottom-0 z-50 w-72 lg:hidden',
-                'bg-[var(--bg)] border-r border-[var(--border)]/50',
+                'bg-[var(--bg)]',
                 'shadow-2xl'
               )}
             >

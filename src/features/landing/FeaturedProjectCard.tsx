@@ -23,6 +23,18 @@ function ExternalLinkIcon({ className }: { className?: string }) {
   )
 }
 
+function DoiIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+      <path d="M18 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+      <path d="M12 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+      <path d="M12 16a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+    </svg>
+  )
+}
+
 interface FeaturedProjectCardProps {
   project: FeaturedProject
   activeIndex: number
@@ -42,7 +54,7 @@ export function FeaturedProjectCard({
 }: FeaturedProjectCardProps) {
   const t = useTranslations('hero')
 
-  const hasLinks = project.links && (project.links.github || project.links.docs)
+  const hasLinks = project.links && (project.links.github || project.links.docs || project.links.doi)
   const isCodeXr = project.id === 'codeXr'
 
   return (
@@ -63,7 +75,7 @@ export function FeaturedProjectCard({
 
       {/* Card container */}
       <div
-        className="relative w-full rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg ring-1 ring-white/10"
+        className="relative w-full rounded-xl border border-white/10 bg-white/5 shadow-lg ring-1 ring-white/10"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onFocus={onMouseEnter}
@@ -123,7 +135,22 @@ export function FeaturedProjectCard({
                         {t('featuredProject.github')}
                       </a>
                     )}
-                    {project.links?.github && project.links?.docs && (
+                    {project.links?.doi && project.links?.github && (
+                      <span className="text-white/20">·</span>
+                    )}
+                    {project.links?.doi && (
+                      <a
+                        href={project.links.doi}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors"
+                        title={t('publication')}
+                      >
+                        <DoiIcon className="w-3.5 h-3.5" />
+                        {t('links.doi')}
+                      </a>
+                    )}
+                    {project.links?.doi && project.links?.docs && (
                       <span className="text-white/20">·</span>
                     )}
                     {project.links?.docs && (

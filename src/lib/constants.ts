@@ -1,5 +1,8 @@
 // Centralized constants for the portfolio
 
+// Placeholder image for carousels/galleries when no image is available
+export const PLACEHOLDER_IMAGE = '/projects/placeholder.svg'
+
 // External links - Single source of truth for all URLs
 export const LINKS = {
   // Personal
@@ -13,9 +16,11 @@ export const LINKS = {
   codeXrDocs: 'https://amontesl.github.io/code-xr-docs/',
   codeXrMarketplace:
     'https://marketplace.visualstudio.com/items?itemName=aMonteSl.codexr',
+  codeXrDoi: 'https://doi.org/10.1109/VISSOFT67405.2025.00034',
+  codeXrIeee: 'https://ieeexplore.ieee.org/document/11175653',
 
   // Publications
-  vissoftPaper: 'https://doi.org/PLACEHOLDER', // Update when available
+  vissoftPaper: 'https://doi.org/10.1109/VISSOFT67405.2025.00034',
 } as const
 
 // CV files per locale
@@ -39,6 +44,7 @@ export const CREDENTIALS = [
 // Navigation items
 export const NAV_ITEMS = [
   { key: 'home', href: '#home' },
+  { key: 'profile', href: '#profile' },
   { key: 'projects', href: '#projects' },
   { key: 'skills', href: '#skills' },
   { key: 'journey', href: '#journey' },

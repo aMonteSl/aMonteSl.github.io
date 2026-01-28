@@ -5,8 +5,10 @@ export type SkillId =
   | 'riscv'
   | 'python'
   | 'kotlin'
-  | 'jsTs'
-  | 'htmlCss'
+  | 'javascript'
+  | 'typescript'
+  | 'html'
+  | 'css'
   | 'matlab'
   | 'go'
   | 'django'
@@ -34,6 +36,8 @@ export type SkillId =
   | 'ufw'
   | 'promptEngineering'
   | 'aiModels'
+  | 'azureDevOps'
+  | 'agileScrum'
   | 'githubCopilot'
 
 export type CategoryId =
@@ -43,6 +47,7 @@ export type CategoryId =
   | 'xrRobotics'
   | 'databasesCloud'
   | 'tools'
+  | 'methodologies'
   | 'other'
 
 export type ExperienceTagId =
@@ -67,7 +72,9 @@ export type SkillIconKey =
   | 'python'
   | 'kotlin'
   | 'typescript'
+  | 'javascript'
   | 'html5'
+  | 'css'
   | 'go'
   | 'django'
   | 'express'
@@ -88,6 +95,8 @@ export type SkillIconKey =
   | 'xr'
   | 'security'
   | 'ai'
+  | 'azuredevops'
+  | 'jira' 
 
 export interface SkillUsedIn {
   id: string
@@ -192,28 +201,52 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     highlightsKeys: ['items.kotlin.h1', 'items.kotlin.h2'],
     usedIn: [USED_IN.projects],
   },
-  jsTs: {
-    id: 'jsTs',
-    labelKey: 'items.jsTs.label',
+  javascript: {
+    id: 'javascript',
+    labelKey: 'items.javascript.label',
+    iconKey: 'javascript',
+    experienceTags: ['open_source', 'regular_use'],
+    proficiency: 'advanced',
+    purposeTag: 'open_source',
+    purposeKey: 'items.javascript.purpose',
+    summaryKey: 'items.javascript.summary',
+    highlightsKeys: ['items.javascript.h1', 'items.javascript.h2'],
+    usedIn: [USED_IN.codeXr, USED_IN.projects],
+  },
+  typescript: {
+    id: 'typescript',
+    labelKey: 'items.typescript.label',
     iconKey: 'typescript',
     experienceTags: ['open_source', 'regular_use'],
     proficiency: 'advanced',
     purposeTag: 'open_source',
-    purposeKey: 'items.jsTs.purpose',
-    summaryKey: 'items.jsTs.summary',
-    highlightsKeys: ['items.jsTs.h1', 'items.jsTs.h2'],
+    purposeKey: 'items.typescript.purpose',
+    summaryKey: 'items.typescript.summary',
+    highlightsKeys: ['items.typescript.h1', 'items.typescript.h2'],
     usedIn: [USED_IN.codeXr, USED_IN.projects],
   },
-  htmlCss: {
-    id: 'htmlCss',
-    labelKey: 'items.htmlCss.label',
+  html: {
+    id: 'html',
+    labelKey: 'items.html.label',
     iconKey: 'html5',
     experienceTags: ['regular_use'],
     proficiency: 'intermediate',
     purposeTag: 'production_like',
-    purposeKey: 'items.htmlCss.purpose',
-    summaryKey: 'items.htmlCss.summary',
-    highlightsKeys: ['items.htmlCss.h1', 'items.htmlCss.h2'],
+    purposeKey: 'items.html.purpose',
+    summaryKey: 'items.html.summary',
+    highlightsKeys: ['items.html.h1', 'items.html.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  css: {
+    id: 'css',
+    labelKey: 'items.css.label',
+    iconKey: 'css',
+    experienceTags: ['regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.css.purpose',
+    summaryKey: 'items.css.summary',
+    highlightsKeys: ['items.css.h1', 'items.css.h2'],
     usedIn: [USED_IN.projects],
   },
   matlab: {
@@ -539,6 +572,30 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     highlightsKeys: ['items.aiModels.h1', 'items.aiModels.h2'],
     usedIn: [USED_IN.projects],
   },
+  azureDevOps: {
+    id: 'azureDevOps',
+    labelKey: 'items.azureDevOps.label',
+    iconKey: 'azuredevops',
+    experienceTags: ['regular_use', 'production_like'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.azureDevOps.purpose',
+    summaryKey: 'items.azureDevOps.summary',
+    highlightsKeys: ['items.azureDevOps.h1', 'items.azureDevOps.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  agileScrum: {
+    id: 'agileScrum',
+    labelKey: 'items.agileScrum.label',
+    iconKey: 'jira',
+    experienceTags: ['regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.agileScrum.purpose',
+    summaryKey: 'items.agileScrum.summary',
+    highlightsKeys: ['items.agileScrum.h1', 'items.agileScrum.h2'],
+    usedIn: [USED_IN.projects],
+  },
   githubCopilot: {
     id: 'githubCopilot',
     labelKey: 'items.githubCopilot.label',
@@ -550,7 +607,7 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     summaryKey: 'items.githubCopilot.summary',
     highlightsKeys: ['items.githubCopilot.h1', 'items.githubCopilot.h2'],
     usedIn: [USED_IN.projects],
-  },
+  }
 }
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
@@ -558,7 +615,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     id: 'languages',
     titleKey: 'categories.languages.label',
     descriptionKey: 'categories.languages.desc',
-    skills: ['pascal', 'c', 'cpp', 'riscv', 'python', 'kotlin', 'jsTs', 'htmlCss', 'matlab', 'go'],
+    skills: ['pascal', 'c', 'cpp', 'riscv', 'python', 'kotlin', 'javascript', 'typescript', 'html', 'css', 'matlab', 'go'],
   },
   {
     id: 'backend',
@@ -591,9 +648,15 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     skills: ['git', 'linux', 'vscode', 'androidStudio', 'wireshark', 'nmap', 'openssl', 'gpg', 'iptables', 'ufw'],
   },
   {
+    id: 'methodologies',
+    titleKey: 'categories.methodologies.label',
+    descriptionKey: 'categories.methodologies.desc',
+    skills: ['azureDevOps', 'agileScrum'],
+  },
+  {
     id: 'other',
     titleKey: 'categories.other.label',
     descriptionKey: 'categories.other.desc',
     skills: ['promptEngineering', 'aiModels', 'githubCopilot'],
-  },
+  }
 ]

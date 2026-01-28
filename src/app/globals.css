@@ -102,6 +102,62 @@ body::before {
   color: var(--fg);
 }
 
+/* Image quality optimization - Prevent blurry images across entire project */
+img {
+  /* High quality rendering for all resolutions */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
+  
+  /* Smooth font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Prevent layout shifts */
+  max-width: 100%;
+  height: auto;
+  
+  /* Disable blur filter by default */
+  filter: none;
+}
+
+/* For images that need smooth scaling (photos, portraits, carousels) */
+img[class*="object-cover"],
+img[class*="object-contain"],
+motion img,
+[data-framer-component-type="motion.img"] img {
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  
+  /* Ensure proper scaling */
+  display: block;
+  width: 100%;
+  height: 100%;
+  
+  /* Smooth transitions - prevents flashing */
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Avatar images - extra sharp but smooth */
+.avatar img,
+[class*="Avatar"] img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: auto;
+}
+
+/* Carousel and gallery images - optimized for smooth viewing and transitions */
+.carousel img,
+.gallery img,
+[class*="Carousel"] img,
+[class*="Gallery"] img {
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  will-change: opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
 /* Animation utility classes */
 .transition-base {
   transition: all var(--dur-base) var(--ease);

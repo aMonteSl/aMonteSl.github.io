@@ -54,14 +54,14 @@ export const hoverScale = {
 export const avatarHover = {
   whileHover: {
     y: -2,
-    scale: 1.02,
-    rotateZ: -0.5,
+    scale: 1,
+    rotateZ: 0,
     transition: { duration: DURATION.base, ease: EASING }
   },
   whileFocus: {
     y: -2,
-    scale: 1.02,
-    rotateZ: -0.5,
+    scale: 1,
+    rotateZ: 0,
     transition: { duration: DURATION.base, ease: EASING }
   }
 }

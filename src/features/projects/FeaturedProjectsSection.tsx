@@ -38,6 +38,8 @@ export function FeaturedProjectsSection() {
               summary={project.summary}
               tags={project.tags}
               images={project.imagePaths}
+              repoUrl={project.repoUrl}
+              demoUrl={project.demoUrl}
               index={index}
             />
           ))}

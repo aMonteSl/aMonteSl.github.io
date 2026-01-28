@@ -16,6 +16,8 @@ import {
   SiKotlin,
   SiTypescript,
   SiHtml5,
+  SiJavascript,
+  SiCss3,
   SiGo,
   SiDjango,
   SiExpress,
@@ -30,7 +32,9 @@ import {
   SiWireshark,
   SiOpenssl,
   SiGithub,
+  SiJira,
 } from 'react-icons/si'
+import { VscAzureDevops } from 'react-icons/vsc' 
 
 const skillIconMap: Record<SkillIconKey, IconType> = {
   c: SiC,
@@ -38,7 +42,9 @@ const skillIconMap: Record<SkillIconKey, IconType> = {
   python: SiPython,
   kotlin: SiKotlin,
   typescript: SiTypescript,
+  javascript: SiJavascript,
   html5: SiHtml5,
+  css: SiCss3,
   go: SiGo,
   django: SiDjango,
   express: SiExpress,
@@ -48,6 +54,8 @@ const skillIconMap: Record<SkillIconKey, IconType> = {
   bootstrap: SiBootstrap,
   postgresql: SiPostgresql,
   azure: FaCloud,
+  azuredevops: VscAzureDevops,
+  jira: SiJira,
   git: SiGit,
   linux: SiLinux,
   vscode: FaCode,

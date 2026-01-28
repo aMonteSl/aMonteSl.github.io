@@ -2,10 +2,11 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Badge, Button } from '@/components/ui'
+import { Button, ImageCarousel } from '@/components/ui'
 import { shouldAnimate, fadeInUp } from '@/lib/motion'
 import { useTranslations } from '@/i18n'
-import { RotatingThumbnail } from './components/RotatingThumbnail'
+import { LINKS } from '@/lib/constants'
+import { TechTag } from './components/TechTag'
 
 export interface ProjectCardProps {
   slug: string
@@ -14,6 +15,8 @@ export interface ProjectCardProps {
   tags: string[]
   /** Array of full image paths for rotating thumbnail */
   images: string[]
+  repoUrl?: string
+  demoUrl?: string
   index?: number
 }
 
@@ -23,22 +26,34 @@ export function ProjectCard({
   summary,
   tags,
   images,
+  repoUrl,
+  demoUrl,
   index = 0,
 }: ProjectCardProps) {
   const animate = shouldAnimate()
   const t = useTranslations('projects')
+  const isCodeXr = slug === 'code-xr'
+  const repoLink = isCodeXr ? LINKS.codeXrRepo : repoUrl
+  const docsLink = isCodeXr ? LINKS.codeXrDocs : demoUrl
+  const doiLink = isCodeXr ? LINKS.codeXrDoi : null
 
   return (
     <motion.article
       {...(animate ? fadeInUp(0.1 + index * 0.08) : {})}
       className="group relative flex flex-col h-full rounded-2xl bg-[var(--card)]/50 ring-1 ring-[var(--border)]/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:ring-[var(--accent)]/30 hover:shadow-lg hover:shadow-black/10"
     >
-      {/* Rotating thumbnail */}
-      <RotatingThumbnail
+      {/* Image carousel thumbnail */}
+      <ImageCarousel
         images={images}
         alt={title}
-        interval={3500 + index * 500}
+        interval={10000 + index * 500}
+        aspectRatio="video"
+        showProgress={true}
+        showCounter={true}
         showDots={images.length > 1}
+        showArrows={images.length > 1}
+        arrowSize="sm"
+        rounded={false}
         className="rounded-t-2xl"
       />
 
@@ -52,21 +67,81 @@ export function ProjectCard({
           {summary}
         </p>
 
-        {/* Tags */}
+        {/* Tech Tags with Icons */}
         <div className="flex flex-wrap gap-1.5 mb-4">
-          {tags.slice(0, 4).map((tag) => (
-            <Badge key={tag} variant="default" className="text-xs">
-              {tag}
-            </Badge>
+          {tags.slice(0, 5).map((tag) => (
+            <TechTag key={tag} tech={tag} />
           ))}
         </div>
 
-        {/* CTA */}
-        <Button asChild variant="ghost" size="sm" className="self-start">
-          <Link href={`/projects/${slug}`}>
-            {t('ctaAll')} →
-          </Link>
-        </Button>
+        {/* Footer links */}
+        <div className="mt-auto pt-4 border-t border-[var(--border)]/60">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2">
+              <Button
+                asChild
+                variant="ghost"
+                size="sm"
+                className="h-8 px-0 text-[var(--fg)] hover:text-[var(--fg)]"
+              >
+                <Link href={`/projects/${slug}`} className="flex items-center gap-1">
+                  <span>{t('ctaAll')}</span>
+                  <span aria-hidden>→</span>
+                </Link>
+              </Button>
+
+              {doiLink && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 px-2 text-xs gap-1 rounded-lg border border-[var(--border)]/60 bg-[var(--card)]/60 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                >
+                  <a
+                    href={doiLink}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    title={t('publication')}
+                    aria-label={`${t('links.doi')} — ${t('publication')}`}
+                  >
+                    <span>{t('links.doi')}</span>
+                    <span aria-hidden>↗</span>
+                  </a>
+                </Button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 sm:ml-auto">
+              {repoLink && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 px-2 text-xs gap-1 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                >
+                  <a href={repoLink} target="_blank" rel="noreferrer noopener">
+                    <span>{t('links.repo')}</span>
+                    <span aria-hidden>↗</span>
+                  </a>
+                </Button>
+              )}
+
+              {docsLink && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 px-2 text-xs gap-1 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                >
+                  <a href={docsLink} target="_blank" rel="noreferrer noopener">
+                    <span>{isCodeXr ? t('links.demo') : t('links.demo')}</span>
+                    <span aria-hidden>↗</span>
+                  </a>
+                </Button>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </motion.article>
   )

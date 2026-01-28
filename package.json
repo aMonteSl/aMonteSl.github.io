@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch src --watch scripts --ext ts,tsx,js,jsx --exec \"npm run dev:next\"",
-    "dev:next": "next dev --turbopack",
+    "predev": "node scripts/generate-project-images.mjs",
+    "dev": "next dev --turbopack",
+    "prebuild": "node scripts/generate-project-images.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

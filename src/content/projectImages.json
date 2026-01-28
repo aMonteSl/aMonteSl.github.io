@@ -1,0 +1,25 @@
+{
+  "code-xr": {
+    "images": [
+      "logo.png",
+      "ar-experience.png",
+      "ar2-experience.png",
+      "ejemplo1.png",
+      "ejemplo2.png",
+      "html-analisis.png"
+    ],
+    "heroImage": "logo.png"
+  },
+  "honor-course-1": {
+    "images": [],
+    "heroImage": null
+  },
+  "honor-course-2": {
+    "images": [],
+    "heroImage": null
+  },
+  "obt": {
+    "images": [],
+    "heroImage": null
+  }
+}
