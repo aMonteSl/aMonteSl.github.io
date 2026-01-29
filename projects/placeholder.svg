@@ -1,0 +1,8 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="#1a1a2e"/>
+  <rect x="1" y="1" width="798" height="448" stroke="#333355" stroke-width="2" fill="none"/>
+  <circle cx="400" cy="200" r="60" stroke="#6366f1" stroke-width="3" fill="none" opacity="0.5"/>
+  <path d="M370 200 L390 180 L410 210 L430 170 L450 200" stroke="#6366f1" stroke-width="2" fill="none" opacity="0.8"/>
+  <text x="400" y="300" font-family="system-ui, sans-serif" font-size="24" fill="#888" text-anchor="middle">Project Screenshot</text>
+  <text x="400" y="340" font-family="system-ui, sans-serif" font-size="16" fill="#666" text-anchor="middle">Coming Soon</text>
+</svg>
