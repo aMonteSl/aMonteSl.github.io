@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Hero, AnimatedBackground } from '@/features/landing'
 import { ProfileSection } from '@/features/profile'
 import { FeaturedProjectsSection } from '@/features/projects'
-import { ProfessionalJourneySection } from '@/features/journey'
+import { ParallelStreamsSection } from '@/features/journey'
 import { SkillsSection } from '@/features/skills'
 import { MorphNavProvider, MorphHeader, MorphSidebar, useMorphNav } from '@/features/morphNav'
 
@@ -42,7 +42,7 @@ function HomeContent() {
         <SkillsSection />
 
         {/* Professional Journey section */}
-        <ProfessionalJourneySection />
+        <ParallelStreamsSection />
       </div>
     </>
   )

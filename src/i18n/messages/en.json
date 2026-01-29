@@ -549,7 +549,46 @@
   },
   "journey": {
     "title": "Professional Journey",
-    "subtitle": "Experience, education, and key milestones"
+    "subtitle": "Experience, education, and key milestones",
+    "present": "Present",
+    "hoverHint": "Select an item to view details",
+    "legend": {
+      "education": "Education",
+      "work": "Work Experience",
+      "project": "Featured Projects",
+      "achievement": "Achievements & Publications"
+    },
+    "entries": {
+      "urjc": {
+        "role": "Telematics Engineering Degree",
+        "org": "Universidad Rey Juan Carlos (URJC)",
+        "desc": "Comprehensive training in software engineering, networks, and systems. Progressive specialization in full-stack development and XR technologies. Final thesis linked to VISSOFT 2025.",
+        "highlights": {
+          "ast": "Honors — AST (C++)",
+          "lsmu": "Honors — LSMU (Kotlin)"
+        }
+      },
+      "adyra": {
+        "role": "Technology Collaborator",
+        "org": "Adyra Ingeniería (family business)",
+        "desc": "Automation of internal processes through scripts and digital tools. Optimization of time and reduction of manual errors in day-to-day operations."
+      },
+      "vbgroup": {
+        "role": "Full Stack Developer Junior",
+        "org": "VBGroup (Curricular Internship)",
+        "desc": "End-to-end development of internal tool for management/operations. Backend with Express.js and TypeScript, integrating Azure Cosmos DB and Blob Storage. Frontend with React + Tailwind. Teamwork under Agile/Scrum."
+      },
+      "codexr": {
+        "role": "Author & Lead Developer",
+        "org": "Code-XR (Open Source)",
+        "desc": "VS Code extension for XR/3D/AR visualization of software metrics. End-to-end architecture: static analysis, XR scene mapping, documentation. +300 downloads on Marketplace."
+      },
+      "vissoft": {
+        "role": "Paper Accepted — VISSOFT 2025",
+        "org": "IEEE VISSOFT @ ICSME 2025",
+        "desc": "Research paper on XR visualization of software metrics accepted for presentation at international conference."
+      }
+    }
   },
   "development": {
     "title": "🚧 Under development",

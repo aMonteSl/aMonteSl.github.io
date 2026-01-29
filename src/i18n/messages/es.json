@@ -547,7 +547,46 @@
   },
   "journey": {
     "title": "Trayectoria Profesional",
-    "subtitle": "Experiencia, formación y logros clave"
+    "subtitle": "Experiencia, formación y logros clave",
+    "present": "Actualidad",
+    "hoverHint": "Selecciona un elemento para ver detalles",
+    "legend": {
+      "education": "Formación",
+      "work": "Experiencia laboral",
+      "project": "Proyectos destacados",
+      "achievement": "Logros y publicaciones"
+    },
+    "entries": {
+      "urjc": {
+        "role": "Grado en Ingeniería Telemática",
+        "org": "Universidad Rey Juan Carlos (URJC)",
+        "desc": "Formación integral en ingeniería de software, redes y sistemas. Especialización progresiva en desarrollo full-stack y tecnologías XR. TFG vinculado a VISSOFT 2025.",
+        "highlights": {
+          "ast": "Matrícula de Honor — AST (C++)",
+          "lsmu": "Matrícula de Honor — LSMU (Kotlin)"
+        }
+      },
+      "adyra": {
+        "role": "Colaborador Tecnológico",
+        "org": "Adyra Ingeniería (empresa familiar)",
+        "desc": "Automatización de procesos internos mediante scripts y herramientas digitales. Optimización de tiempos y reducción de errores manuales en operaciones del día a día."
+      },
+      "vbgroup": {
+        "role": "Desarrollador Full Stack Junior",
+        "org": "VBGroup (Prácticas curriculares)",
+        "desc": "Desarrollo end-to-end de herramienta interna para gestión/operaciones. Backend con Express.js y TypeScript, integrando Azure Cosmos DB y Blob Storage. Frontend con React + Tailwind. Trabajo en equipo bajo Agile/Scrum."
+      },
+      "codexr": {
+        "role": "Autor & Lead Developer",
+        "org": "Code-XR (Open Source)",
+        "desc": "Extensión de VS Code para visualización XR/3D/AR de métricas de software. Arquitectura end-to-end: análisis estático, mapeo de escenas XR, documentación. +300 descargas en Marketplace."
+      },
+      "vissoft": {
+        "role": "Paper Aceptado — VISSOFT 2025",
+        "org": "IEEE VISSOFT @ ICSME 2025",
+        "desc": "Artículo de investigación sobre visualización XR de métricas de software aceptado para presentación en conferencia internacional."
+      }
+    }
   },
   "development": {
     "title": "🚧 En desarrollo",
