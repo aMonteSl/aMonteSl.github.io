@@ -14,6 +14,8 @@ export interface JourneyHighlight {
   id: string
   labelKey: string // i18n key
   year: number
+  month?: number // 1-12
+  day?: number // 1-31
 }
 
 /** Main journey entry - represents a significant period or event */
@@ -29,8 +31,16 @@ export interface JourneyEntry {
   descKey: string
   /** Start year (for positioning) */
   startYear: number
+  /** Start month (1-12, optional for monthly precision) */
+  startMonth?: number
+  /** Start day (1-31, optional for daily precision) */
+  startDay?: number
   /** End year (null = ongoing) */
   endYear: number | null
+  /** End month (1-12, optional for monthly precision) */
+  endMonth?: number
+  /** End day (1-31, optional for daily precision) */
+  endDay?: number
   /** Nested highlights (e.g., honors within education) */
   highlights?: JourneyHighlight[]
   /** Optional link */

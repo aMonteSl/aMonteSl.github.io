@@ -552,6 +552,7 @@
     "subtitle": "Experience, education, and key milestones",
     "present": "Present",
     "hoverHint": "Select an item to view details",
+    "clickYearHint": "Click on a year to see monthly details",
     "legend": {
       "education": "Education",
       "work": "Work Experience",
@@ -576,7 +577,10 @@
       "vbgroup": {
         "role": "Full Stack Developer Junior",
         "org": "VBGroup (Curricular Internship)",
-        "desc": "End-to-end development of internal tool for management/operations. Backend with Express.js and TypeScript, integrating Azure Cosmos DB and Blob Storage. Frontend with React + Tailwind. Teamwork under Agile/Scrum."
+        "desc": "End-to-end development of internal tool for management/operations. Backend with Express.js and TypeScript, integrating Azure Cosmos DB and Blob Storage. Frontend with React + Tailwind. Teamwork under Agile/Scrum.",
+        "highlights": {
+          "fullstack": "Promoted to Full Stack"
+        }
       },
       "codexr": {
         "role": "Author & Lead Developer",

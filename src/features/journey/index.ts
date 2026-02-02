@@ -5,6 +5,9 @@ export { ParallelStreamsSection } from './ParallelStreamsSection'
 export { StreamCard } from './StreamCard'
 export { StreamLegend } from './StreamLegend'
 
+// Hooks
+export { useGlowAnimation } from './useGlowAnimation'
+
 // Types
 export type {
   JourneyEntry,

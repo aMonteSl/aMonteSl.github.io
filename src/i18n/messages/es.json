@@ -550,6 +550,7 @@
     "subtitle": "Experiencia, formación y logros clave",
     "present": "Actualidad",
     "hoverHint": "Selecciona un elemento para ver detalles",
+    "clickYearHint": "Haz clic en un año para ver el detalle mensual",
     "legend": {
       "education": "Formación",
       "work": "Experiencia laboral",
@@ -574,7 +575,10 @@
       "vbgroup": {
         "role": "Desarrollador Full Stack Junior",
         "org": "VBGroup (Prácticas curriculares)",
-        "desc": "Desarrollo end-to-end de herramienta interna para gestión/operaciones. Backend con Express.js y TypeScript, integrando Azure Cosmos DB y Blob Storage. Frontend con React + Tailwind. Trabajo en equipo bajo Agile/Scrum."
+        "desc": "Desarrollo end-to-end de herramienta interna para gestión/operaciones. Backend con Express.js y TypeScript, integrando Azure Cosmos DB y Blob Storage. Frontend con React + Tailwind. Trabajo en equipo bajo Agile/Scrum.",
+        "highlights": {
+          "fullstack": "Ascenso a Full Stack"
+        }
       },
       "codexr": {
         "role": "Autor & Lead Developer",

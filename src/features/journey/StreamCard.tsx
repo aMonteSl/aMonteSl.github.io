@@ -36,13 +36,6 @@ const accentMap: Record<JourneyLane, string> = {
   achievement: 'from-amber-500/20 via-amber-500/5',
 }
 
-const borderMap: Record<JourneyLane, string> = {
-  education: 'border-blue-500/40',
-  work: 'border-emerald-500/40',
-  project: 'border-violet-500/40',
-  achievement: 'border-amber-500/40',
-}
-
 const dotMap: Record<JourneyLane, string> = {
   education: 'bg-blue-500',
   work: 'bg-emerald-500',
@@ -50,9 +43,16 @@ const dotMap: Record<JourneyLane, string> = {
   achievement: 'bg-amber-500',
 }
 
+const glowMap: Record<JourneyLane, string> = {
+  education: 'hover:shadow-blue-500/20',
+  work: 'hover:shadow-emerald-500/20',
+  project: 'hover:shadow-violet-500/20',
+  achievement: 'hover:shadow-amber-500/20',
+}
+
 /**
- * StreamCard - Displays detailed info for a journey entry
- * Polished glassmorphism design
+ * StreamCard - Fixed height detail card for journey entries
+ * Clean design with accent border and subtle gradients
  */
 export function StreamCard({
   lane,
@@ -76,29 +76,29 @@ export function StreamCard({
   const content = (
     <div
       className={cn(
-        'relative overflow-hidden rounded-xl',
+        'relative h-full overflow-hidden rounded-xl',
         'bg-gradient-to-r to-transparent',
         accentMap[lane],
         'ring-1 ring-[var(--border)]/30',
         'backdrop-blur-sm',
         'transition-all duration-300',
-        link && 'cursor-pointer hover:ring-[var(--border)]/60 hover:shadow-lg hover:shadow-black/20',
+        link && ['cursor-pointer hover:ring-[var(--border)]/50 hover:shadow-xl', glowMap[lane]],
         className
       )}
     >
       {/* Left accent border */}
       <div className={cn('absolute left-0 top-0 bottom-0 w-1 rounded-l-xl', dotMap[lane])} />
 
-      <div className="p-5 pl-6">
+      <div className="h-full p-5 pl-6 flex flex-col">
         {/* Header row */}
-        <div className="flex items-start justify-between gap-4 mb-3">
+        <div className="flex items-start justify-between gap-4 mb-2">
           <div className="flex-1 min-w-0">
             {/* Title */}
-            <h4 className="text-base sm:text-lg font-semibold text-[var(--fg)] leading-tight mb-1">
+            <h4 className="text-base sm:text-lg font-semibold text-[var(--fg)] leading-tight mb-0.5 truncate">
               {title}
             </h4>
             {/* Organization */}
-            <p className="text-sm text-[var(--fg-muted)]">
+            <p className="text-sm text-[var(--fg-muted)] truncate">
               {organization}
             </p>
           </div>
@@ -113,50 +113,66 @@ export function StreamCard({
             </span>
             {isOngoing && (
               <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <motion.span 
+                  className="w-1.5 h-1.5 rounded-full bg-emerald-400"
+                  animate={{ opacity: [1, 0.4, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
                 En curso
               </span>
             )}
           </div>
         </div>
 
-        {/* Description */}
-        <p className="text-sm text-[var(--fg-muted)] leading-relaxed mb-4">
+        {/* Description - limited to 2 lines */}
+        <p className="text-sm text-[var(--fg-muted)] leading-relaxed line-clamp-2 mb-3 flex-shrink-0">
           {description}
         </p>
 
-        {/* Highlights (matrículas) */}
-        {highlights.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {highlights.map((h) => (
-              <span
-                key={h.label}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 text-xs font-medium"
-              >
-                <span>🏆</span>
-                <span>{h.label}</span>
-              </span>
-            ))}
-          </div>
-        )}
+        {/* Bottom row: highlights, tags, link */}
+        <div className="mt-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 flex-1 min-w-0 overflow-hidden">
+            {/* Highlights (matrículas) */}
+            {highlights.length > 0 && (
+              <div className="flex gap-1.5 flex-shrink-0">
+                {highlights.slice(0, 2).map((h) => (
+                  <span
+                    key={h.label}
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-xs font-medium"
+                    title={h.label}
+                  >
+                    <span className="truncate max-w-[100px]">{h.label}</span>
+                  </span>
+                ))}
+              </div>
+            )}
 
-        {/* Tags + Link */}
-        <div className="flex items-center justify-between gap-4">
-          {tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {tags.slice(0, 5).map((tag) => (
-                <Badge key={tag} variant="default" className="text-xs px-2 py-0.5">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          )}
+            {/* Tags */}
+            {tags.length > 0 && (
+              <div className="flex gap-1 flex-shrink overflow-hidden">
+                {tags.slice(0, 3).map((tag) => (
+                  <Badge key={tag} variant="default" className="text-xs px-2 py-0.5 whitespace-nowrap">
+                    {tag}
+                  </Badge>
+                ))}
+                {tags.length > 3 && (
+                  <span className="text-xs text-[var(--fg-muted)]/50 self-center">
+                    +{tags.length - 3}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
 
           {link && (
-            <span className="flex items-center gap-1 text-xs text-[var(--accent)] font-medium whitespace-nowrap">
+            <motion.span 
+              className="flex items-center gap-1 text-xs text-[var(--accent)] font-medium whitespace-nowrap flex-shrink-0"
+              whileHover={{ x: 2 }}
+              transition={{ duration: 0.15 }}
+            >
               <span>Ver más</span>
               <span>→</span>
-            </span>
+            </motion.span>
           )}
         </div>
       </div>
@@ -164,16 +180,16 @@ export function StreamCard({
   )
 
   if (!animate) {
-    return <Wrapper {...wrapperProps}>{content}</Wrapper>
+    return (
+      <Wrapper {...wrapperProps} className="block h-full">
+        {content}
+      </Wrapper>
+    )
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2 }}
-    >
-      <Wrapper {...wrapperProps}>{content}</Wrapper>
-    </motion.div>
+    <Wrapper {...wrapperProps} className="block h-full">
+      {content}
+    </Wrapper>
   )
 }
