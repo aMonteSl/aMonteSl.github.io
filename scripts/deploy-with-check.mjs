@@ -55,20 +55,9 @@ function getCommitMessage() {
   }
 }
 
-async function runCommand(cmd, description) {
-  try {
-    log('cyan', `⏳ ${description}...`)
-    const output = execSync(cmd, { encoding: 'utf-8' })
-    log('green', `✅ ${description}`)
-    return true
-  } catch (error) {
-    log('red', `❌ ${description} falló`)
-    log('red', error.message)
-    return false
-  }
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
-
-async function waitForGitHubActions(maxWaitSeconds = 120) {
   log('cyan', '⏳ Esperando a que GitHub Actions complete el build...')
   
   const startTime = Date.now()
@@ -174,21 +163,43 @@ async function main() {
   const commitMessage = getCommitMessage()
 
   // Step 1: Git Add
-  if (!await runCommand('git add .', 'Git add')) {
+  log('cyan', '⏳ Git add...')
+  try {
+    execSync('git add .', { encoding: 'utf-8' })
+    log('green', '✅ Git add')
+  } catch (error) {
+    log('red', '❌ Git add falló')
     process.exit(1)
   }
 
   // Step 2: Git Commit
-  if (!await runCommand(`git commit -m "${commitMessage}"`, 'Git commit')) {
-    log('yellow', '⚠️  No hay cambios para commitear')
+  log('cyan', '⏳ Git commit...')
+  try {
+    execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf-8' })
+    log('green', '✅ Git commit')
+  } catch (error) {
+    const msg = error.message || ''
+    if (msg.includes('nothing to commit')) {
+      log('yellow', '⚠️  No hay cambios para commitear')
+    } else {
+      log('red', '❌ Git commit falló')
+      log('red', msg.substring(0, 300))
+      process.exit(1)
+    }
   }
 
   // Step 3: Git Push
-  if (!await runCommand('git push origin main', 'Git push')) {
+  log('cyan', '⏳ Git push...')
+  try {
+    execSync('git push origin main', { encoding: 'utf-8' })
+    log('green', '✅ Git push')
+  } catch (error) {
+    log('red', '❌ Git push falló')
+    log('red', error.message.substring(0, 300))
     process.exit(1)
   }
 
-  log('green', `✅ Commit${commitNum} enviado a main\n`)
+  log('green', `✅ ${commitMessage} enviado a main\n`)
 
   // Save the commit number for next time
   saveCommitNumber(commitNum)
