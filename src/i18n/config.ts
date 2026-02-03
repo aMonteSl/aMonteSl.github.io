@@ -4,7 +4,7 @@ export type Locale = (typeof locales)[number]
 
 export const defaultLocale: Locale = 'en'
 
-// Locale display names
+// Locale display names for UI
 export const localeNames: Record<Locale, string> = {
   en: 'English',
   es: 'Español'
