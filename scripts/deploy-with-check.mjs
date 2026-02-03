@@ -54,10 +54,6 @@ function getCommitMessage() {
   }
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
 async function main() {
   log('bright', '\n🚀 Iniciando Deploy a GitHub Pages\n')
 
@@ -82,7 +78,15 @@ async function main() {
   } catch (error) {
     const msg = error.message || ''
     if (msg.includes('nothing to commit')) {
-      log('yellow', '⚠️  No hay cambios para commitear')
+      log('yellow', '⚠️  No hay cambios. Creando commit vacío para disparar deploy...')
+      try {
+        execSync(`git commit --allow-empty -m "${commitMessage}"`, { encoding: 'utf-8', stdio: 'pipe' })
+        log('green', '✅ Commit vacío creado')
+      } catch (emptyError) {
+        log('red', '❌ Git commit vacío falló')
+        log('red', (emptyError.message || '').substring(0, 300))
+        process.exit(1)
+      }
     } else {
       log('red', '❌ Git commit falló')
       log('red', msg.substring(0, 300))
