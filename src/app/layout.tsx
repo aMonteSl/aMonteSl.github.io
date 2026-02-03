@@ -1,3 +1,4 @@
+// Root layout component with i18n provider and theme setup
 import type { Metadata } from 'next'
 import './globals.css'
 import { I18nProvider } from '@/i18n'

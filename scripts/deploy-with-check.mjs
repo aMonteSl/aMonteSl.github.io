@@ -58,14 +58,15 @@ function getCommitMessage() {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
+
+async function waitForGitHubActions() {
   log('cyan', '⏳ Esperando a que GitHub Actions complete el build...')
   
   const startTime = Date.now()
-  let lastStatus = null
   let attemptCount = 0
   const maxAttempts = 24 // 2 minutos con 5 segundos entre intentos
 
-  while (Date.now() - startTime < maxWaitSeconds * 1000 && attemptCount < maxAttempts) {
+  while (attemptCount < maxAttempts) {
     try {
       // Obtener el último workflow run
       const response = await fetch(
@@ -150,10 +151,6 @@ async function verifySiteUpdate() {
     log('red', error.message)
     return false
   }
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 async function main() {
