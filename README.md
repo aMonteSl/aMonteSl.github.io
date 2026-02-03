@@ -88,6 +88,3 @@ npm run build
 
 ## License
 
-MIT
-# Test
-# Test2
