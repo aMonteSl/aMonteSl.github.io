@@ -10,8 +10,7 @@
     "start": "next start",
     "lint": "eslint",
     "export": "next build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d out",
+    "deploy": "node scripts/deploy-with-check.mjs",
     "gen:images": "node scripts/generate-images.mjs",
     "translate": "node scripts/translate.mjs",
     "check-translations": "node scripts/check-translations.mjs"
