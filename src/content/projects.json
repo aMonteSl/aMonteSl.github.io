@@ -30,8 +30,10 @@
       "Solución → Metáfora de visualización espacial donde archivos y módulos se mapean a un entorno 3D con métricas representadas visualmente para comprensión intuitiva.",
       "Impacto → Aceptado en VISSOFT @ ICSME 2025 • 300+ descargas • Activo y mantenido"
     ],
-    "role_en": "Sole author and end-to-end developer. Built the full system: VS Code extension, Python static analysis pipeline, JSON data persistence, XR 3D visualization with BabiaXR, and documentation site (React + Vite + Tailwind). Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor). Portfolio: https://dlumbrer.gitlab.io/",
-    "role_es": "Autor único y desarrollador integral. Construí el sistema completo: extensión VS Code, pipeline de análisis estático en Python, persistencia de datos en JSON, visualización 3D XR con BabiaXR y sitio de documentación (React + Vite + Tailwind). Supervisión académica de David Moreno Lumbreras (PhD, supervisor TFG). Portfolio: https://dlumbrer.gitlab.io/",
+    "role_en": "Sole author and end-to-end developer. Built the full system: VS Code extension, Python static analysis pipeline, JSON data persistence, XR 3D visualization with BabiaXR, and documentation site (React + Vite + Tailwind). Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor).",
+    "role_es": "Autor único y desarrollador integral. Construí el sistema completo: extensión VS Code, pipeline de análisis estático en Python, persistencia de datos en JSON, visualización 3D XR con BabiaXR y sitio de documentación (React + Vite + Tailwind). Supervisión académica de David Moreno Lumbreras (PhD, supervisor TFG).",
+    "supervisorName": "David Moreno Lumbreras",
+    "supervisorUrl": "https://dlumbrer.gitlab.io/",
     "tech": ["Node.js", "TypeScript", "Python", "VS Code Extension API", "WebXR", "A-Frame", "BabiaXR", "JSON", "React", "Vite", "Tailwind"]
   },
   {

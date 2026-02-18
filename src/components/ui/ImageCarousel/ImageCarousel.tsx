@@ -68,6 +68,8 @@ export interface ImageCarouselProps {
   arrowSize?: 'sm' | 'md'
   /** Whether to show rounded corners. Default: true */
   rounded?: boolean
+  /** CSS object-fit for images. Default: 'cover' */
+  objectFit?: 'cover' | 'contain'
 }
 
 /**
@@ -101,6 +103,7 @@ export function ImageCarousel({
   aspectRatio = 'video',
   arrowSize = 'md',
   rounded = true,
+  objectFit = 'cover',
 }: ImageCarouselProps) {
   const [isHovered, setIsHovered] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -228,7 +231,7 @@ export function ImageCarousel({
           key={currentImage}
           src={currentImage}
           alt={hasMultipleImages ? `${alt} - ${currentIndex + 1} of ${totalImages}` : alt}
-          className="absolute inset-0 w-full h-full object-cover"
+          className={cn('absolute inset-0 w-full h-full', objectFit === 'contain' ? 'object-contain' : 'object-cover')}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

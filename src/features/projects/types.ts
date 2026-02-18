@@ -35,6 +35,8 @@ export interface Project {
   highlights_es: string[]
   role_en: string
   role_es: string
+  supervisorName?: string
+  supervisorUrl?: string
   tech: string[]
 }
 

@@ -257,7 +257,7 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
           transition={{ duration: 0.3 }}
           className={[
             /* shared */
-            'flex-1 min-h-0 p-2 gap-2',
+            'flex-1 min-h-0 p-3 gap-2.5',
             /* mobile: vertical stack */
             'flex flex-col',
             /* desktop: bento grid */
@@ -284,6 +284,7 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
               alt={project.title}
               interval={7000}
               aspectRatio=""
+              objectFit="contain"
               showProgress
               showCounter
               showDots={galleryImages.length > 1}
@@ -302,6 +303,20 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
             className="lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2 min-h-0"
           >
             <BentoCard label={t('overview')} scrollable className="h-full">
+              {/* Meta chips: type + period */}
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {project.type && (
+                  <Badge
+                    variant={getTypeBadgeVariant(project.type)}
+                    className="text-[10px] px-2 py-0.5"
+                  >
+                    {t(`types.${project.type}`)}
+                  </Badge>
+                )}
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-[var(--border)]/40 text-[10px] text-[var(--fg-muted)] font-medium">
+                  {project.period}
+                </span>
+              </div>
               <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{summary}</p>
             </BentoCard>
           </motion.div>
@@ -315,33 +330,29 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
           >
             <BentoCard label={t('role')} scrollable className="h-full">
               <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{role}</p>
+              {project.supervisorName && project.supervisorUrl && (
+                <p className="text-xs text-[var(--fg-muted)]/60 mt-3 pt-2.5 border-t border-[var(--border)]/40">
+                  Supervisor:{' '}
+                  <a
+                    href={project.supervisorUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--accent)]/70 hover:text-[var(--accent)] hover:underline underline-offset-2 transition-colors"
+                  >
+                    {project.supervisorName}
+                  </a>
+                </p>
+              )}
             </BentoCard>
           </motion.div>
 
-          {/* ── Quick Facts ── col 3, row 1 ─────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.2 }}
-            className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2 min-h-0"
-          >
-            <BentoCard label={t('quickFacts.title')} className="h-full">
-              <ProjectFactsPanel
-                typeLabel={project.type ? t(`types.${project.type}`) : undefined}
-                period={project.period}
-                periodLabel={t('quickFacts.period')}
-                typeHeadingLabel={t('quickFacts.type')}
-              />
-            </BentoCard>
-          </motion.div>
-
-          {/* ── Links + Publication ── col 3, row 2 ─────────────────────── */}
+          {/* ── Links + Publication ── col 3, rows 1-2 (full right column) ── */}
           {hasLinks && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.25 }}
-              className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3 min-h-0"
+              transition={{ duration: 0.35, delay: 0.2 }}
+              className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-3 min-h-0"
             >
               <BentoCard label={t('linksTitle')} scrollable className="h-full">
                 <ProjectLinksPanel links={projectLinks} publication={publication} />
@@ -390,4 +401,4 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
       </div>
     </>
   )
-}
+}
