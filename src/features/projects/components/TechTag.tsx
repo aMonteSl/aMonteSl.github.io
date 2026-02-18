@@ -44,6 +44,7 @@ const techIconMap: Record<string, IconType> = {
 
   // Libraries
   'babia-xr': TbHexagonLetterA,
+  babiaxr: TbHexagonLetterA,
   leaflet: SiLeaflet,
   websocket: TbBrandSocketIo,
 
@@ -55,6 +56,13 @@ const techIconMap: Record<string, IconType> = {
   // Tools
   'vs code api': VscVscode,
   'vscode api': VscVscode,
+  'vs code extension': VscVscode,
+  'vs code extension api': VscVscode,
+  webxr: BsCpu,
+  json: BsDatabase,
+  vite: FaCode,
+  tailwind: FaCode,
+  'tailwind css': FaCode,
 
   // Academic / Generic
   algorithms: BsCpu,

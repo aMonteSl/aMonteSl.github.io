@@ -3,17 +3,24 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useTranslations, useLocale } from '@/i18n'
-import { Badge, Button, ImageCarousel } from '@/components/ui'
+import { Badge, ImageCarousel } from '@/components/ui'
 import { AnimatedBackground } from '@/features/landing'
 import { TechTag } from './components/TechTag'
+import { BentoCard } from './components/BentoCard'
+import { HighlightCard } from './components/HighlightCard'
+import { ProjectFactsPanel } from './components/ProjectFactsPanel'
+import { ProjectLinksPanel } from './components/ProjectLinksPanel'
+import type { ProjectLink, PublicationInfo } from './components/ProjectLinksPanel'
 import type { Project, ProjectType } from './types'
+import { getProjectImagePaths } from './types'
 import projectsData from '@/content/projects.json'
 import { LINKS } from '@/lib/constants'
 
-// Icons
+// ─── Icons ──────────────────────────────────────────────────────────────────
+
 function ArrowLeftIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <line x1="19" y1="12" x2="5" y2="12" />
       <polyline points="12 19 5 12 12 5" />
     </svg>
@@ -22,7 +29,7 @@ function ArrowLeftIcon({ className }: { className?: string }) {
 
 function GithubIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
     </svg>
   )
@@ -30,7 +37,7 @@ function GithubIcon({ className }: { className?: string }) {
 
 function ExternalLinkIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
       <polyline points="15 3 21 3 21 9" />
       <line x1="10" y1="14" x2="21" y2="3" />
@@ -40,7 +47,7 @@ function ExternalLinkIcon({ className }: { className?: string }) {
 
 function ChevronLeftIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <polyline points="15 18 9 12 15 6" />
     </svg>
   )
@@ -48,95 +55,185 @@ function ChevronLeftIcon({ className }: { className?: string }) {
 
 function ChevronRightIcon({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <polyline points="9 18 15 12 9 6" />
     </svg>
   )
 }
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
 interface ProjectPageClientProps {
   project: Project
 }
 
-// Helper to get adjacent projects
 function getAdjacentProjects(currentSlug: string): { prev: Project | null; next: Project | null } {
   const projects = projectsData as Project[]
-  const currentIndex = projects.findIndex(p => p.slug === currentSlug)
-  
+  const currentIndex = projects.findIndex((p) => p.slug === currentSlug)
   return {
     prev: currentIndex > 0 ? projects[currentIndex - 1] : null,
     next: currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null,
   }
 }
 
-// Type badge color mapping
 function getTypeBadgeVariant(type?: ProjectType): 'default' | 'outline' {
-  switch (type) {
-    case 'openSource':
-    case 'personal':
-      return 'default'
-    default:
-      return 'outline'
-  }
+  return type === 'openSource' || type === 'personal' ? 'default' : 'outline'
 }
+
+/**
+ * Build the ordered list of links for ProjectLinksPanel.
+ * All project-type-specific logic lives here, keeping sub-components dumb.
+ */
+function buildProjectLinks(
+  project: Project,
+  t: ReturnType<typeof useTranslations>,
+): ProjectLink[] {
+  const links: ProjectLink[] = []
+
+  if (project.repoUrl) {
+    links.push({ label: t('links.repo'), url: project.repoUrl, icon: 'github' })
+  }
+  if (project.demoUrl) {
+    links.push({ label: t('links.web'), url: project.demoUrl, icon: 'external' })
+  }
+
+  // ── Code-XR extra links ──
+  // Add new project-specific blocks here as the portfolio grows.
+  if (project.slug === 'code-xr') {
+    links.push({ label: t('links.marketplace'), url: LINKS.codeXrMarketplace, icon: 'external' })
+    links.push({ label: t('links.doi'), url: LINKS.codeXrDoi, icon: 'external' })
+    links.push({ label: t('links.ieee'), url: LINKS.codeXrIeee, icon: 'external' })
+  }
+
+  return links
+}
+
+/**
+ * Build optional publication metadata. Returns undefined for projects
+ * without academic publications.
+ */
+function buildPublication(project: Project): PublicationInfo | undefined {
+  if (project.slug === 'code-xr') {
+    return {
+      venue: 'VISSOFT @ ICSME 2025 (IEEE)',
+      doi: '10.1109/VISSOFT67405.2025.00034',
+      doiUrl: LINKS.codeXrDoi,
+    }
+  }
+  return undefined
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export function ProjectPageClient({ project }: ProjectPageClientProps) {
   const t = useTranslations('projects')
   const { locale } = useLocale()
 
   const highlights = locale === 'es' ? project.highlights_es : project.highlights_en
-  const role = locale === 'es' ? project.role_es : project.role_en
-  const summary = locale === 'es' ? project.summary_es : project.summary_en
+  const role      = locale === 'es' ? project.role_es      : project.role_en
+  const summary   = locale === 'es' ? project.summary_es   : project.summary_en
+
   const { prev, next } = getAdjacentProjects(project.slug)
-  const isCodeXr = project.slug === 'code-xr'
+  const galleryImages  = getProjectImagePaths(project)
+  const projectLinks   = buildProjectLinks(project, t)
+  const publication    = buildPublication(project)
+  const hasLinks       = projectLinks.length > 0 || !!publication
 
   return (
     <>
       <AnimatedBackground />
-      <div className="min-h-screen">
-        {/* Top navigation bar */}
-        <nav className="sticky top-0 z-20 backdrop-blur-md bg-[var(--bg)]/70 border-b border-[var(--border)]/50">
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex items-center justify-between gap-4">
-              {/* Back button */}
-              <Link
-                href="/#projects"
-                className="inline-flex items-center gap-2 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors"
-              >
-                <ArrowLeftIcon className="w-4 h-4" />
-                <span className="hidden sm:inline">{t('back')}</span>
-              </Link>
 
-              {/* Right side: type badge + links */}
-              <div className="flex items-center gap-3">
-                {/* Project type badge */}
+      {/*
+       * PAGE WRAPPER
+       * lg+: fills exactly the viewport height (no page scroll).
+       * < lg: natural flex-col with page scroll.
+       */}
+      <div className="flex flex-col lg:h-dvh">
+
+        {/* ── Navigation bar ──────────────────────────────────────────────── */}
+        <nav className="sticky top-0 z-20 flex-shrink-0 backdrop-blur-md bg-[var(--bg)]/80 border-b border-[var(--border)]/50">
+          <div className="px-3 py-2">
+            <div className="flex items-center gap-2">
+
+              {/* Left zone: back + previous */}
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Link
+                  href="/#projects"
+                  className="inline-flex items-center gap-1.5 px-2 py-1.5 rounded-lg text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all"
+                >
+                  <ArrowLeftIcon className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{t('back')}</span>
+                </Link>
+
+                {prev && (
+                  <>
+                    <span className="text-[var(--border)] select-none">·</span>
+                    <Link
+                      href={`/projects/${prev.slug}`}
+                      className="hidden md:inline-flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all max-w-[140px]"
+                    >
+                      <ChevronLeftIcon className="w-3 h-3 flex-shrink-0" />
+                      <span className="truncate">{prev.title}</span>
+                    </Link>
+                  </>
+                )}
+              </div>
+
+              {/* Center zone: title + period */}
+              <div className="flex-1 min-w-0 text-center px-2">
+                <p className="text-sm font-semibold text-[var(--fg)] truncate leading-tight">
+                  {project.title}
+                </p>
+                <p className="text-[10px] text-[var(--fg-muted)] hidden sm:block">
+                  {project.period}
+                </p>
+              </div>
+
+              {/* Right zone: next + badge + action icons */}
+              <div className="flex items-center gap-1 flex-shrink-0">
+                {next && (
+                  <>
+                    <Link
+                      href={`/projects/${next.slug}`}
+                      className="hidden md:inline-flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all max-w-[140px]"
+                    >
+                      <span className="truncate">{next.title}</span>
+                      <ChevronRightIcon className="w-3 h-3 flex-shrink-0" />
+                    </Link>
+                    <span className="hidden md:block text-[var(--border)] select-none">·</span>
+                  </>
+                )}
+
                 {project.type && (
-                  <Badge variant={getTypeBadgeVariant(project.type)} className="text-xs">
+                  <Badge
+                    variant={getTypeBadgeVariant(project.type)}
+                    className="text-[10px] px-2 py-0.5 hidden sm:inline-flex"
+                  >
                     {t(`types.${project.type}`)}
                   </Badge>
                 )}
 
-                {/* Quick links */}
                 {project.repoUrl && (
                   <a
                     href={project.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all"
+                    className="p-1.5 rounded-lg text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all"
                     title={t('links.repo')}
                   >
-                    <GithubIcon className="w-5 h-5" />
+                    <GithubIcon className="w-4 h-4" />
                   </a>
                 )}
+
                 {project.demoUrl && (
                   <a
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all"
-                    title={t('links.demo')}
+                    className="p-1.5 rounded-lg text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--card)] transition-all"
+                    title={t('links.web')}
                   >
-                    <ExternalLinkIcon className="w-5 h-5" />
+                    <ExternalLinkIcon className="w-4 h-4" />
                   </a>
                 )}
               </div>
@@ -144,261 +241,153 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
           </div>
         </nav>
 
-        {/* Main content */}
-        <main className="container mx-auto px-4 py-8 sm:py-12">
-          <div className="max-w-5xl mx-auto">
-            {/* Project title */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mb-8"
-            >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--fg)] mb-3">
-                {project.title}
-              </h1>
-              <p className="text-lg text-[var(--fg-muted)]">
-                {project.period}
-              </p>
-            </motion.div>
+        {/* ── Bento grid ──────────────────────────────────────────────────── */}
+        {/*
+         * DESKTOP (lg+):
+         *   3 columns  →  [5fr carousel | 4fr text | 3fr sidebar]
+         *   4 rows     →  [1fr overview/facts | 1fr role/links | auto highlights | auto tech]
+         *   All cells fill the remaining viewport height (flex-1 + min-h-0).
+         *
+         * MOBILE (< lg):
+         *   Plain vertical flex, page scrolls naturally.
+         */}
+        <motion.main
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className={[
+            /* shared */
+            'flex-1 min-h-0 p-2 gap-2',
+            /* mobile: vertical stack */
+            'flex flex-col',
+            /* desktop: bento grid */
+            'lg:grid lg:grid-cols-[5fr_4fr_3fr]',
+            'lg:grid-rows-[minmax(0,1fr)_minmax(0,1fr)_auto_auto]',
+          ].join(' ')}
+        >
 
-            {/* Image carousel */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="mb-12"
-            >
-              <ImageCarousel
-                images={project.images}
-                basePath={project.imageDir}
-                alt={project.title}
-                interval={7000}
-                aspectRatio="video"
-                showProgress={true}
-                showCounter={true}
-                showDots={true}
-                showArrows={true}
-                keyboardNavigation={true}
-                className="shadow-2xl ring-1 ring-[var(--border)]/50"
+          {/* ── Carousel ── col 1, rows 1-2 ─────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className={[
+              'rounded-xl overflow-hidden',
+              'h-52 sm:h-64',                   // mobile fixed height
+              'lg:h-auto',                       // desktop: fills grid rows
+              'lg:col-start-1 lg:col-end-2',
+              'lg:row-start-1 lg:row-end-3',
+            ].join(' ')}
+          >
+            <ImageCarousel
+              images={galleryImages}
+              alt={project.title}
+              interval={7000}
+              aspectRatio=""
+              showProgress
+              showCounter
+              showDots={galleryImages.length > 1}
+              showArrows={galleryImages.length > 1}
+              keyboardNavigation
+              rounded={false}
+              className="h-full w-full"
+            />
+          </motion.div>
+
+          {/* ── Overview ── col 2, row 1 ─────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.1 }}
+            className="lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2 min-h-0"
+          >
+            <BentoCard label={t('overview')} scrollable className="h-full">
+              <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{summary}</p>
+            </BentoCard>
+          </motion.div>
+
+          {/* ── Role ── col 2, row 2 ─────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.15 }}
+            className="lg:col-start-2 lg:col-end-3 lg:row-start-2 lg:row-end-3 min-h-0"
+          >
+            <BentoCard label={t('role')} scrollable className="h-full">
+              <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{role}</p>
+            </BentoCard>
+          </motion.div>
+
+          {/* ── Quick Facts ── col 3, row 1 ─────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.2 }}
+            className="lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2 min-h-0"
+          >
+            <BentoCard label={t('quickFacts.title')} className="h-full">
+              <ProjectFactsPanel
+                typeLabel={project.type ? t(`types.${project.type}`) : undefined}
+                period={project.period}
+                periodLabel={t('quickFacts.period')}
+                typeHeadingLabel={t('quickFacts.type')}
               />
+            </BentoCard>
+          </motion.div>
+
+          {/* ── Links + Publication ── col 3, row 2 ─────────────────────── */}
+          {hasLinks && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.25 }}
+              className="lg:col-start-3 lg:col-end-4 lg:row-start-2 lg:row-end-3 min-h-0"
+            >
+              <BentoCard label={t('linksTitle')} scrollable className="h-full">
+                <ProjectLinksPanel links={projectLinks} publication={publication} />
+              </BentoCard>
             </motion.div>
+          )}
 
-            <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
-              {/* Main content column */}
-              <div className="lg:col-span-2 space-y-8">
-                {/* Overview */}
-                <motion.section
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <h2 className="text-2xl font-bold text-[var(--fg)] mb-4">
-                    {t('overview')}
-                  </h2>
-                  <p className="text-lg text-[var(--fg-muted)] leading-relaxed">
-                    {summary}
-                  </p>
-                </motion.section>
+          {/* ── Highlights ── cols 1-3, row 3 ───────────────────────────── */}
+          {highlights.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.3 }}
+              className={[
+                'flex flex-col gap-2 sm:flex-row',
+                'lg:col-start-1 lg:col-end-4 lg:row-start-3 lg:row-end-4',
+              ].join(' ')}
+            >
+              {highlights.map((h, i) => (
+                <HighlightCard key={i} highlight={h} index={i} />
+              ))}
+            </motion.div>
+          )}
 
-                {/* Highlights */}
-                <motion.section
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
-                  <h2 className="text-2xl font-bold text-[var(--fg)] mb-6">
-                    {t('highlights')}
-                  </h2>
-                  <ul className="space-y-4">
-                    {highlights.map((highlight, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <div className="w-2 h-2 rounded-full bg-[var(--accent)] mt-2.5 flex-shrink-0" />
-                        <p className="text-[var(--fg-muted)] leading-relaxed">
-                          {highlight}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.section>
-
-                {/* Role */}
-                <motion.section
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <h2 className="text-2xl font-bold text-[var(--fg)] mb-4">
-                    {t('role')}
-                  </h2>
-                  <p className="text-[var(--fg-muted)] leading-relaxed">
-                    {role}
-                  </p>
-                </motion.section>
-              </div>
-
-              {/* Sidebar */}
-              <div className="lg:col-span-1">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                  className="space-y-6"
-                >
-                  {/* Quick facts card */}
-                  <div className="bg-[var(--card)]/80 backdrop-blur-sm rounded-2xl p-6 border border-[var(--border)] space-y-4">
-                    <h3 className="text-lg font-semibold text-[var(--fg)]">
-                      {t('quickFacts.title')}
-                    </h3>
-                    <dl className="space-y-3 text-sm">
-                      {project.type && (
-                        <div className="flex justify-between">
-                          <dt className="text-[var(--fg-muted)]">{t('quickFacts.type')}</dt>
-                          <dd className="text-[var(--fg)] font-medium">{t(`types.${project.type}`)}</dd>
-                        </div>
-                      )}
-                      <div className="flex justify-between">
-                        <dt className="text-[var(--fg-muted)]">{t('quickFacts.period')}</dt>
-                        <dd className="text-[var(--fg)] font-medium">{project.period}</dd>
-                      </div>
-                    </dl>
-                  </div>
-
-                  {/* Tech stack card */}
-                  <div className="bg-[var(--card)]/80 backdrop-blur-sm rounded-2xl p-6 border border-[var(--border)]">
-                    <h3 className="text-lg font-semibold text-[var(--fg)] mb-4">
-                      {t('tech')}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech) => (
-                        <TechTag key={tech} tech={tech} />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Links card (if any) */}
-                  {(project.repoUrl || project.demoUrl || isCodeXr) && (
-                    <div className="bg-[var(--card)]/80 backdrop-blur-sm rounded-2xl p-6 border border-[var(--border)]">
-                      <h3 className="text-lg font-semibold text-[var(--fg)] mb-4">
-                        {t('linksTitle')}
-                      </h3>
-                      <div className="flex flex-col gap-3">
-                        {project.repoUrl && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => window.open(project.repoUrl, '_blank')}
-                          >
-                            <GithubIcon className="w-4 h-4" />
-                            {t('links.repo')}
-                          </Button>
-                        )}
-                        {project.demoUrl && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-start gap-2"
-                            onClick={() => window.open(project.demoUrl, '_blank')}
-                          >
-                            <ExternalLinkIcon className="w-4 h-4" />
-                            {t('links.demo')}
-                          </Button>
-                        )}
-                        {isCodeXr && (
-                          <>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="w-full justify-start gap-2"
-                              onClick={() => window.open(LINKS.codeXrDoi, '_blank')}
-                            >
-                              <ExternalLinkIcon className="w-4 h-4" />
-                              {t('links.doi')}
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="w-full justify-start gap-2"
-                              onClick={() => window.open(LINKS.codeXrIeee, '_blank')}
-                            >
-                              <ExternalLinkIcon className="w-4 h-4" />
-                              {t('links.ieee')}
-                            </Button>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Publication card */}
-                  {isCodeXr && (
-                    <div className="bg-[var(--card)]/80 backdrop-blur-sm rounded-2xl p-6 border border-[var(--border)] space-y-3">
-                      <h3 className="text-lg font-semibold text-[var(--fg)]">
-                        {t('publication')}
-                      </h3>
-                      <p className="text-sm text-[var(--fg-muted)]">
-                        {t('publicationVenue')}
-                      </p>
-                      <p className="text-sm font-mono text-[var(--fg)] break-all">
-                        {t('publicationDoi', { doi: '10.1109/VISSOFT67405.2025.00034' })}
-                      </p>
-                    </div>
-                  )}
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Prev/Next navigation */}
-            {(prev || next) && (
-              <motion.nav
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="mt-16 pt-8 border-t border-[var(--border)]"
-              >
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Previous project */}
-                  <div>
-                    {prev && (
-                      <Link
-                        href={`/projects/${prev.slug}`}
-                        className="group flex flex-col p-4 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--card)]/50 transition-all"
-                      >
-                        <span className="inline-flex items-center gap-1 text-xs text-[var(--fg-muted)] mb-1">
-                          <ChevronLeftIcon className="w-3 h-3" />
-                          {t('navigation.prev')}
-                        </span>
-                        <span className="text-sm font-medium text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors line-clamp-1">
-                          {prev.title}
-                        </span>
-                      </Link>
-                    )}
-                  </div>
-
-                  {/* Next project */}
-                  <div className="flex justify-end">
-                    {next && (
-                      <Link
-                        href={`/projects/${next.slug}`}
-                        className="group flex flex-col items-end p-4 rounded-xl border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--card)]/50 transition-all"
-                      >
-                        <span className="inline-flex items-center gap-1 text-xs text-[var(--fg-muted)] mb-1">
-                          {t('navigation.next')}
-                          <ChevronRightIcon className="w-3 h-3" />
-                        </span>
-                        <span className="text-sm font-medium text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors line-clamp-1">
-                          {next.title}
-                        </span>
-                      </Link>
-                    )}
-                  </div>
+          {/* ── Tech strip ── cols 1-3, row 4 ───────────────────────────── */}
+          {project.tech.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: 0.35 }}
+              className={[
+                'lg:col-start-1 lg:col-end-4 lg:row-start-4 lg:row-end-5',
+              ].join(' ')}
+            >
+              <BentoCard label={t('tech')} noPadding className="py-3">
+                <div className="px-4 flex flex-wrap gap-2 lg:flex-nowrap lg:overflow-x-auto lg:gap-1.5 pb-0.5">
+                  {project.tech.map((tech) => (
+                    <TechTag key={tech} tech={tech} />
+                  ))}
                 </div>
-              </motion.nav>
-            )}
-          </div>
-        </main>
+              </BentoCard>
+            </motion.div>
+          )}
+
+        </motion.main>
       </div>
     </>
   )
-}
+}

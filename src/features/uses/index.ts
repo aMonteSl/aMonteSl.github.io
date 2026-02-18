@@ -1,0 +1,1 @@
+export { UsesPageClient } from './UsesPageClient'

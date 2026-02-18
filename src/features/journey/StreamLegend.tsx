@@ -25,6 +25,7 @@ const colorMap: Record<JourneyLane, string> = {
   work: 'bg-emerald-500',
   project: 'bg-violet-500',
   achievement: 'bg-amber-500',
+  learning: 'bg-pink-500',
 }
 
 const textColorMap: Record<JourneyLane, string> = {
@@ -32,6 +33,7 @@ const textColorMap: Record<JourneyLane, string> = {
   work: 'text-emerald-400',
   project: 'text-violet-400',
   achievement: 'text-amber-400',
+  learning: 'text-pink-400',
 }
 
 /**

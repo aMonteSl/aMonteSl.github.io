@@ -4,10 +4,10 @@
  */
 
 /** Lane identifiers for parallel tracks */
-export type JourneyLane = 'education' | 'work' | 'project' | 'achievement'
+export type JourneyLane = 'education' | 'work' | 'project' | 'achievement' | 'learning'
 
 /** Entry types determine visual styling */
-export type JourneyEntryType = 'education' | 'work' | 'project' | 'achievement'
+export type JourneyEntryType = 'education' | 'work' | 'project' | 'achievement' | 'learning'
 
 /** A highlight is a sub-milestone within a main entry */
 export interface JourneyHighlight {

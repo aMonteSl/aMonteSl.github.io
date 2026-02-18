@@ -6,9 +6,9 @@ import { Footer } from '@/components/common/Footer'
 import { SITE, LINKS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
-  description: 'Portfolio of Adrián Montes Linares — Telecommunications & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Author of Code-XR (VISSOFT @ ICSME 2025).',
-  keywords: ['Adrián Montes Linares', 'Adrián Montes', 'Telecommunications Engineer', 'Software Engineer', 'React', 'TypeScript', 'Node.js', 'XR', 'WebXR', 'Code-XR', 'VISSOFT', 'ICSME 2025', 'Portfolio'],
+  title: 'Adrián Montes Linares | Telematics & Software Engineer',
+  description: 'Portfolio of Adrián Montes Linares — Telematics & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Author of Code-XR (VISSOFT @ ICSME 2025).',
+  keywords: ['Adrián Montes Linares', 'Adrián Montes', 'Telematics Engineer', 'Software Engineer', 'React', 'TypeScript', 'Node.js', 'XR', 'WebXR', 'Code-XR', 'VISSOFT', 'ICSME 2025', 'Portfolio'],
   authors: [{ name: SITE.author }],
   creator: SITE.author,
   manifest: '/favicons/site.webmanifest',
@@ -25,14 +25,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: SITE.url,
-    title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
-    description: 'Portfolio of Adrián Montes Linares — Telecommunications & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Code-XR author.',
+    title: 'Adrián Montes Linares | Telematics & Software Engineer',
+    description: 'Portfolio of Adrián Montes Linares — Telematics & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Code-XR author.',
     siteName: SITE.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Adrián Montes Linares | Telecommunications & Software Engineer',
-    description: 'Portfolio of Adrián Montes Linares — Telecommunications & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR.',
+    title: 'Adrián Montes Linares | Telematics & Software Engineer',
+    description: 'Portfolio of Adrián Montes Linares — Telematics & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR.',
   },
   alternates: {
     canonical: SITE.url,

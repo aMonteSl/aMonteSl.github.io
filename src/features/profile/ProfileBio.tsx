@@ -52,8 +52,8 @@ export function ProfileBio({ className }: ProfileBioProps) {
   const stats = [
     { icon: CodeIcon, label: t('stats.experience'), value: t('stats.experienceValue') },
     { icon: AcademicIcon, label: t('stats.education'), value: t('stats.educationValue') },
-    { icon: LocationIcon, label: t('stats.location'), value: t('stats.locationValue') },
     { icon: SparklesIcon, label: t('stats.focus'), value: t('stats.focusValue') },
+    { icon: SparklesIcon, label: t('stats.mindset'), value: t('stats.mindsetValue') },
   ]
 
   return (

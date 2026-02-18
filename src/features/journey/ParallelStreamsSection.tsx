@@ -22,7 +22,7 @@ import {
 } from '@/content/journey'
 
 /** Lane order for consistent rendering */
-const LANE_ORDER: JourneyLane[] = ['education', 'work', 'project', 'achievement']
+const LANE_ORDER: JourneyLane[] = ['education', 'work', 'project', 'achievement', 'learning']
 
 /** Color mappings with hex values for dynamic styles */
 const LANE_COLORS: Record<JourneyLane, { 
@@ -54,6 +54,12 @@ const LANE_COLORS: Record<JourneyLane, {
     hex: '#f59e0b',
     ring: 'ring-amber-500/30',
     text: 'text-amber-400'
+  },
+  learning: {
+    bg: 'bg-pink-500',
+    hex: '#ec4899',
+    ring: 'ring-pink-500/30',
+    text: 'text-pink-400'
   },
 }
 
@@ -90,6 +96,14 @@ function formatPeriod(
   return `${start} — ${end}`
 }
 
+function formatStartOnly(startYear: number, startMonth?: number): string {
+  if (startMonth) {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return `${monthNames[startMonth - 1]} ${startYear}`
+  }
+  return `${startYear}`
+}
+
 /**
  * ParallelStreamsSection
  * Professional journey visualization with year drill-down
@@ -102,7 +116,7 @@ export function ParallelStreamsSection() {
   const [hoveredEntry, setHoveredEntry] = useState<string | null>(null)
   const [selectedEntry, setSelectedEntry] = useState<string | null>(null)
   const [drillDownYear, setDrillDownYear] = useState<number | null>(null)
-  const [visibleLanes, setVisibleLanes] = useState<Set<JourneyLane>>(new Set(['education', 'work', 'project', 'achievement']))
+  const [visibleLanes, setVisibleLanes] = useState<Set<JourneyLane>>(new Set(['education', 'work', 'project', 'achievement', 'learning']))
 
   // Get all entry IDs for glow animation
   const entryIds = useMemo(() => JOURNEY_ENTRIES.map((e) => e.id), [])
@@ -121,6 +135,7 @@ export function ParallelStreamsSection() {
       work: [],
       project: [],
       achievement: [],
+      learning: [],
     }
     JOURNEY_ENTRIES.forEach((entry) => {
       grouped[entry.lane].push(entry)
@@ -317,7 +332,7 @@ export function ParallelStreamsSection() {
                         Inicio / Start
                       </div>
                     </div>
-                    {LANE_ORDER.filter(lane => lane !== 'achievement' && visibleLanes.has(lane)).map((lane, laneIndex) => {
+                    {LANE_ORDER.filter(lane => lane !== 'achievement' && lane !== 'learning' && visibleLanes.has(lane)).map((lane, laneIndex) => {
                       const laneEntries = entriesByLane[lane]
                       const colors = LANE_COLORS[lane]
 
@@ -574,6 +589,49 @@ export function ParallelStreamsSection() {
                         })}
                       </div>
                     </div>
+
+                    {visibleLanes.has('learning') && entriesByLane.learning.length > 0 && (
+                      <div className="mt-4 px-6 sm:px-8">
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className={cn('inline-flex w-2 h-2 rounded-full', LANE_COLORS.learning.bg)} />
+                          <span className="text-xs uppercase tracking-wide text-[var(--fg-muted)]/70">
+                            {t('legend.learning')}
+                          </span>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {entriesByLane.learning.map((entry) => {
+                            const startLabel = formatStartOnly(entry.startYear, entry.startMonth)
+                            const isActive = hoveredEntry === entry.id || selectedEntry === entry.id
+
+                            return (
+                              <motion.button
+                                key={entry.id}
+                                type="button"
+                                className={cn(
+                                  'inline-flex items-center gap-2 px-3 py-1.5 rounded-full',
+                                  'bg-[var(--card)]/40 ring-1 ring-[var(--border)]/20',
+                                  'text-xs text-[var(--fg)]/80 hover:text-[var(--fg)]',
+                                  'transition-all duration-300',
+                                  isActive && 'ring-2 ring-pink-500/40'
+                                )}
+                                initial={animate ? { opacity: 0, y: 6 } : undefined}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.35 }}
+                                onMouseEnter={() => setHoveredEntry(entry.id)}
+                                onMouseLeave={() => setHoveredEntry(null)}
+                                onClick={() =>
+                                  setSelectedEntry(selectedEntry === entry.id ? null : entry.id)
+                                }
+                              >
+                                <span className="text-pink-400">🎯</span>
+                                <span className="font-medium">{t(`entries.${entry.id}.role`)}</span>
+                                <span className="text-[var(--fg-muted)]/70">{startLabel}</span>
+                              </motion.button>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -662,7 +720,7 @@ export function ParallelStreamsSection() {
                       </div>
                     </div>
 
-                    {LANE_ORDER.filter(lane => lane !== 'achievement' && visibleLanes.has(lane)).map((lane) => {
+                    {LANE_ORDER.filter(lane => lane !== 'achievement' && lane !== 'learning' && visibleLanes.has(lane)).map((lane) => {
                       const laneEntries = entriesByLane[lane].filter(e => 
                         isEntryInYear(e, drillDownYear)
                       )
@@ -881,6 +939,51 @@ export function ParallelStreamsSection() {
                       </div>
                     </div>
                   </div>
+
+                  {visibleLanes.has('learning') && (
+                    <div className="mt-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className={cn('inline-flex w-2 h-2 rounded-full', LANE_COLORS.learning.bg)} />
+                        <span className="text-xs uppercase tracking-wide text-[var(--fg-muted)]/70">
+                          {t('legend.learning')}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {entriesByLane.learning
+                          .filter((entry) => isEntryInYear(entry, drillDownYear))
+                          .map((entry) => {
+                            const startLabel = formatStartOnly(entry.startYear, entry.startMonth)
+                            const isActive = hoveredEntry === entry.id || selectedEntry === entry.id
+
+                            return (
+                              <motion.button
+                                key={entry.id}
+                                type="button"
+                                className={cn(
+                                  'inline-flex items-center gap-2 px-3 py-1.5 rounded-full',
+                                  'bg-[var(--card)]/40 ring-1 ring-[var(--border)]/20',
+                                  'text-xs text-[var(--fg)]/80 hover:text-[var(--fg)]',
+                                  'transition-all duration-300',
+                                  isActive && 'ring-2 ring-pink-500/40'
+                                )}
+                                initial={{ opacity: 0, y: 6 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.25 }}
+                                onMouseEnter={() => setHoveredEntry(entry.id)}
+                                onMouseLeave={() => setHoveredEntry(null)}
+                                onClick={() =>
+                                  setSelectedEntry(selectedEntry === entry.id ? null : entry.id)
+                                }
+                              >
+                                <span className="text-pink-400">🎯</span>
+                                <span className="font-medium">{t(`entries.${entry.id}.role`)}</span>
+                                <span className="text-[var(--fg-muted)]/70">{startLabel}</span>
+                              </motion.button>
+                            )
+                          })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </motion.div>
             )}
@@ -902,13 +1005,17 @@ export function ParallelStreamsSection() {
                     lane={activeEntry.lane}
                     title={t(`entries.${activeEntry.id}.role`)}
                     organization={t(`entries.${activeEntry.id}.org`)}
-                    period={formatPeriod(
-                      activeEntry.startYear,
-                      activeEntry.startMonth,
-                      activeEntry.endYear,
-                      activeEntry.endMonth,
-                      t('present')
-                    )}
+                    period={
+                      activeEntry.lane === 'learning'
+                        ? formatStartOnly(activeEntry.startYear, activeEntry.startMonth)
+                        : formatPeriod(
+                            activeEntry.startYear,
+                            activeEntry.startMonth,
+                            activeEntry.endYear,
+                            activeEntry.endMonth,
+                            t('present')
+                          )
+                    }
                     description={t(`entries.${activeEntry.id}.desc`)}
                     highlights={activeEntry.highlights?.map((h) => ({
                       label: t(`entries.${activeEntry.id}.highlights.${h.id}`),
@@ -916,7 +1023,7 @@ export function ParallelStreamsSection() {
                     }))}
                     tags={activeEntry.tags}
                     link={activeEntry.link}
-                    isOngoing={activeEntry.endYear === null}
+                    isOngoing={activeEntry.endYear === null && activeEntry.lane !== 'learning'}
                   />
                 </motion.div>
               ) : (

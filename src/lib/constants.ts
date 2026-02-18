@@ -15,7 +15,7 @@ export const LINKS = {
   codeXrRepo: 'https://github.com/aMonteSl/CodeXR',
   codeXrDocs: 'https://amontesl.github.io/code-xr-docs/',
   codeXrMarketplace:
-    'https://marketplace.visualstudio.com/items?itemName=aMonteSl.codexr',
+    'https://marketplace.visualstudio.com/items?itemName=aMonteSl.code-xr',
   codeXrDoi: 'https://doi.org/10.1109/VISSOFT67405.2025.00034',
   codeXrIeee: 'https://ieeexplore.ieee.org/document/11175653',
 

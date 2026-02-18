@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Button, ImageCarousel } from '@/components/ui'
 import { shouldAnimate, fadeInUp } from '@/lib/motion'
@@ -30,17 +31,24 @@ export function ProjectCard({
   demoUrl,
   index = 0,
 }: ProjectCardProps) {
+  const router = useRouter()
   const animate = shouldAnimate()
   const t = useTranslations('projects')
   const isCodeXr = slug === 'code-xr'
   const repoLink = isCodeXr ? LINKS.codeXrRepo : repoUrl
   const docsLink = isCodeXr ? LINKS.codeXrDocs : demoUrl
   const doiLink = isCodeXr ? LINKS.codeXrDoi : null
+  const marketplaceLink = isCodeXr ? LINKS.codeXrMarketplace : null
+
+  const handleCardClick = () => {
+    router.push(`/projects/${slug}`)
+  }
 
   return (
     <motion.article
       {...(animate ? fadeInUp(0.1 + index * 0.08) : {})}
-      className="group relative flex flex-col h-full rounded-2xl bg-[var(--card)]/50 ring-1 ring-[var(--border)]/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:ring-[var(--accent)]/30 hover:shadow-lg hover:shadow-black/10"
+      onClick={handleCardClick}
+      className="group relative flex flex-col h-full rounded-2xl bg-[var(--card)]/50 ring-1 ring-[var(--border)]/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:ring-[var(--accent)]/30 hover:shadow-lg hover:shadow-black/10 cursor-pointer"
     >
       {/* Image carousel thumbnail */}
       <ImageCarousel
@@ -83,6 +91,7 @@ export function ProjectCard({
                 variant="ghost"
                 size="sm"
                 className="h-8 px-0 text-[var(--fg)] hover:text-[var(--fg)]"
+                onClick={(e) => e.stopPropagation()}
               >
                 <Link href={`/projects/${slug}`} className="flex items-center gap-1">
                   <span>{t('ctaAll')}</span>
@@ -96,6 +105,7 @@ export function ProjectCard({
                   variant="ghost"
                   size="sm"
                   className="h-8 px-2 text-xs gap-1 rounded-lg border border-[var(--border)]/60 bg-[var(--card)]/60 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <a
                     href={doiLink}
@@ -118,6 +128,7 @@ export function ProjectCard({
                   variant="ghost"
                   size="sm"
                   className="h-8 px-2 text-xs gap-1 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <a href={repoLink} target="_blank" rel="noreferrer noopener">
                     <span>{t('links.repo')}</span>
@@ -132,9 +143,25 @@ export function ProjectCard({
                   variant="ghost"
                   size="sm"
                   className="h-8 px-2 text-xs gap-1 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <a href={docsLink} target="_blank" rel="noreferrer noopener">
-                    <span>{isCodeXr ? t('links.demo') : t('links.demo')}</span>
+                    <span>{t('links.web')}</span>
+                    <span aria-hidden>↗</span>
+                  </a>
+                </Button>
+              )}
+
+              {marketplaceLink && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 px-2 text-xs gap-1 text-[var(--fg-muted)] hover:text-[var(--fg)]"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a href={marketplaceLink} target="_blank" rel="noreferrer noopener">
+                    <span>{t('links.marketplace')}</span>
                     <span aria-hidden>↗</span>
                   </a>
                 </Button>

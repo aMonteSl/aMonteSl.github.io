@@ -6,6 +6,9 @@ import { ProfileSection } from '@/features/profile'
 import { FeaturedProjectsSection } from '@/features/projects'
 import { ParallelStreamsSection } from '@/features/journey'
 import { SkillsSection } from '@/features/skills'
+import { TestimonialsSection } from '@/features/testimonials'
+import { CertificationsSection } from '@/features/certifications'
+import { ContactCTASection } from '@/features/contact'
 import { MorphNavProvider, MorphHeader, MorphSidebar, useMorphNav } from '@/features/morphNav'
 
 function HomeContent() {
@@ -43,6 +46,15 @@ function HomeContent() {
 
         {/* Professional Journey section */}
         <ParallelStreamsSection />
+
+        {/* Testimonials section */}
+        <TestimonialsSection />
+
+        {/* Certifications & Achievements section */}
+        <CertificationsSection />
+
+        {/* Contact CTA section */}
+        <ContactCTASection />
       </div>
     </>
   )

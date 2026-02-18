@@ -2,30 +2,37 @@
   {
     "slug": "code-xr",
     "title": "Code-XR",
-    "period": "2024–2025",
+    "period": "Feb 2025–Jul 2025",
     "featured": true,
     "type": "openSource",
-    "summary_en": "XR/3D/AR visualization of software metrics with static analysis (e.g., CCN), LivePanel/XR modes, and JSON persistence.",
-    "summary_es": "Visualización XR/3D/AR de métricas de software con análisis estático (p. ej., CCN), modos LivePanel/XR y persistencia JSON.",
-    "tags": ["React", "A-Frame", "babia-xr", "Python", "VS Code API"],
+    "summary_en": "Code-XR is an open-source Visual Studio Code extension that provides immersive XR-based visualization of software metrics. It transforms static analysis data into an interactive 3D environment, enabling developers to explore complex codebases through spatial metaphors. The tool integrates a static analysis pipeline and renders metrics inside an XR scene, allowing users to identify hotspots, structural issues, and architectural patterns in a more intuitive and exploratory way.",
+    "summary_es": "Code-XR es una extensión gratuita de Visual Studio Code que proporciona visualización inmersiva basada en XR de métricas de software. Transforma datos de análisis estático en un entorno 3D interactivo, permitiendo a los desarrolladores explorar bases de código complejas a través de metáforas espaciales. La herramienta integra un pipeline de análisis estático y renderiza métricas dentro de una escena XR, permitiendo a los usuarios identificar hotspots, problemas estructurales y patrones arquitectónicos de manera más intuitiva y exploratoria.",
+    "tags": ["VS Code Extension API", "WebXR", "A-Frame", "BabiaXR", "Python"],
     "repoUrl": "https://github.com/aMonteSl/CodeXR",
-    "demoUrl": "",
+    "demoUrl": "https://amontesl.github.io/code-xr-docs/",
     "imageDir": "/projects/code-xr",
-    "images": ["thumb-1.jpg", "thumb-2.jpg", "thumb-3.jpg"],
-    "heroImage": "hero.jpg",
+    "images": [
+      "logo.png",
+      "html-analisis.png",
+      "ejemplo2.png",
+      "ejemplo1.png",
+      "ar2-experience.png",
+      "ar-experience.png"
+    ],
+    "heroImage": "logo.png",
     "highlights_en": [
-      "Problem → Many metrics, low comprehension at a glance",
-      "Solution → Immersive XR city metaphor with live panel",
-      "Impact → Faster hotspot spotting; clearer onboarding demos"
+      "Problem → Traditional metric tools present data in static dashboards, making it hard to understand large codebases at a glance and detect hotspots quickly.",
+      "Solution → Spatial visualization metaphor where files and modules map to a 3D environment with metrics represented visually for intuitive comprehension.",
+      "Impact → Accepted at VISSOFT @ ICSME 2025 • 300+ downloads • Active and maintained"
     ],
     "highlights_es": [
-      "Problema → Muchas métricas, baja comprensión de un vistazo",
-      "Solución → Metáfora de ciudad XR inmersiva con panel en vivo",
-      "Impacto → Detección más rápida de hotspots; demos de onboarding más claras"
+      "Problema → Las herramientas de métricas tradicionales presentan datos en dashboards estáticos, dificultando la comprensión de bases de código grandes de un vistazo.",
+      "Solución → Metáfora de visualización espacial donde archivos y módulos se mapean a un entorno 3D con métricas representadas visualmente para comprensión intuitiva.",
+      "Impacto → Aceptado en VISSOFT @ ICSME 2025 • 300+ descargas • Activo y mantenido"
     ],
-    "role_en": "End-to-end design & implementation. Static analysis pipeline, XR scene mapping, and documentation.",
-    "role_es": "Diseño e implementación end-to-end. Pipeline de análisis estático, mapeo de escena XR y documentación.",
-    "tech": ["TypeScript", "React", "Next.js", "A-Frame", "babia-xr", "Python"]
+    "role_en": "Sole author and end-to-end developer. Built the full system: VS Code extension, Python static analysis pipeline, JSON data persistence, XR 3D visualization with BabiaXR, and documentation site (React + Vite + Tailwind). Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor). Portfolio: https://dlumbrer.gitlab.io/",
+    "role_es": "Autor único y desarrollador integral. Construí el sistema completo: extensión VS Code, pipeline de análisis estático en Python, persistencia de datos en JSON, visualización 3D XR con BabiaXR y sitio de documentación (React + Vite + Tailwind). Supervisión académica de David Moreno Lumbreras (PhD, supervisor TFG). Portfolio: https://dlumbrer.gitlab.io/",
+    "tech": ["Node.js", "TypeScript", "Python", "VS Code Extension API", "WebXR", "A-Frame", "BabiaXR", "JSON", "React", "Vite", "Tailwind"]
   },
   {
     "slug": "obt",

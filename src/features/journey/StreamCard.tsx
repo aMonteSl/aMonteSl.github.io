@@ -34,6 +34,7 @@ const accentMap: Record<JourneyLane, string> = {
   work: 'from-emerald-500/20 via-emerald-500/5',
   project: 'from-violet-500/20 via-violet-500/5',
   achievement: 'from-amber-500/20 via-amber-500/5',
+  learning: 'from-pink-500/20 via-pink-500/5',
 }
 
 const dotMap: Record<JourneyLane, string> = {
@@ -41,6 +42,7 @@ const dotMap: Record<JourneyLane, string> = {
   work: 'bg-emerald-500',
   project: 'bg-violet-500',
   achievement: 'bg-amber-500',
+  learning: 'bg-pink-500',
 }
 
 const glowMap: Record<JourneyLane, string> = {
@@ -48,6 +50,7 @@ const glowMap: Record<JourneyLane, string> = {
   work: 'hover:shadow-emerald-500/20',
   project: 'hover:shadow-violet-500/20',
   achievement: 'hover:shadow-amber-500/20',
+  learning: 'hover:shadow-pink-500/20',
 }
 
 /**

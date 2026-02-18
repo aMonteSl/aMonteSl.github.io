@@ -12,8 +12,7 @@
     "journey": "Trayectoria profesional",
     "experience": "Experiencia",
     "education": "Formación",
-    "publications": "Publicaciones",
-    "contact": "Contacto"
+    "publications": "Publicaciones"
   },
   "hero": {
     "name": "Adrián Montes Linares",
@@ -85,17 +84,17 @@
     "imageAlt": "Foto de perfil de Adrián Montes",
     "name": "Adrián Montes Linares",
     "role": "Ingeniero Telemático & Desarrollador Full-Stack",
-    "bio1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "bio2": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    "bio1": "Soy Ingeniero Telemático graduado por la Universidad Rey Juan Carlos en 2026, con una mentalidad orientada a la construcción práctica y al aprendizaje continuo. Me gusta entender cómo funcionan las cosas desde dentro y transformar esa comprensión en soluciones claras, bien diseñadas y útiles para otras personas.\n\nDisfruto especialmente trabajando en proyectos donde puedo participar en todo el proceso: desde la idea inicial y el diseño de la arquitectura hasta la implementación, documentación y mejora iterativa. Para mí, programar no es solo escribir código, sino estructurar problemas complejos y convertirlos en sistemas coherentes y mantenibles.",
+    "bio2": "Me considero una persona curiosa, disciplinada y comprometida. Valoro el trabajo en equipo, la comunicación clara y la responsabilidad sobre lo que construyo. Me motiva enfrentarme a nuevos retos técnicos y explorar distintos ámbitos profesionales para seguir creciendo tanto a nivel técnico como personal.\n\nFuera del ámbito estrictamente técnico, me interesa viajar, conocer otras culturas y perspectivas, y mantener un equilibrio entre desarrollo profesional y vida personal. Creo que esa combinación me ayuda a aportar una visión más amplia a los proyectos en los que participo.",
     "stats": {
       "experience": "Experiencia",
-      "experienceValue": "3+ años programando",
+      "experienceValue": "Desarrollo Full-Stack · Publicación científica (VISSOFT @ ICSME 2025)",
       "education": "Formación",
-      "educationValue": "Ing. Telemática",
-      "location": "Ubicación",
-      "locationValue": "Madrid, España",
+      "educationValue": "Grado en Ingeniería Telemática (URJC, 2026)",
       "focus": "Enfoque actual",
-      "focusValue": "XR y DevTools"
+      "focusValue": "DevTools, XR, IA",
+      "mindset": "Mentalidad",
+      "mindsetValue": "Curiosidad técnica, Orientación a calidad, Aprendizaje continuo"
     }
   },
   "skills": {
@@ -383,7 +382,7 @@
       },
       "linux": {
         "label": "Linux",
-        "summary": "Entorno principal para sistemas y desarrollo.",
+        "summary": "Entorno principal para tareas de sistemas y desarrollo.",
         "purpose": "Sistema principal para desarrollo y scripts.",
         "h1": "Configuré tooling y scripts.",
         "h2": "Resolví incidencias de sistema."
@@ -493,7 +492,8 @@
     "tech": "Tecnologías",
     "links": {
       "repo": "Repositorio",
-      "demo": "Demo",
+      "web": "Web",
+      "marketplace": "Marketplace",
       "doi": "DOI (Publicación)",
       "ieee": "IEEE Xplore"
     },
@@ -532,19 +532,6 @@
     "title": "Publicaciones / Méritos",
     "item1": "Artículo aceptado para VISSOFT 2025 (co-localizado con ICSME 2025): visualización de métricas de software en XR. Preparando camera-ready."
   },
-  "contact": {
-    "title": "Contacto",
-    "copy": "¿Colaboramos? Busco entornos donde el diseño de software y la visualización generen ventajas reales.",
-    "email": "Correo",
-    "linkedin": "LinkedIn",
-    "github": "GitHub"
-  },
-  "footer": {
-    "copyright": "Todos los derechos reservados.",
-    "by": "Diseño y desarrollo por Adrián Montes Linares",
-    "quickLinks": "Enlaces rápidos",
-    "description": "Estudiante de Ingeniería Telemática enfocado en backend, frontend, software engineering y tecnologías XR."
-  },
   "journey": {
     "title": "Trayectoria Profesional",
     "subtitle": "Experiencia, formación y logros clave",
@@ -555,7 +542,8 @@
       "education": "Formación",
       "work": "Experiencia laboral",
       "project": "Proyectos destacados",
-      "achievement": "Logros y publicaciones"
+      "achievement": "Logros y publicaciones",
+      "learning": "Objetivos de Aprendizaje"
     },
     "entries": {
       "urjc": {
@@ -588,8 +576,16 @@
       "vissoft": {
         "role": "Paper Aceptado — VISSOFT 2025",
         "org": "IEEE VISSOFT @ ICSME 2025",
-        "desc": "Artículo de investigación sobre visualización XR de métricas de software aceptado para presentación en conferencia internacional."
-      }
+        "desc": "Artículo de investigación sobre visualización XR de métricas de software aceptado para presentación en conferencia internacional."      },
+      "cambridgeC1": {
+        "role": "Certificación Cambridge English C1",
+        "org": "Universidad de Cambridge",
+        "desc": "Avanzar fluidez de inglés profesional en contextos técnicos y empresariales. Examen integral que cubre lectura, escritura, expresión oral y comprensión auditiva."
+      },
+      "masterAI": {
+        "role": "Máster Oficial en Inteligencia Artificial Aplicada",
+        "org": "Universidad (Por determinar)",
+        "desc": "Postgrado especializado en IA aplicada. Deep learning, Procesamiento de Lenguaje Natural y aplicaciones XR combinadas con investigación profesional y prácticas del sector."      }
     }
   },
   "development": {
@@ -603,5 +599,144 @@
     "demo": "Demo",
     "repo": "Repositorio",
     "download": "Descargar"
+  },
+  "footer": {
+    "copyright": "Todos los derechos reservados.",
+    "by": "Hecho con Next.js, Tailwind CSS y Framer Motion",
+    "sections": {
+      "navigation": "Navegación",
+      "connect": "Conectar",
+      "resources": "Recursos"
+    },
+    "links": {
+      "home": "Inicio",
+      "projects": "Proyectos",
+      "skills": "Habilidades",
+      "journey": "Trayectoria",
+      "uses": "Herramientas",
+      "cv": "Descargar CV",
+      "source": "Código Fuente"
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes una idea de proyecto o quieres colaborar? No dudes en escribirme.",
+    "form": {
+      "name": "Tu Nombre",
+      "email": "Tu Email",
+      "message": "Tu Mensaje",
+      "send": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado! Te responderé pronto.",
+      "error": "Algo salió mal. Inténtalo de nuevo o escríbeme directamente."
+    },
+    "or": "O escríbeme directamente a",
+    "social": "Encuéntrame en"
+  },
+  "projectFilters": {
+    "all": "Todos",
+    "openSource": "Open Source",
+    "personal": "Personal",
+    "academic": "Académico",
+    "internal": "Interno",
+    "showing": "Mostrando {count} proyectos"
+  },
+  "uses": {
+    "title": "Herramientas",
+    "subtitle": "Software, herramientas y hardware que uso a diario para desarrollar.",
+    "backHome": "Volver al Inicio",
+    "categories": {
+      "editor": "Editor & IDE",
+      "terminal": "Terminal & Shell",
+      "devTools": "Herramientas de Desarrollo",
+      "design": "Diseño & Productividad",
+      "hardware": "Hardware",
+      "browser": "Navegador & Extensiones"
+    },
+    "items": {
+      "vscode": {
+        "name": "Visual Studio Code",
+        "desc": "Mi editor principal. Personalizado con temas, extensiones y atajos para máxima productividad."
+      },
+      "copilot": {
+        "name": "GitHub Copilot",
+        "desc": "Programador IA que me ayuda a escribir código más rápido y explorar nuevos patrones."
+      },
+      "windowsTerminal": {
+        "name": "Windows Terminal",
+        "desc": "Terminal moderna con pestañas, paneles y renderizado acelerado por GPU."
+      },
+      "git": {
+        "name": "Git + GitHub",
+        "desc": "Control de versiones y colaboración. GitHub para repos, Actions para CI/CD."
+      },
+      "node": {
+        "name": "Node.js",
+        "desc": "Runtime JavaScript para servicios backend, scripts y herramientas."
+      },
+      "docker": {
+        "name": "Docker",
+        "desc": "Contenedorización para entornos dev/prod consistentes."
+      },
+      "postman": {
+        "name": "Postman",
+        "desc": "Herramienta de testing y documentación de APIs REST/GraphQL."
+      },
+      "figma": {
+        "name": "Figma",
+        "desc": "Diseño UI/UX y prototipado. Ideal para colaborar en sistemas de diseño."
+      },
+      "notion": {
+        "name": "Notion",
+        "desc": "Espacio de trabajo todo-en-uno para notas, planificación y gestión de proyectos."
+      },
+      "obsidian": {
+        "name": "Obsidian",
+        "desc": "Base de conocimiento local en markdown para notas personales y estudio."
+      },
+      "dellMonitor": {
+        "name": "Monitor Dell 27\" 4K",
+        "desc": "Pantalla nítida para programar y diseñar. USB-C con carga de 65W."
+      },
+      "keyboard": {
+        "name": "Teclado Mecánico",
+        "desc": "Layout compacto con switches táctiles para una experiencia de programación satisfactoria."
+      },
+      "chrome": {
+        "name": "Google Chrome",
+        "desc": "Navegador principal para desarrollo. DevTools, Lighthouse y extensiones."
+      },
+      "reactDevtools": {
+        "name": "React Developer Tools",
+        "desc": "Esencial para depurar árboles de componentes React y rendimiento."
+      }
+    }
+  },
+  "contact": {
+    "title": "Conectemos",
+    "subtitle": "¿Tienes un proyecto en mente o quieres charlar? Me encantaría saber de ti.",
+    "cta": "Envíame un email",
+    "email": "Correo",
+    "or": "o contacta conmigo en",
+    "available": "Disponible para colaboraciones, trabajos freelance y oportunidades a tiempo completo."
+  },
+  "testimonials": {
+    "title": "Lo que otros dicen",
+    "subtitle": "Palabras amables de mentores, colegas y colaboradores",
+    "pending": "Los testimonios llegarán pronto. Contáctame en LinkedIn o por email si deseas recomendarme.",
+    "viewMore": "Leer más",
+    "viewLess": "Leer menos"
+  },
+  "certificates": {
+    "title": "Certificaciones y Logros",
+    "subtitle": "Credenciales profesionales, publicaciones y reconocimientos",
+    "completed": "Completado",
+    "inProgress": "En Progreso",
+    "planned": "Planeado",
+    "cambridgeC1": "Certificado Cambridge English C1",
+    "masterAI": "Máster en Inteligencia Artificial Aplicada",
+    "masterAIIssuer": "Universidad (Por determinar)",
+    "verify": "Verificar",
+    "learnMore": "Más información"
   }
 }

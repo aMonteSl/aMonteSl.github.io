@@ -29,6 +29,12 @@ export const LANE_CONFIG: LaneConfig[] = [
     labelKey: 'journey.legend.achievement',
     icon: '🏆',
   },
+  {
+    lane: 'learning',
+    colorVar: '--stream-learning',
+    labelKey: 'journey.legend.learning',
+    icon: '🎯',
+  },
 ]
 
 /**
@@ -126,6 +132,34 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     endMonth: 9,
     endDay: 7,
     link: 'https://vissoft.info',
+  },
+
+  // === LEARNING GOALS (Lane 5 - Future objectives) ===
+  {
+    id: 'cambridgeC1',
+    type: 'learning',
+    lane: 'learning',
+    roleKey: 'journey.entries.cambridgeC1.role',
+    orgKey: 'journey.entries.cambridgeC1.org',
+    descKey: 'journey.entries.cambridgeC1.desc',
+    startYear: 2026,
+    startMonth: 3,
+    startDay: 1,
+    endYear: null,
+    tags: ['English', 'Certification', 'Professional Development'],
+  },
+  {
+    id: 'masterAI',
+    type: 'learning',
+    lane: 'learning',
+    roleKey: 'journey.entries.masterAI.role',
+    orgKey: 'journey.entries.masterAI.org',
+    descKey: 'journey.entries.masterAI.desc',
+    startYear: 2026,
+    startMonth: 9,
+    startDay: 1,
+    endYear: null,
+    tags: ['AI', 'Deep Learning', 'NLP', 'XR'],
   },
 ]
 

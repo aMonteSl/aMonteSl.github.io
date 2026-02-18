@@ -12,14 +12,13 @@
     "journey": "Professional Journey",
     "experience": "Experience",
     "education": "Education",
-    "publications": "Publications",
-    "contact": "Contact"
+    "publications": "Publications"
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Telecommunications Engineer",
+    "headline": "Telematics Engineer",
     "headlineSub": "Full-Stack (TypeScript/Node/React) · DevTools & XR",
-    "aboutMe": "Telecommunications Engineer (URJC, 2026) with experience delivering real software solutions end-to-end—from analysis and implementation to documentation and delivery. Creator of Code-XR (open source) for VS Code, linked to VISSOFT @ ICSME 2025. Graduated and, within the current academic year, eligible for extracurricular internships (up to 550 hours) or full-time employment. Motivated to keep growing and explore different professional domains.",
+    "aboutMe": "Telematics Engineer (URJC, 2026) with experience delivering real software solutions end-to-end—from analysis and implementation to documentation and delivery. Creator of Code-XR (open source) for VS Code, linked to VISSOFT @ ICSME 2025. Graduated and, within the current academic year, eligible for extracurricular internships (up to 550 hours) or full-time employment. Motivated to keep growing and explore different professional domains.",
     "title": "Adrián Montes Linares",
     "subtitle1": "Telematics Engineering — Student",
     "subtitle2": "Backend • Frontend • Software Engineering • XR",
@@ -84,18 +83,18 @@
     "subtitle": "Get to know the person behind the code",
     "imageAlt": "Adrián Montes profile photo",
     "name": "Adrián Montes Linares",
-    "role": "Telecommunications Engineer & Full-Stack Developer",
-    "bio1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "bio2": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+    "role": "Telematics Engineer & Full-Stack Developer",
+    "bio1": "I am a Telecommunications Engineer graduated from Universidad Rey Juan Carlos in 2026, with a strong focus on practical building and continuous learning. I enjoy understanding how systems work internally and transforming that knowledge into clear, well-designed, and useful solutions.\n\nI particularly value projects where I can be involved end-to-end: from initial idea and architectural decisions to implementation, documentation, and iterative improvement. For me, programming is not just about writing code—it is about structuring complex problems and turning them into coherent, maintainable systems.",
+    "bio2": "I consider myself curious, disciplined, and committed. I value teamwork, clear communication, and ownership of what I build. I am motivated by technical challenges and by exploring different professional domains to keep growing both technically and personally.\n\nOutside of purely technical work, I enjoy traveling, discovering new cultures and perspectives, and maintaining a healthy balance between professional growth and personal life. I believe this balance helps me bring a broader perspective to the projects I work on.",
     "stats": {
       "experience": "Experience",
-      "experienceValue": "3+ years coding",
+      "experienceValue": "Full-Stack Development · Scientific publication (VISSOFT @ ICSME 2025)",
       "education": "Education",
-      "educationValue": "Telecommunications Eng.",
-      "location": "Location",
-      "locationValue": "Madrid, Spain",
+      "educationValue": "BSc in Telecommunications Engineering (URJC, 2026)",
       "focus": "Current Focus",
-      "focusValue": "XR & DevTools"
+      "focusValue": "DevTools, XR, AI",
+      "mindset": "Mindset",
+      "mindsetValue": "Technical curiosity, Quality-driven approach, Continuous learning"
     }
   },
   "skills": {
@@ -495,7 +494,8 @@
     "tech": "Tech stack",
     "links": {
       "repo": "Repository",
-      "demo": "Live demo",
+      "web": "Website",
+      "marketplace": "Marketplace",
       "doi": "DOI (Publication)",
       "ieee": "IEEE Xplore"
     },
@@ -534,19 +534,6 @@
     "title": "Publications / Merits",
     "item1": "Paper accepted for VISSOFT 2025 (co-located with ICSME 2025): visualization of software metrics in XR. Preparing camera-ready."
   },
-  "contact": {
-    "title": "Contact",
-    "copy": "Shall we collaborate? I look for environments where software design and visualization create real advantages.",
-    "email": "Email",
-    "linkedin": "LinkedIn",
-    "github": "GitHub"
-  },
-  "footer": {
-    "copyright": "All rights reserved.",
-    "by": "Design & development by Adrián Montes Linares",
-    "quickLinks": "Quick Links",
-    "description": "Telematics Engineering student focused on backend, frontend, software engineering, and XR technologies."
-  },
   "journey": {
     "title": "Professional Journey",
     "subtitle": "Experience, education, and key milestones",
@@ -557,7 +544,8 @@
       "education": "Education",
       "work": "Work Experience",
       "project": "Featured Projects",
-      "achievement": "Achievements & Publications"
+      "achievement": "Achievements & Publications",
+      "learning": "Learning Goals"
     },
     "entries": {
       "urjc": {
@@ -591,6 +579,16 @@
         "role": "Paper Accepted — VISSOFT 2025",
         "org": "IEEE VISSOFT @ ICSME 2025",
         "desc": "Research paper on XR visualization of software metrics accepted for presentation at international conference."
+      },
+      "cambridgeC1": {
+        "role": "Cambridge English C1 Certification",
+        "org": "Cambridge University",
+        "desc": "Advance English proficiency to professional fluency across technical and business contexts. Comprehensive exam covering reading, writing, speaking, and listening."
+      },
+      "masterAI": {
+        "role": "Official Master's in Applied AI",
+        "org": "Universidad (To be determined)",
+        "desc": "Specialized postgraduate degree in applied AI. Deep learning, Natural Language Processing, and XR applications combined with professional research and industry practices."
       }
     }
   },
@@ -605,5 +603,144 @@
     "demo": "Demo",
     "repo": "Repository",
     "download": "Download"
+  },
+  "footer": {
+    "copyright": "All rights reserved.",
+    "by": "Built with Next.js, Tailwind CSS & Framer Motion",
+    "sections": {
+      "navigation": "Navigation",
+      "connect": "Connect",
+      "resources": "Resources"
+    },
+    "links": {
+      "home": "Home",
+      "projects": "Projects",
+      "skills": "Skills",
+      "journey": "Journey",
+      "uses": "Uses",
+      "cv": "Download CV",
+      "source": "Source Code"
+    }
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have a project idea or want to collaborate? Feel free to reach out.",
+    "form": {
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent! I'll get back to you soon.",
+      "error": "Something went wrong. Please try again or email me directly."
+    },
+    "or": "Or reach me directly at",
+    "social": "Find me on"
+  },
+  "projectFilters": {
+    "all": "All",
+    "openSource": "Open Source",
+    "personal": "Personal",
+    "academic": "Academic",
+    "internal": "Internal",
+    "showing": "Showing {count} projects"
+  },
+  "uses": {
+    "title": "Uses",
+    "subtitle": "Tools, software, and hardware I use daily for development.",
+    "backHome": "Back to Home",
+    "categories": {
+      "editor": "Editor & IDE",
+      "terminal": "Terminal & Shell",
+      "devTools": "Development Tools",
+      "design": "Design & Productivity",
+      "hardware": "Hardware",
+      "browser": "Browser & Extensions"
+    },
+    "items": {
+      "vscode": {
+        "name": "Visual Studio Code",
+        "desc": "My main editor. Customized with themes, extensions, and keybindings for max productivity."
+      },
+      "copilot": {
+        "name": "GitHub Copilot",
+        "desc": "AI pair programmer that helps me write code faster and explore new patterns."
+      },
+      "windowsTerminal": {
+        "name": "Windows Terminal",
+        "desc": "Modern terminal with tabs, panes, and GPU-accelerated rendering."
+      },
+      "git": {
+        "name": "Git + GitHub",
+        "desc": "Version control and collaboration. GitHub for repos, Actions for CI/CD."
+      },
+      "node": {
+        "name": "Node.js",
+        "desc": "JavaScript runtime for backend services, scripts, and tooling."
+      },
+      "docker": {
+        "name": "Docker",
+        "desc": "Containerization for consistent dev/prod environments."
+      },
+      "postman": {
+        "name": "Postman",
+        "desc": "API testing and documentation tool for REST/GraphQL endpoints."
+      },
+      "figma": {
+        "name": "Figma",
+        "desc": "UI/UX design and prototyping. Great for collaboration on design systems."
+      },
+      "notion": {
+        "name": "Notion",
+        "desc": "All-in-one workspace for notes, planning, and project management."
+      },
+      "obsidian": {
+        "name": "Obsidian",
+        "desc": "Local-first markdown knowledge base for personal notes and study."
+      },
+      "dellMonitor": {
+        "name": "Dell 27\" 4K Monitor",
+        "desc": "Sharp display for coding and design work. USB-C with 65W charging."
+      },
+      "keyboard": {
+        "name": "Mechanical Keyboard",
+        "desc": "Compact layout with tactile switches for a satisfying coding experience."
+      },
+      "chrome": {
+        "name": "Google Chrome",
+        "desc": "Primary browser for development. DevTools, Lighthouse, and extensions."
+      },
+      "reactDevtools": {
+        "name": "React Developer Tools",
+        "desc": "Essential for debugging React component trees and performance."
+      }
+    }
+  },
+  "contact": {
+    "title": "Let's Connect",
+    "subtitle": "Have a project in mind or want to chat? I'd love to hear from you.",
+    "cta": "Send me an email",
+    "email": "Email",
+    "or": "or reach me on",
+    "available": "Available for collaborations, freelance work, and full-time opportunities."
+  },
+  "testimonials": {
+    "title": "What Others Say",
+    "subtitle": "Kind words from mentors, colleagues, and collaborators",
+    "pending": "Testimonials coming soon. Reach out on LinkedIn or via email if you'd like to recommend me.",
+    "viewMore": "Read more",
+    "viewLess": "Read less"
+  },
+  "certificates": {
+    "title": "Certifications & Achievements",
+    "subtitle": "Professional credentials, publications, and recognitions",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "planned": "Planned",
+    "cambridgeC1": "Cambridge English C1 Certificate",
+    "masterAI": "Master in Applied AI",
+    "masterAIIssuer": "Universidad (To be determined)",
+    "verify": "Verify",
+    "learnMore": "Learn more"
   }
 }
