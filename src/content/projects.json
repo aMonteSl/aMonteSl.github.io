@@ -38,31 +38,31 @@
   },
   {
     "slug": "obt",
-    "title": "OBT — Online Bus Tracker",
-    "period": "2024",
+    "title": "OBT — Online Booking Tool",
+    "period": "Nov 2025–Feb 2026",
     "featured": true,
-    "type": "personal",
-    "summary_en": "Real-time bus tracking app with route optimization and live ETAs for Madrid public transport.",
-    "summary_es": "Aplicación de seguimiento de autobuses en tiempo real con optimización de rutas y ETAs en vivo para el transporte público de Madrid.",
-    "tags": ["React", "Node.js", "PostgreSQL", "Redis", "WebSocket"],
-    "repoUrl": "https://github.com/aMonteSl/OBT",
+    "type": "academic",
+    "summary_en": "SaaS platform built during VBGroup internship for managing travel booking requests across client companies. Clients submit trip requirements → VBGroup agents create cost estimates → upon approval, agents process reservations and send confirmations. Features 5 role-based access tiers, automated email notifications with JWT-secured interactive buttons, and scalable MVC architecture. Also designed all backend databases.",
+    "summary_es": "Plataforma SaaS desarrollada durante prácticas en VBGroup para gestionar solicitudes de reservas de viajes de empresas clientes. Los clientes envían requisitos de viaje → agentes de VBGroup crean presupuestos → una vez aprobado, agentes procesan reservas y envían confirmaciones. Incluye 5 niveles de acceso basados en roles, notificaciones por email automáticas con botones interactivos asegurados con JWT, y arquitectura MVC escalable. También diseñé todas las bases de datos backend.",
+    "tags": ["Nest.js", "TypeScript", "React", "Vite", "Tailwind", "Azure CosmosDB", "Azure Blob Storage"],
+    "repoUrl": "",
     "demoUrl": "",
     "imageDir": "/projects/obt",
-    "images": ["thumb-1.jpg", "thumb-2.jpg", "thumb-3.jpg"],
-    "heroImage": "hero.jpg",
+    "images": [],
+    "heroImage": "placeholder.svg",
     "highlights_en": [
-      "Challenge → Unreliable bus arrival predictions frustrate commuters",
-      "Solution → Real-time GPS + historical data fusion for accurate ETAs",
-      "Impact → 40% reduction in wait-time uncertainty"
+      "Architecture → Designed scalable role-based backend (RBAC with 5 distinct roles: SuperAdmin, Admin, Agent, Manager, Employee) using clean MVC patterns with middleware-driven access control. Also designed and architected all CosmosDB and Blob Storage schemas.",
+      "Email system → Implemented interactive JWT-secured button actions directly within emails for cost estimate approvals, travel notifications, and booking confirmations. Emails generated dynamically based on role and booking state.",
+      "Full-stack evolution → Started contributing as backend-only (API + database design), evolved to full-stack managing React frontend, state management, complex booking workflows, and REST API consumption."
     ],
     "highlights_es": [
-      "Reto → Predicciones de llegada de autobús poco fiables frustran a los viajeros",
-      "Solución → GPS en tiempo real + fusión de datos históricos para ETAs precisos",
-      "Impacto → Reducción del 40% en la incertidumbre de tiempo de espera"
+      "Arquitectura → Backend escalable basado en roles (RBAC con 5 roles: SuperAdmin, Admin, Agent, Manager, Employee) usando patrones MVC limpios con control de acceso mediante middlewares. También diseñé y arquitecturé todos los esquemas de CosmosDB y Blob Storage.",
+      "Sistema de emails → Botones interactivos con JWT directamente en emails para aprobaciones de presupuestos, notificaciones de viajes y confirmaciones de reservas. Emails generados dinámicamente según rol y estado de reserva.",
+      "Evolución full-stack → Comenzó solo backend (API + diseño de BD), evolucionó a full-stack gestionando frontend React, gestión de estado, flujos complejos de reserva y consumo de APIs REST."
     ],
-    "role_en": "Full-stack development. Backend API, real-time data pipeline, and React frontend with map integration.",
-    "role_es": "Desarrollo full-stack. API backend, pipeline de datos en tiempo real y frontend React con integración de mapas.",
-    "tech": ["React", "Node.js", "Express", "PostgreSQL", "Redis", "WebSocket", "Leaflet"]
+    "role_en": "Initially backend architect and developer, evolved to full-stack. Designed REST API architecture (Nest.js, TypeScript, Swagger) with JWT-based email security, RBAC middleware, and clean MVC patterns. Architected CosmosDB collections and Blob Storage containers for travel data, cost estimates, and user documents. Later contributed to React + Vite frontend, complex state management for multi-step booking workflows, and seamless API integration.",
+    "role_es": "Inicialmente arquitecto backend y developer, evolucionó a full-stack. Diseñé arquitectura de API REST (Nest.js, TypeScript, Swagger) con seguridad en emails basada en JWT, middleware RBAC, y patrones MVC limpios. Arquitecturé colecciones de CosmosDB y contenedores de Blob Storage para datos de viajes, presupuestos y documentos de usuarios. Posteriormente contribuí al frontend React + Vite, gestión de estado compleja para flujos de reserva multi-paso, e integración fluida de APIs.",
+    "tech": ["Nest.js", "TypeScript", "Swagger", "TSDoc", "React", "Vite", "Tailwind CSS", "Azure CosmosDB", "Azure Blob Storage", "JWT", "REST API"]
   },
   {
     "slug": "honor-course-1",

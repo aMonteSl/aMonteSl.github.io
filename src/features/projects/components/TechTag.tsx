@@ -1,7 +1,7 @@
 'use client'
 
 import type { IconType } from 'react-icons'
-import { FaCode } from 'react-icons/fa'
+import { FaCode, FaCloud } from 'react-icons/fa'
 import {
   SiReact,
   SiNodedotjs,
@@ -14,6 +14,8 @@ import {
   SiExpress,
   SiAframe,
   SiLeaflet,
+  SiNestjs,
+  SiSwagger,
 } from 'react-icons/si'
 import { TbBrandSocketIo, TbHexagonLetterA } from 'react-icons/tb'
 import { DiJava } from 'react-icons/di'
@@ -38,6 +40,8 @@ const techIconMap: Record<string, IconType> = {
   // Frameworks
   'next.js': SiNextdotjs,
   nextjs: SiNextdotjs,
+  'nest.js': SiNestjs,
+  nestjs: SiNestjs,
   express: SiExpress,
   'a-frame': SiAframe,
   aframe: SiAframe,
@@ -52,12 +56,18 @@ const techIconMap: Record<string, IconType> = {
   postgresql: SiPostgresql,
   postgres: SiPostgresql,
   redis: SiRedis,
+  'cosmosdb': FaCloud,
+  'azure cosmosdb': FaCloud,
+  'azure blob storage': FaCloud,
 
   // Tools
   'vs code api': VscVscode,
   'vscode api': VscVscode,
   'vs code extension': VscVscode,
   'vs code extension api': VscVscode,
+  swagger: SiSwagger,
+  jwt: BsDatabase,
+  tsdoc: FaCode,
   webxr: BsCpu,
   json: BsDatabase,
   vite: FaCode,

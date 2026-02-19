@@ -19,7 +19,9 @@
     "heroImage": null
   },
   "obt": {
-    "images": [],
-    "heroImage": null
+    "images": [
+      "logo.jpg"
+    ],
+    "heroImage": "logo.jpg"
   }
 }
