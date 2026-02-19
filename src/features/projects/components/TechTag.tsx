@@ -16,6 +16,7 @@ import {
   SiLeaflet,
   SiNestjs,
   SiSwagger,
+  SiCplusplus,
 } from 'react-icons/si'
 import { TbBrandSocketIo, TbHexagonLetterA } from 'react-icons/tb'
 import { DiJava } from 'react-icons/di'
@@ -36,6 +37,8 @@ const techIconMap: Record<string, IconType> = {
   javascript: SiJavascript,
   python: SiPython,
   java: DiJava,
+  'c++': SiCplusplus,
+  cpp: SiCplusplus,
 
   // Frameworks
   'next.js': SiNextdotjs,

@@ -66,31 +66,31 @@
   },
   {
     "slug": "honor-course-1",
-    "title": "High Distinction — Algorithms",
-    "period": "2023",
+    "title": "High Distinction — AST (Telematic Systems)",
+    "period": "May 2024",
     "featured": true,
     "type": "academic",
-    "summary_en": "Earned High Distinction (Matrícula de Honor) for advanced algorithms coursework with focus on optimization.",
-    "summary_es": "Matrícula de Honor en asignatura avanzada de algoritmos con enfoque en optimización.",
-    "tags": ["Algorithms", "Clean Architecture", "Java"],
-    "repoUrl": "",
+    "summary_en": "Matrícula de Honor (highest distinction) in AST (Ampliación de Sistemas Telemáticos), a course focused on techniques and technologies for developing telematic applications. Developed an embedded greenhouse system implementing user role management, real-time sensor integration, hardware component abstraction (keyboard, display, alarms), and event-driven architecture—all using object-oriented C++14 with clean layered design.",
+    "summary_es": "Matrícula de Honor en AST (Ampliación de Sistemas Telemáticos), asignatura enfocada en técnicas y tecnologías para el desarrollo de aplicaciones telemáticas. Desarrollé un sistema completo de invernadero embebido implementando gestión de roles de usuario, integración de sensores en tiempo real, abstracción de componentes hardware (teclado, pantalla, alarmas) y arquitectura dirigida por eventos—todo usando C++14 orientado a objetos con diseño limpio en capas.",
+    "tags": ["C++", "Object-Oriented Programming", "Shell", "Doxygen", "UMLET"],
+    "repoUrl": "https://github.com/aMonteSl/GreenHouse",
     "demoUrl": "",
     "imageDir": "/projects/honor-course-1",
-    "images": ["thumb-1.jpg"],
-    "heroImage": "hero.jpg",
+    "images": [],
+    "heroImage": "placeholder.svg",
     "highlights_en": [
-      "Challenge → Complex algorithmic problem sets with strict time limits",
-      "Approach → Clean architecture + rigorous testing for correctness",
-      "Result → Perfect scores on all optimization assignments"
+      "System design → Multi-user embedded systems with role-based access control (admin, operator, viewer). Event-driven architecture managing sensor inputs, hardware I/O, and system state atomically.",
+      "Object-oriented C++ → Clean layered model abstracting hardware (GPIO, sensors, actuators) into cohesive interfaces. Demonstrated mastery of design patterns and memory management in constrained environments.",
+      "Documentation & Testing → Full API documentation via Doxygen, UML diagrams with UMLET, shell test scripts for system validation. Awarded Matrícula de Honor (A+ distinction)."
     ],
     "highlights_es": [
-      "Reto → Problemas algorítmicos complejos con límites de tiempo estrictos",
-      "Enfoque → Arquitectura limpia + pruebas rigurosas para corrección",
-      "Resultado → Puntuaciones perfectas en todas las tareas de optimización"
+      "Diseño de sistema → Sistemas embebidos multi-usuario con control de acceso basado en roles (admin, operador, observador). Arquitectura dirigida por eventos gestionando entradas de sensores, I/O hardware y estado del sistema atómicamente.",
+      "C++ orientado a objetos → Modelo limpio en capas abstrayendo hardware (GPIO, sensores, actuadores) en interfaces cohesivas. Demostré maestría en patrones de diseño y gestión de memoria en entornos limitados.",
+      "Documentación y pruebas → Documentación de API completa vía Doxygen, diagramas UML con UMLET, scripts shell para validación del sistema. Galardonado con Matrícula de Honor (distinción A+)."
     ],
-    "role_en": "Designed and implemented efficient algorithms meeting strict time/space constraints. Demonstrated deep understanding of complexity analysis.",
-    "role_es": "Diseñé e implementé algoritmos eficientes cumpliendo restricciones estrictas de tiempo/espacio. Demostré profundo entendimiento del análisis de complejidad.",
-    "tech": ["Java", "Python", "Data Structures"]
+    "role_en": "Solo architect and developer of embedded greenhouse system. Designed role-based access control with atomic state management. Implemented hardware abstraction layer (sensors, GPIO, display, keyboard) with event-driven cores. Full codebase in C++14 with RAII patterns, clean architecture, and comprehensive Doxygen documentation. Demonstrated command of low-level systems programming, concurrent event handling, and telematic protocols.",
+    "role_es": "Arquitecto y desarrollador único del sistema de invernadero embebido. Diseñé control de acceso basado en roles con gestión de estado atómica. Implementé capa de abstracción de hardware (sensores, GPIO, pantalla, teclado) con núcleos dirigidos por eventos. Código completo en C++14 con patrones RAII, arquitectura limpia y documentación Doxygen exhaustiva. Demostré dominio de programación de sistemas de bajo nivel, manejo de eventos concurrentes y protocolos telemáticos.",
+    "tech": ["C++", "Object-Oriented Programming", "Embedded Systems", "Shell Scripting", "Doxygen", "UMLET", "UML", "IoT", "Real-time Systems"]
   },
   {
     "slug": "honor-course-2",
