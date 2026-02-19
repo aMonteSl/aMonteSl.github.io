@@ -76,10 +76,15 @@ export function ProjectCard({
         </p>
 
         {/* Tech Tags with Icons */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-4 items-center">
           {tags.slice(0, 5).map((tag) => (
             <TechTag key={tag} tech={tag} />
           ))}
+          {tags.length > 5 && (
+            <span className="text-xs text-[var(--accent)]/70 font-medium px-2 py-1 rounded-lg bg-[var(--border)]/20 group-hover:bg-[var(--border)]/40 transition-colors">
+              +{tags.length - 5} more
+            </span>
+          )}
         </div>
 
         {/* Footer links */}

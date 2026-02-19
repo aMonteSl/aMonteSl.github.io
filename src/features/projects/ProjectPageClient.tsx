@@ -300,7 +300,11 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.1 }}
-            className="lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2 min-h-0"
+            className={`${
+              !hasLinks
+                ? 'lg:col-start-2 lg:col-end-4'  // Expand to 2 cols when no links
+                : 'lg:col-start-2 lg:col-end-3'  // Normal 1 col
+            } lg:row-start-1 lg:row-end-2 min-h-0`}
           >
             <BentoCard label={t('overview')} scrollable className="h-full">
               {/* Meta chips: type + period */}
@@ -326,7 +330,11 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35, delay: 0.15 }}
-            className="lg:col-start-2 lg:col-end-3 lg:row-start-2 lg:row-end-3 min-h-0"
+            className={`${
+              !hasLinks
+                ? 'lg:col-start-2 lg:col-end-4'  // Expand to 2 cols when no links
+                : 'lg:col-start-2 lg:col-end-3'  // Normal 1 col
+            } lg:row-start-2 lg:row-end-3 min-h-0`}
           >
             <BentoCard label={t('role')} scrollable className="h-full">
               <p className="text-sm text-[var(--fg-muted)] leading-relaxed">{role}</p>
