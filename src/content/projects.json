@@ -2,122 +2,356 @@
   {
     "slug": "code-xr",
     "title": "Code-XR",
-    "period": "Feb 2025–Jul 2025",
+    "period": "Feb 2025-Jul 2025",
     "featured": true,
     "type": "openSource",
-    "summary_en": "Code-XR is an open-source Visual Studio Code extension that provides immersive XR-based visualization of software metrics. It transforms static analysis data into an interactive 3D environment, enabling developers to explore complex codebases through spatial metaphors. The tool integrates a static analysis pipeline and renders metrics inside an XR scene, allowing users to identify hotspots, structural issues, and architectural patterns in a more intuitive and exploratory way.",
-    "summary_es": "Code-XR es una extensión gratuita de Visual Studio Code que proporciona visualización inmersiva basada en XR de métricas de software. Transforma datos de análisis estático en un entorno 3D interactivo, permitiendo a los desarrolladores explorar bases de código complejas a través de metáforas espaciales. La herramienta integra un pipeline de análisis estático y renderiza métricas dentro de una escena XR, permitiendo a los usuarios identificar hotspots, problemas estructurales y patrones arquitectónicos de manera más intuitiva y exploratoria.",
-    "tags": ["VS Code Extension API", "Python", "TypeScript", "A-Frame", "BabiaXR"],
+    "summary_en": "Code-XR is an open-source VS Code extension for static code analysis and immersive XR software visualization. Version 1.1.0 turns files, directories, and full projects into navigable 3D workspaces with richer metrics, shared XR/DOM rooms, virtual screens, and safer in-scene remapping controls for exploring software structure without leaving the editor.",
+    "summary_es": "Code-XR es una extensión open source para VS Code orientada al análisis estático y la visualización inmersiva de software en XR. La versión 1.1.0 convierte archivos, directorios y proyectos completos en espacios 3D navegables con métricas más ricas, salas XR/DOM compartidas, pantallas virtuales y controles de remapeo dentro de la escena para explorar la estructura del software sin salir del editor.",
+    "tags": [
+      "VS Code Extension API",
+      "TypeScript",
+      "Python",
+      "WebXR",
+      "A-Frame",
+      "BabiaXR"
+    ],
     "repoUrl": "https://github.com/aMonteSl/CodeXR",
     "demoUrl": "https://amontesl.github.io/code-xr-docs/",
     "imageDir": "/projects/code-xr",
     "images": [
-      "logo.png",
-      "html-analisis.png",
-      "ejemplo2.png",
-      "ejemplo1.png",
-      "ar2-experience.png",
-      "ar-experience.png"
+      "scene-v1-1-0.webp",
+      "collaborative-workspace.webp",
+      "pedestal-mapping-ui.webp",
+      "virtual-screen-controller.webp"
     ],
-    "heroImage": "logo.png",
+    "heroImage": "scene-v1-1-0.webp",
     "highlights_en": [
-      "Problem → Traditional metric tools present data in static dashboards, making it hard to understand large codebases at a glance and detect hotspots quickly.",
-      "Solution → Spatial visualization metaphor where files and modules map to a 3D environment with metrics represented visually for intuitive comprehension.",
-      "Impact → Accepted at VISSOFT @ ICSME 2025 • 300+ downloads • Active and maintained"
+      "Problem -> Static dashboards make it difficult to understand large codebases, compare software metrics, and explain structural hotspots during review or research work.",
+      "Solution -> A VS Code workflow that runs static analysis, projects metrics into an XR scene, and supports shared rooms, virtual screens, and safer chart remapping from inside the immersive workspace.",
+      "Impact -> Accepted at VISSOFT @ ICSME 2025, published on the VS Code Marketplace, and maintained as an open-source developer tool with 300+ downloads."
     ],
     "highlights_es": [
-      "Problema → Las herramientas de métricas tradicionales presentan datos en dashboards estáticos, dificultando la comprensión de bases de código grandes de un vistazo.",
-      "Solución → Metáfora de visualización espacial donde archivos y módulos se mapean a un entorno 3D con métricas representadas visualmente para comprensión intuitiva.",
-      "Impacto → Aceptado en VISSOFT @ ICSME 2025 • 300+ descargas • Activo y mantenido"
+      "Problema -> Los dashboards estáticos dificultan entender bases de código grandes, comparar métricas de software y explicar hotspots estructurales durante revisión o investigación.",
+      "Solución -> Un flujo integrado en VS Code que ejecuta análisis estático, proyecta métricas en una escena XR y permite salas compartidas, pantallas virtuales y remapeo seguro de gráficos desde el propio entorno inmersivo.",
+      "Impacto -> Aceptado en VISSOFT @ ICSME 2025, publicado en VS Code Marketplace y mantenido como herramienta open source para desarrolladores con más de 300 descargas."
     ],
-    "role_en": "Sole author and end-to-end developer. Built the full system: VS Code extension, Python static analysis pipeline, JSON data persistence, XR 3D visualization with BabiaXR, and documentation site (React + Vite + Tailwind). Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor).",
-    "role_es": "Autor único y desarrollador integral. Construí el sistema completo: extensión VS Code, pipeline de análisis estático en Python, persistencia de datos en JSON, visualización 3D XR con BabiaXR y sitio de documentación (React + Vite + Tailwind). Supervisión académica de David Moreno Lumbreras (PhD, supervisor TFG).",
+    "role_en": "Sole author and end-to-end developer. Built the VS Code extension, Python static-analysis pipeline, JSON persistence layer, XR scene generation with A-Frame/BabiaXR, marketplace packaging, and documentation site. Version 1.1.0 focused on performance, shared rooms, virtual-screen controls, and safer metric remapping. Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor).",
+    "role_es": "Autor único y desarrollador end-to-end. Construí la extensión de VS Code, el pipeline de análisis estático en Python, la persistencia en JSON, la generación de escenas XR con A-Frame/BabiaXR, el empaquetado para Marketplace y la web de documentación. La versión 1.1.0 se centró en rendimiento, salas compartidas, controles de pantallas virtuales y remapeo seguro de métricas. Supervisión académica de David Moreno Lumbreras (PhD, supervisor del TFG).",
     "supervisorName": "David Moreno Lumbreras",
     "supervisorUrl": "https://dlumbrer.gitlab.io/",
-    "tech": ["Node.js", "TypeScript", "Python", "VS Code Extension API", "WebXR", "A-Frame", "BabiaXR", "JSON", "React", "Vite", "Tailwind"]
+    "tech": [
+      "Node.js",
+      "TypeScript",
+      "Python",
+      "VS Code Extension API",
+      "WebXR",
+      "A-Frame",
+      "BabiaXR",
+      "JSON",
+      "React",
+      "Vite",
+      "Tailwind"
+    ],
+    "status_en": "Active development",
+    "status_es": "En desarrollo activo",
+    "detailSummary_en": "Code-XR started as a way to make software metrics easier to understand than in a traditional static dashboard. The first goal was to connect static analysis with an immersive XR scene, so files, directories, and complete projects could be explored spatially from Visual Studio Code. Version 0.0.8 was the research version linked to VISSOFT @ ICSME 2025. In October 2025 I presented version 1.0.0 before the university committee, with basic file and directory analysis already working. The project did not stop there: on March 22, 2026 I released version 1.1.0, a substantial evolution focused on performance, collaboration, virtual screens, safer in-scene chart remapping, richer metrics, improved file/directory/project workflows, and a more robust Python-backed setup. I am currently working toward version 1.2.0, exploring deeper metrics beyond CCN and function counts, including internal and external file relationships, comparison between commits or branches, and collaborative sessions that no longer require every participant to be on the same local network.",
+    "detailSummary_es": "Code-XR empezó como una forma de hacer que las métricas de software fueran más comprensibles que en un dashboard estático tradicional. El primer objetivo fue conectar análisis estático con una escena XR inmersiva, para que archivos, directorios y proyectos completos pudieran explorarse espacialmente desde Visual Studio Code. La versión 0.0.8 fue la versión de investigación vinculada a VISSOFT @ ICSME 2025. En octubre de 2025 presenté la versión 1.0.0 ante el tribunal universitario, con análisis básico de ficheros y directorios ya funcionando. El proyecto no terminó ahí: el 22 de marzo de 2026 publiqué la versión 1.1.0, una evolución sustancial centrada en rendimiento, colaboración, pantallas virtuales, remapeo seguro de gráficos dentro de la escena, métricas más ricas, mejores workflows para ficheros/directorios/proyectos y un setup Python más robusto. Actualmente estoy trabajando hacia la versión 1.2.0, explorando métricas más profundas además de CCN y número de funciones, incluyendo relaciones internas y externas entre ficheros, comparación entre commits o ramas, y sesiones colaborativas que ya no requieren que todos los participantes estén en la misma red local.",
+    "milestones": [
+      {
+        "version": "0.0.8",
+        "date_en": "VISSOFT @ ICSME 2025",
+        "date_es": "VISSOFT @ ICSME 2025",
+        "title_en": "Research version accepted at VISSOFT",
+        "title_es": "Versión de investigación aceptada en VISSOFT",
+        "description_en": "Research build linked to the VISSOFT @ ICSME 2025 publication and the first XR metric visualization workflow.",
+        "description_es": "Build de investigaci?n vinculada a VISSOFT @ ICSME 2025 y al primer flujo XR de m?tricas.",
+        "status": "awarded"
+      },
+      {
+        "version": "1.0.0",
+        "date_en": "October 2025",
+        "date_es": "Octubre de 2025",
+        "title_en": "University defense version",
+        "title_es": "Versión presentada ante tribunal universitario",
+        "description_en": "University defense version with stable file and directory analysis inside the VS Code extension.",
+        "description_es": "Versi?n de defensa universitaria con an?lisis estable de ficheros y directorios en VS Code.",
+        "status": "presented"
+      },
+      {
+        "version": "1.1.0",
+        "date_en": "March 22, 2026",
+        "date_es": "22 de marzo de 2026",
+        "title_en": "Performance and collaboration release",
+        "title_es": "Release de rendimiento y colaboración",
+        "description_en": "18x faster pipeline, shared rooms, virtual screens, safer remapping, richer metrics, and improved Python setup.",
+        "description_es": "Pipeline 18x m?s r?pido, salas compartidas, pantallas virtuales, remapeo seguro, m?tricas m?s ricas y mejor setup Python.",
+        "status": "released"
+      },
+      {
+        "version": "1.2.0",
+        "date_en": "In progress",
+        "date_es": "En progreso",
+        "title_en": "Deeper software evolution analysis",
+        "title_es": "Análisis más profundo de evolución software",
+        "description_en": "Work in progress on relationships, commit/branch comparison, evolution views, and remote collaboration.",
+        "description_es": "Trabajo en relaciones, comparaci?n de commits/ramas, evoluci?n visual y colaboraci?n remota.",
+        "status": "active"
+      }
+    ],
+    "badges_en": [
+      "Best Project",
+      "Awarded Project"
+    ],
+    "badges_es": [
+      "Mejor proyecto",
+      "Proyecto premiado"
+    ]
   },
   {
     "slug": "obt",
     "title": "OBT — Online Booking Tool",
     "period": "Nov 2025–Feb 2026",
     "featured": true,
-    "type": "academic",
-    "summary_en": "SaaS platform built during VBGroup internship for managing travel booking requests across client companies. Clients submit trip requirements → VBGroup agents create cost estimates → upon approval, agents process reservations and send confirmations. Features 5 role-based access tiers, automated email notifications with JWT-secured interactive buttons, and scalable MVC architecture. Also designed all backend databases.",
-    "summary_es": "Plataforma SaaS desarrollada durante prácticas en VBGroup para gestionar solicitudes de reservas de viajes de empresas clientes. Los clientes envían requisitos de viaje → agentes de VBGroup crean presupuestos → una vez aprobado, agentes procesan reservas y envían confirmaciones. Incluye 5 niveles de acceso basados en roles, notificaciones por email automáticas con botones interactivos asegurados con JWT, y arquitectura MVC escalable. También diseñé todas las bases de datos backend.",
-    "tags": ["Nest.js", "TypeScript", "React", "Azure CosmosDB", "REST API"],
+    "type": "internal",
+    "summary_en": "Internal SaaS platform developed during my VBGroup internship to manage travel booking requests for client companies. The system supports request intake, agent-managed cost estimates, approval flows, reservation processing, automated email notifications, and role-based access across five user tiers.",
+    "summary_es": "Plataforma SaaS interna desarrollada durante mis prácticas en VBGroup para gestionar solicitudes de reserva de viajes de empresas cliente. El sistema cubre la recepción de solicitudes, presupuestos gestionados por agentes, flujos de aprobación, procesamiento de reservas, notificaciones automáticas por email y control de acceso por roles en cinco niveles de usuario.",
+    "tags": [
+      "Nest.js",
+      "TypeScript",
+      "React",
+      "Azure CosmosDB",
+      "REST API"
+    ],
     "repoUrl": "",
     "demoUrl": "",
     "imageDir": "/projects/obt",
     "images": [],
     "heroImage": "placeholder.svg",
     "highlights_en": [
-      "Architecture → Designed scalable role-based backend (RBAC with 5 distinct roles: SuperAdmin, Admin, Agent, Manager, Employee) using clean MVC patterns with middleware-driven access control. Also designed and architected all CosmosDB and Blob Storage schemas.",
-      "Email system → Implemented interactive JWT-secured button actions directly within emails for cost estimate approvals, travel notifications, and booking confirmations. Emails generated dynamically based on role and booking state.",
-      "Full-stack evolution → Started contributing as backend-only (API + database design), evolved to full-stack managing React frontend, state management, complex booking workflows, and REST API consumption."
+      "Designed a scalable role-based backend with five profiles: SuperAdmin, Admin, Agent, Manager, and Employee, using MVC patterns and middleware-driven access control.",
+      "Implemented interactive JWT-secured email actions for cost estimate approvals, travel notifications, and booking confirmations.",
+      "Started with backend and database design, then expanded into React frontend work, state management, booking workflows, and REST API integration."
     ],
     "highlights_es": [
-      "Arquitectura → Backend escalable basado en roles (RBAC con 5 roles: SuperAdmin, Admin, Agent, Manager, Employee) usando patrones MVC limpios con control de acceso mediante middlewares. También diseñé y arquitecturé todos los esquemas de CosmosDB y Blob Storage.",
-      "Sistema de emails → Botones interactivos con JWT directamente en emails para aprobaciones de presupuestos, notificaciones de viajes y confirmaciones de reservas. Emails generados dinámicamente según rol y estado de reserva.",
-      "Evolución full-stack → Comenzó solo backend (API + diseño de BD), evolucionó a full-stack gestionando frontend React, gestión de estado, flujos complejos de reserva y consumo de APIs REST."
+      "Diseñé un backend escalable basado en roles con cinco perfiles: SuperAdmin, Admin, Agent, Manager y Employee, usando patrones MVC y control de acceso mediante middlewares.",
+      "Implementé acciones interactivas por email aseguradas con JWT para aprobaciones de presupuestos, notificaciones de viaje y confirmaciones de reserva.",
+      "Empecé con backend y diseño de base de datos, y después amplié mi contribución al frontend React, gestión de estado, flujos de reserva e integración con APIs REST."
     ],
-    "role_en": "Initially backend architect and developer, evolved to full-stack. Designed REST API architecture (Nest.js, TypeScript, Swagger) with JWT-based email security, RBAC middleware, and clean MVC patterns. Architected CosmosDB collections and Blob Storage containers for travel data, cost estimates, and user documents. Later contributed to React + Vite frontend, complex state management for multi-step booking workflows, and seamless API integration.",
-    "role_es": "Inicialmente arquitecto backend y developer, evolucionó a full-stack. Diseñé arquitectura de API REST (Nest.js, TypeScript, Swagger) con seguridad en emails basada en JWT, middleware RBAC, y patrones MVC limpios. Arquitecturé colecciones de CosmosDB y contenedores de Blob Storage para datos de viajes, presupuestos y documentos de usuarios. Posteriormente contribuí al frontend React + Vite, gestión de estado compleja para flujos de reserva multi-paso, e integración fluida de APIs.",
-    "tech": ["Nest.js", "TypeScript", "Swagger", "TSDoc", "React", "Vite", "Tailwind CSS", "Azure CosmosDB", "Azure Blob Storage", "JWT", "REST API"]
+    "role_en": "Initially focused on backend architecture and development, then evolved into a full-stack role as the platform grew. Designed REST API architecture with Nest.js, TypeScript, and Swagger; implemented JWT-based email security, RBAC middleware, and MVC patterns; and structured Cosmos DB collections and Azure Blob Storage containers for travel data, cost estimates, and user documents. Later contributed to the React + Vite frontend, multi-step booking workflows, state management, Tailwind UI implementation, and API integration.",
+    "role_es": "Inicialmente me enfoqué en arquitectura y desarrollo backend, y después evolucioné hacia un rol full-stack a medida que la plataforma creció. Diseñé la arquitectura de API REST con Nest.js, TypeScript y Swagger; implementé seguridad en emails basada en JWT, middleware RBAC y patrones MVC; y estructuré colecciones de Cosmos DB y contenedores de Azure Blob Storage para datos de viajes, presupuestos y documentos de usuario. Posteriormente contribuí al frontend React + Vite, flujos de reserva multipaso, gestión de estado, implementación UI con Tailwind e integración con APIs.",
+    "tech": [
+      "Nest.js",
+      "TypeScript",
+      "Swagger",
+      "TSDoc",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "Azure CosmosDB",
+      "Azure Blob Storage",
+      "JWT",
+      "REST API"
+    ],
+    "detailSummary_en": "OBT was built as an internal tool for VBGroup during my curricular internship. Its purpose was to centralize travel booking requests from client companies and give agents a structured workflow to review requirements, prepare cost estimates, process approved reservations, and send confirmations.\nThe backend was designed around a clean MVC architecture with role-based access control for five profiles: SuperAdmin, Admin, Agent, Manager, and Employee. I worked on the REST API, middleware-based authorization, Swagger documentation, Cosmos DB collections, Azure Blob Storage containers, and JWT-secured actions for interactive email approvals.\nThe project later expanded into full-stack work. I contributed to the React and Vite frontend, integrated the API from the UI, and supported multi-step booking flows with state management and Tailwind CSS. The result was a practical internal platform focused on operational clarity, secure approval flows, and maintainable delivery.",
+    "detailSummary_es": "OBT se construyó como una herramienta interna para VBGroup durante mis prácticas curriculares. Su objetivo era centralizar las solicitudes de reserva de viajes de empresas cliente y ofrecer a los agentes un flujo estructurado para revisar requisitos, preparar presupuestos, procesar reservas aprobadas y enviar confirmaciones.\nEl backend se diseñó sobre una arquitectura MVC clara, con control de acceso basado en roles para cinco perfiles: SuperAdmin, Admin, Agent, Manager y Employee. Trabajé en la API REST, la autorización mediante middlewares, la documentación con Swagger, las colecciones de Cosmos DB, los contenedores de Azure Blob Storage y acciones aseguradas con JWT para aprobaciones interactivas desde email.\nEl proyecto evolucionó después hacia trabajo full-stack. Contribuí al frontend con React y Vite, integré la API desde la interfaz y apoyé flujos de reserva multipaso con gestión de estado y Tailwind CSS. El resultado fue una plataforma interna práctica, enfocada en claridad operativa, flujos de aprobación seguros y entrega mantenible."
   },
   {
     "slug": "honor-course-1",
-    "title": "High Distinction — AST (Telematic Systems)",
+    "title": "GreenHouse — AST High Distinction",
     "period": "May 2024",
     "featured": true,
     "type": "academic",
-    "summary_en": "Matrícula de Honor (highest distinction) in AST (Ampliación de Sistemas Telemáticos), a course focused on techniques and technologies for developing telematic applications. Developed an embedded greenhouse system implementing user role management, real-time sensor integration, hardware component abstraction (keyboard, display, alarms), and event-driven architecture—all using object-oriented C++14 with clean layered design.",
-    "summary_es": "Matrícula de Honor en AST (Ampliación de Sistemas Telemáticos), asignatura enfocada en técnicas y tecnologías para el desarrollo de aplicaciones telemáticas. Desarrollé un sistema completo de invernadero embebido implementando gestión de roles de usuario, integración de sensores en tiempo real, abstracción de componentes hardware (teclado, pantalla, alarmas) y arquitectura dirigida por eventos—todo usando C++14 orientado a objetos con diseño limpio en capas.",
-    "tags": ["C++", "Object-Oriented Programming", "Shell", "Doxygen", "UMLET"],
+    "summary_en": "Academic C++ greenhouse system developed for AST (Ampliación de Sistemas Telemáticos), a URJC telematics course focused on building telematic applications through progressive practical work. The final project integrated object-oriented design, role-based users, sensors, cameras, hardware abstraction, file persistence, UML diagrams with UMLET, and Doxygen documentation. It was awarded Matrícula de Honor, the highest academic distinction in the course.",
+    "summary_es": "Sistema de invernadero en C++ desarrollado para AST (Ampliación de Sistemas Telemáticos), asignatura de la URJC centrada en construir aplicaciones telemáticas mediante prácticas progresivas. El proyecto final integró diseño orientado a objetos, usuarios por roles, sensores, cámaras, abstracción de hardware, persistencia en ficheros, diagramas UML con UMLET y documentación con Doxygen. Obtuvo Matrícula de Honor, la máxima distinción académica de la asignatura.",
+    "tags": [
+      "C++",
+      "Object-Oriented Programming",
+      "Doxygen",
+      "UMLET",
+      "File Persistence"
+    ],
     "repoUrl": "https://github.com/aMonteSl/GreenHouse",
     "demoUrl": "",
     "imageDir": "/projects/honor-course-1",
-    "images": [],
-    "heroImage": "placeholder.svg",
+    "images": [
+      "01-umlet-architecture.webp",
+      "02-greenhouse-composition.webp",
+      "03-sensor-inheritance.webp",
+      "04-doxygen-comments.webp",
+      "05-binary-persistence.webp"
+    ],
+    "heroImage": "01-umlet-architecture.webp",
     "highlights_en": [
-      "System design → Multi-user embedded systems with role-based access control (admin, operator, viewer). Event-driven architecture managing sensor inputs, hardware I/O, and system state atomically.",
-      "Object-oriented C++ → Clean layered model abstracting hardware (GPIO, sensors, actuators) into cohesive interfaces. Demonstrated mastery of design patterns and memory management in constrained environments.",
-      "Documentation & Testing → Full API documentation via Doxygen, UML diagrams with UMLET, shell test scripts for system validation. Awarded Matrícula de Honor (A+ distinction)."
+      "Object-oriented greenhouse architecture with a central GreenHouse coordinator and separated modules for alarms, cameras, monitoring, and users.",
+      "Role-based users with Admin, Employee, and Guest profiles, backed by a user server/database layer and file persistence.",
+      "Sensor and hardware abstraction in C++ with Doxygen comments and UMLET diagrams to document the class structure."
     ],
     "highlights_es": [
-      "Diseño de sistema → Sistemas embebidos multi-usuario con control de acceso basado en roles (admin, operador, observador). Arquitectura dirigida por eventos gestionando entradas de sensores, I/O hardware y estado del sistema atómicamente.",
-      "C++ orientado a objetos → Modelo limpio en capas abstrayendo hardware (GPIO, sensores, actuadores) en interfaces cohesivas. Demostré maestría en patrones de diseño y gestión de memoria en entornos limitados.",
-      "Documentación y pruebas → Documentación de API completa vía Doxygen, diagramas UML con UMLET, scripts shell para validación del sistema. Galardonado con Matrícula de Honor (distinción A+)."
+      "Arquitectura de invernadero orientada a objetos con una clase GreenHouse central y módulos separados para alarmas, cámaras, monitorización y usuarios.",
+      "Usuarios basados en roles Admin, Employee y Guest, apoyados en una capa de servidor/base de datos y persistencia en ficheros.",
+      "Abstracción de sensores y hardware en C++ con comentarios Doxygen y diagramas UMLET para documentar la estructura de clases."
     ],
-    "role_en": "Solo architect and developer of embedded greenhouse system. Designed role-based access control with atomic state management. Implemented hardware abstraction layer (sensors, GPIO, display, keyboard) with event-driven cores. Full codebase in C++14 with RAII patterns, clean architecture, and comprehensive Doxygen documentation. Demonstrated command of low-level systems programming, concurrent event handling, and telematic protocols.",
-    "role_es": "Arquitecto y desarrollador único del sistema de invernadero embebido. Diseñé control de acceso basado en roles con gestión de estado atómica. Implementé capa de abstracción de hardware (sensores, GPIO, pantalla, teclado) con núcleos dirigidos por eventos. Código completo en C++14 con patrones RAII, arquitectura limpia y documentación Doxygen exhaustiva. Demostré dominio de programación de sistemas de bajo nivel, manejo de eventos concurrentes y protocolos telemáticos.",
-    "tech": ["C++", "Object-Oriented Programming", "Embedded Systems", "Shell Scripting", "Doxygen", "UMLET", "UML", "IoT", "Real-time Systems"]
+    "role_en": "Solo developer of the final GreenHouse system. Designed the object-oriented structure, implemented the C++ classes, connected role-based user management, sensors, cameras, monitoring hardware, binary/text persistence, and Doxygen documentation. Used UMLET to model the class organization and iterated from the early practical assignments to the final integrated delivery.",
+    "role_es": "Desarrollador único del sistema final GreenHouse. Diseñé la estructura orientada a objetos, implementé las clases en C++, conecté gestión de usuarios por roles, sensores, cámaras, hardware de monitorización, persistencia binaria/texto y documentación Doxygen. Usé UMLET para modelar la organización de clases e iteré desde las primeras prácticas hasta la entrega final integrada.",
+    "tech": [
+      "C++",
+      "Object-Oriented Programming",
+      "Doxygen",
+      "UMLET",
+      "UML",
+      "Makefile",
+      "Shell Scripting",
+      "File Persistence"
+    ],
+    "detailSummary_en": "GreenHouse was the final project for AST, a URJC subject where the codebase evolved through successive practical assignments. The goal was to build a greenhouse management system in C++ using object-oriented programming, not just isolated exercises. The final version connected users, sensors, cameras, hardware interfaces, persistence, documentation, and UML design into a single system.\nThe architecture is organized around a main GreenHouse class that coordinates AlarmSensors, ManageCameras, MonitoringSystem, and UsersServer. The system includes Admin, Employee, and Guest users; a user database/server layer; RGB and temperature cameras; sensors for temperature, air quality, humidity, pressure, light, and pH; and hardware abstractions for screen, keyboard, and switch. It also persists users and sensors in text and binary files such as users.txt, users.dat, sensors.txt, and sensors.dat.\nA key part of the project was the learning curve. Around the middle of the course, after receiving direct feedback that the current work would objectively not go beyond a 5/10, I used that as a turning point. I reviewed where my C++ and OOP design were failing, rebuilt the architecture with more discipline during the Easter break, improved documentation and diagrams, and turned the final delivery into my first Matrícula de Honor. It remains one of the academic projects I am most proud of because the result came from correcting real design mistakes, not from starting with an easy path.",
+    "detailSummary_es": "GreenHouse fue el proyecto final de AST, una asignatura de la URJC donde el código evolucionaba a través de prácticas sucesivas. El objetivo era construir un sistema de gestión de invernadero en C++ aplicando programación orientada a objetos, no solo resolver ejercicios aislados. La versión final conectaba usuarios, sensores, cámaras, interfaces de hardware, persistencia, documentación y diseño UML dentro de un mismo sistema.\nLa arquitectura se organiza alrededor de una clase principal GreenHouse que coordina AlarmSensors, ManageCameras, MonitoringSystem y UsersServer. El sistema incluye usuarios Admin, Employee y Guest; una capa de servidor/base de datos de usuarios; cámaras RGB y térmicas; sensores de temperatura, calidad del aire, humedad, presión, luz y pH; y abstracciones de hardware para pantalla, teclado e interruptor. Además, persiste usuarios y sensores en ficheros de texto y binarios como users.txt, users.dat, sensors.txt y sensors.dat.\nUna parte importante del proyecto fue la curva de aprendizaje. Hacia la mitad de la asignatura, después de recibir feedback directo de que con lo que llevaba objetivamente no podría pasar de un 5/10, lo tomé como punto de inflexión. Revisé dónde fallaba mi diseño en C++ y POO, reconstruí la arquitectura con más disciplina durante Semana Santa, mejoré la documentación y los diagramas, y convertí la entrega final en mi primera Matrícula de Honor. Es uno de los proyectos académicos de los que más orgulloso estoy porque el resultado nació de corregir errores reales de diseño, no de un camino fácil.",
+    "milestones": [
+      {
+        "version": "P0",
+        "date_en": "Course start",
+        "date_es": "Inicio de asignatura",
+        "title_en": "Progressive C++ and OOP practice work",
+        "title_es": "Prácticas progresivas de C++ y POO",
+        "description_en": "The greenhouse system evolved from early practical assignments into a final integrated project.",
+        "description_es": "El invernadero evolucionó desde las primeras prácticas hasta convertirse en un proyecto final integrado.",
+        "status": "presented"
+      },
+      {
+        "version": "MID",
+        "date_en": "Mid-course feedback",
+        "date_es": "Feedback a mitad de curso",
+        "title_en": "Turning point in object-oriented design",
+        "title_es": "Punto de inflexión en diseño orientado a objetos",
+        "description_en": "Direct feedback exposed weaknesses in the initial C++/OOP approach and motivated a deeper redesign.",
+        "description_es": "Un feedback directo evidenció debilidades en el enfoque inicial de C++/POO y motivó un rediseño más profundo.",
+        "status": "active"
+      },
+      {
+        "version": "SPRINT",
+        "date_en": "Easter break 2024",
+        "date_es": "Semana Santa 2024",
+        "title_en": "Architecture rebuild and documentation push",
+        "title_es": "Reconstrucción de arquitectura y documentación",
+        "description_en": "Focused work on class structure, UMLET diagrams, Doxygen comments, and file persistence.",
+        "description_es": "Trabajo intensivo en estructura de clases, diagramas UMLET, comentarios Doxygen y persistencia en ficheros.",
+        "status": "active"
+      },
+      {
+        "version": "FINAL",
+        "date_en": "May 2024",
+        "date_es": "Mayo de 2024",
+        "title_en": "Matrícula de Honor",
+        "title_es": "Matrícula de Honor",
+        "description_en": "Final integrated delivery awarded the highest academic distinction in the subject.",
+        "description_es": "Entrega final integrada reconocida con la máxima distinción académica de la asignatura.",
+        "status": "awarded"
+      }
+    ],
+    "title_en": "GreenHouse — AST High Distinction",
+    "title_es": "GreenHouse — Matrícula de Honor en AST",
+    "status_en": "High Distinction",
+    "status_es": "Matrícula de Honor"
   },
   {
     "slug": "honor-course-2",
-    "title": "High Distinction — Networks",
-    "period": "2023",
+    "title": "StepByStep — LSMO High Distinction",
+    "period": "May 2025",
     "featured": true,
     "type": "academic",
-    "summary_en": "Earned High Distinction (Matrícula de Honor) in computer networks with hands-on protocol implementation.",
-    "summary_es": "Matrícula de Honor en redes de computadores con implementación práctica de protocolos.",
-    "tags": ["Networking", "Systems", "C/C++"],
-    "repoUrl": "",
+    "summary_en": "Android/Kotlin walking-route app developed as the final project for LSMO. StepByStep records routes in real time, imports GPX files, persists route data, calculates distance, time, elevation and gain metrics, and presents profile statistics with light and dark themes.",
+    "summary_es": "App Android/Kotlin para rutas andando desarrollada como proyecto final de LSMO. StepByStep graba rutas en tiempo real, importa ficheros GPX, persiste datos de rutas, calcula métricas de distancia, tiempo, altitud y desnivel, y muestra estadísticas de perfil con tema claro y oscuro.",
+    "tags": [
+      "Kotlin",
+      "Android",
+      "Room",
+      "Google Maps",
+      "Fused Location Provider",
+      "Foreground Service",
+      "GPX",
+      "MPAndroidChart",
+      "MVVM"
+    ],
+    "repoUrl": "https://github.com/aMonteSl/StepByStep",
     "demoUrl": "",
     "imageDir": "/projects/honor-course-2",
-    "images": ["thumb-1.jpg"],
-    "heroImage": "hero.jpg",
+    "images": [
+      "01-routes-list.webp",
+      "02-new-route-map.webp",
+      "03-import-gpx.webp",
+      "04-profile-stats.webp"
+    ],
+    "heroImage": "02-new-route-map.webp",
     "highlights_en": [
-      "Challenge → Implement core network protocols from scratch",
-      "Approach → Low-level C programming with socket APIs",
-      "Result → Fully functional TCP/IP stack implementation"
+      "Real-time walking route recording with a foreground service, high-accuracy location updates, persistent notification, and wake lock management.",
+      "GPX import workflow with custom XML parsing, route statistics calculation, and Room persistence for routes and points.",
+      "Mobile interface with route list, live recording map, profile statistics, light/dark themes, and map styling."
     ],
     "highlights_es": [
-      "Reto → Implementar protocolos de red básicos desde cero",
-      "Enfoque → Programación de bajo nivel en C con APIs de sockets",
-      "Resultado → Implementación completamente funcional del stack TCP/IP"
+      "Grabación de rutas andando en tiempo real con foreground service, actualizaciones de ubicación de alta precisión, notificación persistente y gestión de wake lock.",
+      "Flujo de importación GPX con parser XML propio, cálculo de estadísticas de ruta y persistencia Room para rutas y puntos.",
+      "Interfaz móvil con listado de rutas, mapa de grabación en vivo, estadísticas de perfil, temas claro/oscuro y estilo de mapa."
     ],
-    "role_en": "Built custom network protocol implementations demonstrating deep understanding of OSI layers and practical systems programming.",
-    "role_es": "Construí implementaciones personalizadas de protocolos de red demostrando profundo entendimiento de las capas OSI y programación de sistemas práctica.",
-    "tech": ["C/C++", "Linux", "Sockets", "Wireshark"]
+    "role_en": "Android project developer for the final LSMO assignment. Designed and implemented the Kotlin app structure, Room entities and repositories, GPX parser, route recording service, Google Maps integration, metrics calculation, profile statistics, theme support, and screen flows for listing, importing, recording, saving, and reviewing walking routes.",
+    "role_es": "Desarrollador Android del proyecto final de LSMO. Diseñé e implementé la estructura de la app en Kotlin, entidades y repositorios Room, parser GPX, servicio de grabación de rutas, integración con Google Maps, cálculo de métricas, estadísticas de perfil, soporte de temas y flujos de pantalla para listar, importar, grabar, guardar y revisar rutas andando.",
+    "tech": [
+      "Kotlin",
+      "Android",
+      "Room",
+      "Google Maps",
+      "Fused Location Provider",
+      "Foreground Service",
+      "GPX",
+      "MPAndroidChart",
+      "MVVM",
+      "XML Layouts"
+    ],
+    "title_en": "StepByStep — LSMO High Distinction",
+    "title_es": "StepByStep — Matrícula de Honor en LSMO",
+    "status_en": "High Distinction",
+    "status_es": "Matrícula de Honor",
+    "detailSummary_en": "StepByStep was my final project for LSMO, a mobile and ubiquitous systems course focused on Android development. Unlike AST, this was not a project grown through many separate mini-projects: the goal was to deliver a complete mobile application for walking routes, from route creation and GPX import to live tracking, metrics, persistence, profile statistics, and theme support.\nThe core of the app is real-time route recording. A ForegroundService keeps tracking active while the app can move to the background, using FusedLocationProviderClient for high-accuracy updates, a persistent notification so the user can return to the active route, START_STICKY behavior, and a PARTIAL_WAKE_LOCK to keep the CPU available during recording. The service calculates distance from consecutive location points, elapsed time, current elevation, and positive elevation gain, then broadcasts updates to the recording screen.\nThe project also includes GPX import through a custom parser that reads track points, elevation and timestamps, calculates route statistics, and stores the result with Room. Routes and points are modeled as separate entities with cascade behavior, allowing the app to list recorded/imported routes, show profile-level statistics, and persist the walking history. Visually, the app combines Google Maps, a dark map style, light/dark Android themes, and dedicated screens for route creation, importing, profile metrics, saving, and route detail review.",
+    "detailSummary_es": "StepByStep fue mi proyecto final de LSMO, una asignatura de sistemas móviles y ubicuos centrada en desarrollo Android. A diferencia de AST, no fue un proyecto que creciera a partir de muchos mini-proyectos separados: el objetivo era entregar una aplicación móvil completa para rutas andando, desde creación e importación GPX hasta seguimiento en vivo, métricas, persistencia, estadísticas de perfil y soporte de temas.\nEl núcleo de la app es la grabación de rutas en tiempo real. Un ForegroundService mantiene el seguimiento activo aunque la app pase a segundo plano, usando FusedLocationProviderClient para actualizaciones de alta precisión, una notificación persistente para volver a la ruta activa, comportamiento START_STICKY y un PARTIAL_WAKE_LOCK para mantener la CPU disponible durante la grabación. El servicio calcula distancia a partir de puntos consecutivos, tiempo transcurrido, altitud actual y desnivel positivo, y envía actualizaciones a la pantalla de grabación mediante broadcasts.\nEl proyecto también incluye importación GPX mediante un parser propio que lee puntos de track, altitud y timestamps, calcula estadísticas de ruta y guarda el resultado con Room. Las rutas y puntos están modelados como entidades separadas con borrado en cascada, permitiendo listar rutas grabadas/importadas, mostrar estadísticas globales de perfil y persistir el historial de caminatas. Visualmente, la app combina Google Maps, estilo oscuro de mapa, temas Android claro/oscuro y pantallas específicas para creación de ruta, importación, métricas de perfil, guardado y revisión de detalle.",
+    "milestones": [
+      {
+        "version": "BRIEF",
+        "date_en": "Final assignment",
+        "date_es": "Proyecto final",
+        "title_en": "Walking-route app definition",
+        "title_es": "Definición de app para rutas andando",
+        "description_en": "The project was scoped as a complete Android app for recording, importing, storing, and reviewing walking routes.",
+        "description_es": "El proyecto se planteó como una app Android completa para grabar, importar, guardar y revisar rutas andando.",
+        "status": "presented"
+      },
+      {
+        "version": "TRACK",
+        "date_en": "Core implementation",
+        "date_es": "Implementación principal",
+        "title_en": "Background route recording",
+        "title_es": "Grabación de rutas en segundo plano",
+        "description_en": "ForegroundService, Fused Location, notification, broadcasts, and wake lock management kept route metrics active while recording.",
+        "description_es": "ForegroundService, Fused Location, notificación, broadcasts y wake lock mantuvieron activas las métricas durante la grabación.",
+        "status": "active"
+      },
+      {
+        "version": "GPX",
+        "date_en": "Data workflow",
+        "date_es": "Flujo de datos",
+        "title_en": "GPX import and Room persistence",
+        "title_es": "Importación GPX y persistencia Room",
+        "description_en": "Custom GPX parsing and Room entities stored routes and points with calculated statistics.",
+        "description_es": "Parser GPX propio y entidades Room para guardar rutas y puntos con estadísticas calculadas.",
+        "status": "active"
+      },
+      {
+        "version": "FINAL",
+        "date_en": "May 2025",
+        "date_es": "Mayo de 2025",
+        "title_en": "High Distinction in LSMO",
+        "title_es": "Matrícula de Honor en LSMO",
+        "description_en": "Final delivery with route recording, import, metrics, profile statistics, themes, and map-based screens.",
+        "description_es": "Entrega final con grabación de rutas, importación, métricas, estadísticas de perfil, temas y pantallas basadas en mapa.",
+        "status": "awarded"
+      }
+    ]
   }
 ]

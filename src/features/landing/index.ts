@@ -1,4 +1,5 @@
 export { Hero } from './Hero'
+export { HomePageClient } from './HomePageClient'
 export { AnimatedBackground } from './AnimatedBackground'
 export { FeaturedProjectCard } from './FeaturedProjectCard'
 export { useFeaturedRotation } from './useFeaturedRotation'

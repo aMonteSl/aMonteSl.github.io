@@ -28,7 +28,7 @@ export function SectionHeading({
       <motion.h2
         {...(animate ? fadeInUp(0) : {})}
         className={cn(
-          'text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--fg)] mb-3 sm:mb-4',
+          'mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-normal text-[var(--fg)] mb-3 sm:mb-4',
           titleClassName
         )}
       >

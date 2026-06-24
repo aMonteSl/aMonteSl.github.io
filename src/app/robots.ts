@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { LINKS } from '@/lib/constants'
+import { SITE } from '@/lib/constants'
 
 export const dynamic = 'force-static'
 
@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: `${LINKS.website}/sitemap.xml`,
+    sitemap: `${SITE.url}/sitemap.xml`,
   }
 }

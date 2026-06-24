@@ -18,7 +18,11 @@ interface StreamCardProps {
   /** Description text */
   description: string
   /** Nested highlights */
-  highlights?: Array<{ label: string; year: number }>
+  highlights?: Array<{ id: string; label: string; year: number; date?: string }>
+  /** Highlight currently selected from the timeline */
+  activeHighlight?: { id: string; label: string; date: string; lane: JourneyLane } | null
+  /** Label for the selected highlight block */
+  activeHighlightLabel?: string
   /** Tech/skill tags */
   tags?: string[]
   /** Optional external link */
@@ -53,6 +57,14 @@ const glowMap: Record<JourneyLane, string> = {
   learning: 'hover:shadow-pink-500/20',
 }
 
+const selectedHighlightMap: Record<JourneyLane, string> = {
+  education: 'border-blue-300/45 bg-blue-500/10 text-blue-100',
+  work: 'border-emerald-300/45 bg-emerald-500/10 text-emerald-100',
+  project: 'border-violet-300/50 bg-violet-500/12 text-violet-100',
+  achievement: 'border-amber-300/55 bg-amber-500/12 text-amber-100',
+  learning: 'border-pink-300/50 bg-pink-500/12 text-pink-100',
+}
+
 /**
  * StreamCard - Fixed height detail card for journey entries
  * Clean design with accent border and subtle gradients
@@ -64,6 +76,8 @@ export function StreamCard({
   period,
   description,
   highlights = [],
+  activeHighlight = null,
+  activeHighlightLabel = 'Selected milestone',
   tags = [],
   link,
   isOngoing = false,
@@ -132,49 +146,78 @@ export function StreamCard({
           {description}
         </p>
 
+        {activeHighlight && (
+          <div
+            className={cn(
+              'mb-3 rounded-lg border px-3 py-2',
+              selectedHighlightMap[activeHighlight.lane]
+            )}
+          >
+            <p className="text-[0.62rem] font-semibold uppercase tracking-[0.18em] opacity-70">
+              {activeHighlightLabel}
+            </p>
+            <div className="mt-1 flex flex-wrap items-center gap-2">
+              <span className="text-sm font-semibold leading-snug">
+                {activeHighlight.label}
+              </span>
+              <span className="rounded-full bg-[var(--bg)]/55 px-2 py-0.5 text-[0.68rem] font-medium text-[var(--fg-muted)] ring-1 ring-[var(--border)]/35">
+                {activeHighlight.date}
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Bottom row: highlights, tags, link */}
-        <div className="mt-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 flex-1 min-w-0 overflow-hidden">
+        <div className="mt-auto flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
             {/* Highlights (matrículas) */}
             {highlights.length > 0 && (
-              <div className="flex gap-1.5 flex-shrink-0">
-                {highlights.slice(0, 2).map((h) => (
+              <>
+                {highlights.slice(0, 4).map((h) => (
                   <span
-                    key={h.label}
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-xs font-medium"
-                    title={h.label}
+                    key={h.id}
+                    className={cn(
+                      'inline-flex max-w-full items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-medium leading-snug ring-1',
+                      activeHighlight?.id === h.id
+                        ? 'bg-amber-500/18 text-amber-100 ring-amber-200/55 shadow-[0_0_14px_rgba(251,191,36,0.18)]'
+                        : 'bg-amber-500/10 text-amber-300 ring-amber-300/20'
+                    )}
+                    title={h.date ? `${h.label} - ${h.date}` : h.label}
                   >
-                    <span className="truncate max-w-[100px]">{h.label}</span>
+                    <span className="min-w-0 truncate">{h.label}</span>
+                    {h.date && activeHighlight?.id === h.id && (
+                      <span className="shrink-0 text-[0.62rem] opacity-75">{h.date}</span>
+                    )}
                   </span>
                 ))}
-              </div>
+              </>
             )}
 
             {/* Tags */}
             {tags.length > 0 && (
-              <div className="flex gap-1 flex-shrink overflow-hidden">
-                {tags.slice(0, 3).map((tag) => (
+              <>
+                {tags.slice(0, 5).map((tag) => (
                   <Badge key={tag} variant="default" className="text-xs px-2 py-0.5 whitespace-nowrap">
                     {tag}
                   </Badge>
                 ))}
-                {tags.length > 3 && (
+                {tags.length > 5 && (
                   <span className="text-xs text-[var(--fg-muted)]/50 self-center">
-                    +{tags.length - 3}
+                    +{tags.length - 5}
                   </span>
                 )}
-              </div>
+              </>
             )}
           </div>
 
           {link && (
             <motion.span 
-              className="flex items-center gap-1 text-xs text-[var(--accent)] font-medium whitespace-nowrap flex-shrink-0"
+              className="flex flex-shrink-0 items-center gap-1 self-end whitespace-nowrap text-xs font-medium text-[var(--accent)]"
               whileHover={{ x: 2 }}
               transition={{ duration: 0.15 }}
             >
               <span>Ver más</span>
-              <span>→</span>
+              <span aria-hidden="true">&rarr;</span>
             </motion.span>
           )}
         </div>

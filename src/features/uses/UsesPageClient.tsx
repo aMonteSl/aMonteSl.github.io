@@ -3,22 +3,23 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Container, SectionHeading } from '@/components/ui'
-import { useTranslations } from '@/i18n'
+import { localizePath, useLocale, useTranslations } from '@/i18n'
 import { USES_ITEMS, USES_CATEGORIES} from '@/content/uses'
 import type { UsesCategory } from '@/content/uses'
 import { fadeInUp, shouldAnimate, EASING, DURATION } from '@/lib/motion'
 
 const CATEGORY_ICONS: Record<UsesCategory, string> = {
-  editor: '🖥️',
-  terminal: '⌨️',
-  devTools: '🔧',
-  design: '🎨',
-  hardware: '🖱️',
-  browser: '🌐',
+  editor: 'ED',
+  terminal: 'TM',
+  devTools: 'DV',
+  design: 'DS',
+  hardware: 'HW',
+  browser: 'BR',
 }
 
 export function UsesPageClient() {
   const t = useTranslations('uses')
+  const { locale } = useLocale()
   const animate = shouldAnimate()
 
   const groupedItems = useMemo(() => {
@@ -34,7 +35,7 @@ export function UsesPageClient() {
         <div className="py-12 sm:py-16 md:py-20">
           {/* Back link */}
           <motion.a
-            href="/"
+            href={localizePath('/', locale)}
             {...(animate ? fadeInUp(0) : {})}
             className="inline-flex items-center gap-2 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors mb-10"
           >
@@ -59,7 +60,9 @@ export function UsesPageClient() {
               >
                 {/* Category header */}
                 <h3 className="text-lg sm:text-xl font-semibold text-[var(--fg)] mb-6 flex items-center gap-3">
-                  <span className="text-xl">{CATEGORY_ICONS[category]}</span>
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--accent)]/20 bg-[var(--accent)]/8 text-[0.65rem] font-semibold tracking-wide text-[var(--accent)]">
+                    {CATEGORY_ICONS[category]}
+                  </span>
                   {t(`categories.${category}`)}
                 </h3>
 

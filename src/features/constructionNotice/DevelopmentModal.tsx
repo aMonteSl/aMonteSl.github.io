@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from '@/i18n'
-import { Modal, Button } from '@/components/ui'
+import { Modal, Button, ClockIcon } from '@/components/ui'
 
 export interface DevelopmentModalProps {
   isOpen: boolean
@@ -14,7 +14,9 @@ export function DevelopmentModal({ isOpen, onClose }: DevelopmentModalProps) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="p-6 text-center">
-        <div className="text-4xl mb-4">🚧</div>
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--accent)]/25 bg-[var(--accent)]/10 text-[var(--accent)]">
+          <ClockIcon className="h-6 w-6" />
+        </div>
 
         <h2 className="text-xl font-semibold text-[var(--fg)] mb-3">
           {t('title')}

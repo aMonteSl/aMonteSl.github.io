@@ -15,18 +15,12 @@ const eslintConfig = [
     ignores: [
       "node_modules/**",
       ".next/**",
+      ".next-dev/**",
       "out/**",
       "build/**",
       "next-env.d.ts",
       "src/types/**",
     ],
-  },
-  {
-    files: ["src/features/landing/Silk.tsx"],
-    rules: {
-      "@typescript-eslint/ban-ts-comment": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-    },
   },
 ];
 

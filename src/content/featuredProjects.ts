@@ -8,6 +8,7 @@ export interface FeaturedProject {
   i18nKey: string // Key under hero.featuredProject
   links?: {
     github?: string
+    marketplace?: string
     docs?: string
     doi?: string
   }
@@ -19,6 +20,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     i18nKey: 'codeXr',
     links: {
       github: LINKS.codeXrRepo,
+      marketplace: LINKS.codeXrMarketplace,
       docs: LINKS.codeXrDocs,
       doi: LINKS.codeXrDoi,
     },

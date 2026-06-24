@@ -2,13 +2,14 @@
 
 import { readFile, writeFile, stat } from 'fs/promises'
 import { join } from 'path'
+import { pathToFileURL } from 'url'
 
 /**
  * Script de traducción automática para i18n
  * Traduce en.json a es.json usando OpenAI o DeepL
  */
 
-const DICTIONARIES_PATH = './src/app/_i18n/dictionaries'
+const DICTIONARIES_PATH = './src/i18n/messages'
 const EN_FILE = join(DICTIONARIES_PATH, 'en.json')
 const ES_FILE = join(DICTIONARIES_PATH, 'es.json')
 
@@ -113,7 +114,7 @@ Responde SOLO con el JSON traducido, sin explicaciones adicionales.`
     // Intentar parsear JSON
     try {
       return JSON.parse(translatedText)
-    } catch (parseError) {
+    } catch {
       console.warn('JSON malformado de OpenAI, reintentando...')
       
       // Segundo intento con prompt de corrección
@@ -320,7 +321,7 @@ async function main() {
           console.log('🎯 Continuando con traducciones existentes')
           return // Exit successfully
         }
-      } catch (readError) {
+      } catch {
         console.log('📄 No se pudo leer archivo español existente')
       }
       
@@ -349,7 +350,11 @@ async function main() {
   }
 }
 
+function isMainModule() {
+  return import.meta.url === pathToFileURL(process.argv[1]).href
+}
+
 // Ejecutar si es llamado directamente
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMainModule()) {
   main()
 }

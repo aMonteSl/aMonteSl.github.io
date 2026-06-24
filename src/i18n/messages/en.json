@@ -1,24 +1,28 @@
 {
   "meta": {
-    "title": "Adrián Montes — Portfolio",
+    "title": "Adrián Montes - Portfolio",
     "description": "Telematics Engineering student focusing on clean architectures, XR/3D/AR visualizations of software metrics, and pragmatic UX."
   },
   "nav": {
-    "home": "Home",
+    "home": "Portfolio",
     "about": "About",
-    "profile": "Profile",
+    "profile": "About Me",
     "skills": "Skills",
-    "projects": "Projects",
+    "projects": "Featured Projects",
     "journey": "Professional Journey",
     "experience": "Experience",
     "education": "Education",
-    "publications": "Publications"
+    "publications": "Publications",
+    "testimonials": "Professional References",
+    "certifications": "Certifications & Achievements",
+    "contact": "Let's Connect",
+    "emailCopied": "Email copied"
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Telematics Engineer",
-    "headlineSub": "Full-Stack (TypeScript/Node/React) · DevTools & XR",
-    "aboutMe": "Telematics Engineer (URJC, 2026) with experience delivering real software solutions end-to-end—from analysis and implementation to documentation and delivery. Creator of Code-XR (open source) for VS Code, linked to VISSOFT @ ICSME 2025. Graduated and, within the current academic year, eligible for extracurricular internships (up to 550 hours) or full-time employment. Motivated to keep growing and explore different professional domains.",
+    "headline": "Telematics Engineer & Systems N2 / Cloud Intern",
+    "headlineSub": "Systems, Cloud, Full-Stack and XR developer tools",
+    "aboutMe": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently finishing an extracurricular internship in Cloud & Systems N2 (March-August 2026) and incoming student of the Master's Degree in Telecommunication Engineering at UPM, specializing in Machine Learning and Big Data, with interest in software analytics, code repositories, and applied research.",
     "title": "Adrián Montes Linares",
     "subtitle1": "Telematics Engineering — Student",
     "subtitle2": "Backend • Frontend • Software Engineering • XR",
@@ -27,13 +31,13 @@
     "ctaResume": "Download CV",
     "ctaContact": "Contact",
     "alternativeTitle": "Telematics Engineering",
-    "availabilityLabel": "Available",
-    "availabilityText": "Internships (up to 550h) or employment",
+    "availabilityLabel": "Currently active",
+    "availabilityText": "SATEC internship, Mar-Aug 2026",
     "location": "Madrid, ES",
     "language": "English B2 (TOEIC)",
-    "metaLine": "Madrid, ES · English B2 (TOEIC)",
+    "metaLine": "Madrid, ES - English B2 (TOEIC)",
     "highlights": {
-      "vissoft": "VISSOFT @ ICSME 2025 (accepted) · Code-XR (OSS)",
+      "vissoft": "VISSOFT - @ - ICSME - 2025 - (accepted) - · - Code-XR - (OSS)",
       "downloads": "Code-XR: 300+ downloads",
       "availability": "Available: internships (up to 550h) or full-time"
     },
@@ -60,7 +64,8 @@
       },
       "github": "GitHub",
       "docs": "Docs",
-      "internal": "Internal"
+      "internal": "Internal",
+      "marketplace": "Marketplace"
     },
     "links": {
       "doi": "DOI"
@@ -69,7 +74,25 @@
     "credentials": {
       "vissoft": "VISSOFT 2025",
       "codeXr": "Code-XR (Open Source)",
-      "stack": "TypeScript · Next.js · Tailwind"
+      "stack": "TypeScript - · - Next.js - · - Tailwind"
+    },
+    "kicker": "Portfolio",
+    "metrics": {
+      "current": {
+        "label": "Current",
+        "value": "Cloud & Systems N2",
+        "detail": "Mar-Aug 2026"
+      },
+      "research": {
+        "label": "Research",
+        "value": "VISSOFT 2025",
+        "detail": "Code-XR publication"
+      },
+      "next": {
+        "label": "Next",
+        "value": "UPM 2026",
+        "detail": "Telecom Engineering master"
+      }
     }
   },
   "about": {
@@ -80,26 +103,56 @@
   },
   "profile": {
     "title": "About Me",
-    "subtitle": "Get to know the person behind the code",
+    "subtitle": "A clearer view of where my engineering profile is heading",
     "imageAlt": "Adrián Montes profile photo",
     "name": "Adrián Montes Linares",
-    "role": "Telematics Engineer & Full-Stack Developer",
-    "bio1": "I am a Telecommunications Engineer graduated from Universidad Rey Juan Carlos in 2026, with a strong focus on practical building and continuous learning. I enjoy understanding how systems work internally and transforming that knowledge into clear, well-designed, and useful solutions.\n\nI particularly value projects where I can be involved end-to-end: from initial idea and architectural decisions to implementation, documentation, and iterative improvement. For me, programming is not just about writing code—it is about structuring complex problems and turning them into coherent, maintainable systems.",
-    "bio2": "I consider myself curious, disciplined, and committed. I value teamwork, clear communication, and ownership of what I build. I am motivated by technical challenges and by exploring different professional domains to keep growing both technically and personally.\n\nOutside of purely technical work, I enjoy traveling, discovering new cultures and perspectives, and maintaining a healthy balance between professional growth and personal life. I believe this balance helps me bring a broader perspective to the projects I work on.",
+    "role": "Telematics Engineer with experience in Cloud, Systems N2, Full-Stack development, and XR software visualization",
+    "bio1": "I am a Telematics Engineer from Universidad Rey Juan Carlos, graduated in January 2026. My profile combines software development, systems, cloud operations, and data visualization, with a practical focus on maintainable tools and clear documentation.",
+    "bio2": "I am currently finishing an extracurricular internship at SATEC in Cloud & Systems N2, working around support requests, incidents, infrastructure operation, virtual machines, vulnerability patching, SSH/RDP access, and tools such as Nagios, AMS, Veeam Backup, NetApp, and VMware.",
     "stats": {
       "experience": "Experience",
-      "experienceValue": "Full-Stack Development · Scientific publication (VISSOFT @ ICSME 2025)",
+      "experienceValue": "SATEC Cloud & Systems N2, VBGroup Full-Stack internship, Code-XR, VISSOFT 2025",
       "education": "Education",
-      "educationValue": "BSc in Telecommunications Engineering (URJC, 2026)",
+      "educationValue": "Telematics Engineering (URJC, Jan 2026), Telecom Engineering master at UPM from Sep 2026",
       "focus": "Current Focus",
-      "focusValue": "DevTools, XR, AI",
+      "focusValue": "Systems, cloud, developer tooling, XR visualization, Machine Learning, and Big Data",
+      "languages": "Languages",
+      "languagesValue": "Spanish native, English B2 TOEIC, preparing C1",
       "mindset": "Mindset",
       "mindsetValue": "Technical curiosity, Quality-driven approach, Continuous learning"
+    },
+    "kicker": "Profile",
+    "operatingKicker": "Operating profile",
+    "bio3": "Before that, during my curricular internship at VBGroup, I worked as a Junior Full-Stack Developer on OBT, an internal platform built with Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite, and Tailwind. My next academic step is the Master's Degree in Telecommunication Engineering at UPM, with a specialization path in Machine Learning and Big Data.",
+    "pills": {
+      "satec": "SATEC Cloud & Systems N2",
+      "vbgroup": "VBGroup Full-Stack internship",
+      "upm": "UPM master: ML & Big Data",
+      "english": "Working towards English C1"
+    },
+    "snapshotTitle": "Current direction",
+    "snapshotBody": "Systems and cloud give me operational depth; full-stack development gives me product delivery; XR, software analytics, Machine Learning, and Big Data define the research and tooling direction I want to keep building.",
+    "proof": {
+      "vbgroup": {
+        "label": "Curricular internship",
+        "value": "Full-Stack at VBGroup"
+      },
+      "codexr": {
+        "label": "Research tooling",
+        "value": "Code-XR / VISSOFT 2025"
+      },
+      "english": {
+        "label": "Language goal",
+        "value": "English C1 in progress"
+      }
+    },
+    "transition": {
+      "label": "Scroll to About Me"
     }
   },
   "skills": {
     "title": "Skills",
-    "subtitle": "Technologies and tools I use regularly",
+    "subtitle": "A practical map of technologies grouped by use, context, and current depth.",
     "topStack": {
       "typescript": "TypeScript",
       "react": "React",
@@ -112,7 +165,8 @@
       "close": "Close",
       "back": "Back to overview",
       "next": "Next skill",
-      "prev": "Previous skill"
+      "prev": "Previous skill",
+      "viewCategory": "View group"
     },
     "drawer": {
       "title": "Details"
@@ -479,12 +533,209 @@
         "purpose": "Incremental delivery, sprint planning and teamwork.",
         "h1": "Applied sprint planning, retrospectives and incremental delivery.",
         "h2": "Organized work with backlogs, stories and acceptance criteria."
+      },
+      "nodejs": {
+        "label": "Node.js",
+        "summary": "JavaScript runtime used for APIs, scripts, and tooling around projects.",
+        "purpose": "Backend runtime for APIs and developer tooling.",
+        "h1": "Built API and tooling flows on top of Node.js.",
+        "h2": "Used as the runtime foundation for Code-XR and backend work."
+      },
+      "nestjs": {
+        "label": "Nest.js",
+        "summary": "Structured Node.js framework used in the OBT backend.",
+        "purpose": "Backend architecture with modules, controllers, and services.",
+        "h1": "Designed REST API modules with a clean server-side structure.",
+        "h2": "Connected documentation, validation, and cloud-facing services."
+      },
+      "swagger": {
+        "label": "Swagger",
+        "summary": "API documentation tooling used to describe and test backend endpoints.",
+        "purpose": "Readable API contracts for development and review.",
+        "h1": "Documented REST endpoints for backend collaboration.",
+        "h2": "Kept API behavior easier to inspect and validate."
+      },
+      "jwt": {
+        "label": "JWT",
+        "summary": "Token-based security used for protected actions and email workflows.",
+        "purpose": "Secure stateless actions and role-sensitive flows.",
+        "h1": "Protected interactive approval actions.",
+        "h2": "Integrated token validation with backend routes."
+      },
+      "restApi": {
+        "label": "REST API",
+        "summary": "API design style used across backend and full-stack projects.",
+        "purpose": "Clear HTTP contracts between frontend and backend.",
+        "h1": "Structured endpoints around resources and workflows.",
+        "h2": "Connected UI flows to backend operations."
+      },
+      "room": {
+        "label": "Room",
+        "summary": "Android persistence layer used to store routes and points in StepByStep.",
+        "purpose": "Local structured storage for Android route data.",
+        "h1": "Modeled routes and points as persistent entities.",
+        "h2": "Used cascade behavior to keep route data consistent."
+      },
+      "json": {
+        "label": "JSON",
+        "summary": "Data interchange and persistence format used in tooling and project manifests.",
+        "purpose": "Portable structured data for app and tooling flows.",
+        "h1": "Stored analysis outputs and project metadata.",
+        "h2": "Connected static analysis data with UI and XR rendering."
+      },
+      "googleMaps": {
+        "label": "Google Maps",
+        "summary": "Map platform used in StepByStep route recording screens.",
+        "purpose": "Map-based route creation and review.",
+        "h1": "Integrated live location context in the route UI.",
+        "h2": "Combined map interactions with recording metrics."
+      },
+      "gpx": {
+        "label": "GPX",
+        "summary": "Route exchange format parsed by StepByStep for imported walking routes.",
+        "purpose": "Import and interpret route tracks.",
+        "h1": "Parsed track points, elevation, and timestamps.",
+        "h2": "Calculated route statistics from imported files."
+      },
+      "foregroundService": {
+        "label": "Foreground Service",
+        "summary": "Android background execution pattern used for live route tracking.",
+        "purpose": "Keep tracking active while the app is not foregrounded.",
+        "h1": "Maintained active recording with a persistent notification.",
+        "h2": "Handled service lifecycle for route tracking."
+      },
+      "fusedLocation": {
+        "label": "Fused Location Provider",
+        "summary": "Android location API used for high-accuracy route updates.",
+        "purpose": "Reliable location updates for route metrics.",
+        "h1": "Tracked distance and elevation from location samples.",
+        "h2": "Balanced update frequency with recording behavior."
+      },
+      "mpAndroidChart": {
+        "label": "MPAndroidChart",
+        "summary": "Android charting library used for visual route and profile metrics.",
+        "purpose": "Present route metrics visually in the app.",
+        "h1": "Supported profile and activity statistics.",
+        "h2": "Added clearer feedback around walking data."
+      },
+      "doxygen": {
+        "label": "Doxygen",
+        "summary": "Documentation generator used in the GreenHouse C++ project.",
+        "purpose": "Generate technical documentation from code comments.",
+        "h1": "Documented class responsibilities and relationships.",
+        "h2": "Improved readability of the final C++ delivery."
+      },
+      "uml": {
+        "label": "UML",
+        "summary": "Modeling language used to reason about object-oriented architecture.",
+        "purpose": "Represent classes and relationships before implementation.",
+        "h1": "Clarified the GreenHouse object model.",
+        "h2": "Supported cleaner C++ design decisions."
+      },
+      "umlet": {
+        "label": "UMLET",
+        "summary": "UML diagramming tool used to model the GreenHouse architecture.",
+        "purpose": "Document class structure and organization.",
+        "h1": "Created diagrams for the final AST delivery.",
+        "h2": "Helped validate responsibilities between modules."
+      },
+      "makefile": {
+        "label": "Makefile",
+        "summary": "Build automation used in C++ academic projects.",
+        "purpose": "Automate compile and project commands.",
+        "h1": "Simplified repeated build steps.",
+        "h2": "Kept command-line workflows reproducible."
+      },
+      "shellScripting": {
+        "label": "Shell Scripting",
+        "summary": "Command-line automation used for development and project workflows.",
+        "purpose": "Automate local tasks and technical checks.",
+        "h1": "Used scripts to support builds and utilities.",
+        "h2": "Improved repeatability in development workflows."
+      },
+      "filePersistence": {
+        "label": "File Persistence",
+        "summary": "Text and binary storage used in GreenHouse for users and sensors.",
+        "purpose": "Persist structured state without a database.",
+        "h1": "Stored users and sensors in text and binary files.",
+        "h2": "Practiced serialization and recovery flows."
+      },
+      "vsCodeExtensionApi": {
+        "label": "VS Code Extension API",
+        "summary": "Extension platform used to build Code-XR inside Visual Studio Code.",
+        "purpose": "Integrate custom tooling into the editor.",
+        "h1": "Built commands and workflows around code analysis.",
+        "h2": "Connected editor actions with XR visualization output."
+      },
+      "webxr": {
+        "label": "WebXR",
+        "summary": "Browser XR layer used for immersive software visualization experiences.",
+        "purpose": "Bring software metrics into immersive environments.",
+        "h1": "Supported XR exploration of project structures.",
+        "h2": "Connected web scenes with developer tooling."
+      },
+      "mvvm": {
+        "label": "MVVM",
+        "summary": "App architecture pattern used in Android screens and view models.",
+        "purpose": "Separate UI state from app logic.",
+        "h1": "Structured StepByStep screens around view models.",
+        "h2": "Kept route data flow easier to reason about."
+      }
+    },
+    "kicker": "Capability map",
+    "legend": {
+      "label": "Level scale"
+    },
+    "categoryModal": {
+      "distribution": "Level distribution",
+      "skills": "Technologies in this group"
+    },
+    "categoryDetails": {
+      "languages": {
+        "summary": "Programming languages used across coursework, open-source work, systems exercises, and product prototypes.",
+        "h1": "Strongest depth sits around TypeScript, JavaScript, Python, and structured C/C++ coursework.",
+        "h2": "Lower-level and academic languages remain represented when they support systems understanding."
+      },
+      "backend": {
+        "summary": "Backend skills focused on API design, Node.js ecosystems, documentation, and practical delivery in project work.",
+        "h1": "Express, Nest.js, REST APIs, Swagger, JWT, and Django cover the main service patterns represented in projects.",
+        "h2": "The emphasis is maintainable endpoints, clear contracts, and integration with frontend and storage layers."
+      },
+      "frontend": {
+        "summary": "Frontend stack used to build portfolio, dashboards, internal tools, and research-facing interfaces.",
+        "h1": "React, Vite, Tailwind, and UI composition form the strongest part of this group.",
+        "h2": "The focus is responsive layouts, reusable components, and polished user-facing workflows."
+      },
+      "xrRobotics": {
+        "summary": "XR and immersive tooling around Code-XR, WebXR scenes, VS Code extension work, and research prototypes.",
+        "h1": "This group connects software analysis with spatial visualization and interactive developer tooling.",
+        "h2": "Robotics appears as a foundation, while XR tooling carries the main project depth."
+      },
+      "databasesCloud": {
+        "summary": "Storage and cloud technologies used in internal tooling, Android persistence, and academic systems work.",
+        "h1": "Room, SQL, PostgreSQL, JSON persistence, Cosmos DB, and Azure Blob cover different storage contexts.",
+        "h2": "The practical focus is data modeling, persistence, and connecting storage choices to product requirements."
+      },
+      "tools": {
+        "summary": "Developer, systems, mobile, documentation, security, and delivery tools used across projects and internships.",
+        "h1": "The group is intentionally broad because it represents the operating layer around implementation work.",
+        "h2": "Daily tools are mixed with academic/security tooling and project-specific documentation workflows."
+      },
+      "methodologies": {
+        "summary": "Ways of organizing work, UI state, delivery flow, and collaboration across academic and practical projects.",
+        "h1": "MVVM appears through Android work, while Agile and Azure DevOps support delivery practices.",
+        "h2": "The value here is less about labels and more about structure, traceability, and iteration."
+      },
+      "other": {
+        "summary": "AI-assisted and workflow acceleration practices used carefully as support around engineering work.",
+        "h1": "These tools help with exploration, review, and speed, without replacing engineering judgment.",
+        "h2": "The emphasis is practical assistance, clear validation, and keeping outputs grounded in real project context."
       }
     }
   },
   "projects": {
     "title": "Featured projects",
-    "subtitle": "Selected work and case studies",
+    "subtitle": "A concise selection of projects showing product work, research tooling, systems, and XR visualization.",
     "ctaAll": "See details",
     "empty": "Projects coming soon.",
     "back": "Back to projects",
@@ -497,12 +748,18 @@
       "web": "Website",
       "marketplace": "Marketplace",
       "doi": "DOI (Publication)",
-      "ieee": "IEEE Xplore"
+      "ieee": "IEEE Xplore",
+      "award": "Award",
+      "certificate": "Certificate"
     },
     "linksTitle": "Links",
     "publication": "Publication",
     "publicationVenue": "VISSOFT @ ICSME 2025 (IEEE)",
     "publicationDoi": "DOI: {doi}",
+    "detail": {
+      "summaryTitle": "Project narrative",
+      "milestones": "Versions & milestones"
+    },
     "quickFacts": {
       "title": "Quick facts",
       "type": "Type",
@@ -513,13 +770,14 @@
       "openSource": "Open Source",
       "academic": "Academic",
       "personal": "Personal",
-      "internal": "Internal"
+      "internal": "Work"
     },
     "navigation": {
       "prev": "Previous project",
       "next": "Next project"
     },
-    "gallery": "Project gallery"
+    "gallery": "Project gallery",
+    "kicker": "Selected work"
   },
   "experience": {
     "title": "Experience / Collaborations",
@@ -539,6 +797,7 @@
     "subtitle": "Experience, education, and key milestones",
     "present": "Present",
     "hoverHint": "Select an item to view details",
+    "selectedMilestone": "Selected milestone",
     "clickYearHint": "Click on a year to see monthly details",
     "legend": {
       "education": "Education",
@@ -573,7 +832,13 @@
       "codexr": {
         "role": "Author & Lead Developer",
         "org": "Code-XR (Open Source)",
-        "desc": "VS Code extension for XR/3D/AR visualization of software metrics. End-to-end architecture: static analysis, XR scene mapping, documentation. +300 downloads on Marketplace."
+        "desc": "Active VS Code extension for XR/3D visualization of software metrics. Started as a final degree project, accepted at VISSOFT @ ICSME 2025, released as version 1.1.0 outside the thesis context, and currently evolving toward 1.2.0.",
+        "highlights": {
+          "v008Poster": "v0.0.8 - VISSOFT poster track",
+          "v100Defense": "v1.0.0 - university defense",
+          "v110Release": "v1.1.0 - public release",
+          "v120Current": "v1.2.0 - in progress"
+        }
       },
       "vissoft": {
         "role": "Paper Accepted — VISSOFT 2025",
@@ -581,21 +846,28 @@
         "desc": "Research paper on XR visualization of software metrics accepted for presentation at international conference."
       },
       "cambridgeC1": {
-        "role": "Cambridge English C1 Certification",
+        "role": "Cambridge English C1 Certification - in progress",
         "org": "Cambridge University",
-        "desc": "Advance English proficiency to professional fluency across technical and business contexts. Comprehensive exam covering reading, writing, speaking, and listening."
+        "desc": "Working toward professional English fluency across technical and business contexts, with reading, writing, speaking, and listening preparation in progress."
       },
-      "masterAI": {
-        "role": "Official Master's in Applied AI",
-        "org": "Universidad (To be determined)",
-        "desc": "Specialized postgraduate degree in applied AI. Deep learning, Natural Language Processing, and XR applications combined with professional research and industry practices."
+      "satecCloud": {
+        "role": "Systems N2 / Cloud Engineer",
+        "org": "SATEC (Extracurricular Internship)",
+        "desc": "Extracurricular internship focused on systems, N2 support, cloud environments, infrastructure operation, and professional documentation. Started on March 14, 2026."
+      },
+      "masterTelecomUPM": {
+        "role": "Master's Degree in Telecommunication Engineering - starts Sep 2026",
+        "org": "Universidad Politecnica de Madrid (UPM)",
+        "desc": "Official master's degree starting in September 2026 at UPM, with a path toward Machine Learning and Big Data within Telecommunication Engineering."
       }
-    }
+    },
+    "kicker": "Career stream",
+    "today": "Today"
   },
   "development": {
-    "title": "🚧 Under development",
+    "title": "Under development",
     "message": "Hi there! My portfolio is under construction. For now, you can only see the main page, but soon the rest of the sections with my projects, experience, and more information about me will be available.",
-    "thanks": "Thanks for your patience! 😊",
+    "thanks": "Thanks for your patience.",
     "dismiss": "Got it"
   },
   "buttons": {
@@ -613,37 +885,29 @@
       "resources": "Resources"
     },
     "links": {
-      "home": "Home",
-      "projects": "Projects",
+      "home": "Portfolio",
+      "profile": "About Me",
+      "projects": "Featured Projects",
       "skills": "Skills",
-      "journey": "Journey",
+      "journey": "Professional Journey",
+      "testimonials": "Professional References",
+      "certifications": "Certifications & Achievements",
+      "contact": "Let's Connect",
       "uses": "Uses",
       "cv": "Download CV",
       "source": "Source Code"
-    }
+    },
+    "brand": "Telematics Engineer focused on full-stack product work, developer tooling, and XR software visualization."
   },
   "contact": {
-    "title": "Get in Touch",
-    "subtitle": "Have a project idea or want to collaborate? Feel free to reach out.",
-    "form": {
-      "name": "Your Name",
-      "email": "Your Email",
-      "message": "Your Message",
-      "send": "Send Message",
-      "sending": "Sending...",
-      "success": "Message sent! I'll get back to you soon.",
-      "error": "Something went wrong. Please try again or email me directly."
-    },
-    "or": "Or reach me directly at",
-    "social": "Find me on"
-  },
-  "projectFilters": {
-    "all": "All",
-    "openSource": "Open Source",
-    "personal": "Personal",
-    "academic": "Academic",
-    "internal": "Internal",
-    "showing": "Showing {count} projects"
+    "kicker": "Contact",
+    "title": "Let's Connect",
+    "subtitle": "Have a project in mind or want to chat? I'd love to hear from you.",
+    "cta": "Send me an email",
+    "email": "Email",
+    "or": "or reach me on",
+    "available": "Available for collaborations, freelance work, and full-time opportunities.",
+    "availabilityLabel": "Available for selected collaborations"
   },
   "uses": {
     "title": "Uses",
@@ -716,20 +980,50 @@
       }
     }
   },
-  "contact": {
-    "title": "Let's Connect",
-    "subtitle": "Have a project in mind or want to chat? I'd love to hear from you.",
-    "cta": "Send me an email",
-    "email": "Email",
-    "or": "or reach me on",
-    "available": "Available for collaborations, freelance work, and full-time opportunities."
-  },
   "testimonials": {
-    "title": "What Others Say",
-    "subtitle": "Kind words from mentors, colleagues, and collaborators",
-    "pending": "Testimonials coming soon. Reach out on LinkedIn or via email if you'd like to recommend me.",
-    "viewMore": "Read more",
-    "viewLess": "Read less"
+    "kicker": "Recommendations",
+    "title": "Professional References",
+    "subtitle": "Verified recommendation letters summarized with privacy in mind. The full documents are available on request.",
+    "availableOnRequest": "Full letter available on request.",
+    "types": {
+      "professional": "Professional internship",
+      "academic": "Academic supervision",
+      "formal": "Formal reference"
+    },
+    "recommendations": {
+      "vbgroup-abner": {
+        "role": "Development Leader",
+        "relationship": "Direct supervisor during VBGroup internship",
+        "summary": "Abner highlights my end-to-end contribution to a backend project from its early stages, including REST API design with Node.js and TypeScript, Azure Cosmos DB, Blob Storage, Git/GitHub workflow, and supporting frontend work with React and Vite. The letter emphasizes a strong junior technical foundation, progressive autonomy, clear documentation, responsibility, and a positive, collaborative attitude.",
+        "strengths": {
+          "backend": "Backend ownership",
+          "cloud": "Azure data work",
+          "autonomy": "Progressive autonomy",
+          "attitude": "Professional attitude"
+        }
+      },
+      "david-moreno": {
+        "role": "Assistant Professor",
+        "relationship": "Final degree project supervisor",
+        "summary": "David supervised my final degree project and describes a profile with the mindset of a solid software and telecommunications engineer. His recommendation focuses on independence, methodical problem solving, practical execution, communication, collaboration, and the ability to go beyond the minimum requirements when the project needs it.",
+        "strengths": {
+          "autonomy": "Independence",
+          "method": "Methodical problem solving",
+          "communication": "Communication",
+          "collaboration": "Collaboration"
+        }
+      },
+      "vbgroup-formal": {
+        "role": "Development department reference",
+        "relationship": "Formal VBGroup recommendation",
+        "summary": "The formal VBGroup reference confirms my work in the IT-Development department from November 2025 to January 2026 and states that my commitment to the assigned responsibilities was excellent. It acts as a concise institutional endorsement alongside the more detailed technical recommendation.",
+        "strengths": {
+          "commitment": "Excellent commitment",
+          "it": "IT-Development context",
+          "reference": "Institutional endorsement"
+        }
+      }
+    }
   },
   "certificates": {
     "title": "Certifications & Achievements",
@@ -737,10 +1031,23 @@
     "completed": "Completed",
     "inProgress": "In Progress",
     "planned": "Planned",
+    "statusDescriptions": {
+      "completed": "Degrees, awards, and confirmed academic recognitions.",
+      "in-progress": "Credentials currently being prepared.",
+      "planned": "Next academic step already planned."
+    },
     "cambridgeC1": "Cambridge English C1 Certificate",
-    "masterAI": "Master in Applied AI",
-    "masterAIIssuer": "Universidad (To be determined)",
     "verify": "Verify",
-    "learnMore": "Learn more"
+    "learnMore": "Learn more",
+    "masterTelecomUPM": "Master's Degree in Telecommunication Engineering",
+    "masterTelecomUPMIssuer": "Universidad Politecnica de Madrid (UPM)",
+    "telematicsDegree": "BSc in Telematics Engineering",
+    "telematicsDegreeIssuer": "Universidad Rey Juan Carlos (URJC)",
+    "codeXrAward": "Code-XR — VISSOFT 2025 Poster Track Award",
+    "codeXrAwardIssuer": "ICSME 2025 Awards",
+    "greenhouseHighDistinction": "GreenHouse — AST High Distinction",
+    "greenhouseHighDistinctionIssuer": "Ampliacion de Sistemas Telematicos (URJC)",
+    "stepByStepHighDistinction": "StepByStep — LSMO High Distinction",
+    "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Moviles y Ubicuos (URJC)"
   }
 }

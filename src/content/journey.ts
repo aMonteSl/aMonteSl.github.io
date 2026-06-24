@@ -1,7 +1,7 @@
 import { JourneyEntry, LaneConfig } from '@/features/journey/types'
 
 /**
- * Lane configuration - defines colors and icons for each track
+ * Lane configuration - defines colors for each track
  * Using CSS variables for theming consistency
  */
 export const LANE_CONFIG: LaneConfig[] = [
@@ -9,31 +9,26 @@ export const LANE_CONFIG: LaneConfig[] = [
     lane: 'education',
     colorVar: '--stream-education',
     labelKey: 'journey.legend.education',
-    icon: '🎓',
   },
   {
     lane: 'work',
     colorVar: '--stream-work',
     labelKey: 'journey.legend.work',
-    icon: '💼',
   },
   {
     lane: 'project',
     colorVar: '--stream-project',
     labelKey: 'journey.legend.project',
-    icon: '🚀',
   },
   {
     lane: 'achievement',
     colorVar: '--stream-achievement',
     labelKey: 'journey.legend.achievement',
-    icon: '🏆',
   },
   {
     lane: 'learning',
     colorVar: '--stream-learning',
     labelKey: 'journey.legend.learning',
-    icon: '🎯',
   },
 ]
 
@@ -98,6 +93,20 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     tags: ['TypeScript', 'React', 'Azure', 'Express'],
     link: 'https://vbgroup.es',
   },
+  {
+    id: 'satecCloud',
+    type: 'work',
+    lane: 'work',
+    roleKey: 'journey.entries.satecCloud.role',
+    orgKey: 'journey.entries.satecCloud.org',
+    descKey: 'journey.entries.satecCloud.desc',
+    startYear: 2026,
+    startMonth: 3,
+    startDay: 14,
+    endYear: null,
+    tags: ['Cloud', 'Systems', 'N2 Support', 'Infrastructure'],
+    link: 'https://www.satec.es',
+  },
 
   // === PROJECT (Lane 3) ===
   {
@@ -110,9 +119,13 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     startYear: 2025,
     startMonth: 1,
     startDay: 14,
-    endYear: 2025,
-    endMonth: 10,
-    endDay: 20,
+    endYear: null,
+    highlights: [
+      { id: 'v008Poster', labelKey: 'journey.entries.codexr.highlights.v008Poster', year: 2025, month: 9, day: 7 },
+      { id: 'v100Defense', labelKey: 'journey.entries.codexr.highlights.v100Defense', year: 2025, month: 10, day: 20 },
+      { id: 'v110Release', labelKey: 'journey.entries.codexr.highlights.v110Release', year: 2026, month: 3, day: 22 },
+      { id: 'v120Current', labelKey: 'journey.entries.codexr.highlights.v120Current', year: 2026, month: 6, day: 23 },
+    ],
     tags: ['VS Code API', 'A-Frame', 'XR', 'TypeScript'],
     link: 'https://github.com/aMonteSl/CodeXR',
   },
@@ -149,23 +162,30 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     tags: ['English', 'Certification', 'Professional Development'],
   },
   {
-    id: 'masterAI',
+    id: 'masterTelecomUPM',
     type: 'learning',
     lane: 'learning',
-    roleKey: 'journey.entries.masterAI.role',
-    orgKey: 'journey.entries.masterAI.org',
-    descKey: 'journey.entries.masterAI.desc',
+    roleKey: 'journey.entries.masterTelecomUPM.role',
+    orgKey: 'journey.entries.masterTelecomUPM.org',
+    descKey: 'journey.entries.masterTelecomUPM.desc',
     startYear: 2026,
     startMonth: 9,
     startDay: 1,
-    endYear: null,
-    tags: ['AI', 'Deep Learning', 'NLP', 'XR'],
+    endYear: 2026,
+    endMonth: 9,
+    endDay: 1,
+    tags: ['Telecommunications', 'Networks', 'Cloud', 'Systems'],
   },
 ]
 
 /** Timeline boundaries */
 export const TIMELINE_START = 2020
 export const TIMELINE_END = 2026
+export const CURRENT_DATE = {
+  year: 2026,
+  month: 6,
+  day: 23,
+} as const
 
 /** Convert a date to a decimal year (for precise positioning) */
 export function dateToDecimalYear(year: number, month?: number, day?: number): number {

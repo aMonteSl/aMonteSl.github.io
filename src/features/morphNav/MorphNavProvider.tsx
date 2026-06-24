@@ -48,46 +48,72 @@ export function MorphNavProvider({
 
   const [activeSection, setActiveSection] = useState('home')
 
-  // Scrollspy: track active section
   useEffect(() => {
     const sectionIds = NAV_ITEMS.map(item => item.href.replace('#', ''))
+    let frameId = 0
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Find all intersecting entries and pick the one with the highest intersection ratio
-        const intersectingEntries = entries.filter(entry => entry.isIntersecting)
-        
-        if (intersectingEntries.length > 0) {
-          // Sort by intersection ratio (descending) to get the most visible section
-          const mostVisible = intersectingEntries.sort(
-            (a, b) => b.intersectionRatio - a.intersectionRatio
-          )[0]
-          
-          setActiveSection(mostVisible.target.id)
-        }
-      },
-      {
-        // Use simple threshold - section is "active" when any part is visible in viewport
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-        // Only detect sections when they're in the upper 60% of the viewport
-        rootMargin: '0px 0px -40% 0px',
+    const getSectionElements = () =>
+      sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((element): element is HTMLElement => Boolean(element))
+
+    const updateActiveSection = () => {
+      frameId = 0
+
+      const sections = getSectionElements()
+      if (sections.length === 0) return
+
+      const scrollPosition = window.scrollY
+      const viewportHeight = window.innerHeight
+      const activationLine = scrollPosition + Math.min(viewportHeight * 0.38, 360)
+      const documentBottom = scrollPosition + viewportHeight >= document.documentElement.scrollHeight - 2
+
+      if (documentBottom) {
+        setActiveSection(sections[sections.length - 1].id)
+        return
       }
-    )
 
-    // Observe all sections
-    sectionIds.forEach(id => {
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
-    })
+      let nextActive = sections[0].id
 
-    return () => observer.disconnect()
+      for (const section of sections) {
+        const sectionTop = section.offsetTop
+
+        if (sectionTop <= activationLine) {
+          nextActive = section.id
+        } else {
+          break
+        }
+      }
+
+      setActiveSection((current) => (current === nextActive ? current : nextActive))
+    }
+
+    const requestUpdate = () => {
+      if (frameId) return
+      frameId = window.requestAnimationFrame(updateActiveSection)
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      if (frameId) window.cancelAnimationFrame(frameId)
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+    }
   }, [])
 
-  // Scroll to section handler
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      const headerOffset = 76
+      const targetTop = element.getBoundingClientRect().top + window.scrollY - headerOffset
+
+      window.scrollTo({
+        top: Math.max(targetTop, 0),
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      })
     }
   }
 

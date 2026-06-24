@@ -1,13 +1,15 @@
-// Root layout component with i18n provider and theme setup
 import type { Metadata } from 'next'
 import './globals.css'
-import { I18nProvider } from '@/i18n'
-import { Footer } from '@/components/common/Footer'
-import { SITE, LINKS } from '@/lib/constants'
+import { SITE } from '@/lib/constants'
+import { OG_IMAGE } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Adrián Montes Linares | Telematics & Software Engineer',
-  description: 'Portfolio of Adrián Montes Linares — Telematics & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Author of Code-XR (VISSOFT @ ICSME 2025).',
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.author} | Telematics & Software Engineer`,
+    template: `%s | ${SITE.author}`,
+  },
+  description: 'Portfolio of Adrián Montes Linares, Telematics & Software Engineer focused on TypeScript, React, Node.js, DevTools and XR.',
   keywords: ['Adrián Montes Linares', 'Adrián Montes', 'Telematics Engineer', 'Software Engineer', 'React', 'TypeScript', 'Node.js', 'XR', 'WebXR', 'Code-XR', 'VISSOFT', 'ICSME 2025', 'Portfolio'],
   authors: [{ name: SITE.author }],
   creator: SITE.author,
@@ -25,17 +27,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: SITE.url,
-    title: 'Adrián Montes Linares | Telematics & Software Engineer',
-    description: 'Portfolio of Adrián Montes Linares — Telematics & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR. Code-XR author.',
+    title: `${SITE.author} | Telematics & Software Engineer`,
+    description: 'Portfolio of Adrián Montes Linares, Telematics & Software Engineer focused on TypeScript, React, Node.js, DevTools and XR.',
     siteName: SITE.name,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${SITE.author} portfolio preview`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Adrián Montes Linares | Telematics & Software Engineer',
-    description: 'Portfolio of Adrián Montes Linares — Telematics & Software Engineer. Full-Stack (TypeScript/Node/React), DevTools & XR.',
-  },
-  alternates: {
-    canonical: SITE.url,
+    title: `${SITE.author} | Telematics & Software Engineer`,
+    description: 'Portfolio of Adrián Montes Linares, Telematics & Software Engineer focused on TypeScript, React, Node.js, DevTools and XR.',
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -48,61 +56,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-}
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Person',
-      '@id': `${SITE.url}/#person`,
-      name: 'Adrián Montes Linares',
-      givenName: 'Adrián',
-      familyName: 'Montes Linares',
-      jobTitle: ['Telecommunications Engineer', 'Software Engineer'],
-      description: 'Full-Stack developer (TypeScript/Node/React), DevTools & XR specialist. Author of Code-XR, presented at VISSOFT @ ICSME 2025.',
-      url: SITE.url,
-      email: 'adrian.monteslinares@gmail.com',
-      sameAs: [
-        LINKS.github,
-        LINKS.linkedin
-      ],
-      alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'Universidad Rey Juan Carlos',
-        url: 'https://www.urjc.es'
-      },
-      knowsAbout: [
-        'TypeScript',
-        'Node.js',
-        'React',
-        'Next.js',
-        'Express',
-        'WebXR',
-        'Software Engineering',
-        'Data Visualization',
-        'Azure',
-        'DevTools',
-        'Telecommunications'
-      ],
-      hasCredential: {
-        '@type': 'EducationalOccupationalCredential',
-        name: 'VISSOFT @ ICSME 2025 Publication',
-        description: 'Paper accepted at VISSOFT 2025, co-located with ICSME'
-      }
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${SITE.url}/#website`,
-      url: SITE.url,
-      name: SITE.name,
-      description: `Personal portfolio of ${SITE.author}`,
-      publisher: {
-        '@id': `${SITE.url}/#person`
-      },
-      inLanguage: 'en'
-    }
-  ]
 }
 
 export default function RootLayout({
@@ -121,21 +74,9 @@ export default function RootLayout({
           imageSizes="196px"
           href="/images/profile/hero-196.avif"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
       </head>
       <body className="antialiased" suppressHydrationWarning>
-        <I18nProvider>
-          <a href="#main-content" className="skip-to-content">
-            Skip to main content
-          </a>
-          <main id="main-content">
-            {children}
-          </main>
-          <Footer />
-        </I18nProvider>
+        {children}
       </body>
     </html>
   )

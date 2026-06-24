@@ -1,10 +1,8 @@
 'use client'
 
-// @ts-nocheck
-
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { forwardRef, useRef, useMemo, useLayoutEffect } from 'react'
-import { Color } from 'three'
+import { Color, Mesh, PlaneGeometry, ShaderMaterial } from 'three'
 
 const hexToNormalizedRGB = (hex: string): [number, number, number] => {
   hex = hex.replace('#', '')
@@ -70,11 +68,23 @@ void main() {
 }
 `
 
-interface SilkPlaneProps {
-  uniforms: any
+interface SilkUniforms {
+  [key: string]: { value: number | Color }
+  uSpeed: { value: number }
+  uScale: { value: number }
+  uNoiseIntensity: { value: number }
+  uColor: { value: Color }
+  uRotation: { value: number }
+  uTime: { value: number }
 }
 
-const SilkPlane = forwardRef<any, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
+interface SilkPlaneProps {
+  uniforms: SilkUniforms
+}
+
+type SilkMesh = Mesh<PlaneGeometry, ShaderMaterial>
+
+const SilkPlane = forwardRef<SilkMesh, SilkPlaneProps>(function SilkPlane({ uniforms }, ref) {
   const { viewport } = useThree()
 
   useLayoutEffect(() => {
@@ -119,9 +129,9 @@ const Silk = ({
   noiseIntensity = 1.5,
   rotation = 0
 }: SilkProps) => {
-  const meshRef = useRef<any>(null)
+  const meshRef = useRef<SilkMesh>(null)
 
-  const uniforms = useMemo(
+  const uniforms = useMemo<SilkUniforms>(
     () => ({
       uSpeed: { value: speed },
       uScale: { value: scale },

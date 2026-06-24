@@ -1,22 +1,31 @@
 {
   "code-xr": {
     "images": [
-      "logo.png",
-      "ar-experience.png",
-      "ar2-experience.png",
-      "ejemplo1.png",
-      "ejemplo2.png",
-      "html-analisis.png"
+      "scene-v1-1-0.webp",
+      "collaborative-workspace.webp",
+      "pedestal-mapping-ui.webp",
+      "virtual-screen-controller.webp"
     ],
-    "heroImage": "logo.png"
+    "heroImage": "scene-v1-1-0.webp"
   },
   "honor-course-1": {
-    "images": [],
-    "heroImage": null
+    "images": [
+      "01-umlet-architecture.webp",
+      "02-greenhouse-composition.webp",
+      "03-sensor-inheritance.webp",
+      "04-doxygen-comments.webp",
+      "05-binary-persistence.webp"
+    ],
+    "heroImage": "01-umlet-architecture.webp"
   },
   "honor-course-2": {
-    "images": [],
-    "heroImage": null
+    "images": [
+      "01-routes-list.webp",
+      "02-new-route-map.webp",
+      "03-import-gpx.webp",
+      "04-profile-stats.webp"
+    ],
+    "heroImage": "02-new-route-map.webp"
   },
   "obt": {
     "images": [

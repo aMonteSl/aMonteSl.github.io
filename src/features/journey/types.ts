@@ -54,7 +54,6 @@ export interface LaneConfig {
   lane: JourneyLane
   colorVar: string
   labelKey: string
-  icon: string
 }
 
 /** Year marker for the timeline axis */

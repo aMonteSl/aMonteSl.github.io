@@ -5,10 +5,12 @@ import Link from 'next/link'
 import { Nav } from './Nav'
 import { LanguageSwitcher } from '@/features/language/LanguageSwitcher'
 import { Avatar } from '@/components/ui'
+import { localizePath, useLocale } from '@/i18n'
 import { cn } from '@/lib/utils'
 
 export function Header() {
   const [hasScrolled, setHasScrolled] = useState(false)
+  const { locale } = useLocale()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +34,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         {/* Brand: Avatar + Name */}
         <Link
-          href="/"
+          href={localizePath('/', locale)}
           aria-label="Go to home"
           className="inline-flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
         >

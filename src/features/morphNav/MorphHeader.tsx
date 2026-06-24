@@ -8,7 +8,7 @@ import { LanguageSwitcher } from '@/features/language'
 import { Avatar } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/lib/constants'
-import { useTranslations } from '@/i18n'
+import { localizePath, useLocale, useTranslations } from '@/i18n'
 
 /**
  * The morphing header that fades out as user scrolls down.
@@ -17,6 +17,7 @@ import { useTranslations } from '@/i18n'
 export function MorphHeader() {
   const { progress, scrollToSection, activeSection } = useMorphNav()
   const t = useTranslations('nav')
+  const { locale } = useLocale()
 
   // Hide header when fully morphed
   const isVisible = progress < 1
@@ -46,7 +47,7 @@ export function MorphHeader() {
       <div className="container flex h-16 items-center justify-between">
         {/* Brand: Avatar + Name with shared layoutId */}
         <Link
-          href="/"
+          href={localizePath('/', locale)}
           aria-label="Go to home"
           className="inline-flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
         >
@@ -64,8 +65,8 @@ export function MorphHeader() {
         </Link>
 
         {/* Desktop navigation */}
-        <div className="hidden md:flex items-center gap-6">
-          <nav className="flex items-center gap-1" role="navigation" aria-label="Main navigation">
+        <div className="hidden xl:flex items-center gap-4">
+          <nav className="flex items-center gap-0.5" role="navigation" aria-label="Main navigation">
             {NAV_ITEMS.map(({ key, href }) => {
               const sectionId = href.replace('#', '')
               const isActive = activeSection === sectionId
@@ -75,7 +76,7 @@ export function MorphHeader() {
                   key={key}
                   onClick={() => scrollToSection(sectionId)}
                   className={cn(
-                    'relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+                    'relative px-2.5 py-2 text-xs font-medium rounded-lg transition-all duration-200',
                     'after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:rounded-full after:bg-[var(--accent)] after:transition-all after:duration-200',
                     isActive
                       ? 'text-[var(--fg)] after:w-4 after:opacity-100'

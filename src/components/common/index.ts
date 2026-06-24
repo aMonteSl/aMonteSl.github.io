@@ -2,3 +2,5 @@
 export { Header } from './Header'
 export { Nav } from './Nav'
 export { Footer } from './Footer'
+export { JsonLd } from './JsonLd'
+export { LocalizedShell } from './LocalizedShell'

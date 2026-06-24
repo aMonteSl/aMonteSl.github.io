@@ -1,4 +1,4 @@
-export type SkillId =
+﻿export type SkillId =
   | 'pascal'
   | 'c'
   | 'cpp'
@@ -12,22 +12,42 @@ export type SkillId =
   | 'matlab'
   | 'go'
   | 'django'
+  | 'nodejs'
   | 'express'
+  | 'nestjs'
+  | 'swagger'
+  | 'jwt'
+  | 'restApi'
   | 'react'
   | 'vite'
   | 'tailwind'
   | 'bootstrap'
   | 'aframe'
   | 'babiaXr'
+  | 'vsCodeExtensionApi'
+  | 'webxr'
   | 'ros2'
   | 'sql'
   | 'postgresql'
   | 'azureCosmos'
   | 'azureBlob'
+  | 'room'
+  | 'json'
   | 'git'
   | 'linux'
   | 'vscode'
   | 'androidStudio'
+  | 'googleMaps'
+  | 'gpx'
+  | 'foregroundService'
+  | 'fusedLocation'
+  | 'mpAndroidChart'
+  | 'doxygen'
+  | 'uml'
+  | 'umlet'
+  | 'makefile'
+  | 'shellScripting'
+  | 'filePersistence'
   | 'wireshark'
   | 'nmap'
   | 'openssl'
@@ -38,6 +58,7 @@ export type SkillId =
   | 'aiModels'
   | 'azureDevOps'
   | 'agileScrum'
+  | 'mvvm'
   | 'githubCopilot'
 
 export type CategoryId =
@@ -77,7 +98,17 @@ export type SkillIconKey =
   | 'css'
   | 'go'
   | 'django'
+  | 'nodejs'
   | 'express'
+  | 'nestjs'
+  | 'swagger'
+  | 'json'
+  | 'googlemaps'
+  | 'android'
+  | 'sqlite'
+  | 'doxygen'
+  | 'bash'
+  | 'gnu'
   | 'react'
   | 'vite'
   | 'tailwind'
@@ -194,7 +225,7 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     labelKey: 'items.kotlin.label',
     iconKey: 'kotlin',
     experienceTags: ['academic'],
-    proficiency: 'basic',
+    proficiency: 'intermediate',
     purposeTag: 'academic',
     purposeKey: 'items.kotlin.purpose',
     summaryKey: 'items.kotlin.summary',
@@ -284,6 +315,18 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     highlightsKeys: ['items.django.h1', 'items.django.h2'],
     usedIn: [USED_IN.projects],
   },
+  nodejs: {
+    id: 'nodejs',
+    labelKey: 'items.nodejs.label',
+    iconKey: 'nodejs',
+    experienceTags: ['regular_use', 'open_source'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.nodejs.purpose',
+    summaryKey: 'items.nodejs.summary',
+    highlightsKeys: ['items.nodejs.h1', 'items.nodejs.h2'],
+    usedIn: [USED_IN.projects, USED_IN.codeXr],
+  },
   express: {
     id: 'express',
     labelKey: 'items.express.label',
@@ -294,6 +337,52 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     purposeKey: 'items.express.purpose',
     summaryKey: 'items.express.summary',
     highlightsKeys: ['items.express.h1', 'items.express.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  nestjs: {
+    id: 'nestjs',
+    labelKey: 'items.nestjs.label',
+    iconKey: 'nestjs',
+    experienceTags: ['internship', 'production_like'],
+    proficiency: 'intermediate',
+    purposeTag: 'internship',
+    purposeKey: 'items.nestjs.purpose',
+    summaryKey: 'items.nestjs.summary',
+    highlightsKeys: ['items.nestjs.h1', 'items.nestjs.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  swagger: {
+    id: 'swagger',
+    labelKey: 'items.swagger.label',
+    iconKey: 'swagger',
+    experienceTags: ['internship', 'production_like'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.swagger.purpose',
+    summaryKey: 'items.swagger.summary',
+    highlightsKeys: ['items.swagger.h1', 'items.swagger.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  jwt: {
+    id: 'jwt',
+    labelKey: 'items.jwt.label',
+    experienceTags: ['internship', 'production_like'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.jwt.purpose',
+    summaryKey: 'items.jwt.summary',
+    highlightsKeys: ['items.jwt.h1', 'items.jwt.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  restApi: {
+    id: 'restApi',
+    labelKey: 'items.restApi.label',
+    experienceTags: ['internship', 'regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.restApi.purpose',
+    summaryKey: 'items.restApi.summary',
+    highlightsKeys: ['items.restApi.h1', 'items.restApi.h2'],
     usedIn: [USED_IN.projects],
   },
   react: {
@@ -368,6 +457,30 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     highlightsKeys: ['items.babiaXr.h1', 'items.babiaXr.h2'],
     usedIn: [USED_IN.codeXr],
   },
+  vsCodeExtensionApi: {
+    id: 'vsCodeExtensionApi',
+    labelKey: 'items.vsCodeExtensionApi.label',
+    iconKey: 'vscode',
+    experienceTags: ['open_source'],
+    proficiency: 'intermediate',
+    purposeTag: 'open_source',
+    purposeKey: 'items.vsCodeExtensionApi.purpose',
+    summaryKey: 'items.vsCodeExtensionApi.summary',
+    highlightsKeys: ['items.vsCodeExtensionApi.h1', 'items.vsCodeExtensionApi.h2'],
+    usedIn: [USED_IN.codeXr],
+  },
+  webxr: {
+    id: 'webxr',
+    labelKey: 'items.webxr.label',
+    iconKey: 'xr',
+    experienceTags: ['open_source', 'academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'open_source',
+    purposeKey: 'items.webxr.purpose',
+    summaryKey: 'items.webxr.summary',
+    highlightsKeys: ['items.webxr.h1', 'items.webxr.h2'],
+    usedIn: [USED_IN.codeXr],
+  },
   ros2: {
     id: 'ros2',
     labelKey: 'items.ros2.label',
@@ -409,7 +522,7 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     labelKey: 'items.azureCosmos.label',
     iconKey: 'azure',
     experienceTags: ['academic'],
-    proficiency: 'basic',
+    proficiency: 'intermediate',
     purposeTag: 'academic',
     purposeKey: 'items.azureCosmos.purpose',
     summaryKey: 'items.azureCosmos.summary',
@@ -421,12 +534,36 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     labelKey: 'items.azureBlob.label',
     iconKey: 'azure',
     experienceTags: ['academic'],
-    proficiency: 'basic',
+    proficiency: 'intermediate',
     purposeTag: 'academic',
     purposeKey: 'items.azureBlob.purpose',
     summaryKey: 'items.azureBlob.summary',
     highlightsKeys: ['items.azureBlob.h1', 'items.azureBlob.h2'],
     usedIn: [USED_IN.projects],
+  },
+  room: {
+    id: 'room',
+    labelKey: 'items.room.label',
+    iconKey: 'sqlite',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.room.purpose',
+    summaryKey: 'items.room.summary',
+    highlightsKeys: ['items.room.h1', 'items.room.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  json: {
+    id: 'json',
+    labelKey: 'items.json.label',
+    iconKey: 'json',
+    experienceTags: ['open_source', 'regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'open_source',
+    purposeKey: 'items.json.purpose',
+    summaryKey: 'items.json.summary',
+    highlightsKeys: ['items.json.h1', 'items.json.h2'],
+    usedIn: [USED_IN.codeXr, USED_IN.projects],
   },
   git: {
     id: 'git',
@@ -469,11 +606,139 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     labelKey: 'items.androidStudio.label',
     iconKey: 'androidStudio',
     experienceTags: ['academic'],
-    proficiency: 'basic',
+    proficiency: 'intermediate',
     purposeTag: 'academic',
     purposeKey: 'items.androidStudio.purpose',
     summaryKey: 'items.androidStudio.summary',
     highlightsKeys: ['items.androidStudio.h1', 'items.androidStudio.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  googleMaps: {
+    id: 'googleMaps',
+    labelKey: 'items.googleMaps.label',
+    iconKey: 'googlemaps',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.googleMaps.purpose',
+    summaryKey: 'items.googleMaps.summary',
+    highlightsKeys: ['items.googleMaps.h1', 'items.googleMaps.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  gpx: {
+    id: 'gpx',
+    labelKey: 'items.gpx.label',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.gpx.purpose',
+    summaryKey: 'items.gpx.summary',
+    highlightsKeys: ['items.gpx.h1', 'items.gpx.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  foregroundService: {
+    id: 'foregroundService',
+    labelKey: 'items.foregroundService.label',
+    iconKey: 'android',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.foregroundService.purpose',
+    summaryKey: 'items.foregroundService.summary',
+    highlightsKeys: ['items.foregroundService.h1', 'items.foregroundService.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  fusedLocation: {
+    id: 'fusedLocation',
+    labelKey: 'items.fusedLocation.label',
+    iconKey: 'android',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.fusedLocation.purpose',
+    summaryKey: 'items.fusedLocation.summary',
+    highlightsKeys: ['items.fusedLocation.h1', 'items.fusedLocation.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  mpAndroidChart: {
+    id: 'mpAndroidChart',
+    labelKey: 'items.mpAndroidChart.label',
+    iconKey: 'android',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.mpAndroidChart.purpose',
+    summaryKey: 'items.mpAndroidChart.summary',
+    highlightsKeys: ['items.mpAndroidChart.h1', 'items.mpAndroidChart.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  doxygen: {
+    id: 'doxygen',
+    labelKey: 'items.doxygen.label',
+    iconKey: 'doxygen',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.doxygen.purpose',
+    summaryKey: 'items.doxygen.summary',
+    highlightsKeys: ['items.doxygen.h1', 'items.doxygen.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  uml: {
+    id: 'uml',
+    labelKey: 'items.uml.label',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.uml.purpose',
+    summaryKey: 'items.uml.summary',
+    highlightsKeys: ['items.uml.h1', 'items.uml.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  umlet: {
+    id: 'umlet',
+    labelKey: 'items.umlet.label',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.umlet.purpose',
+    summaryKey: 'items.umlet.summary',
+    highlightsKeys: ['items.umlet.h1', 'items.umlet.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  makefile: {
+    id: 'makefile',
+    labelKey: 'items.makefile.label',
+    iconKey: 'gnu',
+    experienceTags: ['academic'],
+    proficiency: 'advanced',
+    purposeTag: 'academic',
+    purposeKey: 'items.makefile.purpose',
+    summaryKey: 'items.makefile.summary',
+    highlightsKeys: ['items.makefile.h1', 'items.makefile.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  shellScripting: {
+    id: 'shellScripting',
+    labelKey: 'items.shellScripting.label',
+    iconKey: 'bash',
+    experienceTags: ['academic', 'regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.shellScripting.purpose',
+    summaryKey: 'items.shellScripting.summary',
+    highlightsKeys: ['items.shellScripting.h1', 'items.shellScripting.h2'],
+    usedIn: [USED_IN.projects, USED_IN.journey],
+  },
+  filePersistence: {
+    id: 'filePersistence',
+    labelKey: 'items.filePersistence.label',
+    experienceTags: ['academic'],
+    proficiency: 'intermediate',
+    purposeTag: 'academic',
+    purposeKey: 'items.filePersistence.purpose',
+    summaryKey: 'items.filePersistence.summary',
+    highlightsKeys: ['items.filePersistence.h1', 'items.filePersistence.h2'],
     usedIn: [USED_IN.projects],
   },
   wireshark: {
@@ -596,6 +861,17 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     highlightsKeys: ['items.agileScrum.h1', 'items.agileScrum.h2'],
     usedIn: [USED_IN.projects],
   },
+  mvvm: {
+    id: 'mvvm',
+    labelKey: 'items.mvvm.label',
+    experienceTags: ['academic'],
+    proficiency: 'basic',
+    purposeTag: 'academic',
+    purposeKey: 'items.mvvm.purpose',
+    summaryKey: 'items.mvvm.summary',
+    highlightsKeys: ['items.mvvm.h1', 'items.mvvm.h2'],
+    usedIn: [USED_IN.projects],
+  },
   githubCopilot: {
     id: 'githubCopilot',
     labelKey: 'items.githubCopilot.label',
@@ -621,7 +897,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     id: 'backend',
     titleKey: 'categories.backend.label',
     descriptionKey: 'categories.backend.desc',
-    skills: ['django', 'express'],
+    skills: ['nodejs', 'express', 'nestjs', 'restApi', 'swagger', 'jwt', 'django'],
   },
   {
     id: 'frontend',
@@ -633,25 +909,25 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     id: 'xrRobotics',
     titleKey: 'categories.xrRobotics.label',
     descriptionKey: 'categories.xrRobotics.desc',
-    skills: ['aframe', 'babiaXr', 'ros2'],
+    skills: ['vsCodeExtensionApi', 'webxr', 'aframe', 'babiaXr', 'ros2'],
   },
   {
     id: 'databasesCloud',
     titleKey: 'categories.databasesCloud.label',
     descriptionKey: 'categories.databasesCloud.desc',
-    skills: ['sql', 'postgresql', 'azureCosmos', 'azureBlob'],
+    skills: ['sql', 'postgresql', 'room', 'json', 'azureCosmos', 'azureBlob'],
   },
   {
     id: 'tools',
     titleKey: 'categories.tools.label',
     descriptionKey: 'categories.tools.desc',
-    skills: ['git', 'linux', 'vscode', 'androidStudio', 'wireshark', 'nmap', 'openssl', 'gpg', 'iptables', 'ufw'],
+    skills: ['git', 'linux', 'vscode', 'androidStudio', 'googleMaps', 'gpx', 'foregroundService', 'fusedLocation', 'mpAndroidChart', 'doxygen', 'uml', 'umlet', 'makefile', 'shellScripting', 'filePersistence', 'wireshark', 'nmap', 'openssl', 'gpg', 'iptables', 'ufw'],
   },
   {
     id: 'methodologies',
     titleKey: 'categories.methodologies.label',
     descriptionKey: 'categories.methodologies.desc',
-    skills: ['azureDevOps', 'agileScrum'],
+    skills: ['mvvm', 'azureDevOps', 'agileScrum'],
   },
   {
     id: 'other',
@@ -660,3 +936,4 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     skills: ['promptEngineering', 'aiModels', 'githubCopilot'],
   }
 ]
+

@@ -1,36 +1,68 @@
 /**
- * Testimonials and Recommendations
- * Quotes from colleagues, mentors, and collaborators
+ * Public recommendation summaries.
+ * The original PDFs are intentionally not exposed as downloadable assets.
  */
 
-export interface Testimonial {
-  id: string
+export type RecommendationType = 'academic' | 'professional' | 'formal'
+
+export interface Recommendation {
+  id: 'vbgroup-abner' | 'david-moreno' | 'vbgroup-formal'
   name: string
-  role: string
-  organization?: string
-  quote: string // i18n key
-  avatar?: string
-  link?: string // LinkedIn or website
-  type: 'colleague' | 'mentor' | 'manager' | 'client'
+  roleKey: string
+  organization: string
+  relationshipKey: string
+  date: string
+  type: RecommendationType
+  summaryKey: string
+  strengthKeys: string[]
 }
 
-export const TESTIMONIALS: Testimonial[] = [
+export const RECOMMENDATIONS: Recommendation[] = [
   {
-    id: 'mentor-1',
-    name: 'Pending',
-    role: 'Mentor',
-    quote: 'testimonials.pending',
-    type: 'mentor',
+    id: 'vbgroup-abner',
+    name: 'Abner Alejandro Magaña H.',
+    roleKey: 'recommendations.vbgroup-abner.role',
+    organization: 'VB Group',
+    relationshipKey: 'recommendations.vbgroup-abner.relationship',
+    date: 'Jan 2026',
+    type: 'professional',
+    summaryKey: 'recommendations.vbgroup-abner.summary',
+    strengthKeys: [
+      'recommendations.vbgroup-abner.strengths.backend',
+      'recommendations.vbgroup-abner.strengths.cloud',
+      'recommendations.vbgroup-abner.strengths.autonomy',
+      'recommendations.vbgroup-abner.strengths.attitude',
+    ],
   },
-  // Add testimonials from colleagues, managers, clients as they come in
-  // Format:
-  // {
-  //   id: 'vbgroup-manager',
-  //   name: 'John Doe',
-  //   role: 'Tech Lead',
-  //   organization: 'VBGroup',
-  //   quote: 'testimonials.vbgroupManager',
-  //   link: 'https://linkedin.com/in/johndoe',
-  //   type: 'manager',
-  // }
+  {
+    id: 'david-moreno',
+    name: 'David Moreno Lumbreras',
+    roleKey: 'recommendations.david-moreno.role',
+    organization: 'Universidad Rey Juan Carlos',
+    relationshipKey: 'recommendations.david-moreno.relationship',
+    date: 'Jul 2025',
+    type: 'academic',
+    summaryKey: 'recommendations.david-moreno.summary',
+    strengthKeys: [
+      'recommendations.david-moreno.strengths.autonomy',
+      'recommendations.david-moreno.strengths.method',
+      'recommendations.david-moreno.strengths.communication',
+      'recommendations.david-moreno.strengths.collaboration',
+    ],
+  },
+  {
+    id: 'vbgroup-formal',
+    name: 'VB Group',
+    roleKey: 'recommendations.vbgroup-formal.role',
+    organization: 'VB Group S.L.',
+    relationshipKey: 'recommendations.vbgroup-formal.relationship',
+    date: 'Jan 2026',
+    type: 'formal',
+    summaryKey: 'recommendations.vbgroup-formal.summary',
+    strengthKeys: [
+      'recommendations.vbgroup-formal.strengths.commitment',
+      'recommendations.vbgroup-formal.strengths.it',
+      'recommendations.vbgroup-formal.strengths.reference',
+    ],
+  },
 ]

@@ -6,7 +6,7 @@ on:
   # Auto trigger when en.json changes
   push:
     paths:
-      - 'src/app/_i18n/dictionaries/en.json'
+      - 'src/i18n/messages/en.json'
     branches:
       - main
 
@@ -20,7 +20,7 @@ jobs:
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # Need full history for proper diff
           fetch-depth: 0
@@ -44,7 +44,7 @@ jobs:
       - name: Check for changes
         id: verify-changed-files
         run: |
-          if git diff --quiet HEAD src/app/_i18n/dictionaries/es.json; then
+          if git diff --quiet HEAD src/i18n/messages/es.json; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
@@ -63,7 +63,7 @@ jobs:
             This PR was automatically generated to update Spanish translations based on changes to the English dictionary.
             
             ### Changes
-            - 📝 Updated `src/app/_i18n/dictionaries/es.json`
+            - Updated `src/i18n/messages/es.json`
             - 🤖 Generated using automated translation service
             - ✅ Ready for review and merge
             

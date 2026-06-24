@@ -2,185 +2,249 @@
 
 import { useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
-import { Container } from '@/components/ui/Container'
-import { SectionHeading } from '@/components/ui/SectionHeading'
+import type { IconType } from 'react-icons'
+import { FaAward, FaCode, FaLanguage, FaUniversity } from 'react-icons/fa'
+import { CheckIcon, ClockIcon, ExternalLinkIcon, PinIcon, SectionHeader, SectionShell } from '@/components/ui'
+import { localizePath, useLocale } from '@/i18n'
 import { EASING, DURATION, fadeInUp } from '@/lib/motion'
+import { cn } from '@/lib/utils'
 import { CERTIFICATIONS } from '@/content/certifications'
+import { getTechIcon } from '@/features/projects/components/TechTag'
+
+const statusOrder = ['completed', 'in-progress', 'planned'] as const
+
+const statusConfig = {
+  completed: {
+    colors: 'border-emerald-400/25 bg-emerald-400/10 text-emerald-300',
+    dot: 'bg-emerald-400',
+    Icon: CheckIcon,
+    labelKey: 'completed',
+  },
+  'in-progress': {
+    colors: 'border-amber-300/25 bg-amber-300/10 text-amber-200',
+    dot: 'bg-amber-300',
+    Icon: ClockIcon,
+    labelKey: 'inProgress',
+  },
+  planned: {
+    colors: 'border-sky-300/25 bg-sky-300/10 text-sky-200',
+    dot: 'bg-sky-300',
+    Icon: PinIcon,
+    labelKey: 'planned',
+  },
+} as const
+
+function getTagIcon(tag: string): IconType {
+  const normalized = tag.toLowerCase()
+
+  if (normalized.includes('urjc') || normalized.includes('upm')) return FaUniversity
+  if (normalized.includes('english') || normalized.includes('professional development')) return FaLanguage
+  if (normalized.includes('vissoft') || normalized.includes('icsme') || normalized.includes('code-xr')) return FaAward
+
+  const TechIcon = getTechIcon(tag)
+  return TechIcon === FaCode ? FaCode : TechIcon
+}
+
+function formatCertificationDate(date: string, locale: string) {
+  if (!date) return ''
+
+  if (/^\d{4}-Q[1-4]$/.test(date)) {
+    const [year, quarter] = date.split('-')
+    return `${quarter} ${year}`
+  }
+
+  if (/^\d{4}-\d{2}$/.test(date)) {
+    const [year, month] = date.split('-')
+    return new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }).format(
+      new Date(Number(year), Number(month) - 1, 1),
+    )
+  }
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }).format(new Date(date))
+  }
+
+  return date
+}
 
 export function CertificationsSection() {
   const t = useTranslations('certificates')
 
   const groupedByStatus = {
-    completed: CERTIFICATIONS.filter((c) => c.status === 'completed'),
-    'in-progress': CERTIFICATIONS.filter((c) => c.status === 'in-progress'),
-    planned: CERTIFICATIONS.filter((c) => c.status === 'planned'),
+    completed: CERTIFICATIONS.filter((cert) => cert.status === 'completed'),
+    'in-progress': CERTIFICATIONS.filter((cert) => cert.status === 'in-progress'),
+    planned: CERTIFICATIONS.filter((cert) => cert.status === 'planned'),
   }
 
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden">
-      <Container>
-        {/* Background accent */}
+    <SectionShell id="certifications">
         <div className="absolute inset-0 -z-10 pointer-events-none">
-          <div className="absolute top-1/2 left-0 w-96 h-96 rounded-full bg-gradient-to-r from-[var(--accent)]/5 to-transparent blur-3xl" />
+          <div className="absolute left-0 top-1/3 h-80 w-80 rounded-full bg-[var(--accent)]/5 blur-3xl" />
         </div>
 
-        {/* Heading */}
-        <motion.div
-          className="mb-12 md:mb-16"
-          {...fadeInUp()}
-        >
-          <SectionHeading
-            title={t('title')}
-            subtitle={t('subtitle')}
-            centered
-          />
+        <motion.div className="mb-10 md:mb-14" {...fadeInUp()}>
+          <SectionHeader kicker="Professional record" title={t('title')} subtitle={t('subtitle')} align="left" />
         </motion.div>
 
-        {/* Certifications by status */}
         <motion.div
-          className="space-y-12"
+          className="mx-auto grid max-w-6xl grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.75fr)]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
           variants={{
-            visible: {
-              transition: {
-                staggerChildren: 0.15,
-              },
-            },
+            visible: { transition: { staggerChildren: 0.12 } },
             hidden: {},
           }}
         >
-          {/* Completed */}
-          {groupedByStatus.completed.length > 0 && (
-            <motion.div {...fadeInUp()}>
-              <h3 className="text-lg font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
-                <span className="inline-block w-8 h-8 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center text-green-400 text-sm font-bold">
-                  {groupedByStatus.completed.length}
-                </span>
-                {t('completed')}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {groupedByStatus.completed.map((cert) => (
-                  <CertificationCard key={cert.id} cert={cert} />
-                ))}
-              </div>
-            </motion.div>
-          )}
+          <CertificationStatusPanel status="completed" items={groupedByStatus.completed} />
 
-          {/* In Progress */}
-          {groupedByStatus['in-progress'].length > 0 && (
-            <motion.div {...fadeInUp()}>
-              <h3 className="text-lg font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
-                <span className="inline-block w-8 h-8 rounded-full bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center text-yellow-400 text-sm font-bold">
-                  {groupedByStatus['in-progress'].length}
-                </span>
-                {t('inProgress')}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {groupedByStatus['in-progress'].map((cert) => (
-                  <CertificationCard key={cert.id} cert={cert} />
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Planned */}
-          {groupedByStatus.planned.length > 0 && (
-            <motion.div {...fadeInUp()}>
-              <h3 className="text-lg font-semibold text-[var(--fg)] mb-6 flex items-center gap-2">
-                <span className="inline-block w-8 h-8 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-sm font-bold">
-                  {groupedByStatus.planned.length}
-                </span>
-                {t('planned')}
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {groupedByStatus.planned.map((cert) => (
-                  <CertificationCard key={cert.id} cert={cert} />
-                ))}
-              </div>
-            </motion.div>
-          )}
+          <div className="grid min-w-0 gap-5">
+            {statusOrder
+              .filter((status) => status !== 'completed')
+              .map((status) => (
+                <CertificationStatusPanel key={status} status={status} items={groupedByStatus[status]} compact />
+              ))}
+          </div>
         </motion.div>
-      </Container>
-    </section>
+    </SectionShell>
+  )
+}
+
+function CertificationStatusPanel({
+  status,
+  items,
+  compact = false,
+}: {
+  status: (typeof statusOrder)[number]
+  items: typeof CERTIFICATIONS
+  compact?: boolean
+}) {
+  const t = useTranslations('certificates')
+  const config = statusConfig[status]
+  const Icon = config.Icon
+
+  return (
+    <motion.section
+      className={cn(
+        'min-w-0 overflow-hidden rounded-2xl border border-[var(--border)]/70 bg-[var(--surface)]/40 shadow-[0_24px_80px_rgba(0,0,0,0.18)] backdrop-blur-sm',
+        compact ? 'p-4 sm:p-5' : 'p-4 sm:p-5 lg:p-6'
+      )}
+      {...fadeInUp()}
+    >
+      <div className="mb-5 flex min-w-0 items-center justify-between gap-3 border-b border-[var(--border)]/45 pb-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <span className={cn('flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border', config.colors)}>
+            <Icon className="h-4 w-4" />
+          </span>
+          <div className="min-w-0">
+            <h3 className="min-w-0 text-base font-semibold text-[var(--fg)]">
+              {t(config.labelKey)}
+            </h3>
+            <p className="mt-0.5 text-xs text-[var(--fg-muted)]">
+              {t(`statusDescriptions.${status}`)}
+            </p>
+          </div>
+        </div>
+        <span className="rounded-full border border-[var(--border)]/70 bg-black/22 px-2.5 py-1 text-xs font-medium text-[var(--fg-muted)]">
+          {items.length}
+        </span>
+      </div>
+
+      <div className={cn('grid gap-3', !compact && 'md:grid-cols-2')}>
+        {items.map((cert) => (
+          <CertificationCard key={cert.id} cert={cert} compact={compact} />
+        ))}
+      </div>
+    </motion.section>
   )
 }
 
 function CertificationCard({
   cert,
+  compact = false,
 }: {
   cert: (typeof CERTIFICATIONS)[0]
+  compact?: boolean
 }) {
   const t = useTranslations('certificates')
+  const { locale } = useLocale()
+  const config = statusConfig[cert.status]
 
-  const statusConfig = {
-    completed: { colors: 'bg-green-500/10 border-green-500/30 text-green-400', icon: '✓' },
-    'in-progress': { colors: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400', icon: '⟳' },
-    planned: { colors: 'bg-blue-500/10 border-blue-500/30 text-blue-400', icon: '📌' },
-  }
-
-  const { colors: statusColors, icon: statusIcon } = statusConfig[cert.status]
+  const translatableCertKeys = [
+    'cambridgeC1',
+    'masterTelecomUPM',
+    'masterTelecomUPMIssuer',
+    'telematicsDegree',
+    'telematicsDegreeIssuer',
+    'codeXrAward',
+    'codeXrAwardIssuer',
+    'greenhouseHighDistinction',
+    'greenhouseHighDistinctionIssuer',
+    'stepByStepHighDistinction',
+    'stepByStepHighDistinctionIssuer',
+  ]
+  const name = translatableCertKeys.includes(cert.name) ? t(cert.name) : cert.name
+  const issuer = translatableCertKeys.includes(cert.issuer) ? t(cert.issuer) : cert.issuer
+  const href = cert.linkType === 'internal' && cert.link ? localizePath(cert.link, locale) : cert.link
 
   return (
-    <motion.div
-      className="rounded-lg border border-[var(--border)] bg-[var(--card)] p-5 transition-all duration-200 hover:border-[var(--accent)]/20"
+    <motion.article
+      className={cn(
+        'group flex min-h-full flex-col rounded-xl border border-[var(--border)]/75 bg-black/16 p-4 transition-all duration-200',
+        'hover:border-[var(--accent)]/32 hover:bg-[var(--card)]/68 hover:shadow-[0_18px_55px_rgba(0,0,0,0.22)]',
+        compact ? 'min-h-[11rem]' : 'min-h-[13rem]'
+      )}
       whileHover={{ y: -2 }}
       transition={{ duration: DURATION.fast, ease: EASING }}
     >
-      {/* Header */}
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <div className="flex-1 min-w-0">
-          <h4 className="font-medium text-[var(--fg)] text-sm truncate">
-            {cert.name.startsWith('certificates.')
-              ? t(cert.name)
-              : cert.name}
+      <div className="mb-3 flex min-h-[4.25rem] min-w-0 items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h4 className="text-sm font-semibold leading-snug text-[var(--fg)]">
+            {name}
           </h4>
-          <p className="text-xs text-[var(--fg)]/60 mt-1">
-            {cert.issuer.startsWith('certificates.')
-              ? t(cert.issuer)
-              : cert.issuer}
+          <p className="mt-1 text-xs leading-relaxed text-[var(--fg-muted)]">
+            {issuer}
           </p>
         </div>
-        <div className={`px-2 py-1 rounded text-xs font-medium flex items-center gap-1 whitespace-nowrap ${statusColors}`}>
-          {statusIcon}
-        </div>
+        <span className={cn('mt-1 h-2.5 w-2.5 shrink-0 rounded-full shadow-[0_0_16px_currentColor]', config.dot)} />
       </div>
 
-      {/* Date & Tags */}
-      <div className="space-y-3">
-        {cert.date && (
-          <p className="text-xs text-[var(--fg)]/50">
-            {cert.date === 'In Progress' ? cert.date : new Date(cert.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short' })}
-          </p>
-        )}
+      <div className="mb-3 flex min-h-5 flex-wrap items-center gap-2 text-xs text-[var(--fg)]/55">
+        <span>{formatCertificationDate(cert.date, locale)}</span>
+      </div>
 
-        {cert.tags && cert.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {cert.tags.map((tag) => (
+      {cert.tags && cert.tags.length > 0 && (
+        <div className="flex min-h-[4.25rem] flex-wrap content-start gap-1.5">
+          {cert.tags.map((tag) => {
+            const TagIcon = getTagIcon(tag)
+
+            return (
               <span
                 key={tag}
-                className="inline-block px-2 py-0.5 rounded text-xs bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/20"
+                className="inline-flex min-h-6 items-center gap-1.5 rounded-full border border-[var(--accent)]/16 bg-[var(--accent)]/8 px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]"
               >
-                {tag}
+                <TagIcon className="h-3 w-3 shrink-0 opacity-85" aria-hidden />
+                <span>{tag}</span>
               </span>
-            ))}
-          </div>
-        )}
-      </div>
+            )
+          })}
+        </div>
+      )}
 
-      {/* Link */}
-      {cert.link && (
+      <div className="mt-auto flex min-h-9 items-end pt-4">
+      {href ? (
         <motion.a
-          href={cert.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center text-xs text-[var(--accent)] hover:text-[var(--accent)]/80 transition-colors group"
+          href={href}
+          target={cert.linkType === 'internal' ? undefined : '_blank'}
+          rel={cert.linkType === 'internal' ? undefined : 'noopener noreferrer'}
+          className="inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[var(--accent)] transition-colors hover:text-[var(--fg)]"
           whileHover={{ x: 2 }}
         >
-          {t('verify')} <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+          {t('verify')}
+          <ExternalLinkIcon className="h-3.5 w-3.5" />
         </motion.a>
-      )}
-    </motion.div>
+      ) : null}
+      </div>
+    </motion.article>
   )
 }

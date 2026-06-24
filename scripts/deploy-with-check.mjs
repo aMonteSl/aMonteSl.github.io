@@ -1,22 +1,18 @@
 #!/usr/bin/env node
 
-import { execSync } from 'child_process'
-import * as fs from 'fs'
-import * as path from 'path'
+import { execFileSync } from 'child_process'
 import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const DEPLOY_COUNT_FILE = path.join(__dirname, '..', '.deploycount')
-const SITE_URL = 'https://amontesl.github.io'
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const ROOT = resolve(__dirname, '..')
 
-// Colors for terminal output
 const colors = {
   reset: '\x1b[0m',
   bright: '\x1b[1m',
   green: '\x1b[32m',
   red: '\x1b[31m',
   yellow: '\x1b[33m',
-  blue: '\x1b[34m',
   cyan: '\x1b[36m',
 }
 
@@ -24,106 +20,75 @@ function log(color, text) {
   console.log(`${colors[color] || ''}${text}${colors.reset}`)
 }
 
-function getCommitNumber() {
-  try {
-    if (fs.existsSync(DEPLOY_COUNT_FILE)) {
-      const content = fs.readFileSync(DEPLOY_COUNT_FILE, 'utf-8').trim()
-      return parseInt(content) + 1
-    }
-  } catch (e) {
-    // File doesn't exist, start at 1
-  }
-  return 1
+function run(command, args, options = {}) {
+  return execFileSync(command, args, {
+    cwd: ROOT,
+    encoding: 'utf-8',
+    stdio: options.capture ? 'pipe' : 'inherit',
+    shell: process.platform === 'win32',
+  })
 }
 
-function saveCommitNumber(num) {
-  fs.writeFileSync(DEPLOY_COUNT_FILE, num.toString())
+function git(args, options = {}) {
+  return run('git', args, options)
+}
+
+function npm(args) {
+  return run('npm', args)
+}
+
+function getCurrentBranch() {
+  return git(['branch', '--show-current'], { capture: true }).trim()
 }
 
 function getCommitMessage() {
-  // Get message from command line arguments
-  const args = process.argv.slice(2)
-  const customMessage = args.join(' ').trim()
-  
-  const commitNum = getCommitNumber()
-  
-  if (customMessage) {
-    return `${customMessage} (Commit${commitNum})`
-  } else {
-    return `Commit${commitNum}`
-  }
+  const message = process.argv.slice(2).join(' ').trim()
+  return message || 'chore: ship portfolio updates'
 }
 
-async function main() {
-  log('bright', '\n🚀 Iniciando Deploy a GitHub Pages\n')
+function hasChanges() {
+  return git(['status', '--porcelain'], { capture: true }).trim().length > 0
+}
 
-  const commitNum = getCommitNumber()
+function main() {
+  log('bright', '\nPreparing portfolio branch for GitHub\n')
+
+  const branch = getCurrentBranch()
+  if (!branch) {
+    log('red', 'Could not detect the current branch.')
+    process.exit(1)
+  }
+
+  if (branch === 'main') {
+    log('red', 'Refusing to commit or push directly to main. Create a feature branch first.')
+    process.exit(1)
+  }
+
+  log('cyan', 'Running checks...')
+  npm(['run', 'check'])
+
+  log('cyan', 'Building static export...')
+  npm(['run', 'build'])
+
+  if (!hasChanges()) {
+    log('yellow', 'No changes to commit. Pushing the current branch anyway.')
+    git(['push', '-u', 'origin', branch])
+    return
+  }
+
   const commitMessage = getCommitMessage()
 
-  // Step 1: Git Add
-  log('cyan', '⏳ Git add...')
-  try {
-    execSync('git add .', { encoding: 'utf-8', stdio: 'pipe' })
-    log('green', '✅ Git add')
-  } catch (error) {
-    log('red', '❌ Git add falló')
-    process.exit(1)
-  }
+  log('cyan', 'Staging changes...')
+  git(['add', '-A'])
 
-  // Step 2: Git Commit
-  log('cyan', '⏳ Git commit...')
-  try {
-    execSync(`git commit -m "${commitMessage}"`, { encoding: 'utf-8', stdio: 'pipe' })
-    log('green', '✅ Git commit')
-  } catch (error) {
-    const msg = error.message || ''
-    if (msg.includes('nothing to commit')) {
-      log('yellow', '⚠️  No hay cambios. Creando commit vacío para disparar deploy...')
-      try {
-        execSync(`git commit --allow-empty -m "${commitMessage}"`, { encoding: 'utf-8', stdio: 'pipe' })
-        log('green', '✅ Commit vacío creado')
-      } catch (emptyError) {
-        log('red', '❌ Git commit vacío falló')
-        log('red', (emptyError.message || '').substring(0, 300))
-        process.exit(1)
-      }
-    } else {
-      log('red', '❌ Git commit falló')
-      log('red', msg.substring(0, 300))
-      process.exit(1)
-    }
-  }
+  log('cyan', `Creating commit: ${commitMessage}`)
+  git(['commit', '-m', commitMessage])
 
-  // Step 3: Git Push
-  log('cyan', '⏳ Git push...')
-  try {
-    execSync('git push origin main', { encoding: 'utf-8', stdio: 'pipe' })
-    log('green', '✅ Git push')
-  } catch (error) {
-    log('red', '❌ Git push falló')
-    log('red', error.message.substring(0, 300))
-    process.exit(1)
-  }
+  log('cyan', `Pushing ${branch}...`)
+  git(['push', '-u', 'origin', branch])
 
-  log('green', `✅ ${commitMessage} enviado a main\n`)
-
-  // Save the commit number for next time
-  saveCommitNumber(commitNum)
-
-  // Final success message
-  log('bright', '\n' + '='.repeat(60))
-  log('green', '✅ DEPLOY INICIADO')
-  log('bright', '='.repeat(60))
-  log('cyan', `Commit: ${commitMessage}`)
-  log('cyan', `GitHub Actions: https://github.com/aMonteSl/aMonteSl.github.io/actions`)
-  log('cyan', `Sitio: ${SITE_URL}`)
-  log('yellow', 'Los cambios se desplegarán en 1-2 minutos...')
-  log('bright', '='.repeat(60) + '\n')
-
-  process.exit(0)
+  log('green', `\nBranch pushed: ${branch}`)
+  log('cyan', 'Open a pull request into main to trigger the reviewed GitHub Pages deploy.')
 }
 
-main().catch(error => {
-  log('red', `\n❌ Error fatal: ${error.message}\n`)
-  process.exit(1)
-})
+main()

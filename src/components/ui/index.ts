@@ -18,7 +18,36 @@ export { Chip } from './Chip'
 export type { ChipProps } from './Chip'
 
 export { SectionHeading } from './SectionHeading'
+export {
+  DividerLine,
+  IconButton,
+  Kicker,
+  LinkButton,
+  MetricTile,
+  SectionHeader,
+  SectionShell,
+  StatusPill,
+  Surface,
+} from './layout'
+export type { SectionHeaderProps, SectionShellProps, SurfaceProps, MetricTileProps } from './layout'
 
 export { ImageCarousel } from './ImageCarousel'
+
+export {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CheckIcon,
+  ClockIcon,
+  CloseIcon,
+  EmailIcon,
+  ExternalLinkIcon,
+  GitHubIcon,
+  LinkedInIcon,
+  MenuIcon,
+  PinIcon,
+  SparkIcon,
+} from './icons'
 export type { ImageCarouselProps, AspectRatioPreset } from './ImageCarousel'
 export type { SectionHeadingProps } from './SectionHeading'

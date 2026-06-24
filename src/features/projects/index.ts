@@ -1,6 +1,6 @@
 export { ProjectPageClient } from './ProjectPageClient'
-export { ProjectCard } from './ProjectCard'
 export { FeaturedProjectsSection } from './FeaturedProjectsSection'
 export { TechTag, getTechIcon, techIconMap } from './components/TechTag'
+export { getLocalizedProjects, getProjectBySlug, getProjectSeoImage, getProjects } from './data'
 export type { Project, LocalizedProject, ProjectType } from './types'
-export { getLocalizedProject, getProjectImagePaths, getProjectHeroPath, projectHasImages } from './types'
+export { getLocalizedProject, getLocalizedProjectTitle, getProjectImagePaths, getProjectHeroPath, projectHasImages } from './types'

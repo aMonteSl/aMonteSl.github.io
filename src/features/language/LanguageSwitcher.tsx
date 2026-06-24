@@ -1,9 +1,12 @@
 'use client'
 
-import { useLocale, locales, localeNames, Locale } from '@/i18n'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useLocale, locales, localeNames, localizePath, Locale } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { GB, ES } from 'country-flag-icons/react/3x2'
 import type { ReactElement } from 'react'
+import { PREFERRED_LOCALE_STORAGE_KEY } from './LocalePreferenceGate'
 
 // Map locales to their flag components
 const FlagComponents: Record<Locale, () => ReactElement> = {
@@ -12,11 +15,8 @@ const FlagComponents: Record<Locale, () => ReactElement> = {
 }
 
 export function LanguageSwitcher() {
-  const { locale, setLocale } = useLocale()
-
-  const handleLanguageChange = (newLocale: Locale) => {
-    setLocale(newLocale)
-  }
+  const { locale } = useLocale()
+  const pathname = usePathname()
 
   return (
     <div
@@ -28,9 +28,12 @@ export function LanguageSwitcher() {
         const isActive = locale === loc
         const FlagIcon = FlagComponents[loc]
         return (
-          <button
+          <Link
             key={loc}
-            onClick={() => handleLanguageChange(loc)}
+            href={localizePath(pathname, loc)}
+            onClick={() => {
+              window.localStorage.setItem(PREFERRED_LOCALE_STORAGE_KEY, loc)
+            }}
             aria-label={`Switch to ${localeNames[loc]}`}
             aria-pressed={isActive}
             title={localeNames[loc]}
@@ -49,7 +52,7 @@ export function LanguageSwitcher() {
             {isActive && (
               <span className="sr-only">(current language)</span>
             )}
-          </button>
+          </Link>
         )
       })}
     </div>

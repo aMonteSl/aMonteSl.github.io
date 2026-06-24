@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
-import { readFile, writeFile, stat } from 'fs/promises'
+import { readFile, stat } from 'fs/promises'
 import { join } from 'path'
+import { pathToFileURL } from 'url'
 
 /**
  * Script de verificación de traducción para i18n
  * Verifica si es necesario traducir en.json a es.json
  */
 
-const DICTIONARIES_PATH = './src/app/_i18n/dictionaries'
+const DICTIONARIES_PATH = './src/i18n/messages'
 const EN_FILE = join(DICTIONARIES_PATH, 'en.json')
 const ES_FILE = join(DICTIONARIES_PATH, 'es.json')
 
@@ -52,7 +53,7 @@ async function main() {
         }
       }
       
-    } catch (error) {
+    } catch {
       console.log('📄 Archivo español no existe o es inválido')
       shouldTranslate = true
     }
@@ -83,7 +84,11 @@ async function main() {
   }
 }
 
+function isMainModule() {
+  return import.meta.url === pathToFileURL(process.argv[1]).href
+}
+
 // Ejecutar si es llamado directamente
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (isMainModule()) {
   main()
 }

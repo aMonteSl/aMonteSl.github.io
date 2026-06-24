@@ -1,8 +1,8 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react'
-import { IntlProvider } from 'next-intl'
-import { Locale, defaultLocale, locales } from './config'
+import { createContext, useContext, useEffect, type ReactNode } from 'react'
+import { NextIntlClientProvider } from 'next-intl'
+import { Locale, defaultLocale } from './config'
 
 // Import messages statically
 import enMessages from './messages/en.json'
@@ -15,61 +15,32 @@ const messages: Record<Locale, typeof enMessages> = {
 
 interface LocaleContextType {
   locale: Locale
-  setLocale: (locale: Locale) => void
 }
 
 const LocaleContext = createContext<LocaleContextType | null>(null)
 
-const LOCALE_STORAGE_KEY = 'portfolio-locale'
-
-function getStoredLocale(): Locale {
-  if (typeof window === 'undefined') return defaultLocale
-  const stored = localStorage.getItem(LOCALE_STORAGE_KEY)
-  if (stored && locales.includes(stored as Locale)) {
-    return stored as Locale
-  }
-  return defaultLocale
-}
-
 interface I18nProviderProps {
   children: ReactNode
+  locale?: Locale
 }
 
-export function I18nProvider({ children }: I18nProviderProps) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale)
-  const [mounted, setMounted] = useState(false)
-
-  // Initialize locale from localStorage on mount
-  useEffect(() => {
-    setLocaleState(getStoredLocale())
-    setMounted(true)
-  }, [])
-
-  // Update document lang attribute when locale changes
-  useEffect(() => {
-    if (mounted) {
-      document.documentElement.lang = locale
-    }
-  }, [locale, mounted])
-
-  const setLocale = useCallback((newLocale: Locale) => {
-    setLocaleState(newLocale)
-    localStorage.setItem(LOCALE_STORAGE_KEY, newLocale)
-  }, [])
-
-  // Prevent hydration mismatch by using default locale until mounted
-  const currentLocale = mounted ? locale : defaultLocale
+export function I18nProvider({ children, locale = defaultLocale }: I18nProviderProps) {
+  const currentLocale = locale
   const currentMessages = messages[currentLocale]
 
+  useEffect(() => {
+    document.documentElement.lang = currentLocale
+  }, [currentLocale])
+
   return (
-    <LocaleContext.Provider value={{ locale: currentLocale, setLocale }}>
-      <IntlProvider
+    <LocaleContext.Provider value={{ locale: currentLocale }}>
+      <NextIntlClientProvider
         locale={currentLocale}
         messages={currentMessages}
         timeZone="Europe/Madrid"
       >
         {children}
-      </IntlProvider>
+      </NextIntlClientProvider>
     </LocaleContext.Provider>
   )
 }

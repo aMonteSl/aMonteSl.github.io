@@ -1,14 +1,23 @@
-import { ButtonHTMLAttributes, ReactNode, forwardRef } from 'react'
+import {
+  cloneElement,
+  forwardRef,
+  isValidElement,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+  type Ref,
+  type RefAttributes,
+} from 'react'
 import { cn } from '@/lib/utils'
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLElement> {
   variant?: 'primary' | 'ghost' | 'outline'
   size?: 'sm' | 'md' | 'lg'
   children: ReactNode
   asChild?: boolean
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
+export const Button = forwardRef<HTMLElement, ButtonProps>(({
   variant = 'primary',
   size = 'md',
   className,
@@ -38,17 +47,23 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   )
 
   if (asChild) {
-    return (
-      <span className={classes}>
-        {children}
-      </span>
-    )
+    if (!isValidElement(children)) {
+      return <span className={classes}>{children}</span>
+    }
+
+    const child = children as ReactElement<{ className?: string }>
+
+    return cloneElement(child, {
+      ...props,
+      ref,
+      className: cn(classes, child.props.className),
+    } as HTMLAttributes<HTMLElement> & RefAttributes<HTMLElement>)
   }
 
   return (
     <button
       className={classes}
-      ref={ref}
+      ref={ref as Ref<HTMLButtonElement>}
       {...props}
     >
       {children}
