@@ -23,7 +23,9 @@ RDAP availability was checked on 2026-06-24. Treat these results as a strong scr
 
 ## Default choice
 
-Use `adrianmonteslinares.com` as the primary canonical domain when purchased.
+Use `adrianmonteslinares.com` as the primary canonical domain.
+
+Status on 2026-06-24: purchased and prepared in this repository through `public/CNAME` and `LINKS.website`.
 
 Keep all other bought domains as redirects to:
 

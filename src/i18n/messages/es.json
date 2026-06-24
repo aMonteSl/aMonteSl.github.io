@@ -798,6 +798,8 @@
     "present": "Actualidad",
     "hoverHint": "Selecciona un elemento para ver detalles",
     "selectedMilestone": "Hito seleccionado",
+    "ongoing": "Activo",
+    "viewMore": "Ver más",
     "clickYearHint": "Haz clic en un año para ver el detalle mensual",
     "legend": {
       "education": "Formación",

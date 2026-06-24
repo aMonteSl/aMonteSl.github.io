@@ -195,13 +195,6 @@ export function ParallelStreamsSection() {
 
   const todayLabel = useMemo(() => formatHighlightDate(today), [formatHighlightDate, today])
 
-  const formatShortJourneyDate = useCallback((date: JourneyDate) => {
-    return new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', {
-      month: 'short',
-      day: 'numeric',
-    }).format(toLocalDate(date)).replace('.', '')
-  }, [locale])
-
   const activeHighlight = useMemo(() => {
     if (!activeEntry || !activeHighlightRef || activeEntry.id !== activeHighlightRef.entryId) {
       return null
@@ -419,38 +412,17 @@ export function ParallelStreamsSection() {
     setSelectedHighlight(null)
   }, [])
 
-  const mobileTimelineEntries = useMemo(() => {
-    return JOURNEY_ENTRIES
-      .filter((entry) => visibleLanes.has(entry.lane))
-      .sort((a, b) => {
-        const aEnd = toLocalDate(getEntryEndDate(a, today)).getTime()
-        const bEnd = toLocalDate(getEntryEndDate(b, today)).getTime()
+  const verticalFocusedEntry = useMemo(() => {
+    const focusedId = selectedHighlight?.entryId ?? selectedEntry
+    return focusedId ? JOURNEY_ENTRIES.find((entry) => entry.id === focusedId) ?? null : null
+  }, [selectedEntry, selectedHighlight])
 
-        if (aEnd !== bEnd) {
-          return bEnd - aEnd
-        }
+  const getVerticalTop = useCallback((date: JourneyDate) => (
+    100 - dateToTimelinePercent(date, timelineEndYear)
+  ), [timelineEndYear])
 
-        return toLocalDate(getEntryStartDate(b)).getTime() - toLocalDate(getEntryStartDate(a)).getTime()
-      })
-  }, [today, visibleLanes])
-
-  const mobileEntriesByYear = useMemo(() => {
-    return mobileTimelineEntries.reduce<Array<{ year: number; entries: JourneyEntry[] }>>((groups, entry) => {
-      const year = getEntryEndDate(entry, today).year
-      const currentGroup = groups[groups.length - 1]
-
-      if (currentGroup?.year === year) {
-        currentGroup.entries.push(entry)
-      } else {
-        groups.push({ year, entries: [entry] })
-      }
-
-      return groups
-    }, [])
-  }, [mobileTimelineEntries, today])
-
-  const renderDetailCard = () => (
-    <div className="mt-10 min-h-[190px]">
+  const renderDetailCard = (className = 'mt-10') => (
+    <div className={cn(className, 'min-h-[190px]')}>
       <AnimatePresence mode="wait">
         {activeEntry ? (
           <motion.div
@@ -485,6 +457,8 @@ export function ParallelStreamsSection() {
               tags={activeEntry.tags}
               link={activeEntry.link}
               isOngoing={activeEntry.endYear === null}
+              ongoingLabel={t('ongoing')}
+              moreLabel={t('viewMore')}
             />
           </motion.div>
         ) : (
@@ -536,7 +510,7 @@ export function ParallelStreamsSection() {
           />
         </div>
 
-        {/* Vertical timeline for mobile and portrait layouts */}
+        {/* Vertical lane timeline for mobile and portrait layouts */}
         <div className="relative hidden w-full max-md:block max-lg:portrait:block">
           <div className="mb-4 flex items-center justify-between gap-3 rounded-xl border border-[var(--border)]/20 bg-[var(--card)]/15 px-4 py-3">
             <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
@@ -547,161 +521,203 @@ export function ParallelStreamsSection() {
             </span>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-[var(--border)]/20 bg-[var(--card)]/15 px-4 py-5">
-            <div className="space-y-6">
-              {mobileEntriesByYear.map(({ year, entries }) => {
-                const state = yearStates.get(year)
+          <motion.div
+            layout
+            className={cn(
+              'relative mb-24 rounded-2xl border border-[var(--border)]/20 bg-[var(--card)]/15',
+              verticalFocusedEntry
+                ? 'grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3 overflow-visible p-3'
+                : 'overflow-hidden p-4'
+            )}
+          >
+            <motion.div
+              layout
+              className={cn(
+                'relative w-full',
+                verticalFocusedEntry
+                  ? 'h-[72vh] min-h-[35rem] max-h-[54rem]'
+                  : 'h-[84vh] min-h-[50rem] max-h-[70rem]'
+              )}
+            >
+              <div className={cn(
+                'absolute inset-y-10 left-0 w-12 transition-opacity duration-200',
+                verticalFocusedEntry && 'pointer-events-none opacity-0'
+              )}>
+                {years.map((year) => {
+                  const state = yearStates.get(year)
+                  return (
+                    <button
+                      key={year}
+                      type="button"
+                      disabled={!state?.isClickable}
+                      onClick={() => handleYearClick(year)}
+                      className={cn(
+                        'absolute right-1 -translate-y-1/2 rounded-full px-2 py-1 text-[0.62rem] font-mono font-semibold transition-colors',
+                        state?.isCurrent
+                          ? 'bg-[var(--accent)]/10 text-[var(--accent)]'
+                          : state?.isPreview
+                            ? 'text-[var(--fg-muted)]/35'
+                            : 'text-[var(--fg-muted)]/65',
+                        state?.isClickable && 'hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]'
+                      )}
+                      style={{ top: `${getVerticalTop({ year, month: 1, day: 1 })}%` }}
+                    >
+                      {year}
+                    </button>
+                  )
+                })}
+              </div>
 
-                return (
-                  <section key={year} className="relative">
-                    <div className="mb-3 flex items-center gap-3 pl-8">
-                      <button
-                        type="button"
-                        disabled={!state?.isClickable}
-                        onClick={() => handleYearClick(year)}
-                        className={cn(
-                          'rounded-full border px-3 py-1 text-xs font-semibold transition-colors',
-                          state?.isCurrent
-                            ? 'border-[var(--accent)]/45 bg-[var(--accent)]/10 text-[var(--accent)]'
-                            : state?.isPreview
-                              ? 'border-[var(--border)]/20 bg-black/10 text-[var(--fg-muted)]/45'
-                              : 'border-[var(--border)]/25 bg-black/10 text-[var(--fg-muted)]',
-                          state?.isClickable && 'hover:border-[var(--accent)]/55 hover:text-[var(--accent)]'
-                        )}
-                      >
-                        {year}
-                      </button>
-                      <span className="h-px flex-1 bg-[var(--border)]/15" aria-hidden="true" />
-                    </div>
+              <div className={cn('absolute bottom-10 top-10 transition-all duration-300', verticalFocusedEntry ? 'left-0 right-0' : 'left-14 right-1')}>
+                <div className="absolute inset-x-0 top-0 h-px bg-[var(--border)]/12" />
+                <div className="absolute inset-x-0 bottom-0 h-px bg-[var(--border)]/12" />
+                <div
+                  className="group absolute inset-x-0 h-px -translate-y-1/2 bg-[var(--accent)]/55"
+                  style={{ top: `${getVerticalTop(today)}%` }}
+                  title={`${t('today')}: ${todayLabel}`}
+                >
+                  <span className="pointer-events-none absolute right-0 top-1 -translate-y-1/2 rounded-full border border-[var(--accent)]/35 bg-[var(--bg)]/90 px-2 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-100">
+                    {todayLabel}
+                  </span>
+                </div>
 
-                    <div className="space-y-4">
-                      {entries.map((entry) => {
-                        const colors = LANE_COLORS[entry.lane]
-                        const isActive = hoveredEntry === entry.id || selectedEntry === entry.id
-                        const isFutureLearning = isFutureLearningEntry(entry, today)
-                        const highlights = entry.highlights ?? []
+                {LANE_ORDER.filter((lane) => visibleLanes.has(lane)).map((lane, laneIndex, laneList) => {
+                  const laneEntries = entriesByLane[lane]
+                  const colors = LANE_COLORS[lane]
+                  const laneIsFocused = verticalFocusedEntry?.lane === lane
+                  const left = laneList.length === 1 ? 50 : (laneIndex / (laneList.length - 1)) * 100
+
+                  return (
+                    <motion.div
+                      key={lane}
+                      layout
+                      className={cn(
+                        'absolute bottom-0 top-0 transition-opacity duration-300',
+                        verticalFocusedEntry && !laneIsFocused ? 'pointer-events-none opacity-0' : 'opacity-100'
+                      )}
+                      style={{ left: verticalFocusedEntry ? '50%' : `${left}%` }}
+                    >
+                              <div className="absolute bottom-0 top-0 w-px -translate-x-1/2 bg-[var(--border)]/18" />
+                      {laneEntries.map((entry) => {
+                        const isActive = hoveredEntry === entry.id || selectedEntry === entry.id || selectedHighlight?.entryId === entry.id
                         const isPointEvent = isPointEntry(entry)
-                        const startDate = getEntryStartDate(entry)
-                        const endDate = getEntryEndDate(entry, today)
-                        const periodLabel = formatPeriod(entry.startYear, entry.startMonth, entry.endYear, entry.endMonth, t('present'), locale)
+                        const startTop = getVerticalTop(getEntryStartDate(entry))
+                        const endTop = getVerticalTop(getEntryEndDate(entry, today))
+                        const top = isPointEvent ? startTop : Math.min(startTop, endTop)
+                        const height = Math.max(Math.abs(startTop - endTop), 2)
+                        const isFutureLearning = isFutureLearningEntry(entry, today)
 
-                        return (
-                          <motion.div
-                            key={entry.id}
-                            className="grid grid-cols-[4.5rem_1.35rem_minmax(0,1fr)] gap-3"
-                            initial={animate ? { opacity: 0, y: 14 } : undefined}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.28, ease: 'easeOut' }}
-                          >
-                            <div className="flex flex-col items-end justify-between py-2 text-right">
-                              <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--fg-muted)]">
-                                {formatShortJourneyDate(endDate)}
-                              </span>
-                              {!isPointEvent && (
-                                <span className="font-mono text-[0.62rem] uppercase tracking-[0.08em] text-[var(--fg-muted)]/45">
-                                  {formatShortJourneyDate(startDate)}
-                                </span>
-                              )}
-                            </div>
-
-                            <div className="relative flex min-h-[8.5rem] justify-center py-2" aria-hidden="true">
-                              {isPointEvent ? (
-                                <span className={cn('mt-3 h-3.5 w-3.5 rounded-full ring-4 ring-[var(--bg)]', colors.bg)} />
-                              ) : (
-                                <>
-                                  <span className="absolute bottom-3 top-3 w-px bg-[var(--border)]/18" />
-                                  <motion.span
-                                    className={cn('absolute bottom-3 top-3 w-1.5 origin-bottom rounded-full', colors.bg)}
-                                    initial={animate ? { scaleY: 0 } : undefined}
-                                    animate={{ scaleY: 1 }}
-                                    transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
-                                  />
-                                  <span className={cn('absolute top-2 h-3.5 w-3.5 rounded-full ring-4 ring-[var(--bg)]', colors.bg, entry.endYear === null && 'ring-white/60')} />
-                                  <span className={cn('absolute bottom-2 h-3.5 w-3.5 rounded-full ring-4 ring-[var(--bg)]', colors.bg)} />
-                                </>
-                              )}
-                            </div>
-
-                            <motion.article
+                        if (isPointEvent) {
+                          return (
+                            <motion.button
+                              key={entry.id}
+                              type="button"
+                              layout
                               className={cn(
-                                'relative rounded-xl border bg-black/18 p-4 transition-all duration-200',
-                                'focus-within:border-[var(--accent)]/45 hover:-translate-y-0.5 hover:bg-black/24',
-                                isActive ? 'border-[var(--accent)]/55 shadow-[0_12px_38px_rgba(0,0,0,0.28)]' : 'border-[var(--border)]/18',
-                                isFutureLearning && 'opacity-70 hover:opacity-100'
+                                'absolute z-20 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-[var(--bg)] transition-all duration-200 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]',
+                                isFutureLearning ? 'border border-dashed border-pink-200/45 bg-pink-400/30 opacity-70' : colors.bg,
+                                isActive && 'scale-125 shadow-[0_0_18px_rgba(238,174,148,0.45)]'
                               )}
+                              style={{ top: `${top}%` }}
                               onPointerEnter={() => handleEntryHoverStart(entry.id)}
                               onPointerMove={() => handleEntryHoverStart(entry.id)}
                               onPointerLeave={() => handleEntryHoverEnd(entry.id)}
                               onClick={(event) => handleEntryClick(entry.id, event)}
-                            >
-                              <div className="flex flex-wrap items-start justify-between gap-3">
-                                <div className="min-w-0">
-                                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
-                                    {t(`legend.${entry.lane}`)}
-                                  </p>
-                                  <h3 className="mt-1 text-sm font-semibold text-[var(--fg)]">
-                                    {t(`entries.${entry.id}.role`)}
-                                  </h3>
-                                  <p className="mt-0.5 text-xs text-[var(--fg-muted)]">
-                                    {t(`entries.${entry.id}.org`)}
-                                  </p>
-                                </div>
-                                <span className="rounded-full bg-black/25 px-2.5 py-1 text-[0.68rem] font-semibold text-[var(--fg-muted)]">
-                                  {periodLabel}
-                                </span>
-                              </div>
+                              aria-label={t(`entries.${entry.id}.role`)}
+                              title={t(`entries.${entry.id}.role`)}
+                            />
+                          )
+                        }
 
-                              <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-[var(--fg-muted)]">
-                                {t(`entries.${entry.id}.desc`)}
-                              </p>
+                        return (
+                          <motion.div
+                            key={entry.id}
+                            layout
+                              className={cn(
+                              'absolute z-10 w-2 -translate-x-1/2 cursor-pointer rounded-full transition-all duration-200 hover:w-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]',
+                              colors.bg,
+                              isActive && 'w-3 shadow-[0_0_18px_rgba(238,174,148,0.45)]'
+                            )}
+                            style={{ top: `${top}%`, height: `${height}%` }}
+                            role="button"
+                            tabIndex={0}
+                            onPointerEnter={() => handleEntryHoverStart(entry.id)}
+                            onPointerMove={() => handleEntryHoverStart(entry.id)}
+                            onPointerLeave={() => handleEntryHoverEnd(entry.id)}
+                            onClick={(event) => handleEntryClick(entry.id, event)}
+                            onKeyDown={(event) => {
+                              if (event.key === 'Enter' || event.key === ' ') {
+                                handleEntryClick(entry.id, event)
+                              }
+                            }}
+                            aria-label={t(`entries.${entry.id}.role`)}
+                            title={t(`entries.${entry.id}.role`)}
+                          >
+                            <span className={cn('absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-[var(--bg)]', colors.bg, entry.endYear === null && 'ring-white/60')} />
+                            <span className={cn('absolute bottom-0 left-1/2 h-3 w-3 -translate-x-1/2 translate-y-1/2 rounded-full ring-2 ring-[var(--bg)]', colors.bg)} />
 
-                              {highlights.length > 0 && (
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                  {highlights.slice(0, 4).map((highlight) => {
-                                    const isHighlightSelected = isHighlightActive(entry.id, highlight.id)
+                            {entry.highlights?.map((highlight) => {
+                              const highlightTop = getVerticalTop(getHighlightDate(highlight, today))
+                              const localTop = clampPercent(((highlightTop - top) / height) * 100)
+                              const isSelected = isHighlightActive(entry.id, highlight.id)
 
-                                    return (
-                                      <button
-                                        key={highlight.id}
-                                        type="button"
-                                        className={cn(
-                                          'rounded-full border px-2.5 py-1 text-[0.68rem] font-semibold transition-colors',
-                                          isHighlightSelected
-                                            ? 'border-[var(--accent)]/75 bg-[var(--accent)]/15 text-[var(--accent)]'
-                                            : 'border-[var(--border)]/20 bg-black/20 text-[var(--fg-muted)] hover:border-[var(--accent)]/45 hover:text-[var(--accent)]'
-                                        )}
-                                        onPointerEnter={(event) => {
-                                          event.stopPropagation()
-                                          handleHighlightHoverStart(entry.id, highlight.id)
-                                        }}
-                                        onPointerMove={(event) => {
-                                          event.stopPropagation()
-                                          handleHighlightHoverStart(entry.id, highlight.id)
-                                        }}
-                                        onPointerLeave={(event) => {
-                                          event.stopPropagation()
-                                          handleHighlightHoverEnd(entry.id, highlight.id)
-                                        }}
-                                        onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
-                                      >
-                                        {formatHighlightDate(getHighlightDate(highlight, today))} · {t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                                      </button>
-                                    )
-                                  })}
-                                </div>
-                              )}
-                            </motion.article>
+                              return (
+                                <span
+                                  key={highlight.id}
+                                  role="button"
+                                  tabIndex={0}
+                                  className={cn(
+                                    'absolute left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-100/70 bg-violet-300 shadow-[0_0_0_2px_rgba(139,92,246,0.2)] transition-all hover:scale-125',
+                                    isSelected && 'scale-125 bg-violet-100 shadow-[0_0_0_5px_rgba(139,92,246,0.32),0_0_18px_rgba(139,92,246,0.55)]'
+                                  )}
+                                  style={{ top: `${localTop}%` }}
+                                  onPointerEnter={(event) => {
+                                    event.stopPropagation()
+                                    handleHighlightHoverStart(entry.id, highlight.id)
+                                  }}
+                                  onPointerMove={(event) => {
+                                    event.stopPropagation()
+                                    handleHighlightHoverStart(entry.id, highlight.id)
+                                  }}
+                                  onPointerLeave={(event) => {
+                                    event.stopPropagation()
+                                    handleHighlightHoverEnd(entry.id, highlight.id)
+                                  }}
+                                  onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
+                                  onKeyDown={(event) => {
+                                    if (event.key === 'Enter' || event.key === ' ') {
+                                      handleHighlightClick(entry.id, highlight.id, event)
+                                    }
+                                  }}
+                                  aria-label={t(`entries.${entry.id}.highlights.${highlight.id}`)}
+                                  title={t(`entries.${entry.id}.highlights.${highlight.id}`)}
+                                />
+                              )
+                            })}
                           </motion.div>
                         )
                       })}
-                    </div>
-                  </section>
-                )
-              })}
-            </div>
-          </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </motion.div>
 
-          {renderDetailCard()}
+            {verticalFocusedEntry && (
+              <motion.div
+                layout
+                initial={{ opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 18 }}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                className="min-w-0"
+              >
+                {renderDetailCard('mt-0')}
+              </motion.div>
+            )}
+          </motion.div>
+
+          {!verticalFocusedEntry && renderDetailCard()}
         </div>
 
         {/* Main Timeline Visualization */}

@@ -6,7 +6,7 @@ export const LINKS = {
   github: 'https://github.com/aMonteSl',
   linkedin: 'https://www.linkedin.com/in/adrianmonteslinares/',
   email: 'mailto:adrian.adyra@gmail.com',
-  website: 'https://amontesl.github.io',
+  website: 'https://adrianmonteslinares.com',
 
   codeXrRepo: 'https://github.com/aMonteSl/CodeXR',
   codeXrDocs: 'https://amontesl.github.io/code-xr-docs/',

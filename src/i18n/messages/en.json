@@ -798,6 +798,8 @@
     "present": "Present",
     "hoverHint": "Select an item to view details",
     "selectedMilestone": "Selected milestone",
+    "ongoing": "Active",
+    "viewMore": "View more",
     "clickYearHint": "Click on a year to see monthly details",
     "legend": {
       "education": "Education",

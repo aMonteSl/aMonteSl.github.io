@@ -29,6 +29,10 @@ interface StreamCardProps {
   link?: string
   /** Is this entry ongoing? */
   isOngoing?: boolean
+  /** Localized ongoing status label */
+  ongoingLabel?: string
+  /** Localized external link label */
+  moreLabel?: string
   /** Additional className */
   className?: string
 }
@@ -81,6 +85,8 @@ export function StreamCard({
   tags = [],
   link,
   isOngoing = false,
+  ongoingLabel = 'Active',
+  moreLabel = 'View more',
   className,
 }: StreamCardProps) {
   const animate = shouldAnimate()
@@ -108,7 +114,7 @@ export function StreamCard({
 
       <div className="h-full p-5 pl-6 flex flex-col">
         {/* Header row */}
-        <div className="flex items-start justify-between gap-4 mb-2">
+        <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div className="flex-1 min-w-0">
             {/* Title */}
             <h4 className="text-base sm:text-lg font-semibold text-[var(--fg)] leading-tight mb-0.5 truncate">
@@ -121,7 +127,7 @@ export function StreamCard({
           </div>
 
           {/* Period badge */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex flex-shrink-0 flex-wrap items-center gap-2">
             <span className={cn(
               'px-3 py-1 rounded-full text-xs font-medium',
               'bg-[var(--bg)]/50 text-[var(--fg-muted)] ring-1 ring-[var(--border)]/30'
@@ -135,7 +141,7 @@ export function StreamCard({
                   animate={{ opacity: [1, 0.4, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
-                En curso
+                {ongoingLabel}
               </span>
             )}
           </div>
@@ -216,7 +222,7 @@ export function StreamCard({
               whileHover={{ x: 2 }}
               transition={{ duration: 0.15 }}
             >
-              <span>Ver más</span>
+              <span>{moreLabel}</span>
               <span aria-hidden="true">&rarr;</span>
             </motion.span>
           )}

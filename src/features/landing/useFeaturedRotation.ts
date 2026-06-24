@@ -18,19 +18,16 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  const nextItem = useCallback(() => {
+  const resetClock = useCallback((time = performance.now()) => {
     elapsedRef.current = 0
-    startTimeRef.current = performance.now()
+    startTimeRef.current = time
     setProgress(0)
-    setActiveIndex((prev) => (prev + 1) % items.length)
-  }, [items.length])
+  }, [])
 
   const goToIndex = useCallback((index: number) => {
-    elapsedRef.current = 0
-    startTimeRef.current = performance.now()
-    setProgress(0)
+    resetClock()
     setActiveIndex(index)
-  }, [])
+  }, [resetClock])
 
   const pause = useCallback(() => {
     setIsPaused(true)
@@ -50,6 +47,7 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
     if (isPaused) {
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current)
+        rafIdRef.current = null
       }
       return
     }
@@ -61,7 +59,10 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
       elapsedRef.current = elapsed
 
       if (elapsed >= ROTATION_INTERVAL_MS) {
-        nextItem()
+        resetClock(time)
+        setActiveIndex((prev) => (prev + 1) % items.length)
+        setProgress(0)
+        rafIdRef.current = requestAnimationFrame(animate)
         return
       }
 
@@ -74,9 +75,10 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
     return () => {
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current)
+        rafIdRef.current = null
       }
     }
-  }, [isPaused, items.length, nextItem, prefersReducedMotion])
+  }, [isPaused, items.length, prefersReducedMotion, resetClock])
 
   // Handle visibility change - pause when tab is hidden
   useEffect(() => {
