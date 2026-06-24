@@ -43,7 +43,16 @@ export function Hero() {
   const tNav = useTranslations('nav')
   const { locale } = useLocale()
   const animate = shouldAnimate()
-  const { activeItem: activeProject, activeIndex, goToIndex, pause, resume, total } = useFeaturedRotation(FEATURED_PROJECTS)
+  const {
+    activeItem: activeProject,
+    activeIndex,
+    goToIndex,
+    pause,
+    resume,
+    total,
+    progress,
+    isPaused,
+  } = useFeaturedRotation(FEATURED_PROJECTS)
   const cvUrl = getCvUrl(locale)
   const { copiedEmail, copyEmail } = useEmailCopyFeedback()
 
@@ -76,6 +85,8 @@ export function Hero() {
               project={activeProject}
               activeIndex={activeIndex}
               total={total}
+              progress={progress}
+              isPaused={isPaused}
               onDotClick={goToIndex}
               onMouseEnter={pause}
               onMouseLeave={resume}

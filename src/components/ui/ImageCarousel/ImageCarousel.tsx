@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { PLACEHOLDER_IMAGE } from '@/lib/constants'
+import { CAROUSEL_ROTATION_INTERVAL_MS } from '@/lib/timing'
 import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from '@/components/ui/icons'
 import { useImageRotation } from './useImageRotation'
 
@@ -26,7 +27,7 @@ export interface ImageCarouselProps {
   basePath?: string
   /** Alt text for the images */
   alt: string
-  /** Rotation interval in ms. Default: 5000 */
+  /** Rotation interval in ms. Default: shared carousel duration */
   interval?: number
   /** Additional CSS classes for container */
   className?: string
@@ -79,7 +80,7 @@ export function ImageCarousel({
   images,
   basePath,
   alt,
-  interval = 5000,
+  interval = CAROUSEL_ROTATION_INTERVAL_MS,
   className,
   showDots = true,
   showArrows = true,

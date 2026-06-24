@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { PLACEHOLDER_IMAGE } from '@/lib/constants'
+import { CAROUSEL_ROTATION_INTERVAL_MS } from '@/lib/timing'
 
 interface UseImageRotationOptions {
   /** Array of image paths to rotate through */
@@ -45,7 +46,7 @@ interface UseImageRotationReturn {
  */
 export function useImageRotation({
   images,
-  interval = 5000,
+  interval = CAROUSEL_ROTATION_INTERVAL_MS,
   paused = false,
   isVisible = true,
   respectReducedMotion = true,

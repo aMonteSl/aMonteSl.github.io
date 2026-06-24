@@ -22,6 +22,8 @@ interface FeaturedProjectCardProps {
   project: FeaturedProject
   activeIndex: number
   total: number
+  progress: number
+  isPaused: boolean
   onDotClick: (index: number) => void
   onMouseEnter: () => void
   onMouseLeave: () => void
@@ -64,6 +66,8 @@ export function FeaturedProjectCard({
   project,
   activeIndex,
   total,
+  progress,
+  isPaused,
   onDotClick,
   onMouseEnter,
   onMouseLeave,
@@ -171,17 +175,27 @@ export function FeaturedProjectCard({
         </div>
 
         {total > 1 && (
-          <div className="flex h-10 shrink-0 items-center justify-center gap-1.5 border-t border-white/10">
-            {Array.from({ length: total }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => onDotClick(i)}
-                className={`h-2 w-2 rounded-full transition-all duration-200 ${
-                  i === activeIndex ? 'scale-110 bg-[var(--accent)]' : 'bg-white/20 hover:bg-white/40'
+          <div className="relative flex h-10 shrink-0 items-center justify-center gap-1.5 border-t border-white/10">
+            <div className="absolute left-0 right-0 top-0 h-0.5 overflow-hidden bg-black/20">
+              <div
+                className={`h-full origin-left transition-colors duration-200 ${
+                  isPaused ? 'bg-red-500' : 'bg-[var(--accent)]'
                 }`}
-                aria-label={`Go to project ${i + 1}`}
+                style={{ transform: `scaleX(${Math.min(1, Math.max(0, progress))})` }}
               />
-            ))}
+            </div>
+            <div className="flex items-center justify-center gap-1.5">
+              {Array.from({ length: total }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => onDotClick(i)}
+                  className={`h-2 w-2 rounded-full transition-all duration-200 ${
+                    i === activeIndex ? 'scale-110 bg-[var(--accent)]' : 'bg-white/20 hover:bg-white/40'
+                  }`}
+                  aria-label={`Go to project ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>

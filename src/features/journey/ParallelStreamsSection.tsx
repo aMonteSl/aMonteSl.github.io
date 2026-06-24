@@ -195,6 +195,13 @@ export function ParallelStreamsSection() {
 
   const todayLabel = useMemo(() => formatHighlightDate(today), [formatHighlightDate, today])
 
+  const formatShortJourneyDate = useCallback((date: JourneyDate) => {
+    return new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', {
+      month: 'short',
+      day: 'numeric',
+    }).format(toLocalDate(date)).replace('.', '')
+  }, [locale])
+
   const activeHighlight = useMemo(() => {
     if (!activeEntry || !activeHighlightRef || activeEntry.id !== activeHighlightRef.entryId) {
       return null
@@ -412,6 +419,101 @@ export function ParallelStreamsSection() {
     setSelectedHighlight(null)
   }, [])
 
+  const mobileTimelineEntries = useMemo(() => {
+    return JOURNEY_ENTRIES
+      .filter((entry) => visibleLanes.has(entry.lane))
+      .sort((a, b) => {
+        const aEnd = toLocalDate(getEntryEndDate(a, today)).getTime()
+        const bEnd = toLocalDate(getEntryEndDate(b, today)).getTime()
+
+        if (aEnd !== bEnd) {
+          return bEnd - aEnd
+        }
+
+        return toLocalDate(getEntryStartDate(b)).getTime() - toLocalDate(getEntryStartDate(a)).getTime()
+      })
+  }, [today, visibleLanes])
+
+  const mobileEntriesByYear = useMemo(() => {
+    return mobileTimelineEntries.reduce<Array<{ year: number; entries: JourneyEntry[] }>>((groups, entry) => {
+      const year = getEntryEndDate(entry, today).year
+      const currentGroup = groups[groups.length - 1]
+
+      if (currentGroup?.year === year) {
+        currentGroup.entries.push(entry)
+      } else {
+        groups.push({ year, entries: [entry] })
+      }
+
+      return groups
+    }, [])
+  }, [mobileTimelineEntries, today])
+
+  const renderDetailCard = () => (
+    <div className="mt-10 min-h-[190px]">
+      <AnimatePresence mode="wait">
+        {activeEntry ? (
+          <motion.div
+            key={activeEntry.id}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="h-full min-h-[190px]"
+          >
+            <StreamCard
+              lane={activeEntry.lane}
+              title={t(`entries.${activeEntry.id}.role`)}
+              organization={t(`entries.${activeEntry.id}.org`)}
+              period={formatPeriod(
+                activeEntry.startYear,
+                activeEntry.startMonth,
+                activeEntry.endYear,
+                activeEntry.endMonth,
+                t('present'),
+                locale
+              )}
+              description={t(`entries.${activeEntry.id}.desc`)}
+              highlights={activeEntry.highlights?.map((h) => ({
+                id: h.id,
+                label: t(`entries.${activeEntry.id}.highlights.${h.id}`),
+                year: h.year,
+                date: formatHighlightDate(getHighlightDate(h, today)),
+              }))}
+              activeHighlight={activeHighlight}
+              activeHighlightLabel={t('selectedMilestone')}
+              tags={activeEntry.tags}
+              link={activeEntry.link}
+              isOngoing={activeEntry.endYear === null}
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="placeholder"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex min-h-[190px] flex-col items-center justify-center rounded-xl bg-[var(--card)]/10 text-center ring-1 ring-[var(--border)]/10"
+          >
+            <div className="w-10 h-10 rounded-full bg-[var(--fg-muted)]/10 flex items-center justify-center mb-3">
+              <svg
+                className="w-5 h-5 text-[var(--fg-muted)]/40"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+              </svg>
+            </div>
+            <p className="text-sm text-[var(--fg-muted)]/50 font-medium">
+              {t('hoverHint')}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+
   return (
     <SectionShell id="journey" tone="xr">
         <SectionHeader kicker={t('kicker')} title={t('title')} subtitle={t('subtitle')} align="left" />
@@ -434,8 +536,176 @@ export function ParallelStreamsSection() {
           />
         </div>
 
+        {/* Vertical timeline for mobile and portrait layouts */}
+        <div className="relative hidden w-full max-md:block max-lg:portrait:block">
+          <div className="mb-4 flex items-center justify-between gap-3 rounded-xl border border-[var(--border)]/20 bg-[var(--card)]/15 px-4 py-3">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
+              {t('today')}
+            </span>
+            <span className="rounded-full border border-[var(--accent)]/35 bg-[var(--accent)]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">
+              {todayLabel}
+            </span>
+          </div>
+
+          <div className="relative overflow-hidden rounded-2xl border border-[var(--border)]/20 bg-[var(--card)]/15 px-4 py-5">
+            <div className="space-y-6">
+              {mobileEntriesByYear.map(({ year, entries }) => {
+                const state = yearStates.get(year)
+
+                return (
+                  <section key={year} className="relative">
+                    <div className="mb-3 flex items-center gap-3 pl-8">
+                      <button
+                        type="button"
+                        disabled={!state?.isClickable}
+                        onClick={() => handleYearClick(year)}
+                        className={cn(
+                          'rounded-full border px-3 py-1 text-xs font-semibold transition-colors',
+                          state?.isCurrent
+                            ? 'border-[var(--accent)]/45 bg-[var(--accent)]/10 text-[var(--accent)]'
+                            : state?.isPreview
+                              ? 'border-[var(--border)]/20 bg-black/10 text-[var(--fg-muted)]/45'
+                              : 'border-[var(--border)]/25 bg-black/10 text-[var(--fg-muted)]',
+                          state?.isClickable && 'hover:border-[var(--accent)]/55 hover:text-[var(--accent)]'
+                        )}
+                      >
+                        {year}
+                      </button>
+                      <span className="h-px flex-1 bg-[var(--border)]/15" aria-hidden="true" />
+                    </div>
+
+                    <div className="space-y-4">
+                      {entries.map((entry) => {
+                        const colors = LANE_COLORS[entry.lane]
+                        const isActive = hoveredEntry === entry.id || selectedEntry === entry.id
+                        const isFutureLearning = isFutureLearningEntry(entry, today)
+                        const highlights = entry.highlights ?? []
+                        const isPointEvent = isPointEntry(entry)
+                        const startDate = getEntryStartDate(entry)
+                        const endDate = getEntryEndDate(entry, today)
+                        const periodLabel = formatPeriod(entry.startYear, entry.startMonth, entry.endYear, entry.endMonth, t('present'), locale)
+
+                        return (
+                          <motion.div
+                            key={entry.id}
+                            className="grid grid-cols-[4.5rem_1.35rem_minmax(0,1fr)] gap-3"
+                            initial={animate ? { opacity: 0, y: 14 } : undefined}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.28, ease: 'easeOut' }}
+                          >
+                            <div className="flex flex-col items-end justify-between py-2 text-right">
+                              <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[var(--fg-muted)]">
+                                {formatShortJourneyDate(endDate)}
+                              </span>
+                              {!isPointEvent && (
+                                <span className="font-mono text-[0.62rem] uppercase tracking-[0.08em] text-[var(--fg-muted)]/45">
+                                  {formatShortJourneyDate(startDate)}
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="relative flex min-h-[8.5rem] justify-center py-2" aria-hidden="true">
+                              {isPointEvent ? (
+                                <span className={cn('mt-3 h-3.5 w-3.5 rounded-full ring-4 ring-[var(--bg)]', colors.bg)} />
+                              ) : (
+                                <>
+                                  <span className="absolute bottom-3 top-3 w-px bg-[var(--border)]/18" />
+                                  <motion.span
+                                    className={cn('absolute bottom-3 top-3 w-1.5 origin-bottom rounded-full', colors.bg)}
+                                    initial={animate ? { scaleY: 0 } : undefined}
+                                    animate={{ scaleY: 1 }}
+                                    transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
+                                  />
+                                  <span className={cn('absolute top-2 h-3.5 w-3.5 rounded-full ring-4 ring-[var(--bg)]', colors.bg, entry.endYear === null && 'ring-white/60')} />
+                                  <span className={cn('absolute bottom-2 h-3.5 w-3.5 rounded-full ring-4 ring-[var(--bg)]', colors.bg)} />
+                                </>
+                              )}
+                            </div>
+
+                            <motion.article
+                              className={cn(
+                                'relative rounded-xl border bg-black/18 p-4 transition-all duration-200',
+                                'focus-within:border-[var(--accent)]/45 hover:-translate-y-0.5 hover:bg-black/24',
+                                isActive ? 'border-[var(--accent)]/55 shadow-[0_12px_38px_rgba(0,0,0,0.28)]' : 'border-[var(--border)]/18',
+                                isFutureLearning && 'opacity-70 hover:opacity-100'
+                              )}
+                              onPointerEnter={() => handleEntryHoverStart(entry.id)}
+                              onPointerMove={() => handleEntryHoverStart(entry.id)}
+                              onPointerLeave={() => handleEntryHoverEnd(entry.id)}
+                              onClick={(event) => handleEntryClick(entry.id, event)}
+                            >
+                              <div className="flex flex-wrap items-start justify-between gap-3">
+                                <div className="min-w-0">
+                                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
+                                    {t(`legend.${entry.lane}`)}
+                                  </p>
+                                  <h3 className="mt-1 text-sm font-semibold text-[var(--fg)]">
+                                    {t(`entries.${entry.id}.role`)}
+                                  </h3>
+                                  <p className="mt-0.5 text-xs text-[var(--fg-muted)]">
+                                    {t(`entries.${entry.id}.org`)}
+                                  </p>
+                                </div>
+                                <span className="rounded-full bg-black/25 px-2.5 py-1 text-[0.68rem] font-semibold text-[var(--fg-muted)]">
+                                  {periodLabel}
+                                </span>
+                              </div>
+
+                              <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-[var(--fg-muted)]">
+                                {t(`entries.${entry.id}.desc`)}
+                              </p>
+
+                              {highlights.length > 0 && (
+                                <div className="mt-3 flex flex-wrap gap-2">
+                                  {highlights.slice(0, 4).map((highlight) => {
+                                    const isHighlightSelected = isHighlightActive(entry.id, highlight.id)
+
+                                    return (
+                                      <button
+                                        key={highlight.id}
+                                        type="button"
+                                        className={cn(
+                                          'rounded-full border px-2.5 py-1 text-[0.68rem] font-semibold transition-colors',
+                                          isHighlightSelected
+                                            ? 'border-[var(--accent)]/75 bg-[var(--accent)]/15 text-[var(--accent)]'
+                                            : 'border-[var(--border)]/20 bg-black/20 text-[var(--fg-muted)] hover:border-[var(--accent)]/45 hover:text-[var(--accent)]'
+                                        )}
+                                        onPointerEnter={(event) => {
+                                          event.stopPropagation()
+                                          handleHighlightHoverStart(entry.id, highlight.id)
+                                        }}
+                                        onPointerMove={(event) => {
+                                          event.stopPropagation()
+                                          handleHighlightHoverStart(entry.id, highlight.id)
+                                        }}
+                                        onPointerLeave={(event) => {
+                                          event.stopPropagation()
+                                          handleHighlightHoverEnd(entry.id, highlight.id)
+                                        }}
+                                        onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
+                                      >
+                                        {formatHighlightDate(getHighlightDate(highlight, today))} · {t(`entries.${entry.id}.highlights.${highlight.id}`)}
+                                      </button>
+                                    )
+                                  })}
+                                </div>
+                              )}
+                            </motion.article>
+                          </motion.div>
+                        )
+                      })}
+                    </div>
+                  </section>
+                )
+              })}
+            </div>
+          </div>
+
+          {renderDetailCard()}
+        </div>
+
         {/* Main Timeline Visualization */}
-        <div className="relative w-full">
+        <div className="relative w-full max-md:hidden max-lg:portrait:hidden">
           <AnimatePresence mode="wait">
             {drillDownYear === null ? (
               <motion.div
@@ -1143,69 +1413,7 @@ export function ParallelStreamsSection() {
             )}
           </AnimatePresence>
 
-          {/* Detail Card */}
-          <div className="mt-10 min-h-[190px]">
-            <AnimatePresence mode="wait">
-              {activeEntry ? (
-                <motion.div
-                  key={activeEntry.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                  className="h-full min-h-[190px]"
-                >
-                  <StreamCard
-                    lane={activeEntry.lane}
-                    title={t(`entries.${activeEntry.id}.role`)}
-                    organization={t(`entries.${activeEntry.id}.org`)}
-                    period={formatPeriod(
-                      activeEntry.startYear,
-                      activeEntry.startMonth,
-                      activeEntry.endYear,
-                      activeEntry.endMonth,
-                      t('present'),
-                      locale
-                    )}
-                    description={t(`entries.${activeEntry.id}.desc`)}
-                    highlights={activeEntry.highlights?.map((h) => ({
-                      id: h.id,
-                      label: t(`entries.${activeEntry.id}.highlights.${h.id}`),
-                      year: h.year,
-                      date: formatHighlightDate(getHighlightDate(h, today)),
-                    }))}
-                    activeHighlight={activeHighlight}
-                    activeHighlightLabel={t('selectedMilestone')}
-                    tags={activeEntry.tags}
-                    link={activeEntry.link}
-                    isOngoing={activeEntry.endYear === null}
-                  />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="placeholder"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex min-h-[190px] flex-col items-center justify-center rounded-xl bg-[var(--card)]/10 text-center ring-1 ring-[var(--border)]/10"
-                >
-                  <div className="w-10 h-10 rounded-full bg-[var(--fg-muted)]/10 flex items-center justify-center mb-3">
-                    <svg 
-                      className="w-5 h-5 text-[var(--fg-muted)]/40" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-[var(--fg-muted)]/50 font-medium">
-                    {t('hoverHint')}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          {renderDetailCard()}
         </div>
       </div>
     </SectionShell>
