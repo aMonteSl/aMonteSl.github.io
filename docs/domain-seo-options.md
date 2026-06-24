@@ -25,6 +25,8 @@ RDAP availability was checked on 2026-06-24. Treat these results as a strong scr
 
 Use `adrianmonteslinares.com` as the primary canonical domain.
 
+Use `https://code-xr.adrianmonteslinares.com/` as the canonical public URL for the Code-XR documentation.
+
 Status on 2026-06-24: purchased and prepared in this repository through `public/CNAME` and `LINKS.website`.
 
 Keep all other bought domains as redirects to:

@@ -2,7 +2,7 @@
 
 Personal portfolio website for **Adrián Montes Linares**.
 
-Live: [amontesl.github.io](https://amontesl.github.io/)
+Live: [adrianmonteslinares.com](https://adrianmonteslinares.com/)
 
 ## Tech Stack
 

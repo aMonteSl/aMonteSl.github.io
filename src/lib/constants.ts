@@ -9,7 +9,7 @@ export const LINKS = {
   website: 'https://adrianmonteslinares.com',
 
   codeXrRepo: 'https://github.com/aMonteSl/CodeXR',
-  codeXrDocs: 'https://amontesl.github.io/code-xr-docs/',
+  codeXrDocs: 'https://code-xr.adrianmonteslinares.com/',
   codeXrMarketplace:
     'https://marketplace.visualstudio.com/items?itemName=aMonteSl.code-xr',
   codeXrDoi: 'https://doi.org/10.1109/VISSOFT67405.2025.00034',
@@ -21,8 +21,8 @@ export const LINKS = {
 } as const
 
 export const CV_FILES = {
-  en: '/cv/CV_Color_Adrian_Montes_Linares_ENG.pdf',
-  es: '/cv/CV_Color_Adrian_Montes_Linares.pdf',
+  en: '/cv/CV_Color_Adrian_Montes_Linares_EN_NTF.pdf',
+  es: '/cv/CV_Color_Adrian_Montes_Linares_NTF.pdf',
 } as const
 
 export function getCvUrl(locale: string): string {

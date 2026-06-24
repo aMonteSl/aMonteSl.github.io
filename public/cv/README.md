@@ -1,12 +1,16 @@
 # CV Directory
 
-Place the CV file here with the exact name: **AdrianMontesLinares_CV.pdf**
+Place the CV files here with these exact names:
+- `CV_Color_Adrian_Montes_Linares_NTF.pdf` (Spanish)
+- `CV_Color_Adrian_Montes_Linares_EN_NTF.pdf` (English)
 
-The download link in the Hero component points to: `/cv/AdrianMontesLinares_CV.pdf`
+Download links configured in the site:
+- Spanish: `/cv/CV_Color_Adrian_Montes_Linares_NTF.pdf`
+- English: `/cv/CV_Color_Adrian_Montes_Linares_EN_NTF.pdf`
 
-When ready, upload your PDF with that exact filename to enable the download functionality.
+When ready, upload each PDF with the exact filename to enable download functionality.
 
 ## Current Status
 - Directory: ✅ Created
-- Expected filename: AdrianMontesLinares_CV.pdf  
-- Link configured: ✅ Hero CTA ready
+- Expected filenames: ✅ Defined for ES and EN
+- Links configured: ✅ Locale-based CV URLs ready

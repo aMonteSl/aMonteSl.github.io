@@ -3,7 +3,7 @@
 ## Project Summary
 
 **Portfolio Website** for Adrián Montesinos López  
-- **URL**: https://amontesl.github.io/  
+- **URL**: https://adrianmonteslinares.com/  
 - **Purpose**: Personal developer portfolio showcasing skills, projects, and CV  
 - **Status**: Active development — Hero section complete, other sections marked "under construction"
 

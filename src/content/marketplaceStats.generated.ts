@@ -3,9 +3,9 @@
 
 export const marketplaceStats = {
   "codeXr": {
-    "downloadCount": 622,
+    "downloadCount": 623,
     "displayDownloads": "600+",
-    "updatedAt": "2026-06-24T17:28:37.363Z",
+    "updatedAt": "2026-06-24T18:47:12.583Z",
     "sourceUrl": "https://marketplace.visualstudio.com/items?itemName=aMonteSl.code-xr"
   }
 } as const
