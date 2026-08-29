@@ -88,11 +88,7 @@ export function getEntryEndDate(entry: JourneyEntry, today: JourneyDate): Journe
   }
 }
 
-export function getHighlightDate(highlight: JourneyHighlight, today: JourneyDate): JourneyDate {
-  if (highlight.id === 'v120Current') {
-    return today
-  }
-
+export function getHighlightDate(highlight: JourneyHighlight): JourneyDate {
   return {
     year: highlight.year,
     month: highlight.month ?? 1,
@@ -120,7 +116,7 @@ export function hasScheduledContentInYear(
       return true
     }
 
-    return entry.highlights?.some((highlight) => getHighlightDate(highlight, today).year === year) ?? false
+    return entry.highlights?.some((highlight) => getHighlightDate(highlight).year === year) ?? false
   })
 }
 
@@ -132,7 +128,7 @@ export function getLatestScheduledYear(
   const explicitYears = entries.flatMap((entry) => [
     entry.startYear,
     entry.endYear ?? today.year,
-    ...(entry.highlights?.map((highlight) => getHighlightDate(highlight, today).year) ?? []),
+    ...(entry.highlights?.map((highlight) => getHighlightDate(highlight).year) ?? []),
   ])
 
   return Math.max(minimumEndYear, today.year, ...explicitYears)

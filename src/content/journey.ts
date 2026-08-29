@@ -124,7 +124,7 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
       { id: 'v008Poster', labelKey: 'journey.entries.codexr.highlights.v008Poster', year: 2025, month: 9, day: 7 },
       { id: 'v100Defense', labelKey: 'journey.entries.codexr.highlights.v100Defense', year: 2025, month: 10, day: 20 },
       { id: 'v110Release', labelKey: 'journey.entries.codexr.highlights.v110Release', year: 2026, month: 3, day: 22 },
-      { id: 'v120Current', labelKey: 'journey.entries.codexr.highlights.v120Current', year: 2026, month: 6, day: 23 },
+      { id: 'v120Release', labelKey: 'journey.entries.codexr.highlights.v120Release', year: 2026, month: 7, day: 30 },
     ],
     tags: ['VS Code API', 'A-Frame', 'XR', 'TypeScript'],
     link: 'https://github.com/aMonteSl/CodeXR',
@@ -183,8 +183,8 @@ export const TIMELINE_START = 2020
 export const TIMELINE_END = 2026
 export const CURRENT_DATE = {
   year: 2026,
-  month: 6,
-  day: 23,
+  month: 8,
+  day: 29,
 } as const
 
 /** Convert a date to a decimal year (for precise positioning) */

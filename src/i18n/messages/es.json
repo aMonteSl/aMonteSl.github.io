@@ -760,6 +760,12 @@
       "summaryTitle": "Narrativa del proyecto",
       "milestones": "Versiones e hitos"
     },
+    "release": {
+      "watch": "Ver la demo",
+      "tutorial": "Tutorial completo (12:24)",
+      "close": "Cerrar el vídeo",
+      "youtube": "Abrir en YouTube"
+    },
     "quickFacts": {
       "title": "Datos rápidos",
       "type": "Tipo",
@@ -834,12 +840,12 @@
       "codexr": {
         "role": "Autor & Lead Developer",
         "org": "Code-XR (Open Source)",
-        "desc": "Extensión activa de VS Code para visualización XR/3D de métricas de software. Nació como trabajo fin de grado, fue aceptada en VISSOFT @ ICSME 2025, salió como versión 1.1.0 fuera del contexto del TFG y actualmente evoluciona hacia la 1.2.0.",
+        "desc": "Extensión activa de VS Code para visualización XR/3D de métricas de software. Nació como trabajo fin de grado, fue aceptada en VISSOFT @ ICSME 2025, salió como versión 1.1.0 fuera del contexto del TFG y evolucionó hasta la versión 1.2.0 en julio de 2026, que añadió el grafo de dependencias, los dos análisis de Git y las sesiones entre redes. Sigue en desarrollo activo.",
         "highlights": {
           "v008Poster": "v0.0.8 - poster track en VISSOFT",
           "v100Defense": "v1.0.0 - defensa universitaria",
           "v110Release": "v1.1.0 - release pública",
-          "v120Current": "v1.2.0 - en progreso"
+          "v120Release": "v1.2.0 - release pública"
         }
       },
       "vissoft": {

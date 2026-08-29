@@ -24,6 +24,7 @@ import { ProjectDetailLayout } from './components/ProjectDetailLayout'
 import { ProjectDetailSummary } from './components/ProjectDetailSummary'
 import { ProjectDetailFooter } from './components/ProjectDetailFooter'
 import { ProjectMilestones } from './components/ProjectMilestones'
+import { ProjectReleaseHighlights } from './components/ProjectReleaseHighlights'
 import { ProjectTechRail } from './components/ProjectTechRail'
 import type { Project } from './types'
 import { getLocalizedProjectTitle, getProjectImagePaths } from './types'
@@ -131,6 +132,17 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
               links={detailLinks}
               doi={doi}
             />
+          }
+          release={
+            content.release ? (
+              <ProjectReleaseHighlights
+                release={content.release}
+                watchLabel={t('release.watch')}
+                tutorialLabel={t('release.tutorial')}
+                closeLabel={t('release.close')}
+                youtubeLabel={t('release.youtube')}
+              />
+            ) : undefined
           }
           summary={
             <ProjectDetailSummary

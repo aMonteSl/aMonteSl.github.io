@@ -11,7 +11,7 @@ const messages = {
 } as const
 
 export const OG_IMAGE = '/images/og/portfolio.png'
-export const LAST_MODIFIED = '2026-05-09'
+export const LAST_MODIFIED = '2026-08-29'
 
 const localeMeta = {
   en: {

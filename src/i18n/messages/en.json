@@ -581,7 +581,7 @@
         "summary": "Data interchange and persistence format used in tooling and project manifests.",
         "purpose": "Portable structured data for app and tooling flows.",
         "h1": "Stored analysis outputs and project metadata.",
-        "h2": "Connected static analysis data with UI and XR rendering."
+        "h2": "Connected analysis data with UI and XR rendering."
       },
       "googleMaps": {
         "label": "Google Maps",
@@ -760,6 +760,12 @@
       "summaryTitle": "Project narrative",
       "milestones": "Versions & milestones"
     },
+    "release": {
+      "watch": "Watch the demo",
+      "tutorial": "Full tutorial (12:24)",
+      "close": "Close the video",
+      "youtube": "Open on YouTube"
+    },
     "quickFacts": {
       "title": "Quick facts",
       "type": "Type",
@@ -834,12 +840,12 @@
       "codexr": {
         "role": "Author & Lead Developer",
         "org": "Code-XR (Open Source)",
-        "desc": "Active VS Code extension for XR/3D visualization of software metrics. Started as a final degree project, accepted at VISSOFT @ ICSME 2025, released as version 1.1.0 outside the thesis context, and currently evolving toward 1.2.0.",
+        "desc": "Active VS Code extension for XR/3D visualization of software metrics. Started as a final degree project, accepted at VISSOFT @ ICSME 2025, released as version 1.1.0 outside the thesis context, and evolved into version 1.2.0 in July 2026, which added the dependency graph, the two Git analyses and cross-network sessions. Still under active development.",
         "highlights": {
           "v008Poster": "v0.0.8 - VISSOFT poster track",
           "v100Defense": "v1.0.0 - university defense",
           "v110Release": "v1.1.0 - public release",
-          "v120Current": "v1.2.0 - in progress"
+          "v120Release": "v1.2.0 - public release"
         }
       },
       "vissoft": {

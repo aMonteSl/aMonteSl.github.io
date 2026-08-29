@@ -8,6 +8,24 @@ export interface ProjectDetailLink {
   kind?: 'repo' | 'web' | 'marketplace' | 'doi' | 'ieee' | 'award' | 'certificate'
 }
 
+export interface LocalizedProjectReleaseFeature {
+  id: string
+  title: string
+  description: string
+  bullets: string[]
+  videoUrl?: string
+}
+
+export interface LocalizedProjectRelease {
+  version: string
+  date: string
+  title: string
+  codename?: string
+  intro: string
+  tutorialUrl?: string
+  features: LocalizedProjectReleaseFeature[]
+}
+
 export interface LocalizedProjectDetail {
   summary: string
   detailSummary: string
@@ -21,6 +39,7 @@ export interface LocalizedProjectDetail {
     description: string
     status?: ProjectMilestone['status']
   }>
+  release?: LocalizedProjectRelease
 }
 
 export function getAdjacentProjects(currentSlug: string, projects: Project[]): { prev: Project | null; next: Project | null } {
@@ -52,6 +71,21 @@ export function getLocalizedProjectDetail(project: Project, locale: Locale): Loc
       description: isSpanish ? milestone.description_es : milestone.description_en,
       status: milestone.status,
     })) ?? [],
+    release: project.release && {
+      version: project.release.version,
+      date: isSpanish ? project.release.date_es : project.release.date_en,
+      title: isSpanish ? project.release.title_es : project.release.title_en,
+      codename: isSpanish ? project.release.codename_es : project.release.codename_en,
+      intro: isSpanish ? project.release.intro_es : project.release.intro_en,
+      tutorialUrl: project.release.tutorialUrl,
+      features: project.release.features.map((feature) => ({
+        id: feature.id,
+        title: isSpanish ? feature.title_es : feature.title_en,
+        description: isSpanish ? feature.description_es : feature.description_en,
+        bullets: (isSpanish ? feature.bullets_es : feature.bullets_en) ?? [],
+        videoUrl: feature.videoUrl,
+      })),
+    },
   }
 }
 

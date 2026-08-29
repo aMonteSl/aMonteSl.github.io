@@ -38,11 +38,7 @@ function getEntryStartDate(entry) {
   };
 }
 
-function getHighlightDate(highlight, today) {
-  if (highlight.id === 'v120Current') {
-    return today;
-  }
-
+function getHighlightDate(highlight) {
   return {
     year: highlight.year,
     month: highlight.month ?? 1,
@@ -62,7 +58,7 @@ function hasScheduledContentInYear(entries, year, today) {
       return true;
     }
 
-    return entry.highlights?.some((highlight) => getHighlightDate(highlight, today).year === year) ?? false;
+    return entry.highlights?.some((highlight) => getHighlightDate(highlight).year === year) ?? false;
   });
 }
 
@@ -70,7 +66,7 @@ function getLatestScheduledYear(entries, today, minimumEndYear) {
   const years = entries.flatMap((entry) => [
     entry.startYear,
     entry.endYear ?? today.year,
-    ...(entry.highlights?.map((highlight) => getHighlightDate(highlight, today).year) ?? []),
+    ...(entry.highlights?.map((highlight) => getHighlightDate(highlight).year) ?? []),
   ]);
 
   return Math.max(minimumEndYear, today.year, ...years);
@@ -117,7 +113,7 @@ const baseEntries = [
     startMonth: 1,
     startDay: 14,
     endYear: null,
-    highlights: [{ id: 'v120Current', year: 2026, month: 6, day: 23 }],
+    highlights: [{ id: 'v120Release', year: 2026, month: 7, day: 30 }],
   },
   {
     id: 'masterTelecomUPM',
