@@ -2,11 +2,11 @@
   {
     "slug": "code-xr",
     "title": "Code-XR",
-    "period": "Feb 2025-Jul 2025",
+    "period": "Jan 2025 - Present",
     "featured": true,
     "type": "openSource",
-    "summary_en": "Code-XR is an open-source VS Code extension for static code analysis and immersive XR software visualization. Version 1.1.0 turns files, directories, and full projects into navigable 3D workspaces with richer metrics, shared XR/DOM rooms, virtual screens, and safer in-scene remapping controls for exploring software structure without leaving the editor.",
-    "summary_es": "Code-XR es una extensión open source para VS Code orientada al análisis estático y la visualización inmersiva de software en XR. La versión 1.1.0 convierte archivos, directorios y proyectos completos en espacios 3D navegables con métricas más ricas, salas XR/DOM compartidas, pantallas virtuales y controles de remapeo dentro de la escena para explorar la estructura del software sin salir del editor.",
+    "summary_en": "Code-XR is an open-source VS Code extension for live code analysis and immersive XR software visualization, with a scene that keeps updating by itself as you edit. Version 1.2.0 puts four analyses on the same XR table: the code city, a navigable 3D dependency graph, a side-by-side comparison of two Git revisions, and a playable movie of the whole project history. It also adds collaborative rooms you can now open to someone outside your own network.",
+    "summary_es": "Code-XR es una extensión open source para VS Code de análisis de código en vivo y visualización inmersiva de software en XR, con una escena que se va actualizando sola según editas. La versión 1.2.0 pone cuatro análisis sobre la misma mesa XR: la ciudad de código, un grafo de dependencias 3D navegable, la comparación lado a lado de dos revisiones de Git y una película con la historia completa del proyecto. Además añade salas colaborativas que ahora puedes abrir a alguien fuera de tu propia red.",
     "tags": [
       "VS Code Extension API",
       "TypeScript",
@@ -19,24 +19,34 @@
     "demoUrl": "https://code-xr.adrianmonteslinares.com/",
     "imageDir": "/projects/code-xr",
     "images": [
+      "xr-room-v1-2-0.webp",
+      "xr-scene-v1-2-0.webp",
+      "dependency-graph-force-3d.webp",
+      "dependency-graph-metric-space.webp",
+      "historical-comparison.webp",
+      "project-evolution.webp",
+      "in-room-guide.webp",
+      "livepanel-dependency-summary.webp",
+      "cross-network-pairing.webp",
+      "vr-city-at-the-table.webp",
       "scene-v1-1-0.webp",
       "collaborative-workspace.webp",
       "pedestal-mapping-ui.webp",
       "virtual-screen-controller.webp"
     ],
-    "heroImage": "scene-v1-1-0.webp",
+    "heroImage": "xr-room-v1-2-0.webp",
     "highlights_en": [
       "Problem -> Static dashboards make it difficult to understand large codebases, compare software metrics, and explain structural hotspots during review or research work.",
-      "Solution -> A VS Code workflow that runs static analysis, projects metrics into an XR scene, and supports shared rooms, virtual screens, and safer chart remapping from inside the immersive workspace.",
+      "Solution -> A VS Code workflow that analyses the code live, projects metrics into an XR scene, and supports shared rooms, virtual screens, and safer chart remapping from inside the immersive workspace.",
       "Impact -> Accepted at VISSOFT @ ICSME 2025, published on the VS Code Marketplace, and maintained as an open-source developer tool with 300+ downloads."
     ],
     "highlights_es": [
       "Problema -> Los dashboards estáticos dificultan entender bases de código grandes, comparar métricas de software y explicar hotspots estructurales durante revisión o investigación.",
-      "Solución -> Un flujo integrado en VS Code que ejecuta análisis estático, proyecta métricas en una escena XR y permite salas compartidas, pantallas virtuales y remapeo seguro de gráficos desde el propio entorno inmersivo.",
+      "Solución -> Un flujo integrado en VS Code que analiza el código en vivo, proyecta métricas en una escena XR y permite salas compartidas, pantallas virtuales y remapeo seguro de gráficos desde el propio entorno inmersivo.",
       "Impacto -> Aceptado en VISSOFT @ ICSME 2025, publicado en VS Code Marketplace y mantenido como herramienta open source para desarrolladores con más de 300 descargas."
     ],
-    "role_en": "Sole author and end-to-end developer. Built the VS Code extension, Python static-analysis pipeline, JSON persistence layer, XR scene generation with A-Frame/BabiaXR, marketplace packaging, and documentation site. Version 1.1.0 focused on performance, shared rooms, virtual-screen controls, and safer metric remapping. Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor).",
-    "role_es": "Autor único y desarrollador end-to-end. Construí la extensión de VS Code, el pipeline de análisis estático en Python, la persistencia en JSON, la generación de escenas XR con A-Frame/BabiaXR, el empaquetado para Marketplace y la web de documentación. La versión 1.1.0 se centró en rendimiento, salas compartidas, controles de pantallas virtuales y remapeo seguro de métricas. Supervisión académica de David Moreno Lumbreras (PhD, supervisor del TFG).",
+    "role_en": "Sole author and end-to-end developer. Built the VS Code extension, Python analysis pipeline, JSON persistence layer, XR scene generation with A-Frame/BabiaXR, marketplace packaging, and documentation site. Version 1.1.0 focused on performance, shared rooms, virtual-screen controls, and safer metric remapping. Version 1.2.0 added the per-language dependency adapters, safe Git snapshot materialization that never runs checkout or fetch, the Cloudflare tunnel and six-digit pairing flow behind cross-network sessions, and the in-room user guide. Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor).",
+    "role_es": "Autor único y desarrollador end-to-end. Construí la extensión de VS Code, el pipeline de análisis en Python, la persistencia en JSON, la generación de escenas XR con A-Frame/BabiaXR, el empaquetado para Marketplace y la web de documentación. La versión 1.1.0 se centró en rendimiento, salas compartidas, controles de pantallas virtuales y remapeo seguro de métricas. La versión 1.2.0 añadió los adaptadores de dependencias por lenguaje, la materialización segura de snapshots de Git sin ejecutar checkout ni fetch, el túnel de Cloudflare y el emparejamiento por código de seis dígitos detrás de las sesiones entre redes, y la guía de uso dentro de la escena. Supervisión académica de David Moreno Lumbreras (PhD, supervisor del TFG).",
     "supervisorName": "David Moreno Lumbreras",
     "supervisorUrl": "https://dlumbrer.gitlab.io/",
     "tech": [
@@ -48,14 +58,18 @@
       "A-Frame",
       "BabiaXR",
       "JSON",
+      "Git",
+      "Cloudflare Tunnel",
+      "WebCodecs",
+      "Playwright",
       "React",
       "Vite",
       "Tailwind"
     ],
     "status_en": "Active development",
     "status_es": "En desarrollo activo",
-    "detailSummary_en": "Code-XR started as a way to make software metrics easier to understand than in a traditional static dashboard. The first goal was to connect static analysis with an immersive XR scene, so files, directories, and complete projects could be explored spatially from Visual Studio Code. Version 0.0.8 was the research version linked to VISSOFT @ ICSME 2025. In October 2025 I presented version 1.0.0 before the university committee, with basic file and directory analysis already working. The project did not stop there: on March 22, 2026 I released version 1.1.0, a substantial evolution focused on performance, collaboration, virtual screens, safer in-scene chart remapping, richer metrics, improved file/directory/project workflows, and a more robust Python-backed setup. I am currently working toward version 1.2.0, exploring deeper metrics beyond CCN and function counts, including internal and external file relationships, comparison between commits or branches, and collaborative sessions that no longer require every participant to be on the same local network.",
-    "detailSummary_es": "Code-XR empezó como una forma de hacer que las métricas de software fueran más comprensibles que en un dashboard estático tradicional. El primer objetivo fue conectar análisis estático con una escena XR inmersiva, para que archivos, directorios y proyectos completos pudieran explorarse espacialmente desde Visual Studio Code. La versión 0.0.8 fue la versión de investigación vinculada a VISSOFT @ ICSME 2025. En octubre de 2025 presenté la versión 1.0.0 ante el tribunal universitario, con análisis básico de ficheros y directorios ya funcionando. El proyecto no terminó ahí: el 22 de marzo de 2026 publiqué la versión 1.1.0, una evolución sustancial centrada en rendimiento, colaboración, pantallas virtuales, remapeo seguro de gráficos dentro de la escena, métricas más ricas, mejores workflows para ficheros/directorios/proyectos y un setup Python más robusto. Actualmente estoy trabajando hacia la versión 1.2.0, explorando métricas más profundas además de CCN y número de funciones, incluyendo relaciones internas y externas entre ficheros, comparación entre commits o ramas, y sesiones colaborativas que ya no requieren que todos los participantes estén en la misma red local.",
+    "detailSummary_en": "Code-XR started as a way to make software metrics easier to understand than in a traditional static dashboard. The first goal was to connect live code analysis with an immersive XR scene, so files, directories, and complete projects could be explored spatially from Visual Studio Code, and so the scene would keep up with the code as it changed. Version 0.0.8 was the research version linked to VISSOFT @ ICSME 2025. In October 2025 I presented version 1.0.0 before the university committee, with basic file and directory analysis already working. The project did not stop there: on March 22, 2026 I released version 1.1.0, a substantial evolution focused on performance, collaboration, virtual screens, safer in-scene chart remapping, richer metrics, improved file/directory/project workflows, and a more robust Python-backed setup.\nOn July 30, 2026 I released version 1.2.0, \"Threads, Timelines & Global Networks\", which turned the extension into a shared XR workspace. The same pedestal now serves four analyses you switch between without losing the state of any of them: the classic code city, a navigable 3D dependency graph with three layouts, a dual table comparing two points of the Git history, and Project Evolution, which replays the whole repository as a film. Around them, collaboration gained persistent identities and bundled avatars, a session can be opened to someone outside your network through an outbound Cloudflare tunnel gated by a six-digit pairing code, and a six-tab user guide lives inside the room so the question \"what am I looking at\" never requires taking the headset off. The immersive behaviour was debugged end to end in emulated WebXR sessions with Meta’s Immersive Web Emulator, on desktop browsers and the emulator rather than physical headsets. The packaged extension also shrank from 39.2 MB to 6.1 MB.",
+    "detailSummary_es": "Code-XR empezó como una forma de hacer que las métricas de software fueran más comprensibles que en un dashboard estático tradicional. El primer objetivo fue conectar el análisis de código en vivo con una escena XR inmersiva, para que archivos, directorios y proyectos completos pudieran explorarse espacialmente desde Visual Studio Code, y para que la escena siguiera al código según iba cambiando. La versión 0.0.8 fue la versión de investigación vinculada a VISSOFT @ ICSME 2025. En octubre de 2025 presenté la versión 1.0.0 ante el tribunal universitario, con análisis básico de ficheros y directorios ya funcionando. El proyecto no terminó ahí: el 22 de marzo de 2026 publiqué la versión 1.1.0, una evolución sustancial centrada en rendimiento, colaboración, pantallas virtuales, remapeo seguro de gráficos dentro de la escena, métricas más ricas, mejores workflows para ficheros/directorios/proyectos y un setup Python más robusto.\nEl 30 de julio de 2026 publiqué la versión 1.2.0, «Threads, Timelines & Global Networks», que convirtió la extensión en un espacio de trabajo XR compartido. La misma mesa sirve ahora cuatro análisis entre los que se conmuta sin perder el estado de ninguno: la ciudad de código clásica, un grafo de dependencias 3D navegable con tres layouts, una mesa dual que compara dos puntos de la historia de Git, y Project Evolution, que reproduce el repositorio entero como una película. Alrededor, la colaboración ganó identidades persistentes y avatares empaquetados, una sesión puede abrirse a alguien fuera de tu red mediante un túnel saliente de Cloudflare protegido por un código de emparejamiento de seis dígitos, y una guía de seis pestañas vive dentro de la sala para que la pregunta «qué estoy viendo» no obligue a quitarse el casco. El comportamiento inmersivo se depuró de extremo a extremo en sesiones WebXR emuladas con el Immersive Web Emulator de Meta, en navegadores de escritorio y en el emulador, no en cascos físicos. La extensión empaquetada bajó además de 39,2 MB a 6,1 MB.",
     "milestones": [
       {
         "version": "0.0.8",
@@ -64,7 +78,7 @@
         "title_en": "Research version accepted at VISSOFT",
         "title_es": "Versión de investigación aceptada en VISSOFT",
         "description_en": "Research build linked to the VISSOFT @ ICSME 2025 publication and the first XR metric visualization workflow.",
-        "description_es": "Build de investigaci?n vinculada a VISSOFT @ ICSME 2025 y al primer flujo XR de m?tricas.",
+        "description_es": "Build de investigación vinculada a VISSOFT @ ICSME 2025 y al primer flujo XR de métricas.",
         "status": "awarded"
       },
       {
@@ -74,7 +88,7 @@
         "title_en": "University defense version",
         "title_es": "Versión presentada ante tribunal universitario",
         "description_en": "University defense version with stable file and directory analysis inside the VS Code extension.",
-        "description_es": "Versi?n de defensa universitaria con an?lisis estable de ficheros y directorios en VS Code.",
+        "description_es": "Versión de defensa universitaria con análisis estable de ficheros y directorios en VS Code.",
         "status": "presented"
       },
       {
@@ -84,20 +98,140 @@
         "title_en": "Performance and collaboration release",
         "title_es": "Release de rendimiento y colaboración",
         "description_en": "18x faster pipeline, shared rooms, virtual screens, safer remapping, richer metrics, and improved Python setup.",
-        "description_es": "Pipeline 18x m?s r?pido, salas compartidas, pantallas virtuales, remapeo seguro, m?tricas m?s ricas y mejor setup Python.",
+        "description_es": "Pipeline 18x más rápido, salas compartidas, pantallas virtuales, remapeo seguro, métricas más ricas y mejor setup Python.",
         "status": "released"
       },
       {
         "version": "1.2.0",
-        "date_en": "In progress",
-        "date_es": "En progreso",
-        "title_en": "Deeper software evolution analysis",
-        "title_es": "Análisis más profundo de evolución software",
-        "description_en": "Work in progress on relationships, commit/branch comparison, evolution views, and remote collaboration.",
-        "description_es": "Trabajo en relaciones, comparaci?n de commits/ramas, evoluci?n visual y colaboraci?n remota.",
-        "status": "active"
+        "date_en": "July 30, 2026",
+        "date_es": "30 de julio de 2026",
+        "title_en": "Threads, Timelines & Global Networks",
+        "title_es": "Threads, Timelines & Global Networks",
+        "description_en": "Dependency graph, historical comparison and Project Evolution join the classic analysis on one XR table, with collaboration 2.0, cross-network sessions and a VSIX down from 39.2 MB to 6.1 MB.",
+        "description_es": "El grafo de dependencias, la comparación histórica y Project Evolution se suman al análisis clásico sobre una misma mesa XR, con colaboración 2.0, sesiones entre redes y un VSIX que baja de 39,2 MB a 6,1 MB.",
+        "status": "released"
       }
     ],
+    "release": {
+      "version": "1.2.0",
+      "date_en": "July 30, 2026",
+      "date_es": "30 de julio de 2026",
+      "title_en": "What's new in v1.2.0",
+      "title_es": "Novedades de la v1.2.0",
+      "codename_en": "Threads, Timelines & Global Networks",
+      "codename_es": "Threads, Timelines & Global Networks",
+      "intro_en": "Threads are the new dependency graph: the lines that tie a codebase together. Timelines are the two Git analyses, one that compares two points of the history and one that replays the whole thing. Global Networks are the sessions that can now be opened to someone who is not on your network at all.",
+      "intro_es": "Threads es el nuevo grafo de dependencias: las líneas que atan una base de código. Timelines son los dos análisis de Git, uno que compara dos puntos de la historia y otro que la reproduce entera. Global Networks son las sesiones que ahora pueden abrirse a alguien que no está en tu red.",
+      "tutorialUrl": "https://youtu.be/dtvFhUQ1uKY",
+      "features": [
+        {
+          "id": "dependency",
+          "title_en": "Dependency graph: the architecture, not just the files",
+          "title_es": "Grafo de dependencias: la arquitectura, no solo los ficheros",
+          "description_en": "A new analysis that answers what depends on what, and what breaks if you touch it. Relations are read straight from the code in your working directory and rendered as a navigable 3D graph.",
+          "description_es": "Un análisis nuevo que responde qué depende de qué y qué se rompe si tocas algo. Las relaciones se leen directamente del código de tu directorio de trabajo y se renderizan como un grafo 3D navegable.",
+          "bullets_en": [
+            "Three layouts (force-3d, hierarchical and metric-space with real axes), computed in a Web Worker so a large graph never freezes the scene.",
+            "Seven node metrics (fan-in, fan-out, degree, relations, blast radius, cycle size, total lines) can drive size, height, colour or position.",
+            "Capped at 600 nodes and 2,000 edges: beyond that the graph opens grouped by folder and you drill into a group."
+          ],
+          "bullets_es": [
+            "Tres layouts (force-3d, hierarchical y metric-space con ejes reales), calculados en un Web Worker para que un grafo grande nunca congele la escena.",
+            "Siete métricas por nodo (fan-in, fan-out, grado, relaciones, radio de impacto, tamaño de ciclo, líneas totales) pueden mapear tamaño, altura, color o posición.",
+            "Techo de 600 nodos y 2.000 aristas: por encima, el grafo se abre agrupado por carpeta y haces drill-down en un grupo."
+          ],
+          "videoUrl": "https://youtu.be/42hIQTUD0-g"
+        },
+        {
+          "id": "historical",
+          "title_en": "Historical comparison: what changed between two points in time",
+          "title_es": "Comparación histórica: qué cambió entre dos puntos en el tiempo",
+          "description_en": "Pick two sources (the working copy, a branch, a tag or a commit) and both states land on one dual table with the same chart, the same mapping and the same scale, so a height difference is a real difference.",
+          "description_es": "Eliges dos fuentes (la copia de trabajo, una rama, un tag o un commit) y los dos estados caen en una mesa dual con el mismo gráfico, el mismo mapeo y la misma escala, así que una diferencia de altura es una diferencia real.",
+          "bullets_en": [
+            "A comparison card reports added, removed, modified and unchanged counts plus signed per-metric deltas.",
+            "It never runs checkout or fetch and never writes inside .git: your branch, your index and your files stay where you left them.",
+            "It talks to the local git binary, so GitHub, GitLab, Bitbucket or a self-hosted server all work the same."
+          ],
+          "bullets_es": [
+            "Una tarjeta de comparación reporta añadidos, eliminados, modificados y sin cambios, más deltas con signo por métrica.",
+            "Nunca ejecuta checkout ni fetch, y nunca escribe dentro de .git: tu rama, tu índice y tus ficheros se quedan donde los dejaste.",
+            "Habla con el binario local de git, así que GitHub, GitLab, Bitbucket o un servidor propio funcionan igual."
+          ],
+          "videoUrl": "https://youtu.be/b37qDCQeZg0"
+        },
+        {
+          "id": "evolution",
+          "title_en": "Project Evolution: the Git history as a film",
+          "title_es": "Project Evolution: la historia de Git como una película",
+          "description_en": "Where the comparison shows two photographs, Project Evolution plays the movie: one full-size chart walking the repository from its first revision to the current state of the branch.",
+          "description_es": "Donde la comparación enseña dos fotografías, Project Evolution reproduce la película: un único gráfico a tamaño completo que recorre el repositorio desde su primera revisión hasta el estado actual de la rama.",
+          "bullets_en": [
+            "The timeline is sampled evenly in time, favouring merges and tags. You can also pick a range, or the exact frames, in your own order.",
+            "Play, pause, step to the previous or next frame, change speed, and click anywhere on the timeline to jump.",
+            "Every frame is a full analysis, stamped with the revision, date and frame you are looking at."
+          ],
+          "bullets_es": [
+            "La línea temporal se muestrea uniformemente en el tiempo, prefiriendo merges y tags. También puedes elegir un rango, o los frames exactos, en tu propio orden.",
+            "Play, pausa, salto al frame anterior o siguiente, cambio de velocidad y clic en cualquier punto de la línea para saltar.",
+            "Cada frame es un análisis completo, etiquetado con la revisión, la fecha y el frame que estás viendo."
+          ],
+          "videoUrl": "https://youtu.be/QDN8tcKx60w"
+        },
+        {
+          "id": "classic",
+          "title_en": "Classic analysis: change the chart without re-running it",
+          "title_es": "Análisis clásico: cambiar el gráfico sin relanzarlo",
+          "description_en": "The analysis Code-XR started with, one building per file sized and coloured by the metrics you choose, no longer has to be relaunched to be seen another way.",
+          "description_es": "El análisis con el que nació Code-XR, un edificio por fichero dimensionado y coloreado por las métricas que elijas, ya no hay que relanzarlo para verlo de otra forma.",
+          "bullets_en": [
+            "Swap the chart type live from the Field Mapping panel, mid-session.",
+            "Every chart type now presents correctly on the table, and large projects stay readable by showing the top files per metric.",
+            "An in-scene selector routes between the four analyses, keeping the state of each one."
+          ],
+          "bullets_es": [
+            "Cambia el tipo de gráfico en vivo desde el panel Field Mapping, a mitad de sesión.",
+            "Todos los tipos de gráfico ya se presentan correctamente sobre la mesa, y los proyectos grandes siguen legibles mostrando los ficheros top por métrica.",
+            "Un selector dentro de la escena enruta entre los cuatro análisis conservando el estado de cada uno."
+          ],
+          "videoUrl": "https://youtu.be/76p1ibPaf3I"
+        },
+        {
+          "id": "collaboration",
+          "title_en": "Collaboration 2.0 and cross-network sessions",
+          "title_es": "Colaboración 2.0 y sesiones entre redes",
+          "description_en": "Persistent identities, authoritative host and guest roles, and a bundled animated avatar that works offline. Each participant gets their own colour and a name tag that always turns to face you.",
+          "description_es": "Identidades persistentes, roles de anfitrión e invitado con autoridad real y un avatar animado empaquetado que funciona sin conexión. Cada participante tiene su color y una etiqueta con su nombre que siempre se gira hacia ti.",
+          "bullets_en": [
+            "A session reaches someone outside your network through an outbound Cloudflare tunnel: your router never has to accept a new inbound connection.",
+            "The gate is a six-digit pairing code that expires, limits attempts and burns itself on the first mistake.",
+            "cloudflared is version-pinned, downloaded only with your consent and verified by SHA-256 before it ever runs."
+          ],
+          "bullets_es": [
+            "Una sesión llega a alguien fuera de tu red mediante un túnel saliente de Cloudflare: tu router nunca tiene que aceptar una conexión entrante nueva.",
+            "La puerta es un código de emparejamiento de seis dígitos que caduca, limita intentos y se quema al primer fallo.",
+            "cloudflared está fijado a una versión, se descarga solo con tu consentimiento y se verifica por SHA-256 antes de ejecutarse."
+          ]
+        },
+        {
+          "id": "guide",
+          "title_en": "A user guide inside the room, and LivePanel caught up",
+          "title_es": "Una guía de uso dentro de la sala, y LivePanel al día",
+          "description_en": "The answer to \"what am I looking at\" no longer requires taking the headset off, and the 2D panel inside VS Code now carries the same analytics as the room.",
+          "description_es": "La respuesta a «qué estoy viendo» ya no exige quitarse el casco, y el panel 2D dentro de VS Code lleva ahora la misma analítica que la sala.",
+          "bullets_en": [
+            "Six tabs, each in the colour of the analysis it explains, plus a 24-term metric glossary generated from the real analysis contracts.",
+            "LivePanel gained a Dependency Summary and a 2D Historical Comparison with a searchable table of per-item deltas.",
+            "The same guide is served as a guide.html page, for reading outside XR."
+          ],
+          "bullets_es": [
+            "Seis pestañas, cada una con el color del análisis que explica, más un glosario de 24 términos generado desde los contratos reales de análisis.",
+            "LivePanel ganó un Dependency Summary y una comparación histórica en 2D con tabla buscable de deltas por elemento.",
+            "La misma guía se sirve como página guide.html, para leerla fuera de XR."
+          ]
+        }
+      ]
+    },
     "badges_en": [
       "Best Project",
       "Awarded Project"

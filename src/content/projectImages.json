@@ -1,12 +1,22 @@
 {
   "code-xr": {
     "images": [
+      "xr-room-v1-2-0.webp",
+      "xr-scene-v1-2-0.webp",
+      "dependency-graph-force-3d.webp",
+      "dependency-graph-metric-space.webp",
+      "historical-comparison.webp",
+      "project-evolution.webp",
+      "in-room-guide.webp",
+      "livepanel-dependency-summary.webp",
+      "cross-network-pairing.webp",
+      "vr-city-at-the-table.webp",
       "scene-v1-1-0.webp",
       "collaborative-workspace.webp",
       "pedestal-mapping-ui.webp",
       "virtual-screen-controller.webp"
     ],
-    "heroImage": "scene-v1-1-0.webp"
+    "heroImage": "xr-room-v1-2-0.webp"
   },
   "honor-course-1": {
     "images": [

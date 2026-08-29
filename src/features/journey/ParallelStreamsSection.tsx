@@ -208,10 +208,10 @@ export function ParallelStreamsSection() {
     return {
       id: highlight.id,
       label: t(`entries.${activeEntry.id}.highlights.${highlight.id}`),
-      date: formatHighlightDate(getHighlightDate(highlight, today)),
+      date: formatHighlightDate(getHighlightDate(highlight)),
       lane: activeEntry.lane,
     }
-  }, [activeEntry, activeHighlightRef, formatHighlightDate, t, today])
+  }, [activeEntry, activeHighlightRef, formatHighlightDate, t])
 
   const handleEntryHoverStart = useCallback((entryId: string) => {
     setHoveredHighlight(null)
@@ -283,8 +283,8 @@ export function ParallelStreamsSection() {
 
   /** Get highlight percentage (year view) */
   const getHighlightPercent = useCallback((h: JourneyHighlight) => {
-    return dateToTimelinePercent(getHighlightDate(h, today), timelineEndYear)
-  }, [timelineEndYear, today])
+    return dateToTimelinePercent(getHighlightDate(h), timelineEndYear)
+  }, [timelineEndYear])
 
   /** Check if entry is visible in drill-down year */
   const isEntryInYear = useCallback((entry: JourneyEntry, year: number): boolean => {
@@ -348,9 +348,9 @@ export function ParallelStreamsSection() {
     const width = Math.max(endPercent - startPercent, 0.1)
 
     return entry.highlights
-      .filter((highlight) => drillYear === undefined || getHighlightDate(highlight, today).year === drillYear)
+      .filter((highlight) => drillYear === undefined || getHighlightDate(highlight).year === drillYear)
       .map((highlight) => {
-        const highlightDate = getHighlightDate(highlight, today)
+        const highlightDate = getHighlightDate(highlight)
         const absolutePercent = drillYear === undefined
           ? getHighlightPercent(highlight)
           : monthToPercent(highlightDate.month, highlightDate.day)
@@ -385,7 +385,7 @@ export function ParallelStreamsSection() {
           />
         )
       })
-  }, [animate, getHighlightPercent, handleHighlightClick, handleHighlightHoverEnd, handleHighlightHoverStart, isHighlightActive, monthToPercent, t, today])
+  }, [animate, getHighlightPercent, handleHighlightClick, handleHighlightHoverEnd, handleHighlightHoverStart, isHighlightActive, monthToPercent, t])
 
   /** Handle year click for drill-down */
   const handleYearClick = useCallback((year: number) => {
@@ -450,7 +450,7 @@ export function ParallelStreamsSection() {
                 id: h.id,
                 label: t(`entries.${activeEntry.id}.highlights.${h.id}`),
                 year: h.year,
-                date: formatHighlightDate(getHighlightDate(h, today)),
+                date: formatHighlightDate(getHighlightDate(h)),
               }))}
               activeHighlight={activeHighlight}
               activeHighlightLabel={t('selectedMilestone')}
@@ -657,7 +657,7 @@ export function ParallelStreamsSection() {
                             <span className={cn('absolute bottom-0 left-1/2 h-3 w-3 -translate-x-1/2 translate-y-1/2 rounded-full ring-2 ring-[var(--bg)]', colors.bg)} />
 
                             {entry.highlights?.map((highlight) => {
-                              const highlightTop = getVerticalTop(getHighlightDate(highlight, today))
+                              const highlightTop = getVerticalTop(getHighlightDate(highlight))
                               const localTop = clampPercent(((highlightTop - top) / height) * 100)
                               const isSelected = isHighlightActive(entry.id, highlight.id)
 

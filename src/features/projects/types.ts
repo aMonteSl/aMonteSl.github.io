@@ -47,6 +47,7 @@ export interface Project {
   supervisorUrl?: string
   tech: string[]
   milestones?: ProjectMilestone[]
+  release?: ProjectRelease
 }
 
 export interface ProjectMilestone {
@@ -60,8 +61,35 @@ export interface ProjectMilestone {
   status?: 'released' | 'awarded' | 'presented' | 'active'
 }
 
+/** A single headline of the latest release, shown as a card on the project page. */
+export interface ProjectReleaseFeature {
+  id: string
+  title_en: string
+  title_es: string
+  description_en: string
+  description_es: string
+  bullets_en?: string[]
+  bullets_es?: string[]
+  videoUrl?: string
+}
+
+/** What the latest release brought, rendered above the project narrative. */
+export interface ProjectRelease {
+  version: string
+  date_en: string
+  date_es: string
+  title_en: string
+  title_es: string
+  codename_en?: string
+  codename_es?: string
+  intro_en: string
+  intro_es: string
+  tutorialUrl?: string
+  features: ProjectReleaseFeature[]
+}
+
 // Localized project for display
-export interface LocalizedProject extends Omit<Project, 'title_en' | 'title_es' | 'summary_en' | 'summary_es' | 'detailSummary_en' | 'detailSummary_es' | 'highlights_en' | 'highlights_es' | 'role_en' | 'role_es' | 'status_en' | 'status_es' | 'badges_en' | 'badges_es' | 'milestones'> {
+export interface LocalizedProject extends Omit<Project, 'title_en' | 'title_es' | 'summary_en' | 'summary_es' | 'detailSummary_en' | 'detailSummary_es' | 'highlights_en' | 'highlights_es' | 'role_en' | 'role_es' | 'status_en' | 'status_es' | 'badges_en' | 'badges_es' | 'milestones' | 'release'> {
   summary: string
   detailSummary?: string
   highlights: string[]
