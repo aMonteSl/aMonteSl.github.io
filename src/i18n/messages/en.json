@@ -53,7 +53,7 @@
       "badge": "Featured",
       "codeXr": {
         "title": "Code-XR",
-        "subtitle": "VS Code extension for XR visualization of software metrics",
+        "subtitle": "VS Code extension that turns your codebase into a 3D city you can walk through, live as you edit",
         "metric": "300+ downloads",
         "vissoft": "Linked to VISSOFT @ ICSME 2025"
       },

@@ -5,8 +5,8 @@
     "period": "Jan 2025 - Present",
     "featured": true,
     "type": "openSource",
-    "summary_en": "Code-XR is an open-source VS Code extension for live code analysis and immersive XR software visualization, with a scene that keeps updating by itself as you edit. Version 1.2.0 puts four analyses on the same XR table: the code city, a navigable 3D dependency graph, a side-by-side comparison of two Git revisions, and a playable movie of the whole project history. It also adds collaborative rooms you can now open to someone outside your own network.",
-    "summary_es": "Code-XR es una extensión open source para VS Code de análisis de código en vivo y visualización inmersiva de software en XR, con una escena que se va actualizando sola según editas. La versión 1.2.0 pone cuatro análisis sobre la misma mesa XR: la ciudad de código, un grafo de dependencias 3D navegable, la comparación lado a lado de dos revisiones de Git y una película con la historia completa del proyecto. Además añade salas colaborativas que ahora puedes abrir a alguien fuera de tu propia red.",
+    "summary_en": "Code-XR is an open-source VS Code extension that turns a codebase into a 3D city you can walk through in your browser, and keeps it updating as you edit. No headset needed, though it works in VR. Version 1.2.0 puts four analyses on the same table: the code city, a navigable dependency graph, a side-by-side comparison of two Git revisions, and a playable movie of the whole project history, plus rooms you can share with someone outside your own network.",
+    "summary_es": "Code-XR es una extensión open source para VS Code que convierte una base de código en una ciudad 3D que puedes recorrer desde el navegador, y la mantiene actualizada según editas. No hace falta casco, aunque funciona en VR. La versión 1.2.0 pone cuatro análisis sobre la misma mesa: la ciudad de código, un grafo de dependencias navegable, la comparación lado a lado de dos revisiones de Git y una película con la historia completa del proyecto, además de salas que puedes compartir con alguien fuera de tu propia red.",
     "tags": [
       "VS Code Extension API",
       "TypeScript",
