@@ -763,7 +763,7 @@
         "desc": "Formación integral en ingeniería de software, redes y sistemas. Especialización progresiva en desarrollo full-stack y tecnologías XR. TFG vinculado a VISSOFT 2025.",
         "highlights": {
           "ast": "Matrícula de Honor — AST (C++)",
-          "lsmo": "Matrícula de Honor — LSMO (Kotlin)"
+          "lsmu": "Matrícula de Honor — LSMU (Kotlin)"
         }
       },
       "adyra": {
@@ -1018,7 +1018,7 @@
     "codeXrAwardIssuer": "IEEE VISSOFT 2025 (junto a ICSME 2025)",
     "greenhouseHighDistinction": "GreenHouse — Matrícula de Honor en AST",
     "greenhouseHighDistinctionIssuer": "Ampliación de Sistemas Telemáticos (URJC)",
-    "stepByStepHighDistinction": "StepByStep — Matrícula de Honor en LSMO",
+    "stepByStepHighDistinction": "StepByStep — Matrícula de Honor en LSMU",
     "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Móviles y Ubicuos (URJC)"
   }
 }

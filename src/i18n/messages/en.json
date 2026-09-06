@@ -763,7 +763,7 @@
         "desc": "Comprehensive training in software engineering, networks, and systems. Progressive specialization in full-stack development and XR technologies. Final thesis linked to VISSOFT 2025.",
         "highlights": {
           "ast": "Honors — AST (C++)",
-          "lsmo": "Honors — LSMO (Kotlin)"
+          "lsmu": "Honors — LSMU (Kotlin)"
         }
       },
       "adyra": {
@@ -1018,7 +1018,7 @@
     "codeXrAwardIssuer": "IEEE VISSOFT 2025 (co-located with ICSME 2025)",
     "greenhouseHighDistinction": "GreenHouse — AST High Distinction",
     "greenhouseHighDistinctionIssuer": "Ampliación de Sistemas Telemáticos (URJC)",
-    "stepByStepHighDistinction": "StepByStep — LSMO High Distinction",
+    "stepByStepHighDistinction": "StepByStep — LSMU High Distinction",
     "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Móviles y Ubicuos (URJC)"
   }
 }

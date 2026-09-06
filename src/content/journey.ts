@@ -54,7 +54,7 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     endDay: 15,
     highlights: [
       { id: 'ast', labelKey: 'journey.entries.urjc.highlights.ast', year: 2024, month: 5, day: 10 },
-      { id: 'lsmo', labelKey: 'journey.entries.urjc.highlights.lsmo', year: 2025, month: 5, day: 10 },
+      { id: 'lsmu', labelKey: 'journey.entries.urjc.highlights.lsmu', year: 2025, month: 5, day: 10 },
     ],
     tags: ['Software Engineering', 'Networks', 'XR'],
   },
