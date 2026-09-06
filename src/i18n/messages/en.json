@@ -1020,5 +1020,10 @@
     "greenhouseHighDistinctionIssuer": "Ampliación de Sistemas Telemáticos (URJC)",
     "stepByStepHighDistinction": "StepByStep — LSMU High Distinction",
     "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Móviles y Ubicuos (URJC)"
+  },
+  "language": {
+    "browserHint": "This site is written in English and Spanish. Your browser can translate it into your language.",
+    "dismiss": "Dismiss",
+    "skipToContent": "Skip to main content"
   }
 }

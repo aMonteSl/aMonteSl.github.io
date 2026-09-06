@@ -46,7 +46,7 @@ export function Footer() {
         <div className="relative py-10 sm:py-14">
           <div className="mb-9 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.25fr_1.05fr_0.75fr_0.75fr] lg:gap-10">
             <div className="sm:col-span-2 lg:col-span-1">
-              <p className="mb-2 text-lg font-semibold text-[var(--fg)]">{SITE.author}</p>
+              <p className="mb-2 text-lg font-semibold text-[var(--fg)]" translate="no">{SITE.author}</p>
               <p className="max-w-sm text-sm leading-relaxed text-[var(--fg-muted)]">
                 {t('brand')}
               </p>
@@ -129,7 +129,7 @@ export function Footer() {
 
           <div className="flex flex-col items-start justify-between gap-3 text-left sm:flex-row sm:items-center">
             <p className="text-xs text-[var(--fg-muted)]/60">
-              &copy; {currentYear} {SITE.author}. {t('copyright')}
+              &copy; {currentYear} <span translate="no">{SITE.author}</span>. {t('copyright')}
             </p>
             <p className="text-xs text-[var(--fg-muted)]/40">
               {t('by')}

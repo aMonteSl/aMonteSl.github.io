@@ -32,7 +32,7 @@ export function ProfileBio({ className }: ProfileBioProps) {
       <motion.div {...fadeInUp(0)} className="min-w-0">
         <div className="max-w-3xl">
           <Kicker>{t('operatingKicker')}</Kicker>
-          <h3 className="mt-4 text-2xl font-semibold leading-tight text-[var(--fg)] sm:text-3xl lg:text-4xl">
+          <h3 className="mt-4 text-2xl font-semibold leading-tight text-[var(--fg)] sm:text-3xl lg:text-4xl" translate="no">
             {t('name')}
           </h3>
           <p className="mt-3 text-sm font-medium leading-relaxed text-[var(--accent)] sm:text-base">

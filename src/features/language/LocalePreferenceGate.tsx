@@ -1,19 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useLocale, localizePath, type Locale } from '@/i18n'
+import { useLocale, localizePath } from '@/i18n'
+import { getBrowserLanguages, negotiateLocale } from './negotiate'
 
 export const PREFERRED_LOCALE_STORAGE_KEY = 'preferred-locale'
 
 function isRootPath(pathname: string): boolean {
   return pathname === '/' || pathname === '/index.html'
-}
-
-function getPreferredBrowserLocale(): Locale {
-  const languages = navigator.languages?.length ? navigator.languages : [navigator.language]
-  const primaryLanguage = languages.find(Boolean)?.toLowerCase() ?? ''
-
-  return primaryLanguage.startsWith('es') ? 'es' : 'en'
 }
 
 export function LocalePreferenceGate() {
@@ -33,7 +27,7 @@ export function LocalePreferenceGate() {
       return
     }
 
-    const preferredLocale = getPreferredBrowserLocale()
+    const preferredLocale = negotiateLocale(getBrowserLanguages())
     if (preferredLocale === locale) {
       return
     }

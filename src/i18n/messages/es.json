@@ -1020,5 +1020,10 @@
     "greenhouseHighDistinctionIssuer": "Ampliación de Sistemas Telemáticos (URJC)",
     "stepByStepHighDistinction": "StepByStep — Matrícula de Honor en LSMU",
     "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Móviles y Ubicuos (URJC)"
+  },
+  "language": {
+    "browserHint": "Este sitio está escrito en inglés y español. Tu navegador puede traducirlo a tu idioma.",
+    "dismiss": "Cerrar",
+    "skipToContent": "Saltar al contenido"
   }
 }

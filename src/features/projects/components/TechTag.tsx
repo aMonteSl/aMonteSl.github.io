@@ -150,7 +150,10 @@ export function TechTag({ tech, className = '' }: TechTagProps) {
         className="w-4 h-4 text-[var(--accent)] opacity-80 group-hover:opacity-100 transition-opacity"
         aria-hidden="true"
       />
-      <span className="text-[10px] text-[var(--fg-muted)] leading-none whitespace-nowrap group-hover:text-[var(--fg)] transition-colors">
+      <span
+        className="text-[10px] text-[var(--fg-muted)] leading-none whitespace-nowrap group-hover:text-[var(--fg)] transition-colors"
+        translate="no"
+      >
         {tech}
       </span>
     </div>

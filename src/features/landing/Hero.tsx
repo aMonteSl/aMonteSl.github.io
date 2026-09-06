@@ -102,6 +102,7 @@ export function Hero() {
           <motion.h1
             {...(animate ? fadeInUp(0.05) : {})}
             className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.05] tracking-normal text-[var(--fg)] sm:text-5xl md:text-6xl xl:text-7xl"
+            translate="no"
           >
             {t('name')}
           </motion.h1>

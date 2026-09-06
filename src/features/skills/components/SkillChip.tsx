@@ -61,7 +61,10 @@ export function SkillChip({
         )}
         aria-hidden="true"
       />
-      <span className="max-w-28 text-center text-[11px] leading-tight text-[var(--fg-muted)] transition-colors group-hover:text-[var(--fg)]">
+      <span
+        className="max-w-28 text-center text-[11px] leading-tight text-[var(--fg-muted)] transition-colors group-hover:text-[var(--fg)]"
+        translate="no"
+      >
         {label}
       </span>
     </button>
