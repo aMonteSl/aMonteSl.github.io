@@ -53,7 +53,7 @@ npm run dev                 # Development server
 npm run lint                # ESLint
 npm run typecheck           # TypeScript strict check
 npm run check-translations  # i18n coverage sanity check
-npm run check               # lint + typecheck + translations
+npm run check               # lint + typecheck + translations + journey timeline
 npm run build               # Static export to ./out
 npm run preview             # Serve ./out locally
 npm run ship "message"      # Check, build, commit, and push current branch
