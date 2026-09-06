@@ -3,6 +3,8 @@
  * Professional certifications, awards, and achievements
  */
 
+import { LINKS } from '@/lib/constants'
+
 export interface Certification {
   id: string
   name: string // i18n key for name
@@ -16,6 +18,16 @@ export interface Certification {
 }
 
 export const CERTIFICATIONS: Certification[] = [
+  {
+    id: 'oxford-c1',
+    name: 'oxfordC1',
+    issuer: 'oxfordC1Issuer',
+    date: '2026-09-04',
+    link: LINKS.oxfordC1Verify,
+    linkType: 'external',
+    tags: ['English', 'CEFR C1', 'Oxford'],
+    status: 'completed',
+  },
   {
     id: 'telematics-degree',
     name: 'telematicsDegree',
@@ -55,19 +67,11 @@ export const CERTIFICATIONS: Certification[] = [
     status: 'completed',
   },
   {
-    id: 'cambridge-c1',
-    name: 'cambridgeC1',
-    issuer: 'Cambridge University',
-    date: '2026-Q2',
-    tags: ['English', 'Professional Development'],
-    status: 'in-progress',
-  },
-  {
     id: 'master-telecom-upm',
     name: 'masterTelecomUPM',
     issuer: 'masterTelecomUPMIssuer',
     date: '2026-09',
-    tags: ['Telecommunications', 'UPM', 'Systems'],
-    status: 'planned',
+    tags: ['UPM', 'Telecommunications', 'Machine Learning', 'Big Data'],
+    status: 'in-progress',
   },
 ]

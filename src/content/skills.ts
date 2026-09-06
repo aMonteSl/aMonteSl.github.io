@@ -60,6 +60,8 @@
   | 'agileScrum'
   | 'mvvm'
   | 'githubCopilot'
+  | 'claudeCode'
+  | 'mcp'
 
 export type CategoryId =
   | 'languages'
@@ -127,7 +129,9 @@ export type SkillIconKey =
   | 'security'
   | 'ai'
   | 'azuredevops'
-  | 'jira' 
+  | 'jira'
+  | 'claude'
+  | 'mcp'
 
 export interface SkillUsedIn {
   id: string
@@ -331,9 +335,9 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     id: 'express',
     labelKey: 'items.express.label',
     iconKey: 'express',
-    experienceTags: ['regular_use', 'open_source'],
+    experienceTags: ['internship', 'regular_use'],
     proficiency: 'intermediate',
-    purposeTag: 'open_source',
+    purposeTag: 'internship',
     purposeKey: 'items.express.purpose',
     summaryKey: 'items.express.summary',
     highlightsKeys: ['items.express.h1', 'items.express.h2'],
@@ -343,13 +347,13 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     id: 'nestjs',
     labelKey: 'items.nestjs.label',
     iconKey: 'nestjs',
-    experienceTags: ['internship', 'production_like'],
+    experienceTags: ['regular_use'],
     proficiency: 'intermediate',
-    purposeTag: 'internship',
+    purposeTag: 'learning',
     purposeKey: 'items.nestjs.purpose',
     summaryKey: 'items.nestjs.summary',
     highlightsKeys: ['items.nestjs.h1', 'items.nestjs.h2'],
-    usedIn: [USED_IN.projects],
+    usedIn: [],
   },
   swagger: {
     id: 'swagger',
@@ -883,7 +887,31 @@ export const SKILLS: Record<SkillId, SkillDetail> = {
     summaryKey: 'items.githubCopilot.summary',
     highlightsKeys: ['items.githubCopilot.h1', 'items.githubCopilot.h2'],
     usedIn: [USED_IN.projects],
-  }
+  },
+  claudeCode: {
+    id: 'claudeCode',
+    labelKey: 'items.claudeCode.label',
+    iconKey: 'claude',
+    experienceTags: ['regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.claudeCode.purpose',
+    summaryKey: 'items.claudeCode.summary',
+    highlightsKeys: ['items.claudeCode.h1', 'items.claudeCode.h2'],
+    usedIn: [USED_IN.projects],
+  },
+  mcp: {
+    id: 'mcp',
+    labelKey: 'items.mcp.label',
+    iconKey: 'mcp',
+    experienceTags: ['regular_use'],
+    proficiency: 'intermediate',
+    purposeTag: 'production_like',
+    purposeKey: 'items.mcp.purpose',
+    summaryKey: 'items.mcp.summary',
+    highlightsKeys: ['items.mcp.h1', 'items.mcp.h2'],
+    usedIn: [USED_IN.projects],
+  },
 }
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
@@ -933,7 +961,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     id: 'other',
     titleKey: 'categories.other.label',
     descriptionKey: 'categories.other.desc',
-    skills: ['promptEngineering', 'aiModels', 'githubCopilot'],
+    skills: ['promptEngineering', 'aiModels', 'githubCopilot', 'claudeCode', 'mcp'],
   }
 ]
 

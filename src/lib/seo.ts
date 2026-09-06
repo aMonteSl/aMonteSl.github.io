@@ -11,7 +11,7 @@ const messages = {
 } as const
 
 export const OG_IMAGE = '/images/og/portfolio.png'
-export const LAST_MODIFIED = '2026-08-29'
+export const LAST_MODIFIED = '2026-09-07'
 
 const localeMeta = {
   en: {
@@ -177,8 +177,9 @@ export function buildHomeJsonLd(locale: Locale): Record<string, unknown> {
         ],
         givenName: 'Adrián',
         familyName: 'Montes Linares',
-        jobTitle: ['Telecommunications Engineer', 'Software Engineer'],
-        description: 'Full-stack developer focused on TypeScript, React, Node.js, DevTools, and XR software visualization.',
+        jobTitle: ['Telematics Engineer', 'Software Engineer'],
+        description:
+          "Telematics Engineer (URJC, 2026) and Master's student in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data. Author of Code-XR, an open-source VS Code extension for XR software visualization published at IEEE VISSOFT 2025. Cloud & Systems N2 intern at SATEC.",
         url: SITE.url,
         email: LINKS.email,
         image: absoluteUrl('/images/profile/hero-320.jpg'),
@@ -188,6 +189,39 @@ export function buildHomeJsonLd(locale: Locale): Record<string, unknown> {
           name: 'Universidad Rey Juan Carlos',
           url: 'https://www.urjc.es',
         },
+        affiliation: {
+          '@type': 'EducationalOrganization',
+          name: 'Universidad Politécnica de Madrid',
+          alternateName: 'UPM',
+          url: LINKS.upm,
+        },
+        hasCredential: [
+          {
+            '@type': 'EducationalOccupationalCredential',
+            name: 'Oxford Test of English Advanced - CEFR C1',
+            credentialCategory: 'Language certificate',
+            educationalLevel: 'CEFR C1',
+            dateCreated: '2026-09-04',
+            recognizedBy: {
+              '@type': 'Organization',
+              name: 'Oxford University Press',
+              url: 'https://www.oxfordtestofenglish.com',
+            },
+          },
+          {
+            '@type': 'EducationalOccupationalCredential',
+            name: "Bachelor's Degree in Telematics Engineering",
+            credentialCategory: 'degree',
+            dateCreated: '2026-01',
+            recognizedBy: {
+              '@type': 'EducationalOrganization',
+              name: 'Universidad Rey Juan Carlos',
+              url: 'https://www.urjc.es',
+            },
+          },
+        ],
+        knowsLanguage: ['es', 'en'],
+        award: ['Distinguished Artifact Award — IEEE VISSOFT 2025 (Code-XR)'],
         knowsAbout: [
           'TypeScript',
           'React',
@@ -197,6 +231,12 @@ export function buildHomeJsonLd(locale: Locale): Record<string, unknown> {
           'Software Engineering',
           'Data Visualization',
           'Azure',
+          'Machine Learning',
+          'Big Data',
+          'Cloud Infrastructure',
+          'Linux',
+          'Prompt Engineering',
+          'Model Context Protocol (MCP)',
         ],
       },
       {
@@ -245,6 +285,7 @@ export function buildProjectJsonLd(
           operatingSystem: 'Visual Studio Code',
           downloadUrl: LINKS.codeXrMarketplace,
           citation: LINKS.codeXrDoi,
+          award: 'Distinguished Artifact Award, IEEE VISSOFT 2025',
         }
       : {}),
   }

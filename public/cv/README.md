@@ -14,3 +14,4 @@ When ready, upload each PDF with the exact filename to enable download functiona
 - Directory: ✅ Created
 - Expected filenames: ✅ Defined for ES and EN
 - Links configured: ✅ Locale-based CV URLs ready
+- Served revision: September 2026 (NTF = no phone number) — English C1 (Oxford Test of English Advanced), UPM master's in progress, SATEC Cloud & Systems N2 internship ongoing

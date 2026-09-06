@@ -38,12 +38,12 @@
     "highlights_en": [
       "Problem -> Static dashboards make it difficult to understand large codebases, compare software metrics, and explain structural hotspots during review or research work.",
       "Solution -> A VS Code workflow that analyses the code live, projects metrics into an XR scene, and supports shared rooms, virtual screens, and safer chart remapping from inside the immersive workspace.",
-      "Impact -> Accepted at VISSOFT @ ICSME 2025, published on the VS Code Marketplace, and maintained as an open-source developer tool with 300+ downloads."
+      "Impact -> Paper published at IEEE VISSOFT 2025 (co-located with ICSME 2025) and recognized with the Distinguished Artifact Award; the extension is available on the VS Code Marketplace and maintained as an open-source developer tool."
     ],
     "highlights_es": [
       "Problema -> Los dashboards estáticos dificultan entender bases de código grandes, comparar métricas de software y explicar hotspots estructurales durante revisión o investigación.",
       "Solución -> Un flujo integrado en VS Code que analiza el código en vivo, proyecta métricas en una escena XR y permite salas compartidas, pantallas virtuales y remapeo seguro de gráficos desde el propio entorno inmersivo.",
-      "Impacto -> Aceptado en VISSOFT @ ICSME 2025, publicado en VS Code Marketplace y mantenido como herramienta open source para desarrolladores con más de 300 descargas."
+      "Impacto -> Artículo publicado en IEEE VISSOFT 2025 (junto a ICSME 2025) y reconocido con el Distinguished Artifact Award; la extensión está disponible en VS Code Marketplace y se mantiene como herramienta open source para desarrolladores."
     ],
     "role_en": "Sole author and end-to-end developer. Built the VS Code extension, Python analysis pipeline, JSON persistence layer, XR scene generation with A-Frame/BabiaXR, marketplace packaging, and documentation site. Version 1.1.0 focused on performance, shared rooms, virtual-screen controls, and safer metric remapping. Version 1.2.0 added the per-language dependency adapters, safe Git snapshot materialization that never runs checkout or fetch, the Cloudflare tunnel and six-digit pairing flow behind cross-network sessions, and the in-room user guide. Academic supervision by David Moreno Lumbreras (PhD, TFG supervisor).",
     "role_es": "Autor único y desarrollador end-to-end. Construí la extensión de VS Code, el pipeline de análisis en Python, la persistencia en JSON, la generación de escenas XR con A-Frame/BabiaXR, el empaquetado para Marketplace y la web de documentación. La versión 1.1.0 se centró en rendimiento, salas compartidas, controles de pantallas virtuales y remapeo seguro de métricas. La versión 1.2.0 añadió los adaptadores de dependencias por lenguaje, la materialización segura de snapshots de Git sin ejecutar checkout ni fetch, el túnel de Cloudflare y el emparejamiento por código de seis dígitos detrás de las sesiones entre redes, y la guía de uso dentro de la escena. Supervisión académica de David Moreno Lumbreras (PhD, supervisor del TFG).",
@@ -244,13 +244,13 @@
   {
     "slug": "obt",
     "title": "OBT — Online Booking Tool",
-    "period": "Nov 2025–Feb 2026",
+    "period": "Nov 2025–Jan 2026",
     "featured": true,
     "type": "internal",
     "summary_en": "Internal SaaS platform developed during my VBGroup internship to manage travel booking requests for client companies. The system supports request intake, agent-managed cost estimates, approval flows, reservation processing, automated email notifications, and role-based access across five user tiers.",
     "summary_es": "Plataforma SaaS interna desarrollada durante mis prácticas en VBGroup para gestionar solicitudes de reserva de viajes de empresas cliente. El sistema cubre la recepción de solicitudes, presupuestos gestionados por agentes, flujos de aprobación, procesamiento de reservas, notificaciones automáticas por email y control de acceso por roles en cinco niveles de usuario.",
     "tags": [
-      "Nest.js",
+      "Express.js",
       "TypeScript",
       "React",
       "Azure CosmosDB",
@@ -271,10 +271,10 @@
       "Implementé acciones interactivas por email aseguradas con JWT para aprobaciones de presupuestos, notificaciones de viaje y confirmaciones de reserva.",
       "Empecé con backend y diseño de base de datos, y después amplié mi contribución al frontend React, gestión de estado, flujos de reserva e integración con APIs REST."
     ],
-    "role_en": "Initially focused on backend architecture and development, then evolved into a full-stack role as the platform grew. Designed REST API architecture with Nest.js, TypeScript, and Swagger; implemented JWT-based email security, RBAC middleware, and MVC patterns; and structured Cosmos DB collections and Azure Blob Storage containers for travel data, cost estimates, and user documents. Later contributed to the React + Vite frontend, multi-step booking workflows, state management, Tailwind UI implementation, and API integration.",
-    "role_es": "Inicialmente me enfoqué en arquitectura y desarrollo backend, y después evolucioné hacia un rol full-stack a medida que la plataforma creció. Diseñé la arquitectura de API REST con Nest.js, TypeScript y Swagger; implementé seguridad en emails basada en JWT, middleware RBAC y patrones MVC; y estructuré colecciones de Cosmos DB y contenedores de Azure Blob Storage para datos de viajes, presupuestos y documentos de usuario. Posteriormente contribuí al frontend React + Vite, flujos de reserva multipaso, gestión de estado, implementación UI con Tailwind e integración con APIs.",
+    "role_en": "Initially focused on backend architecture and development, then evolved into a full-stack role as the platform grew. Designed REST API architecture with Express.js, TypeScript, and Swagger; implemented JWT-based email security, RBAC middleware, and MVC patterns; and structured Cosmos DB collections and Azure Blob Storage containers for travel data, cost estimates, and user documents. Later contributed to the React + Vite frontend, multi-step booking workflows, state management, Tailwind UI implementation, and API integration.",
+    "role_es": "Inicialmente me enfoqué en arquitectura y desarrollo backend, y después evolucioné hacia un rol full-stack a medida que la plataforma creció. Diseñé la arquitectura de API REST con Express.js, TypeScript y Swagger; implementé seguridad en emails basada en JWT, middleware RBAC y patrones MVC; y estructuré colecciones de Cosmos DB y contenedores de Azure Blob Storage para datos de viajes, presupuestos y documentos de usuario. Posteriormente contribuí al frontend React + Vite, flujos de reserva multipaso, gestión de estado, implementación UI con Tailwind e integración con APIs.",
     "tech": [
-      "Nest.js",
+      "Express.js",
       "TypeScript",
       "Swagger",
       "TSDoc",
@@ -388,12 +388,12 @@
   },
   {
     "slug": "honor-course-2",
-    "title": "StepByStep — LSMO High Distinction",
+    "title": "StepByStep — LSMU High Distinction",
     "period": "May 2025",
     "featured": true,
     "type": "academic",
-    "summary_en": "Android/Kotlin walking-route app developed as the final project for LSMO. StepByStep records routes in real time, imports GPX files, persists route data, calculates distance, time, elevation and gain metrics, and presents profile statistics with light and dark themes.",
-    "summary_es": "App Android/Kotlin para rutas andando desarrollada como proyecto final de LSMO. StepByStep graba rutas en tiempo real, importa ficheros GPX, persiste datos de rutas, calcula métricas de distancia, tiempo, altitud y desnivel, y muestra estadísticas de perfil con tema claro y oscuro.",
+    "summary_en": "Android/Kotlin walking-route app developed as the final project for LSMU. StepByStep records routes in real time, imports GPX files, persists route data, calculates distance, time, elevation and gain metrics, and presents profile statistics with light and dark themes.",
+    "summary_es": "App Android/Kotlin para rutas andando desarrollada como proyecto final de LSMU. StepByStep graba rutas en tiempo real, importa ficheros GPX, persiste datos de rutas, calcula métricas de distancia, tiempo, altitud y desnivel, y muestra estadísticas de perfil con tema claro y oscuro.",
     "tags": [
       "Kotlin",
       "Android",
@@ -425,8 +425,8 @@
       "Flujo de importación GPX con parser XML propio, cálculo de estadísticas de ruta y persistencia Room para rutas y puntos.",
       "Interfaz móvil con listado de rutas, mapa de grabación en vivo, estadísticas de perfil, temas claro/oscuro y estilo de mapa."
     ],
-    "role_en": "Android project developer for the final LSMO assignment. Designed and implemented the Kotlin app structure, Room entities and repositories, GPX parser, route recording service, Google Maps integration, metrics calculation, profile statistics, theme support, and screen flows for listing, importing, recording, saving, and reviewing walking routes.",
-    "role_es": "Desarrollador Android del proyecto final de LSMO. Diseñé e implementé la estructura de la app en Kotlin, entidades y repositorios Room, parser GPX, servicio de grabación de rutas, integración con Google Maps, cálculo de métricas, estadísticas de perfil, soporte de temas y flujos de pantalla para listar, importar, grabar, guardar y revisar rutas andando.",
+    "role_en": "Android project developer for the final LSMU assignment. Designed and implemented the Kotlin app structure, Room entities and repositories, GPX parser, route recording service, Google Maps integration, metrics calculation, profile statistics, theme support, and screen flows for listing, importing, recording, saving, and reviewing walking routes.",
+    "role_es": "Desarrollador Android del proyecto final de LSMU. Diseñé e implementé la estructura de la app en Kotlin, entidades y repositorios Room, parser GPX, servicio de grabación de rutas, integración con Google Maps, cálculo de métricas, estadísticas de perfil, soporte de temas y flujos de pantalla para listar, importar, grabar, guardar y revisar rutas andando.",
     "tech": [
       "Kotlin",
       "Android",
@@ -439,12 +439,12 @@
       "MVVM",
       "XML Layouts"
     ],
-    "title_en": "StepByStep — LSMO High Distinction",
-    "title_es": "StepByStep — Matrícula de Honor en LSMO",
+    "title_en": "StepByStep — LSMU High Distinction",
+    "title_es": "StepByStep — Matrícula de Honor en LSMU",
     "status_en": "High Distinction",
     "status_es": "Matrícula de Honor",
-    "detailSummary_en": "StepByStep was my final project for LSMO, a mobile and ubiquitous systems course focused on Android development. Unlike AST, this was not a project grown through many separate mini-projects: the goal was to deliver a complete mobile application for walking routes, from route creation and GPX import to live tracking, metrics, persistence, profile statistics, and theme support.\nThe core of the app is real-time route recording. A ForegroundService keeps tracking active while the app can move to the background, using FusedLocationProviderClient for high-accuracy updates, a persistent notification so the user can return to the active route, START_STICKY behavior, and a PARTIAL_WAKE_LOCK to keep the CPU available during recording. The service calculates distance from consecutive location points, elapsed time, current elevation, and positive elevation gain, then broadcasts updates to the recording screen.\nThe project also includes GPX import through a custom parser that reads track points, elevation and timestamps, calculates route statistics, and stores the result with Room. Routes and points are modeled as separate entities with cascade behavior, allowing the app to list recorded/imported routes, show profile-level statistics, and persist the walking history. Visually, the app combines Google Maps, a dark map style, light/dark Android themes, and dedicated screens for route creation, importing, profile metrics, saving, and route detail review.",
-    "detailSummary_es": "StepByStep fue mi proyecto final de LSMO, una asignatura de sistemas móviles y ubicuos centrada en desarrollo Android. A diferencia de AST, no fue un proyecto que creciera a partir de muchos mini-proyectos separados: el objetivo era entregar una aplicación móvil completa para rutas andando, desde creación e importación GPX hasta seguimiento en vivo, métricas, persistencia, estadísticas de perfil y soporte de temas.\nEl núcleo de la app es la grabación de rutas en tiempo real. Un ForegroundService mantiene el seguimiento activo aunque la app pase a segundo plano, usando FusedLocationProviderClient para actualizaciones de alta precisión, una notificación persistente para volver a la ruta activa, comportamiento START_STICKY y un PARTIAL_WAKE_LOCK para mantener la CPU disponible durante la grabación. El servicio calcula distancia a partir de puntos consecutivos, tiempo transcurrido, altitud actual y desnivel positivo, y envía actualizaciones a la pantalla de grabación mediante broadcasts.\nEl proyecto también incluye importación GPX mediante un parser propio que lee puntos de track, altitud y timestamps, calcula estadísticas de ruta y guarda el resultado con Room. Las rutas y puntos están modelados como entidades separadas con borrado en cascada, permitiendo listar rutas grabadas/importadas, mostrar estadísticas globales de perfil y persistir el historial de caminatas. Visualmente, la app combina Google Maps, estilo oscuro de mapa, temas Android claro/oscuro y pantallas específicas para creación de ruta, importación, métricas de perfil, guardado y revisión de detalle.",
+    "detailSummary_en": "StepByStep was my final project for LSMU (Laboratorio de Sistemas Móviles y Ubicuos), a mobile and ubiquitous systems course focused on Android development. Unlike AST, this was not a project grown through many separate mini-projects: the goal was to deliver a complete mobile application for walking routes, from route creation and GPX import to live tracking, metrics, persistence, profile statistics, and theme support.\nThe core of the app is real-time route recording. A ForegroundService keeps tracking active while the app can move to the background, using FusedLocationProviderClient for high-accuracy updates, a persistent notification so the user can return to the active route, START_STICKY behavior, and a PARTIAL_WAKE_LOCK to keep the CPU available during recording. The service calculates distance from consecutive location points, elapsed time, current elevation, and positive elevation gain, then broadcasts updates to the recording screen.\nThe project also includes GPX import through a custom parser that reads track points, elevation and timestamps, calculates route statistics, and stores the result with Room. Routes and points are modeled as separate entities with cascade behavior, allowing the app to list recorded/imported routes, show profile-level statistics, and persist the walking history. Visually, the app combines Google Maps, a dark map style, light/dark Android themes, and dedicated screens for route creation, importing, profile metrics, saving, and route detail review.",
+    "detailSummary_es": "StepByStep fue mi proyecto final de LSMU (Laboratorio de Sistemas Móviles y Ubicuos), una asignatura centrada en desarrollo Android. A diferencia de AST, no fue un proyecto que creciera a partir de muchos mini-proyectos separados: el objetivo era entregar una aplicación móvil completa para rutas andando, desde creación e importación GPX hasta seguimiento en vivo, métricas, persistencia, estadísticas de perfil y soporte de temas.\nEl núcleo de la app es la grabación de rutas en tiempo real. Un ForegroundService mantiene el seguimiento activo aunque la app pase a segundo plano, usando FusedLocationProviderClient para actualizaciones de alta precisión, una notificación persistente para volver a la ruta activa, comportamiento START_STICKY y un PARTIAL_WAKE_LOCK para mantener la CPU disponible durante la grabación. El servicio calcula distancia a partir de puntos consecutivos, tiempo transcurrido, altitud actual y desnivel positivo, y envía actualizaciones a la pantalla de grabación mediante broadcasts.\nEl proyecto también incluye importación GPX mediante un parser propio que lee puntos de track, altitud y timestamps, calcula estadísticas de ruta y guarda el resultado con Room. Las rutas y puntos están modelados como entidades separadas con borrado en cascada, permitiendo listar rutas grabadas/importadas, mostrar estadísticas globales de perfil y persistir el historial de caminatas. Visualmente, la app combina Google Maps, estilo oscuro de mapa, temas Android claro/oscuro y pantallas específicas para creación de ruta, importación, métricas de perfil, guardado y revisión de detalle.",
     "milestones": [
       {
         "version": "BRIEF",
@@ -480,8 +480,8 @@
         "version": "FINAL",
         "date_en": "May 2025",
         "date_es": "Mayo de 2025",
-        "title_en": "High Distinction in LSMO",
-        "title_es": "Matrícula de Honor en LSMO",
+        "title_en": "High Distinction in LSMU",
+        "title_es": "Matrícula de Honor en LSMU",
         "description_en": "Final delivery with route recording, import, metrics, profile statistics, themes, and map-based screens.",
         "description_es": "Entrega final con grabación de rutas, importación, métricas, estadísticas de perfil, temas y pantallas basadas en mapa.",
         "status": "awarded"

@@ -2,16 +2,15 @@
 
 ## Project Summary
 
-**Portfolio Website** for Adrián Montesinos López  
+**Portfolio Website** for Adrián Montes Linares  
 - **URL**: https://adrianmonteslinares.com/  
 - **Purpose**: Personal developer portfolio showcasing skills, projects, and CV  
-- **Status**: Active development — Hero section complete, other sections marked "under construction"
+- **Status**: Live — all landing sections shipped (hero, profile, projects, skills, journey, references, certifications, contact). Content is kept in sync with the latest CV in `public/cv/` (September 2026 revision).
 
 ### Current Goals
-1. **Preserve UI/UX**: Keep the current landing experience identical (hero, navbar, language switch, scroll guard modal)
-2. **Refactor Architecture**: Migrate from ad-hoc structure to clean, scalable frontend architecture
-3. **Migrate i18n**: Replace custom i18n with `next-intl` for better maintainability
-4. **Prepare for Growth**: Structure supports adding blog, more projects, sections, etc.
+1. **Keep content truthful**: every claim on the site must match the latest CV (`public/cv/*_NTF.pdf`) and the Code-XR changelog; never expose private data (phone, date of birth, certificate numbers)
+2. **Preserve UI/UX**: keep the landing experience stable while content evolves; every user-visible string lives in both `src/i18n/messages/en.json` and `es.json`
+3. **Prepare for Growth**: structure supports adding blog, more projects, sections, etc.
 
 ---
 

@@ -38,7 +38,14 @@ function getTagIcon(tag: string): IconType {
   const normalized = tag.toLowerCase()
 
   if (normalized.includes('urjc') || normalized.includes('upm')) return FaUniversity
-  if (normalized.includes('english') || normalized.includes('professional development')) return FaLanguage
+  if (
+    normalized.includes('english') ||
+    normalized.includes('cefr') ||
+    normalized.includes('oxford') ||
+    normalized.includes('professional development')
+  ) {
+    return FaLanguage
+  }
   if (normalized.includes('vissoft') || normalized.includes('icsme') || normalized.includes('code-xr')) return FaAward
 
   const TechIcon = getTechIcon(tag)
@@ -83,7 +90,7 @@ export function CertificationsSection() {
         </div>
 
         <motion.div className="mb-10 md:mb-14" {...fadeInUp()}>
-          <SectionHeader kicker="Professional record" title={t('title')} subtitle={t('subtitle')} align="left" />
+          <SectionHeader kicker={t('kicker')} title={t('title')} subtitle={t('subtitle')} align="left" />
         </motion.div>
 
         <motion.div
@@ -100,7 +107,7 @@ export function CertificationsSection() {
 
           <div className="grid min-w-0 gap-5">
             {statusOrder
-              .filter((status) => status !== 'completed')
+              .filter((status) => status !== 'completed' && groupedByStatus[status].length > 0)
               .map((status) => (
                 <CertificationStatusPanel key={status} status={status} items={groupedByStatus[status]} compact />
               ))}
@@ -171,7 +178,8 @@ function CertificationCard({
   const config = statusConfig[cert.status]
 
   const translatableCertKeys = [
-    'cambridgeC1',
+    'oxfordC1',
+    'oxfordC1Issuer',
     'masterTelecomUPM',
     'masterTelecomUPMIssuer',
     'telematicsDegree',

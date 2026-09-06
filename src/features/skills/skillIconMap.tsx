@@ -8,6 +8,7 @@ import {
   FaRobot,
   FaBrain,
   FaCloud,
+  FaPlug,
 } from 'react-icons/fa'
 import {
   SiC,
@@ -43,6 +44,7 @@ import {
   SiOpenssl,
   SiGithub,
   SiJira,
+  SiClaude,
 } from 'react-icons/si'
 import { VscAzureDevops } from 'react-icons/vsc' 
 
@@ -87,6 +89,8 @@ const skillIconMap: Record<SkillIconKey, IconType> = {
   xr: FaCube,
   security: FaShieldAlt,
   ai: FaBrain,
+  claude: SiClaude,
+  mcp: FaPlug,
 }
 
 export function getSkillIcon(iconKey?: SkillIconKey): IconType {

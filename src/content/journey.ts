@@ -1,4 +1,5 @@
 import { JourneyEntry, LaneConfig } from '@/features/journey/types'
+import { LINKS } from '@/lib/constants'
 
 /**
  * Lane configuration - defines colors for each track
@@ -56,6 +57,20 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
       { id: 'lsmu', labelKey: 'journey.entries.urjc.highlights.lsmu', year: 2025, month: 5, day: 10 },
     ],
     tags: ['Software Engineering', 'Networks', 'XR'],
+  },
+  {
+    id: 'masterTelecomUPM',
+    type: 'education',
+    lane: 'education',
+    roleKey: 'journey.entries.masterTelecomUPM.role',
+    orgKey: 'journey.entries.masterTelecomUPM.org',
+    descKey: 'journey.entries.masterTelecomUPM.desc',
+    startYear: 2026,
+    startMonth: 9,
+    startDay: 7,
+    endYear: null,
+    tags: ['Telecommunications', 'Machine Learning', 'Big Data', 'UPM'],
+    link: LINKS.upm,
   },
 
   // === WORK (Lane 2) ===
@@ -132,6 +147,22 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
 
   // === ACHIEVEMENTS (Lane 4 - Discrete events) ===
   {
+    id: 'hackathonUrjc',
+    type: 'achievement',
+    lane: 'achievement',
+    roleKey: 'journey.entries.hackathonUrjc.role',
+    orgKey: 'journey.entries.hackathonUrjc.org',
+    descKey: 'journey.entries.hackathonUrjc.desc',
+    startYear: 2024,
+    startMonth: 3,
+    startDay: 1,
+    endYear: 2024,
+    endMonth: 3,
+    endDay: 1,
+    tags: ['Hackathon', 'Circular economy', 'Pitch'],
+    link: LINKS.hackathonUrjc,
+  },
+  {
     id: 'vissoft',
     type: 'achievement',
     lane: 'achievement',
@@ -147,34 +178,22 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     link: 'https://vissoft.info',
   },
 
-  // === LEARNING GOALS (Lane 5 - Future objectives) ===
+  // === LEARNING (Lane 5 - Certifications and learning goals) ===
   {
-    id: 'cambridgeC1',
+    id: 'oxfordC1',
     type: 'learning',
     lane: 'learning',
-    roleKey: 'journey.entries.cambridgeC1.role',
-    orgKey: 'journey.entries.cambridgeC1.org',
-    descKey: 'journey.entries.cambridgeC1.desc',
+    roleKey: 'journey.entries.oxfordC1.role',
+    orgKey: 'journey.entries.oxfordC1.org',
+    descKey: 'journey.entries.oxfordC1.desc',
     startYear: 2026,
     startMonth: 3,
     startDay: 1,
-    endYear: null,
-    tags: ['English', 'Certification', 'Professional Development'],
-  },
-  {
-    id: 'masterTelecomUPM',
-    type: 'learning',
-    lane: 'learning',
-    roleKey: 'journey.entries.masterTelecomUPM.role',
-    orgKey: 'journey.entries.masterTelecomUPM.org',
-    descKey: 'journey.entries.masterTelecomUPM.desc',
-    startYear: 2026,
-    startMonth: 9,
-    startDay: 1,
     endYear: 2026,
     endMonth: 9,
-    endDay: 1,
-    tags: ['Telecommunications', 'Networks', 'Cloud', 'Systems'],
+    endDay: 4,
+    tags: ['English', 'CEFR C1', 'Oxford Test of English'],
+    link: LINKS.oxfordC1Verify,
   },
 ]
 
@@ -183,8 +202,8 @@ export const TIMELINE_START = 2020
 export const TIMELINE_END = 2026
 export const CURRENT_DATE = {
   year: 2026,
-  month: 8,
-  day: 29,
+  month: 9,
+  day: 7,
 } as const
 
 /** Convert a date to a decimal year (for precise positioning) */
