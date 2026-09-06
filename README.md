@@ -1,4 +1,4 @@
-# amontesl.github.io
+# adrianmonteslinares.com
 
 Personal portfolio website for **Adrián Montes Linares**.
 
@@ -54,6 +54,7 @@ npm run lint                # ESLint
 npm run typecheck           # TypeScript strict check
 npm run check-translations  # i18n coverage sanity check
 npm run check               # lint + typecheck + translations + journey timeline
+npm run gen:og              # Regenerate the social share card (run on Windows for Segoe UI)
 npm run build               # Static export to ./out
 npm run preview             # Serve ./out locally
 npm run ship "message"      # Check, build, commit, and push current branch
