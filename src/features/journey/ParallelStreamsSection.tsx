@@ -1421,6 +1421,47 @@ export function ParallelStreamsSection() {
                           })
                         )}
 
+                        {/* Standalone achievements (hackathon, VISSOFT, ...) that fall in this year */}
+                        {JOURNEY_ENTRIES.filter((entry) => entry.lane === 'achievement' && entry.startYear === drillDownYear).map((entry) => {
+                          const percent = monthToPercent(entry.startMonth ?? 1, entry.startDay ?? 1)
+                          const glowIntensity = getIntensity(entry.id)
+                          const haloColor = LANE_COLORS.achievement.hex
+
+                          const haloStyle = glowIntensity > 0 ? {
+                            boxShadow: `0 0 ${20 * glowIntensity}px ${haloColor}`,
+                            filter: `brightness(${1 + 0.4 * glowIntensity})`,
+                          } : {
+                            boxShadow: `0 0 14px rgba(245, 158, 11, 0.3)`
+                          }
+
+                          return (
+                            <motion.button
+                              key={`achievement-${entry.id}`}
+                              type="button"
+                              className={cn(
+                                'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
+                                'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
+                                'ring-2 ring-[var(--bg)]',
+                                (hoveredEntry === entry.id || selectedEntry === entry.id) && 'scale-125',
+                                'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
+                              )}
+                              style={{
+                                left: `calc(${percent}% - 12px)`,
+                                ...haloStyle,
+                              }}
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 0.4 }}
+                              onPointerEnter={() => handleEntryHoverStart(entry.id)}
+                              onPointerMove={() => handleEntryHoverStart(entry.id)}
+                              onPointerLeave={() => handleEntryHoverEnd(entry.id)}
+                              onClick={(event) => handleEntryClick(entry.id, event)}
+                              title={t(`entries.${entry.id}.role`)}
+                              aria-label={t(`entries.${entry.id}.role`)}
+                            />
+                          )
+                        })}
+
                       </div>
                     </div>
                   </div>

@@ -6,7 +6,7 @@
 export type RecommendationType = 'academic' | 'professional' | 'formal'
 
 export interface Recommendation {
-  id: 'vbgroup-abner' | 'david-moreno' | 'vbgroup-formal'
+  id: 'vbgroup-abner' | 'david-moreno' | 'vbgroup-formal' | 'satec-luis'
   name: string
   roleKey: string
   organization: string
@@ -18,6 +18,22 @@ export interface Recommendation {
 }
 
 export const RECOMMENDATIONS: Recommendation[] = [
+  {
+    id: 'satec-luis',
+    name: 'Luis del Otero Sevillano',
+    roleKey: 'recommendations.satec-luis.role',
+    organization: 'SATEC',
+    relationshipKey: 'recommendations.satec-luis.relationship',
+    date: 'Jul 2026',
+    type: 'professional',
+    summaryKey: 'recommendations.satec-luis.summary',
+    strengthKeys: [
+      'recommendations.satec-luis.strengths.learning',
+      'recommendations.satec-luis.strengths.teamwork',
+      'recommendations.satec-luis.strengths.adaptability',
+      'recommendations.satec-luis.strengths.attitude',
+    ],
+  },
   {
     id: 'vbgroup-abner',
     name: 'Abner Alejandro Magaña H.',

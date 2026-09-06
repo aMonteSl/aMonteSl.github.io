@@ -18,6 +18,10 @@ export const LINKS = {
   codeXrAwardCertificate: '/documents/distinghuished_artifact_award.pdf',
 
   vissoftPaper: 'https://doi.org/10.1109/VISSOFT67405.2025.00034',
+
+  oxfordC1Verify: 'https://go.oup.com/oxfordtestofenglish/verify',
+  upm: 'https://www.upm.es',
+  hackathonUrjc: 'https://eventos.urjc.es/111906/detail/hackathon-urjc.html',
 } as const
 
 export const CV_FILES = {
@@ -28,12 +32,6 @@ export const CV_FILES = {
 export function getCvUrl(locale: string): string {
   return locale === 'es' ? CV_FILES.es : CV_FILES.en
 }
-
-export const CREDENTIALS = [
-  { key: 'vissoft', label: 'VISSOFT 2025' },
-  { key: 'codeXr', label: 'Code-XR (Open Source)' },
-  { key: 'techStack', label: 'TypeScript - Next.js - Tailwind' },
-] as const
 
 export const NAV_ITEMS = [
   { key: 'home', href: '#home' },

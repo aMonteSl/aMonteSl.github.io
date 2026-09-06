@@ -119,10 +119,17 @@ const baseEntries = [
     id: 'masterTelecomUPM',
     startYear: 2026,
     startMonth: 9,
+    startDay: 7,
+    endYear: null,
+  },
+  {
+    id: 'oxfordC1',
+    startYear: 2026,
+    startMonth: 3,
     startDay: 1,
     endYear: 2026,
     endMonth: 9,
-    endDay: 1,
+    endDay: 4,
   },
 ];
 

@@ -7,6 +7,9 @@ import { fadeInUp } from '@/lib/motion'
 import { RECOMMENDATIONS, type Recommendation } from '@/content/testimonials'
 import { cn } from '@/lib/utils'
 
+/** Letters shown at full size: the academic supervisor and the current internship. */
+const FEATURED_IDS: Recommendation['id'][] = ['david-moreno', 'satec-luis']
+
 const typeTone = {
   professional: 'border-emerald-300/25 bg-emerald-300/8 text-emerald-200',
   academic: 'border-sky-300/25 bg-sky-300/8 text-sky-200',
@@ -90,8 +93,12 @@ function RecommendationCard({
 
 export function TestimonialsSection() {
   const t = useTranslations('testimonials')
-  const featuredRecommendation = RECOMMENDATIONS.find((recommendation) => recommendation.id === 'david-moreno')
-  const secondaryRecommendations = RECOMMENDATIONS.filter((recommendation) => recommendation.id !== 'david-moreno')
+  const featuredRecommendations = FEATURED_IDS.map((id) =>
+    RECOMMENDATIONS.find((recommendation) => recommendation.id === id),
+  ).filter((recommendation): recommendation is Recommendation => Boolean(recommendation))
+  const secondaryRecommendations = RECOMMENDATIONS.filter(
+    (recommendation) => !FEATURED_IDS.includes(recommendation.id),
+  )
 
   return (
     <SectionShell id="testimonials" tone="default">
@@ -114,9 +121,11 @@ export function TestimonialsSection() {
         }}
       >
         <div className="grid grid-cols-1 gap-4">
-          {featuredRecommendation && (
-            <RecommendationCard recommendation={featuredRecommendation} featured />
-          )}
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {featuredRecommendations.map((recommendation) => (
+              <RecommendationCard key={recommendation.id} recommendation={recommendation} featured />
+            ))}
+          </div>
 
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
             {secondaryRecommendations.map((recommendation) => (

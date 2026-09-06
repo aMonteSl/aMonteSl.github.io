@@ -11,6 +11,7 @@ export const USES_ITEMS: UsesItem[] = [
   // Editor & IDE
   { id: 'vscode', category: 'editor', url: 'https://code.visualstudio.com' },
   { id: 'copilot', category: 'editor', url: 'https://github.com/features/copilot' },
+  { id: 'claudeCode', category: 'editor', url: 'https://claude.com/product/claude-code' },
 
   // Terminal & Shell
   { id: 'windowsTerminal', category: 'terminal', url: 'https://github.com/microsoft/terminal' },

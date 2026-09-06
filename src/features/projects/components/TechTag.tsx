@@ -55,6 +55,8 @@ const techIconMap: Record<string, IconType> = {
   'nest.js': SiNestjs,
   nestjs: SiNestjs,
   express: SiExpress,
+  'express.js': SiExpress,
+  expressjs: SiExpress,
   'a-frame': SiAframe,
   aframe: SiAframe,
 

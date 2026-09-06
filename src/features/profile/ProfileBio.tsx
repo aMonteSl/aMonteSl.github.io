@@ -17,7 +17,7 @@ export function ProfileBio({ className }: ProfileBioProps) {
     { label: t('pills.satec'), tone: 'success' as const },
     { label: t('pills.vbgroup'), tone: 'accent' as const },
     { label: t('pills.upm'), tone: 'xr' as const },
-    { label: t('pills.english'), tone: 'muted' as const },
+    { label: t('pills.english'), tone: 'success' as const },
   ]
 
   const stats = [

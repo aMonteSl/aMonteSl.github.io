@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Adrián Montes - Portfolio",
-    "description": "Telematics Engineering student focusing on clean architectures, XR/3D/AR visualizations of software metrics, and pragmatic UX."
+    "description": "Telematics Engineer and Master's student in Telecommunications Engineering at UPM. Author of Code-XR, an open-source VS Code extension for XR software visualization published at IEEE VISSOFT 2025."
   },
   "nav": {
     "home": "Portfolio",
@@ -20,41 +20,19 @@
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Telematics Engineer & Systems N2 / Cloud Intern",
+    "headline": "Telematics Engineer · Master's student in Telecommunications Engineering",
     "headlineSub": "Systems, Cloud, Full-Stack and XR developer tools",
-    "aboutMe": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently finishing an extracurricular internship in Cloud & Systems N2 (March-August 2026) and incoming student of the Master's Degree in Telecommunication Engineering at UPM, specializing in Machine Learning and Big Data, with interest in software analytics, code repositories, and applied research.",
-    "title": "Adrián Montes Linares",
-    "subtitle1": "Telematics Engineering — Student",
-    "subtitle2": "Backend • Frontend • Software Engineering • XR",
-    "tagline": "Author of Code-XR, an open-source VS Code extension for XR visualization of software metrics. Focused on clean architectures and developer experience.",
+    "aboutMe": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently enrolled in the Master's Degree in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data, while continuing an extracurricular Cloud & Systems N2 internship at SATEC. Interested in software analytics, code repositories, and applied research.",
     "ctaProjects": "View Projects",
     "ctaResume": "Download CV",
-    "ctaContact": "Contact",
-    "alternativeTitle": "Telematics Engineering",
     "availabilityLabel": "Currently active",
-    "availabilityText": "SATEC internship, Mar-Aug 2026",
+    "availabilityText": "SATEC internship, since Mar 2026",
     "location": "Madrid, ES",
-    "language": "English B2 (TOEIC)",
-    "metaLine": "Madrid, ES - English B2 (TOEIC)",
-    "highlights": {
-      "vissoft": "VISSOFT - @ - ICSME - 2025 - (accepted) - · - Code-XR - (OSS)",
-      "downloads": "Code-XR: 300+ downloads",
-      "availability": "Available: internships (up to 550h) or full-time"
-    },
-    "topStack": {
-      "typescript": "TypeScript",
-      "nodejs": "Node.js",
-      "express": "Express",
-      "react": "React",
-      "tailwind": "Tailwind",
-      "azure": "Azure"
-    },
     "featuredProject": {
       "badge": "Featured",
       "codeXr": {
         "title": "Code-XR",
         "subtitle": "VS Code extension: your codebase as a 3D city you walk through as you edit",
-        "metric": "300+ downloads",
         "vissoft": "Linked to VISSOFT @ ICSME 2025"
       },
       "obt": {
@@ -71,17 +49,12 @@
       "doi": "DOI"
     },
     "publication": "Publication",
-    "credentials": {
-      "vissoft": "VISSOFT 2025",
-      "codeXr": "Code-XR (Open Source)",
-      "stack": "TypeScript - · - Next.js - · - Tailwind"
-    },
     "kicker": "Portfolio",
     "metrics": {
       "current": {
         "label": "Current",
         "value": "Cloud & Systems N2",
-        "detail": "Mar-Aug 2026"
+        "detail": "SATEC · since Mar 2026"
       },
       "research": {
         "label": "Research",
@@ -89,46 +62,40 @@
         "detail": "Code-XR publication"
       },
       "next": {
-        "label": "Next",
-        "value": "UPM 2026",
-        "detail": "Telecom Engineering master"
+        "label": "Master's",
+        "value": "UPM · in progress",
+        "detail": "Telecommunications · ML & Big Data"
       }
     }
-  },
-  "about": {
-    "title": "About me",
-    "p1": "I am a Telematics Engineering student (URJC) and the author of Code-XR, an ecosystem that connects static analysis with immersive visualization of metrics.",
-    "p2": "Our work has been accepted for VISSOFT 2025 (co-located with ICSME 2025). I am preparing the thesis and consolidating documentation and tooling for its evolution.",
-    "p3": "I care about clean code, modular architecture, and a strong DX/UX. I aim for systems that scale and can be maintained."
   },
   "profile": {
     "title": "About Me",
     "subtitle": "A clearer view of where my engineering profile is heading",
     "imageAlt": "Adrián Montes profile photo",
     "name": "Adrián Montes Linares",
-    "role": "Telematics Engineer with experience in Cloud, Systems N2, Full-Stack development, and XR software visualization",
+    "role": "Telematics Engineer and Master's student in Telecommunications Engineering (UPM), with experience in Cloud, Systems N2, Full-Stack development, and XR software visualization",
     "bio1": "I am a Telematics Engineer from Universidad Rey Juan Carlos, graduated in January 2026. My profile combines software development, systems, cloud operations, and data visualization, with a practical focus on maintainable tools and clear documentation.",
-    "bio2": "I am currently finishing an extracurricular internship at SATEC in Cloud & Systems N2, working around support requests, incidents, infrastructure operation, virtual machines, vulnerability patching, SSH/RDP access, and tools such as Nagios, AMS, Veeam Backup, NetApp, and VMware.",
+    "bio2": "I am currently combining the master's degree at UPM with an extracurricular internship at SATEC in Cloud & Systems N2, where I work on support requests, incidents, infrastructure operation, virtual machines, vulnerability patching, SSH/RDP access, and tools such as Nagios, AMS, Veeam Backup, NetApp, and VMware.",
     "stats": {
       "experience": "Experience",
       "experienceValue": "SATEC Cloud & Systems N2, VBGroup Full-Stack internship, Code-XR, VISSOFT 2025",
       "education": "Education",
-      "educationValue": "Telematics Engineering (URJC, Jan 2026), Telecom Engineering master at UPM from Sep 2026",
+      "educationValue": "Telematics Engineering (URJC, Jan 2026) · Master's in Telecommunications Engineering at UPM, in progress since Sep 2026",
       "focus": "Current Focus",
       "focusValue": "Systems, cloud, developer tooling, XR visualization, Machine Learning, and Big Data",
       "languages": "Languages",
-      "languagesValue": "Spanish native, English B2 TOEIC, preparing C1",
+      "languagesValue": "Spanish native, English C1 (Oxford Test of English Advanced)",
       "mindset": "Mindset",
       "mindsetValue": "Technical curiosity, Quality-driven approach, Continuous learning"
     },
     "kicker": "Profile",
     "operatingKicker": "Operating profile",
-    "bio3": "Before that, during my curricular internship at VBGroup, I worked as a Junior Full-Stack Developer on OBT, an internal platform built with Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite, and Tailwind. My next academic step is the Master's Degree in Telecommunication Engineering at UPM, with a specialization path in Machine Learning and Big Data.",
+    "bio3": "Before that, during my curricular internship at VBGroup, I worked as a Junior Full-Stack Developer on OBT, an internal platform built with Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite, and Tailwind. I am now enrolled in the Master's Degree in Telecommunications Engineering at UPM, following the Machine Learning and Big Data specialization.",
     "pills": {
       "satec": "SATEC Cloud & Systems N2",
       "vbgroup": "VBGroup Full-Stack internship",
-      "upm": "UPM master: ML & Big Data",
-      "english": "Working towards English C1"
+      "upm": "UPM Master's · ML & Big Data",
+      "english": "English C1 (Oxford)"
     },
     "snapshotTitle": "Current direction",
     "snapshotBody": "Systems and cloud give me operational depth; full-stack development gives me product delivery; XR, software analytics, Machine Learning, and Big Data define the research and tooling direction I want to keep building.",
@@ -142,8 +109,8 @@
         "value": "Code-XR / VISSOFT 2025"
       },
       "english": {
-        "label": "Language goal",
-        "value": "English C1 in progress"
+        "label": "Language certificate",
+        "value": "English C1 · Oxford Test of English"
       }
     },
     "transition": {
@@ -153,13 +120,6 @@
   "skills": {
     "title": "Skills",
     "subtitle": "A practical map of technologies grouped by use, context, and current depth.",
-    "topStack": {
-      "typescript": "TypeScript",
-      "react": "React",
-      "express": "Express",
-      "postgresql": "PostgreSQL",
-      "azure": "Azure"
-    },
     "actions": {
       "viewDetails": "View details",
       "close": "Close",
@@ -179,13 +139,6 @@
       "nextGroup": "Next category",
       "prevGroup": "Previous category"
     },
-    "tags": {
-      "academic": "Academic",
-      "internship": "Internship",
-      "open_source": "Open Source",
-      "regular_use": "Regular use",
-      "production_like": "Production-like"
-    },
     "proficiency": {
       "basic": "Basic",
       "intermediate": "Intermediate",
@@ -193,18 +146,6 @@
     },
     "proficiencyLabel": "Level",
     "highlights": "Key points",
-    "purposeTags": {
-      "learning": "Learning",
-      "academic": "Academic",
-      "internship": "Internship",
-      "open_source": "Open Source",
-      "production_like": "Production-like"
-    },
-    "usedIn": {
-      "projects": "Projects",
-      "journey": "Journey",
-      "codeXr": "Code-XR"
-    },
     "categories": {
       "languages": {
         "label": "Languages",
@@ -236,7 +177,7 @@
       },
       "other": {
         "label": "Other",
-        "desc": "Workflow accelerators and AI-assisted practices."
+        "desc": "AI-assisted development, prompt engineering, and MCP integrations."
       }
     },
     "items": {
@@ -347,10 +288,10 @@
       },
       "express": {
         "label": "Express.js",
-        "summary": "Used to prototype lightweight APIs for web projects.",
-        "purpose": "Fast Node.js API prototyping.",
-        "h1": "Built middleware pipelines for validation.",
-        "h2": "Integrated services with client applications."
+        "summary": "Node.js framework behind the OBT backend at VBGroup and lightweight APIs in personal projects.",
+        "purpose": "REST APIs for internal tools and prototypes.",
+        "h1": "Built the OBT REST API with TypeScript, Swagger docs, and JWT-secured flows.",
+        "h2": "Composed middleware pipelines for validation and role-based access."
       },
       "react": {
         "label": "React",
@@ -520,6 +461,20 @@
         "h1": "Generated scaffolds and refactors quickly.",
         "h2": "Reviewed suggestions for accuracy and style."
       },
+      "claudeCode": {
+        "label": "Claude Code",
+        "summary": "Anthropic's agentic coding tool, used for AI-assisted development from the terminal and the editor.",
+        "purpose": "AI-assisted development with an agentic workflow.",
+        "h1": "Used it alongside GitHub Copilot for refactors, reviews, and repetitive engineering tasks.",
+        "h2": "Reviewed every generated change before merging it."
+      },
+      "mcp": {
+        "label": "MCP (Model Context Protocol)",
+        "summary": "Open protocol for connecting AI assistants to external tools, data, and services through MCP servers.",
+        "purpose": "Integrate MCP servers into AI-assisted development workflows.",
+        "h1": "Integrated MCP servers so assistants reach project tools and data in a controlled way.",
+        "h2": "Configured and maintained server setups for day-to-day development."
+      },
       "azureDevOps": {
         "label": "Microsoft Azure DevOps",
         "summary": "CI/CD and project-delivery platform used for pipelines, repos and boards.",
@@ -543,10 +498,10 @@
       },
       "nestjs": {
         "label": "Nest.js",
-        "summary": "Structured Node.js framework used in the OBT backend.",
-        "purpose": "Backend architecture with modules, controllers, and services.",
-        "h1": "Designed REST API modules with a clean server-side structure.",
-        "h2": "Connected documentation, validation, and cloud-facing services."
+        "summary": "Structured Node.js framework with modules, controllers, and services for typed APIs.",
+        "purpose": "Modular, typed backend architecture.",
+        "h1": "Familiar with its module, controller, and service layering.",
+        "h2": "Complements Express.js for REST API work in TypeScript."
       },
       "swagger": {
         "label": "Swagger",
@@ -698,7 +653,7 @@
       },
       "backend": {
         "summary": "Backend skills focused on API design, Node.js ecosystems, documentation, and practical delivery in project work.",
-        "h1": "Express, Nest.js, REST APIs, Swagger, JWT, and Django cover the main service patterns represented in projects.",
+        "h1": "Express, REST APIs, Swagger, JWT, and Django cover the main service patterns represented in projects, with Nest.js as a complementary framework.",
         "h2": "The emphasis is maintainable endpoints, clear contracts, and integration with frontend and storage layers."
       },
       "frontend": {
@@ -785,19 +740,6 @@
     "gallery": "Project gallery",
     "kicker": "Selected work"
   },
-  "experience": {
-    "title": "Experience / Collaborations",
-    "intro": "My focus has been academic-applied development and personal projects with measurable impact."
-  },
-  "education": {
-    "title": "Education",
-    "urjc": "URJC — Telematics Engineering (2020–2025)",
-    "bach": "Baccalaureate — Science & Technology (prior to university entry)"
-  },
-  "publications": {
-    "title": "Publications / Merits",
-    "item1": "Paper accepted for VISSOFT 2025 (co-located with ICSME 2025): visualization of software metrics in XR. Preparing camera-ready."
-  },
   "journey": {
     "title": "Professional Journey",
     "subtitle": "Experience, education, and key milestones",
@@ -812,7 +754,7 @@
       "work": "Work Experience",
       "project": "Featured Projects",
       "achievement": "Achievements & Publications",
-      "learning": "Learning Goals"
+      "learning": "Learning & Certifications"
     },
     "entries": {
       "urjc": {
@@ -821,7 +763,7 @@
         "desc": "Comprehensive training in software engineering, networks, and systems. Progressive specialization in full-stack development and XR technologies. Final thesis linked to VISSOFT 2025.",
         "highlights": {
           "ast": "Honors — AST (C++)",
-          "lsmu": "Honors — LSMU (Kotlin)"
+          "lsmo": "Honors — LSMO (Kotlin)"
         }
       },
       "adyra": {
@@ -849,24 +791,29 @@
         }
       },
       "vissoft": {
-        "role": "Paper Accepted — VISSOFT 2025",
+        "role": "Distinguished Artifact Award — VISSOFT 2025",
         "org": "IEEE VISSOFT @ ICSME 2025",
-        "desc": "Research paper on XR visualization of software metrics accepted for presentation at international conference."
+        "desc": "Research paper on XR visualization of software metrics, published at IEEE VISSOFT 2025 (co-located with ICSME 2025) and recognized with the Distinguished Artifact Award."
       },
-      "cambridgeC1": {
-        "role": "Cambridge English C1 Certification - in progress",
-        "org": "Cambridge University",
-        "desc": "Working toward professional English fluency across technical and business contexts, with reading, writing, speaking, and listening preparation in progress."
+      "hackathonUrjc": {
+        "role": "Hackathon URJC 2024 — circular-economy challenge",
+        "org": "Universidad Rey Juan Carlos (URJC)",
+        "desc": "First Hackathon URJC (March 1–2, 2024, Móstoles campus). I worked on the ideation, prototyping, and final pitch of a university token model for the circular-economy challenge: students earn tokens by contributing (tutoring, notes, activities) and spend them on campus services."
+      },
+      "oxfordC1": {
+        "role": "Oxford Test of English Advanced — C1 certified",
+        "org": "Oxford University Press · certified by the University of Oxford",
+        "desc": "Exam taken on September 4, 2026: overall CEFR C1 (146/170). Verifiable by third parties through the official Oxford University Press service."
       },
       "satecCloud": {
         "role": "Systems N2 / Cloud Engineer",
         "org": "SATEC (Extracurricular Internship)",
-        "desc": "Extracurricular internship focused on systems, N2 support, cloud environments, infrastructure operation, and professional documentation. Started on March 14, 2026."
+        "desc": "Extracurricular internship focused on systems, N2 support, cloud environments, infrastructure operation, and professional documentation. Started on March 14, 2026, renewed in September 2026, and currently combined with the master's degree at UPM."
       },
       "masterTelecomUPM": {
-        "role": "Master's Degree in Telecommunication Engineering - starts Sep 2026",
-        "org": "Universidad Politecnica de Madrid (UPM)",
-        "desc": "Official master's degree starting in September 2026 at UPM, with a path toward Machine Learning and Big Data within Telecommunication Engineering."
+        "role": "Master's Degree in Telecommunications Engineering",
+        "org": "Universidad Politécnica de Madrid (UPM)",
+        "desc": "Official master's degree at UPM, started in September 2026, following the Machine Learning and Big Data specialization within Telecommunications Engineering. Combined with the extracurricular Cloud & Systems N2 internship at SATEC."
       }
     },
     "kicker": "Career stream",
@@ -938,6 +885,10 @@
         "name": "GitHub Copilot",
         "desc": "AI pair programmer that helps me write code faster and explore new patterns."
       },
+      "claudeCode": {
+        "name": "Claude Code",
+        "desc": "Anthropic's agentic coding tool. AI-assisted development from the terminal, extended with MCP servers."
+      },
       "windowsTerminal": {
         "name": "Windows Terminal",
         "desc": "Modern terminal with tabs, panes, and GPU-accelerated rendering."
@@ -999,6 +950,17 @@
       "formal": "Formal reference"
     },
     "recommendations": {
+      "satec-luis": {
+        "role": "Director of Cloud Services",
+        "relationship": "Reference from SATEC's Cloud Services management",
+        "summary": "Luis endorses my work during the Cloud & Systems N2 internship at SATEC and recommends me for any position. His letter highlights a proactive, responsible, and committed attitude, a strong capacity to learn and adapt quickly to changes and challenges, adaptability to different contexts and ways of working, and a natural integration into the team, fostering collaboration, respect, and effective communication.",
+        "strengths": {
+          "learning": "Fast learner",
+          "teamwork": "Teamwork",
+          "adaptability": "Adaptability",
+          "attitude": "Proactive attitude"
+        }
+      },
       "vbgroup-abner": {
         "role": "Development Leader",
         "relationship": "Direct supervisor during VBGroup internship",
@@ -1036,26 +998,27 @@
   "certificates": {
     "title": "Certifications & Achievements",
     "subtitle": "Professional credentials, publications, and recognitions",
+    "kicker": "Professional record",
     "completed": "Completed",
     "inProgress": "In Progress",
     "planned": "Planned",
     "statusDescriptions": {
       "completed": "Degrees, awards, and confirmed academic recognitions.",
-      "in-progress": "Credentials currently being prepared.",
-      "planned": "Next academic step already planned."
+      "in-progress": "Degrees and credentials currently in progress.",
+      "planned": "Upcoming credentials on the roadmap."
     },
-    "cambridgeC1": "Cambridge English C1 Certificate",
+    "oxfordC1": "Oxford Test of English Advanced — CEFR C1",
+    "oxfordC1Issuer": "Oxford University Press · certified by the University of Oxford",
     "verify": "Verify",
-    "learnMore": "Learn more",
-    "masterTelecomUPM": "Master's Degree in Telecommunication Engineering",
-    "masterTelecomUPMIssuer": "Universidad Politecnica de Madrid (UPM)",
+    "masterTelecomUPM": "Master's Degree in Telecommunications Engineering",
+    "masterTelecomUPMIssuer": "Universidad Politécnica de Madrid (UPM)",
     "telematicsDegree": "BSc in Telematics Engineering",
     "telematicsDegreeIssuer": "Universidad Rey Juan Carlos (URJC)",
-    "codeXrAward": "Code-XR — VISSOFT 2025 Poster Track Award",
-    "codeXrAwardIssuer": "ICSME 2025 Awards",
+    "codeXrAward": "Code-XR — Distinguished Artifact Award, VISSOFT 2025",
+    "codeXrAwardIssuer": "IEEE VISSOFT 2025 (co-located with ICSME 2025)",
     "greenhouseHighDistinction": "GreenHouse — AST High Distinction",
-    "greenhouseHighDistinctionIssuer": "Ampliacion de Sistemas Telematicos (URJC)",
+    "greenhouseHighDistinctionIssuer": "Ampliación de Sistemas Telemáticos (URJC)",
     "stepByStepHighDistinction": "StepByStep — LSMO High Distinction",
-    "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Moviles y Ubicuos (URJC)"
+    "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Móviles y Ubicuos (URJC)"
   }
 }

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Adrián Montes - Portfolio",
-    "description": "Estudiante de Ingeniería Telemática enfocado en arquitecturas limpias, visualizaciones XR/3D/AR de métricas de software y UX pragmática."
+    "description": "Ingeniero Telemático y estudiante del Máster en Ingeniería de Telecomunicación en la UPM. Autor de Code-XR, extensión open source de VS Code para la visualización XR de métricas de software, publicada en IEEE VISSOFT 2025."
   },
   "nav": {
     "home": "Portfolio",
@@ -20,41 +20,19 @@
   },
   "hero": {
     "name": "Adrián Montes Linares",
-    "headline": "Ingeniero Telematico y Sistemas N2 / Cloud",
+    "headline": "Ingeniero Telemático · Estudiante del Máster en Ingeniería de Telecomunicación",
     "headlineSub": "Sistemas, Cloud, Full-Stack y herramientas XR",
-    "aboutMe": "Ingeniero Telemático por la URJC, titulado en enero de 2026, con experiencia en desarrollo software, sistemas y visualización de datos. Autor de Code-XR, extensión open source para VS Code publicada en IEEE VISSOFT 2025, orientada al análisis visual de métricas de código en entornos XR. Actualmente finalizando prácticas extracurriculares en Cloud & Sistemas N2 (marzo-agosto de 2026) y próximo estudiante del Máster Universitario en Ingeniería de Telecomunicación en la UPM, intensificación en Aprendizaje Automático y Big Data, con interés en analítica de software, repositorios de código e investigación aplicada.",
-    "title": "Adrián Montes Linares",
-    "subtitle1": "Ingeniería Telemática — Estudiante",
-    "subtitle2": "Backend • Frontend • Ingeniería de Software • XR",
-    "tagline": "Autor de Code-XR, una extensión open-source de VS Code para visualización XR de métricas de software. Enfocado en arquitecturas limpias y experiencia de desarrollador.",
+    "aboutMe": "Ingeniero Telemático por la URJC, titulado en enero de 2026, con experiencia en desarrollo software, sistemas y visualización de datos. Autor de Code-XR, extensión open source para VS Code publicada en IEEE VISSOFT 2025, orientada al análisis visual de métricas de código en entornos XR. Actualmente cursando el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data, compaginándolo con prácticas extracurriculares en Cloud & Sistemas N2 de SATEC, con interés en analítica de software, repositorios de código e investigación aplicada.",
     "ctaProjects": "Ver Proyectos",
     "ctaResume": "Descargar CV",
-    "ctaContact": "Contacto",
-    "alternativeTitle": "Ingeniería Telemática",
     "availabilityLabel": "Actualmente activo",
-    "availabilityText": "Prácticas en SATEC, mar-ago 2026",
+    "availabilityText": "Prácticas en SATEC, desde mar 2026",
     "location": "Madrid, ES",
-    "language": "Ingles B2 (TOEIC)",
-    "metaLine": "Madrid, ES - Ingles B2 (TOEIC)",
-    "highlights": {
-      "vissoft": "VISSOFT - @ - ICSME - 2025 - (aceptado) - · - Code-XR - (OSS)",
-      "downloads": "Code-XR: +300 descargas",
-      "availability": "Disponible: prácticas (hasta 550h) o contrato"
-    },
-    "topStack": {
-      "typescript": "TypeScript",
-      "nodejs": "Node.js",
-      "express": "Express",
-      "react": "React",
-      "tailwind": "Tailwind",
-      "azure": "Azure"
-    },
     "featuredProject": {
       "badge": "Destacado",
       "codeXr": {
         "title": "Code-XR",
         "subtitle": "Extensión de VS Code: tu código como una ciudad 3D que recorres mientras editas",
-        "metric": "+300 descargas",
         "vissoft": "Vinculado a VISSOFT @ ICSME 2025"
       },
       "obt": {
@@ -71,17 +49,12 @@
       "doi": "DOI"
     },
     "publication": "Publicación",
-    "credentials": {
-      "vissoft": "VISSOFT 2025",
-      "codeXr": "Code-XR (Open Source)",
-      "stack": "TypeScript - · - Next.js - · - Tailwind"
-    },
     "kicker": "Portfolio",
     "metrics": {
       "current": {
         "label": "Actual",
         "value": "Cloud & Sistemas N2",
-        "detail": "mar-ago 2026"
+        "detail": "SATEC · desde mar 2026"
       },
       "research": {
         "label": "Investigación",
@@ -89,46 +62,40 @@
         "detail": "Publicación Code-XR"
       },
       "next": {
-        "label": "Siguiente",
-        "value": "UPM 2026",
-        "detail": "Máster de Telecomunicación"
+        "label": "Máster",
+        "value": "UPM · en curso",
+        "detail": "Telecomunicación · ML y Big Data"
       }
     }
-  },
-  "about": {
-    "title": "Sobre mí",
-    "p1": "Soy estudiante de Ingeniería Telemática (URJC) y autor de Code-XR, un ecosistema que conecta análisis estático con visualización inmersiva de métricas.",
-    "p2": "Nuestro trabajo ha sido aceptado para VISSOFT 2025 (co-localizado con ICSME 2025). Estoy preparando la tesis y consolidando documentación y herramientas para su evolución.",
-    "p3": "Me preocupo por el código limpio, la arquitectura modular y un DX/UX sólido. Busco sistemas que escalen y puedan mantenerse."
   },
   "profile": {
     "title": "Sobre mí",
     "subtitle": "Una lectura más clara de hacia dónde evoluciona mi perfil técnico",
     "imageAlt": "Foto de perfil de Adrián Montes",
     "name": "Adrián Montes Linares",
-    "role": "Ingeniero Telemático con experiencia en Cloud, Sistemas N2, desarrollo Full-Stack y visualización XR de software",
+    "role": "Ingeniero Telemático y estudiante del Máster en Ingeniería de Telecomunicación (UPM), con experiencia en Cloud, Sistemas N2, desarrollo Full-Stack y visualización XR de software",
     "bio1": "Soy Ingeniero Telemático por la Universidad Rey Juan Carlos, titulado en enero de 2026. Mi perfil combina desarrollo software, sistemas, operación cloud y visualización de datos, con un enfoque práctico en herramientas mantenibles y documentación clara.",
-    "bio2": "Actualmente estoy finalizando prácticas extracurriculares en SATEC dentro de Cloud & Sistemas N2, trabajando con requests, incidencias, operación de infraestructura, máquinas virtuales, parcheo de vulnerabilidades, acceso SSH/RDP y herramientas como Nagios, AMS, Veeam Backup, NetApp y VMware.",
+    "bio2": "Actualmente compagino el máster en la UPM con prácticas extracurriculares en SATEC dentro de Cloud & Sistemas N2, donde trabajo con requests, incidencias, operación de infraestructura, máquinas virtuales, parcheo de vulnerabilidades, acceso SSH/RDP y herramientas como Nagios, AMS, Veeam Backup, NetApp y VMware.",
     "stats": {
       "experience": "Experiencia",
       "experienceValue": "SATEC Cloud & Sistemas N2, prácticas Full-Stack en VBGroup, Code-XR, VISSOFT 2025",
       "education": "Formación",
-      "educationValue": "Ingeniería Telemática (URJC, ene 2026), máster de Telecomunicación en UPM desde sep 2026",
+      "educationValue": "Ingeniería Telemática (URJC, ene 2026) · Máster en Ingeniería de Telecomunicación en la UPM, en curso desde sep 2026",
       "focus": "Enfoque actual",
       "focusValue": "Sistemas, cloud, developer tooling, visualización XR, Machine Learning y Big Data",
       "languages": "Idiomas",
-      "languagesValue": "Español nativo, inglés B2 TOEIC, preparando C1",
+      "languagesValue": "Español nativo, inglés C1 (Oxford Test of English Advanced)",
       "mindset": "Mentalidad",
       "mindsetValue": "Curiosidad técnica, orientación a calidad, aprendizaje continuo"
     },
     "kicker": "Perfil",
     "operatingKicker": "Perfil operativo",
-    "bio3": "Antes, durante mis prácticas curriculares en VBGroup, trabajé como Desarrollador Full-Stack Junior en OBT, una plataforma interna construida con Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite y Tailwind. Mi siguiente paso académico es el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data.",
+    "bio3": "Antes, durante mis prácticas curriculares en VBGroup, trabajé como Desarrollador Full-Stack Junior en OBT, una plataforma interna construida con Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite y Tailwind. En paralelo curso el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data.",
     "pills": {
       "satec": "SATEC Cloud & Sistemas N2",
       "vbgroup": "Prácticas Full-Stack en VBGroup",
-      "upm": "Máster UPM: ML & Big Data",
-      "english": "Preparando inglés C1"
+      "upm": "Máster UPM · ML y Big Data",
+      "english": "Inglés C1 (Oxford)"
     },
     "snapshotTitle": "Dirección actual",
     "snapshotBody": "Sistemas y cloud me dan profundidad operativa; el full-stack me da capacidad de entrega de producto; XR, analítica de software, Machine Learning y Big Data marcan la línea de investigación y tooling que quiero seguir construyendo.",
@@ -142,8 +109,8 @@
         "value": "Code-XR / VISSOFT 2025"
       },
       "english": {
-        "label": "Objetivo de idioma",
-        "value": "Inglés C1 en progreso"
+        "label": "Certificado de idioma",
+        "value": "Inglés C1 · Oxford Test of English"
       }
     },
     "transition": {
@@ -153,13 +120,6 @@
   "skills": {
     "title": "Competencias",
     "subtitle": "Mapa práctico de tecnologías agrupadas por uso, contexto y profundidad actual.",
-    "topStack": {
-      "typescript": "TypeScript",
-      "react": "React",
-      "express": "Express",
-      "postgresql": "PostgreSQL",
-      "azure": "Azure"
-    },
     "actions": {
       "viewDetails": "Ver detalles",
       "close": "Cerrar",
@@ -179,13 +139,6 @@
       "nextGroup": "Siguiente categoría",
       "prevGroup": "Categoría anterior"
     },
-    "tags": {
-      "academic": "Académico",
-      "internship": "Prácticas",
-      "open_source": "Código abierto",
-      "regular_use": "Uso habitual",
-      "production_like": "Similar a producción"
-    },
     "proficiency": {
       "basic": "Básico",
       "intermediate": "Intermedio",
@@ -193,18 +146,6 @@
     },
     "proficiencyLabel": "Nivel",
     "highlights": "Puntos clave",
-    "purposeTags": {
-      "learning": "Aprendizaje",
-      "academic": "Académico",
-      "internship": "Prácticas",
-      "open_source": "Código abierto",
-      "production_like": "Similar a producción"
-    },
-    "usedIn": {
-      "projects": "Proyectos",
-      "journey": "Trayectoria",
-      "codeXr": "Code-XR"
-    },
     "categories": {
       "languages": {
         "label": "Lenguajes",
@@ -236,7 +177,7 @@
       },
       "other": {
         "label": "Otros",
-        "desc": "Aceleradores de flujo de trabajo y prácticas con IA."
+        "desc": "Desarrollo asistido por IA, ingeniería de prompts e integraciones MCP."
       }
     },
     "items": {
@@ -347,10 +288,10 @@
       },
       "express": {
         "label": "Express.js",
-        "summary": "Usado para prototipar APIs ligeras.",
-        "purpose": "Prototipado rápido de APIs Node.",
-        "h1": "Construí middlewares de validación.",
-        "h2": "Integré servicios con el cliente."
+        "summary": "Framework de Node.js usado en el backend de OBT (VBGroup) y en APIs ligeras de proyectos personales.",
+        "purpose": "APIs REST para herramientas internas y prototipos.",
+        "h1": "Construí la API REST de OBT con TypeScript, documentación Swagger y flujos asegurados con JWT.",
+        "h2": "Encadené middlewares de validación y de acceso por roles."
       },
       "react": {
         "label": "React",
@@ -520,6 +461,20 @@
         "h1": "Generé scaffolds y refactors rápido.",
         "h2": "Revisé sugerencias por precisión."
       },
+      "claudeCode": {
+        "label": "Claude Code",
+        "summary": "Herramienta de programación agéntica de Anthropic, usada para desarrollo asistido por IA desde la terminal y el editor.",
+        "purpose": "Desarrollo asistido por IA con flujo agéntico.",
+        "h1": "Lo combiné con GitHub Copilot en refactors, revisiones y tareas repetitivas de ingeniería.",
+        "h2": "Revisé cada cambio generado antes de integrarlo."
+      },
+      "mcp": {
+        "label": "MCP (Model Context Protocol)",
+        "summary": "Protocolo abierto para conectar asistentes de IA con herramientas, datos y servicios externos mediante servidores MCP.",
+        "purpose": "Integrar servidores MCP en flujos de desarrollo asistido por IA.",
+        "h1": "Integré servidores MCP para que los asistentes accedan de forma controlada a herramientas y datos del proyecto.",
+        "h2": "Configuré y mantuve servidores MCP para el desarrollo del día a día."
+      },
       "azureDevOps": {
         "label": "Microsoft Azure DevOps",
         "summary": "Plataforma de CI/CD y entrega para pipelines, repos y planificación.",
@@ -543,10 +498,10 @@
       },
       "nestjs": {
         "label": "Nest.js",
-        "summary": "Framework Node.js estructurado usado en el backend de OBT.",
-        "purpose": "Arquitectura backend con módulos, controladores y servicios.",
-        "h1": "Diseñé módulos de API REST con estructura limpia.",
-        "h2": "Conecté documentación, validación y servicios cloud."
+        "summary": "Framework estructurado de Node.js con módulos, controladores y servicios para APIs tipadas.",
+        "purpose": "Arquitectura backend modular y tipada.",
+        "h1": "Conozco su organización en módulos, controladores y servicios.",
+        "h2": "Complementa a Express.js en APIs REST con TypeScript."
       },
       "swagger": {
         "label": "Swagger",
@@ -698,7 +653,7 @@
       },
       "backend": {
         "summary": "Backend centrado en diseño de APIs, ecosistema Node.js, documentación y entrega práctica en proyectos.",
-        "h1": "Express, Nest.js, REST APIs, Swagger, JWT y Django cubren los principales patrones de servicios.",
+        "h1": "Express, REST APIs, Swagger, JWT y Django cubren los principales patrones de servicios de los proyectos, con Nest.js como framework complementario.",
         "h2": "El foco está en endpoints mantenibles, contratos claros e integración con frontend y almacenamiento."
       },
       "frontend": {
@@ -727,7 +682,7 @@
         "h2": "El valor está menos en las etiquetas y más en estructura, trazabilidad e iteración."
       },
       "other": {
-        "summary": "Prácticas de IA asistida y aceleración de flujo utilizadas como apoyo al trabajo de ingeniería.",
+        "summary": "Prácticas de desarrollo asistido por IA y de aceleración del flujo de trabajo, utilizadas como apoyo al trabajo de ingeniería.",
         "h1": "Estas herramientas ayudan a explorar, revisar y avanzar más rápido sin sustituir criterio técnico.",
         "h2": "El foco está en asistencia práctica, validación clara y mantener los resultados anclados al contexto real."
       }
@@ -785,19 +740,6 @@
     "gallery": "Galería del proyecto",
     "kicker": "Trabajo seleccionado"
   },
-  "experience": {
-    "title": "Experiencia / Colaboraciones",
-    "intro": "Mi enfoque ha sido desarrollo académico-aplicado y proyectos personales con impacto medible."
-  },
-  "education": {
-    "title": "Formación",
-    "urjc": "URJC — Ingeniería Telemática (2020–2025)",
-    "bach": "Bachillerato — Ciencias y Tecnología (previo al ingreso universitario)"
-  },
-  "publications": {
-    "title": "Publicaciones / Méritos",
-    "item1": "Artículo aceptado para VISSOFT 2025 (co-localizado con ICSME 2025): visualización de métricas de software en XR. Preparando camera-ready."
-  },
   "journey": {
     "title": "Trayectoria Profesional",
     "subtitle": "Experiencia, formación y logros clave",
@@ -812,7 +754,7 @@
       "work": "Experiencia laboral",
       "project": "Proyectos destacados",
       "achievement": "Logros y publicaciones",
-      "learning": "Objetivos de Aprendizaje"
+      "learning": "Aprendizaje y certificaciones"
     },
     "entries": {
       "urjc": {
@@ -821,7 +763,7 @@
         "desc": "Formación integral en ingeniería de software, redes y sistemas. Especialización progresiva en desarrollo full-stack y tecnologías XR. TFG vinculado a VISSOFT 2025.",
         "highlights": {
           "ast": "Matrícula de Honor — AST (C++)",
-          "lsmu": "Matrícula de Honor — LSMU (Kotlin)"
+          "lsmo": "Matrícula de Honor — LSMO (Kotlin)"
         }
       },
       "adyra": {
@@ -849,24 +791,29 @@
         }
       },
       "vissoft": {
-        "role": "Paper Aceptado — VISSOFT 2025",
+        "role": "Distinguished Artifact Award — VISSOFT 2025",
         "org": "IEEE VISSOFT @ ICSME 2025",
-        "desc": "Artículo de investigación sobre visualización XR de métricas de software aceptado para presentación en conferencia internacional."
+        "desc": "Artículo de investigación sobre visualización XR de métricas de software, publicado en IEEE VISSOFT 2025 (junto a ICSME 2025) y reconocido con el Distinguished Artifact Award."
       },
-      "cambridgeC1": {
-        "role": "Certificación Cambridge English C1 - en progreso",
-        "org": "Universidad de Cambridge",
-        "desc": "Trabajo en progreso para avanzar hacia fluidez profesional en inglés en contextos técnicos y de negocio, preparando lectura, escritura, expresión oral y comprensión auditiva."
+      "hackathonUrjc": {
+        "role": "Hackatón URJC 2024 — reto de economía circular",
+        "org": "Universidad Rey Juan Carlos (URJC)",
+        "desc": "Primer Hackatón URJC (1 y 2 de marzo de 2024, campus de Móstoles). Trabajé en la ideación, el prototipado y el pitch final de un modelo de tokens universitarios para el reto de economía circular: los estudiantes ganan tokens por contribuir (tutorías, apuntes, actividades) y los gastan en servicios del campus."
+      },
+      "oxfordC1": {
+        "role": "Oxford Test of English Advanced — C1 certificado",
+        "org": "Oxford University Press · certificado por la Universidad de Oxford",
+        "desc": "Examen realizado el 4 de septiembre de 2026: nivel global C1 del MCER (146/170). Verificable por terceros a través del servicio oficial de Oxford University Press."
       },
       "satecCloud": {
         "role": "Ingeniero de Sistemas N2 / Cloud",
-        "org": "SATEC (Practicas extracurriculares)",
-        "desc": "Practicas extracurriculares centradas en sistemas, soporte N2, entornos cloud, operacion de infraestructura y documentacion profesional. Inicio el 14 de marzo de 2026."
+        "org": "SATEC (Prácticas extracurriculares)",
+        "desc": "Prácticas extracurriculares centradas en sistemas, soporte N2, entornos cloud, operación de infraestructura y documentación profesional. Comenzaron el 14 de marzo de 2026, se renovaron en septiembre de 2026 y actualmente las compagino con el máster en la UPM."
       },
       "masterTelecomUPM": {
-        "role": "Máster Universitario en Ingeniería de Telecomunicación - comienza sep 2026",
-        "org": "Universidad Politecnica de Madrid (UPM)",
-        "desc": "Máster oficial con inicio en septiembre de 2026 en la UPM, con camino de intensificación hacia Aprendizaje Automático y Big Data dentro de Ingeniería de Telecomunicación."
+        "role": "Máster Universitario en Ingeniería de Telecomunicación",
+        "org": "Universidad Politécnica de Madrid (UPM)",
+        "desc": "Máster oficial en la UPM, iniciado en septiembre de 2026, con intensificación en Aprendizaje Automático y Big Data dentro de Ingeniería de Telecomunicación. Lo compagino con las prácticas extracurriculares en Cloud & Sistemas N2 de SATEC."
       }
     },
     "kicker": "Trayectoria técnica",
@@ -938,6 +885,10 @@
         "name": "GitHub Copilot",
         "desc": "Programador IA que me ayuda a escribir código más rápido y explorar nuevos patrones."
       },
+      "claudeCode": {
+        "name": "Claude Code",
+        "desc": "Herramienta de programación agéntica de Anthropic. Desarrollo asistido por IA desde la terminal, ampliado con servidores MCP."
+      },
       "windowsTerminal": {
         "name": "Windows Terminal",
         "desc": "Terminal moderna con pestañas, paneles y renderizado acelerado por GPU."
@@ -999,6 +950,17 @@
       "formal": "Referencia formal"
     },
     "recommendations": {
+      "satec-luis": {
+        "role": "Director de Servicios Cloud",
+        "relationship": "Referencia de la dirección de Servicios Cloud de SATEC",
+        "summary": "Luis avala mi desempeño profesional durante las prácticas en Cloud & Sistemas N2 de SATEC y me recomienda para cualquier puesto. Su carta destaca una actitud proactiva, responsable y comprometida; una gran capacidad de aprendizaje y de adaptación rápida a los cambios y desafíos; adaptabilidad a distintos contextos y dinámicas de trabajo; y una integración natural en el equipo, fomentando la colaboración, el respeto y la comunicación efectiva.",
+        "strengths": {
+          "learning": "Aprendizaje rápido",
+          "teamwork": "Trabajo en equipo",
+          "adaptability": "Adaptabilidad",
+          "attitude": "Actitud proactiva"
+        }
+      },
       "vbgroup-abner": {
         "role": "Responsable de Desarrollo",
         "relationship": "Supervisor directo durante las prácticas en VBGroup",
@@ -1036,26 +998,27 @@
   "certificates": {
     "title": "Certificaciones y Logros",
     "subtitle": "Credenciales profesionales, publicaciones y reconocimientos",
+    "kicker": "Historial profesional",
     "completed": "Completado",
-    "inProgress": "En Progreso",
+    "inProgress": "En curso",
     "planned": "Planeado",
     "statusDescriptions": {
-      "completed": "Grado, premios y reconocimientos academicos confirmados.",
-      "in-progress": "Credenciales actualmente en preparacion.",
-      "planned": "Siguiente paso academico ya planificado."
+      "completed": "Grado, premios y reconocimientos académicos confirmados.",
+      "in-progress": "Titulaciones y credenciales actualmente en curso.",
+      "planned": "Próximas credenciales en el horizonte."
     },
-    "cambridgeC1": "Certificado Cambridge English C1",
+    "oxfordC1": "Oxford Test of English Advanced — C1 (MCER)",
+    "oxfordC1Issuer": "Oxford University Press · certificado por la Universidad de Oxford",
     "verify": "Verificar",
-    "learnMore": "Más información",
-    "masterTelecomUPM": "Master Universitario en Ingenieria de Telecomunicacion",
-    "masterTelecomUPMIssuer": "Universidad Politecnica de Madrid (UPM)",
-    "telematicsDegree": "Grado en Ingenieria Telematica",
+    "masterTelecomUPM": "Máster Universitario en Ingeniería de Telecomunicación",
+    "masterTelecomUPMIssuer": "Universidad Politécnica de Madrid (UPM)",
+    "telematicsDegree": "Grado en Ingeniería Telemática",
     "telematicsDegreeIssuer": "Universidad Rey Juan Carlos (URJC)",
-    "codeXrAward": "Code-XR — Premio Poster Track VISSOFT 2025",
-    "codeXrAwardIssuer": "ICSME 2025 Awards",
-    "greenhouseHighDistinction": "GreenHouse — Matricula de Honor en AST",
-    "greenhouseHighDistinctionIssuer": "Ampliacion de Sistemas Telematicos (URJC)",
-    "stepByStepHighDistinction": "StepByStep — Matricula de Honor en LSMO",
-    "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Moviles y Ubicuos (URJC)"
+    "codeXrAward": "Code-XR — Distinguished Artifact Award en VISSOFT 2025",
+    "codeXrAwardIssuer": "IEEE VISSOFT 2025 (junto a ICSME 2025)",
+    "greenhouseHighDistinction": "GreenHouse — Matrícula de Honor en AST",
+    "greenhouseHighDistinctionIssuer": "Ampliación de Sistemas Telemáticos (URJC)",
+    "stepByStepHighDistinction": "StepByStep — Matrícula de Honor en LSMO",
+    "stepByStepHighDistinctionIssuer": "Laboratorio de Sistemas Móviles y Ubicuos (URJC)"
   }
 }

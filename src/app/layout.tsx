@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.author}`,
   },
   description: 'Portfolio of Adrián Montes Linares, Telematics & Software Engineer focused on TypeScript, React, Node.js, DevTools and XR.',
-  keywords: ['Adrián Montes Linares', 'Adrián Montes', 'Telematics Engineer', 'Software Engineer', 'React', 'TypeScript', 'Node.js', 'XR', 'WebXR', 'Code-XR', 'VISSOFT', 'ICSME 2025', 'Portfolio'],
+  keywords: ['Adrián Montes Linares', 'Adrián Montes', 'Telematics Engineer', 'Software Engineer', 'React', 'TypeScript', 'Node.js', 'XR', 'WebXR', 'Code-XR', 'VISSOFT', 'ICSME 2025', 'Universidad Politécnica de Madrid', 'UPM', 'Machine Learning', 'Big Data', 'Cloud', 'Systems N2', 'Model Context Protocol', 'MCP', 'Oxford Test of English C1', 'Portfolio'],
   authors: [{ name: SITE.author }],
   creator: SITE.author,
   manifest: '/favicons/site.webmanifest',
