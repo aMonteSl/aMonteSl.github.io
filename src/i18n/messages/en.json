@@ -76,6 +76,11 @@
         "value": "UPM · in progress",
         "detail": "Telecommunications · ML & Big Data"
       }
+    },
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email"
     }
   },
   "profile": {

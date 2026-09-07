@@ -7,11 +7,14 @@ const ROTATION_INTERVAL_MS = CAROUSEL_ROTATION_INTERVAL_MS
 
 export function useFeaturedRotation<T>(items: readonly T[]) {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
+  // Hover/focus/tab-visibility pauses are transient; the user toggle sticks until pressed again.
+  const [isHoverPaused, setIsHoverPaused] = useState(false)
+  const [isUserPaused, setIsUserPaused] = useState(false)
   const [progress, setProgress] = useState(0)
   const elapsedRef = useRef(0)
   const startTimeRef = useRef(0)
   const rafIdRef = useRef<number | null>(null)
+  const isPaused = isHoverPaused || isUserPaused
 
   // Check for reduced motion preference
   const prefersReducedMotion =
@@ -30,12 +33,23 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
   }, [resetClock])
 
   const pause = useCallback(() => {
-    setIsPaused(true)
+    setIsHoverPaused(true)
   }, [])
 
   const resume = useCallback(() => {
-    setIsPaused(false)
+    setIsHoverPaused(false)
   }, [])
+
+  const togglePause = useCallback(() => {
+    if (isUserPaused) {
+      // Resuming must always resume: drop any transient pause that may be lingering (focus left inside the card,
+      // a synthesized mouseenter on touch) instead of leaving the bar red and frozen until the user taps elsewhere.
+      setIsHoverPaused(false)
+      setIsUserPaused(false)
+      return
+    }
+    setIsUserPaused(true)
+  }, [isUserPaused])
 
   // Handle autoplay and progress from the same clock so the bar matches rotation.
   useEffect(() => {
@@ -102,7 +116,9 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
     goToIndex,
     pause,
     resume,
+    togglePause,
     isPaused,
+    isUserPaused,
     progress,
     intervalMs: ROTATION_INTERVAL_MS,
     total: items.length,

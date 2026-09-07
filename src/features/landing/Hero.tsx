@@ -23,6 +23,8 @@ import { FEATURED_PROJECTS } from '@/content/featuredProjects'
 import { useFeaturedRotation } from './useFeaturedRotation'
 import { FeaturedProjectCard } from './FeaturedProjectCard'
 
+type SocialKey = (typeof SOCIAL_LINKS)[number]['key']
+
 function BriefcaseIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -41,25 +43,31 @@ const iconMap: Record<string, React.FC<{ className?: string }>> = {
 export function Hero() {
   const t = useTranslations('hero')
   const tNav = useTranslations('nav')
+  const tProfile = useTranslations('profile')
   const { locale } = useLocale()
   const animate = shouldAnimate()
   const {
-    activeItem: activeProject,
     activeIndex,
     goToIndex,
     pause,
     resume,
-    total,
     progress,
     isPaused,
+    isUserPaused,
+    togglePause,
   } = useFeaturedRotation(FEATURED_PROJECTS)
   const cvUrl = getCvUrl(locale)
   const { copiedEmail, copyEmail } = useEmailCopyFeedback()
+  const socialLabels: Record<SocialKey, string> = {
+    github: t('social.github'),
+    linkedin: t('social.linkedin'),
+    email: t('social.email'),
+  }
 
   return (
-    <SectionShell id="home" className="flex min-h-[calc(100vh-4rem)] items-center pt-24 sm:pt-24 lg:pt-28" tone="xr">
-      <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-        <motion.div {...(animate ? fadeInUp(0) : {})} className="order-2 flex flex-col items-center lg:order-1 lg:col-span-5">
+    <SectionShell id="home" className="flex min-h-[calc(100svh-4rem)] items-center pt-24 lg:pt-28" tone="xr">
+      <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10 xl:gap-14">
+        <motion.div {...(animate ? fadeInUp(0) : {})} className="order-2 flex flex-col items-center lg:order-1">
           <Surface variant="xr" className="technical-frame w-full max-w-md p-5 sm:p-6">
             <div className="mb-5 flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]/55">
               <span>XR FIELD</span>
@@ -71,7 +79,7 @@ export function Hero() {
               className="relative mx-auto w-fit will-change-transform"
               tabIndex={0}
               role="img"
-              aria-label="Profile photo of Adrian Montes"
+              aria-label={tProfile('imageAlt')}
             >
               <div className="absolute -inset-6 rounded-full border border-[var(--accent)]/20" />
               <div className="relative overflow-hidden rounded-full border border-[var(--accent)]/28 bg-black/30 p-2 shadow-2xl shadow-black/35">
@@ -82,19 +90,20 @@ export function Hero() {
             <DividerLine className="my-6" />
 
             <FeaturedProjectCard
-              project={activeProject}
+              projects={FEATURED_PROJECTS}
               activeIndex={activeIndex}
-              total={total}
               progress={progress}
               isPaused={isPaused}
+              isUserPaused={isUserPaused}
               onDotClick={goToIndex}
-              onMouseEnter={pause}
-              onMouseLeave={resume}
+              onTogglePause={togglePause}
+              onPause={pause}
+              onResume={resume}
             />
           </Surface>
         </motion.div>
 
-        <div className="order-1 flex flex-col items-center text-center lg:order-2 lg:col-span-7 lg:items-start lg:text-left">
+        <div className="order-1 flex flex-col items-center text-center lg:order-2 lg:items-start lg:text-left">
           <motion.div {...(animate ? fadeInUp(0.02) : {})}>
             <Kicker className="justify-center lg:justify-start">{t('kicker')}</Kicker>
           </motion.div>
@@ -127,7 +136,7 @@ export function Hero() {
             {t('aboutMe')}
           </motion.p>
 
-          <motion.div {...(animate ? fadeInUp(0.14) : {})} className="mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <motion.div {...(animate ? fadeInUp(0.14) : {})} className="relative mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <LinkButton href={cvUrl} download rel="noopener">
               {t('ctaResume')}
               <ArrowRightIcon className="h-4 w-4" />
@@ -146,7 +155,7 @@ export function Hero() {
                     target={link.key === 'email' ? undefined : '_blank'}
                     rel={link.key === 'email' ? undefined : 'noopener noreferrer'}
                     onClick={link.key === 'email' ? copyEmail : undefined}
-                    aria-label={link.key}
+                    aria-label={socialLabels[link.key]}
                     className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)]/75 bg-[var(--surface)]/55 text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/35 hover:text-[var(--fg)]"
                   >
                     {Icon && <Icon className="h-5 w-5" />}
@@ -154,11 +163,12 @@ export function Hero() {
                 )
               })}
             </div>
+            {/* Out of flow so the CTA row keeps its height; the text mounts only while copied so aria-live announces it. */}
             <span
               aria-live="polite"
-              className={`min-h-4 text-xs font-medium text-[var(--accent)] transition-opacity ${copiedEmail ? 'opacity-100' : 'opacity-0'}`}
+              className="pointer-events-none absolute inset-x-0 -bottom-5 min-h-4 text-center text-xs font-medium text-[var(--accent)] lg:text-left"
             >
-              {tNav('emailCopied')}
+              {copiedEmail ? tNav('emailCopied') : null}
             </span>
           </motion.div>
 

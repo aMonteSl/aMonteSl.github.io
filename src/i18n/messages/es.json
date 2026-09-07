@@ -76,6 +76,11 @@
         "value": "UPM · en curso",
         "detail": "Telecomunicación · ML y Big Data"
       }
+    },
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Correo electrónico"
     }
   },
   "profile": {
