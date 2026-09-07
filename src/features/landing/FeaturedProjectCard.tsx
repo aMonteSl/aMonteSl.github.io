@@ -130,7 +130,7 @@ function FeaturedProjectPanel({ project, isActive, restingOffset }: FeaturedProj
         {t(`featuredProject.${project.i18nKey}.title`)}
       </h4>
 
-      <p className="mt-1 line-clamp-4 text-sm leading-5 text-[var(--fg-muted)] sm:line-clamp-3">
+      <p className="mt-1 line-clamp-5 text-sm leading-5 text-[var(--fg-muted)] xs:line-clamp-4 sm:line-clamp-3">
         {t(`featuredProject.${project.i18nKey}.subtitle`)}
       </p>
 
