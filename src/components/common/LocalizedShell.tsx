@@ -9,6 +9,8 @@ export interface LocalizedShellProps {
   children: ReactNode
   locale: Locale
   showFooter?: boolean
+  /** Extra classes for the footer, e.g. the sidebar offset on the home page. */
+  footerClassName?: string
 }
 
 function SkipToContentLink() {
@@ -21,7 +23,12 @@ function SkipToContentLink() {
   )
 }
 
-export function LocalizedShell({ children, locale, showFooter = true }: LocalizedShellProps) {
+export function LocalizedShell({
+  children,
+  locale,
+  showFooter = true,
+  footerClassName,
+}: LocalizedShellProps) {
   return (
     <I18nProvider locale={locale}>
       <LocalePreferenceGate />
@@ -29,7 +36,7 @@ export function LocalizedShell({ children, locale, showFooter = true }: Localize
       <main id="main-content">
         {children}
       </main>
-      {showFooter && <Footer />}
+      {showFooter && <Footer className={footerClassName} />}
       <BrowserTranslateHint />
     </I18nProvider>
   )
