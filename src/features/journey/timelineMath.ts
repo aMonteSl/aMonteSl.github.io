@@ -96,6 +96,20 @@ export function getHighlightDate(highlight: JourneyHighlight): JourneyDate {
   }
 }
 
+/** An entry whose start and end fall on the same day renders as a single marker */
+export function isPointEntry(entry: JourneyEntry): boolean {
+  return (
+    entry.startYear === entry.endYear &&
+    entry.startMonth === entry.endMonth &&
+    entry.startDay === entry.endDay
+  )
+}
+
+/** Learning entries scheduled after today render as planned (dashed) items */
+export function isFutureLearningEntry(entry: JourneyEntry, today: JourneyDate): boolean {
+  return entry.lane === 'learning' && toLocalDate(getEntryStartDate(entry)).getTime() > toLocalDate(today).getTime()
+}
+
 export function isPastHalfOfYear(today: JourneyDate): boolean {
   return dateToYearPercent(today) > 50
 }

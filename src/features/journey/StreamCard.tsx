@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { shouldAnimate } from '@/lib/motion'
-import { Badge } from '@/components/ui'
+import { Badge, CloseIcon } from '@/components/ui'
 import type { JourneyLane } from './types'
 
 interface StreamCardProps {
@@ -33,8 +32,17 @@ interface StreamCardProps {
   ongoingLabel?: string
   /** Localized external link label */
   moreLabel?: string
-  /** Additional className */
+  /** Additional className for the card surface */
   className?: string
+  /**
+   * Additional className for the (possibly linked) body wrapper. When the card
+   * is a bottom sheet, the scroll box lives here so the close button stays pinned.
+   */
+  bodyClassName?: string
+  /** Renders a close button (below lg) that clears the selection */
+  onClose?: () => void
+  /** Localized label for the close button */
+  closeLabel?: string
 }
 
 const accentMap: Record<JourneyLane, string> = {
@@ -88,9 +96,10 @@ export function StreamCard({
   ongoingLabel = 'Active',
   moreLabel = 'View more',
   className,
+  bodyClassName,
+  onClose,
+  closeLabel,
 }: StreamCardProps) {
-  const animate = shouldAnimate()
-
   const Wrapper = link ? 'a' : 'div'
   const wrapperProps = link
     ? { href: link, target: '_blank', rel: 'noopener noreferrer' }
@@ -112,16 +121,19 @@ export function StreamCard({
       {/* Left accent border */}
       <div className={cn('absolute left-0 top-0 bottom-0 w-1 rounded-l-xl', dotMap[lane])} />
 
-      <div className="h-full p-5 pl-6 flex flex-col">
-        {/* Header row */}
-        <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+      <div className="flex h-full flex-col p-4 pl-5 lg:p-5 lg:pl-6">
+        {/* Header row (leaves room for the close button on touch layouts) */}
+        <div className={cn(
+          'mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4',
+          onClose && 'max-lg:pr-10'
+        )}>
           <div className="flex-1 min-w-0">
             {/* Title */}
-            <h4 className="text-base sm:text-lg font-semibold text-[var(--fg)] leading-tight mb-0.5 truncate">
+            <h4 className="mb-0.5 line-clamp-2 break-words text-base font-semibold leading-tight text-[var(--fg)] sm:text-lg">
               {title}
             </h4>
             {/* Organization */}
-            <p className="text-sm text-[var(--fg-muted)] truncate">
+            <p className="line-clamp-2 break-words text-sm text-[var(--fg-muted)]">
               {organization}
             </p>
           </div>
@@ -147,8 +159,8 @@ export function StreamCard({
           </div>
         </div>
 
-        {/* Description - limited to 2 lines */}
-        <p className="text-sm text-[var(--fg-muted)] leading-relaxed line-clamp-2 mb-3 flex-shrink-0">
+        {/* Description - 3 lines on compact layouts, 2 on desktop */}
+        <p className="mb-3 line-clamp-3 flex-shrink-0 text-sm leading-relaxed text-[var(--fg-muted)] lg:line-clamp-2">
           {description}
         </p>
 
@@ -231,17 +243,28 @@ export function StreamCard({
     </div>
   )
 
-  if (!animate) {
-    return (
-      <Wrapper {...wrapperProps} className="block h-full">
+  return (
+    <div className="relative h-full">
+      {/* The wrapper is the scroll box (see bodyClassName), so the root never scrolls the close button away */}
+      <Wrapper {...wrapperProps} className={cn('block h-full', bodyClassName)}>
         {content}
       </Wrapper>
-    )
-  }
 
-  return (
-    <Wrapper {...wrapperProps} className="block h-full">
-      {content}
-    </Wrapper>
+      {/* Close control lives outside the (possibly linked, possibly scrolling) wrapper: a tap never follows the link and the button stays pinned */}
+      {onClose && (
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={closeLabel}
+          className={cn(
+            'absolute right-2 top-2 z-10 inline-flex size-10 items-center justify-center rounded-full lg:hidden',
+            'bg-[var(--bg)]/70 text-[var(--fg-muted)] ring-1 ring-[var(--border)]/40 backdrop-blur-sm',
+            'transition-colors hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]'
+          )}
+        >
+          <CloseIcon className="h-4 w-4" />
+        </button>
+      )}
+    </div>
   )
 }
