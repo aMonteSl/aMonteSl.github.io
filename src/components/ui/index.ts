@@ -46,7 +46,9 @@ export {
   GitHubIcon,
   LinkedInIcon,
   MenuIcon,
+  PauseIcon,
   PinIcon,
+  PlayIcon,
   SparkIcon,
 } from './icons'
 export type { ImageCarouselProps, AspectRatioPreset } from './ImageCarousel'

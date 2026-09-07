@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  /* Extra breakpoint between small phones (320-419px) and large phones (420-639px). */
+  --breakpoint-xs: 26.25rem;
+}
+
 /* CSS Variables for theming */
 :root {
   --bg: #040304;
@@ -29,6 +34,8 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
+  /* Keep hash targets clear of the fixed 4rem header. */
+  scroll-padding-top: 5rem;
 }
 
 body {

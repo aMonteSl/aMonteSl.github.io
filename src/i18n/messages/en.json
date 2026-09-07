@@ -16,7 +16,14 @@
     "testimonials": "Professional References",
     "certifications": "Certifications & Achievements",
     "contact": "Let's Connect",
-    "emailCopied": "Email copied"
+    "emailCopied": "Email copied",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "menuLabel": "Navigation menu",
+    "mainNavigation": "Main navigation",
+    "sidebarNavigation": "Sidebar navigation",
+    "goHome": "Go to home",
+    "menu": "Menu"
   },
   "hero": {
     "name": "Adrián Montes Linares",
@@ -37,13 +44,16 @@
       },
       "obt": {
         "title": "OBT",
-        "subtitle": "Internal VBGroup tool delivered end-to-end: backend in Express/TypeScript with cloud integrations; frontend in React + Tailwind. Focused on security, automation, and delivery.",
+        "subtitle": "Internal VBGroup tool built end-to-end: Express/TypeScript backend with cloud integrations and a React + Tailwind frontend.",
         "metric": "Internal tool"
       },
       "github": "GitHub",
       "docs": "Docs",
       "internal": "Internal",
-      "marketplace": "Marketplace"
+      "marketplace": "Marketplace",
+      "goTo": "Go to project {index}",
+      "pauseRotation": "Pause project rotation",
+      "resumeRotation": "Resume project rotation"
     },
     "links": {
       "doi": "DOI"
@@ -748,7 +758,7 @@
     "selectedMilestone": "Selected milestone",
     "ongoing": "Active",
     "viewMore": "View more",
-    "clickYearHint": "Click on a year to see monthly details",
+    "clickYearHint": "Select a year to see monthly details",
     "legend": {
       "education": "Education",
       "work": "Work Experience",
@@ -817,7 +827,14 @@
       }
     },
     "kicker": "Career stream",
-    "today": "Today"
+    "today": "Today",
+    "back": "Back",
+    "start": "Start",
+    "yearDetails": "See {year} in detail",
+    "closeDetails": "Close details",
+    "legendLabel": "Timeline legend",
+    "legendHide": "Hide {lane}",
+    "legendShow": "Show {lane}"
   },
   "development": {
     "title": "Under development",
@@ -1024,6 +1041,19 @@
   "language": {
     "browserHint": "This site is written in English and Spanish. Your browser can translate it into your language.",
     "dismiss": "Dismiss",
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "selection": "Language selection",
+    "switchTo": "Switch to {language}",
+    "current": "(current language)"
+  },
+  "carousel": {
+    "gallery": "{title} gallery",
+    "expandedGallery": "{title} — expanded gallery",
+    "imageOf": "{title} — image {current} of {total}",
+    "previous": "Previous image",
+    "next": "Next image",
+    "goTo": "Go to image {index}",
+    "close": "Close image gallery",
+    "placeholderAlt": "Placeholder image"
   }
 }

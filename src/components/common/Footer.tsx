@@ -5,8 +5,13 @@ import { Container, EmailIcon, ExternalLinkIcon, GitHubIcon, LinkedInIcon } from
 import { LINKS, SITE, getCvUrl } from '@/lib/constants'
 import { useEmailCopyFeedback } from '@/lib/hooks/useEmailCopyFeedback'
 import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
-export function Footer() {
+export interface FooterProps {
+  className?: string
+}
+
+export function Footer({ className }: FooterProps = {}) {
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
   const { locale } = useLocale()
@@ -37,7 +42,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--card)]/30">
+    <footer className={cn('relative overflow-hidden border-t border-[var(--border)] bg-[var(--card)]/30', className)}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-1/2 h-[14rem] w-[min(42rem,90vw)] -translate-x-1/2 rounded-full bg-[var(--accent)]/4 blur-[120px]" />
       </div>
