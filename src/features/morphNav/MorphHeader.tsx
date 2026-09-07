@@ -49,12 +49,14 @@ export function MorphHeader() {
           : 'bg-transparent border-transparent'
       )}
     >
-      <div className="container flex h-16 items-center justify-between">
+      {/* Same container as the sections (max-w-7xl) so the header lines up with the content;
+          the old 1200px `.container` left the desktop nav wrapping onto two lines at every width. */}
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         {/* Brand: Avatar + Name with shared layoutId */}
         <Link
           href={localizePath('/', locale)}
           aria-label={t('goHome')}
-          className="inline-flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
+          className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
         >
           <motion.div layoutId="profile-avatar">
             <Avatar size="sm" />
@@ -63,14 +65,15 @@ export function MorphHeader() {
             layoutId="profile-name"
             className="font-semibold text-sm sm:text-base text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors duration-200"
           >
-            <span className="hidden lg:inline">Adrián Montes Linares</span>
-            <span className="hidden sm:inline lg:hidden">Adrián Montes</span>
+            {/* The full name lives in the hero h1; the header keeps the short form so the
+                eight nav items, the divider and the language switcher fit in one 1216px row. */}
+            <span className="hidden sm:inline">Adrián Montes</span>
             <span className="sm:hidden">Adrián M.</span>
           </motion.span>
         </Link>
 
         {/* Desktop navigation */}
-        <div className="hidden xl:flex items-center gap-4">
+        <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
           <nav className="flex items-center gap-0.5" role="navigation" aria-label={t('mainNavigation')}>
             {NAV_ITEMS.map(({ key, href }) => {
               const sectionId = href.replace('#', '')
@@ -81,7 +84,7 @@ export function MorphHeader() {
                   key={key}
                   onClick={() => scrollToSection(sectionId)}
                   className={cn(
-                    'relative px-2.5 py-2 text-xs font-medium rounded-lg transition-all duration-200',
+                    'relative whitespace-nowrap px-1.5 py-2 text-xs font-medium rounded-lg transition-all duration-200',
                     'after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:rounded-full after:bg-[var(--accent)] after:transition-all after:duration-200',
                     isActive
                       ? 'text-[var(--fg)] after:w-4 after:opacity-100'
