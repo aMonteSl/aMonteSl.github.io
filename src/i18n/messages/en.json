@@ -836,12 +836,6 @@
     "legendHide": "Hide {lane}",
     "legendShow": "Show {lane}"
   },
-  "development": {
-    "title": "Under development",
-    "message": "Hi there! My portfolio is under construction. For now, you can only see the main page, but soon the rest of the sections with my projects, experience, and more information about me will be available.",
-    "thanks": "Thanks for your patience.",
-    "dismiss": "Got it"
-  },
   "buttons": {
     "view": "View",
     "demo": "Demo",

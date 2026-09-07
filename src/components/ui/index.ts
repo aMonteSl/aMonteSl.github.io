@@ -8,9 +8,6 @@ export type { AvatarProps } from './Avatar'
 export { Container } from './Container'
 export type { ContainerProps } from './Container'
 
-export { Modal } from './Modal'
-export type { ModalProps } from './Modal'
-
 export { Badge } from './Badge'
 export type { BadgeProps } from './Badge'
 
