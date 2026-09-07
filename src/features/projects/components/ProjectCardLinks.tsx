@@ -25,7 +25,7 @@ export function ProjectCardLinks({ links, className }: ProjectCardLinksProps) {
     <div className={cn('flex flex-wrap items-center gap-2', className)}>
       {links.map((link) => {
         const classes = cn(
-          'inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors',
+          'inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-semibold transition-colors pointer-coarse:min-h-11',
           link.primary
             ? 'border-[var(--accent)]/40 bg-[var(--accent)] text-[#120d0b] hover:bg-[var(--fg)]'
             : 'border-[var(--border)]/70 bg-black/14 text-[var(--fg-muted)] hover:border-[var(--accent)]/35 hover:text-[var(--fg)]'

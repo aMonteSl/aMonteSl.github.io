@@ -99,7 +99,7 @@ function ReleaseFeatureCard({
                 onFlip(feature.id)
               }}
               aria-label={`${watchLabel}: ${feature.title}`}
-              className="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-[var(--accent)]/24 bg-black/16 px-3 py-1.5 text-xs font-medium text-[var(--fg-muted)] transition-colors duration-200 group-hover:border-[var(--accent)]/50 group-hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60"
+              className="mt-auto inline-flex min-h-10 w-fit items-center gap-2 rounded-full border border-[var(--accent)]/24 bg-black/16 px-3.5 py-1.5 text-xs font-medium text-[var(--fg-muted)] transition-colors duration-200 group-hover:border-[var(--accent)]/50 group-hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60 pointer-coarse:min-h-11"
             >
               <PlayIcon className="h-3 w-3 text-[var(--accent)]" />
               {watchLabel}
@@ -112,15 +112,17 @@ function ReleaseFeatureCard({
             className="absolute inset-0 flex flex-col overflow-hidden rounded-xl border border-[var(--accent)]/40 bg-black/45 p-3 [backface-visibility:hidden] [transform:rotateY(180deg)]"
             inert={!isFlipped}
           >
-            <div className="flex items-start justify-between gap-2">
+            <div className="flex items-center justify-between gap-2">
               <p className="min-w-0 truncate text-[11px] font-medium text-[var(--fg-muted)]">{feature.title}</p>
+              {/* 40px hit area; the negative margins keep the header row at
+                  its old height so the player keeps the same room. */}
               <button
                 type="button"
                 onClick={onClose}
                 aria-label={closeLabel}
-                className="-mt-0.5 shrink-0 rounded-full p-1 text-[var(--fg-muted)] transition-colors hover:bg-white/10 hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60"
+                className="-my-2 -mr-2 inline-flex size-10 shrink-0 items-center justify-center rounded-full text-[var(--fg-muted)] transition-colors hover:bg-white/10 hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60"
               >
-                <CloseIcon className="h-3.5 w-3.5" />
+                <CloseIcon className="h-4 w-4" />
               </button>
             </div>
 
@@ -147,7 +149,7 @@ function ReleaseFeatureCard({
               href={feature.videoUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-2 inline-flex w-fit items-center gap-1.5 text-[11px] font-medium text-[var(--fg-muted)] transition-colors hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60"
+              className="mt-2 inline-flex min-h-10 w-fit items-center gap-1.5 text-[11px] font-medium text-[var(--fg-muted)] transition-colors hover:text-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/60"
             >
               <ExternalLinkIcon className="h-3 w-3" />
               {youtubeLabel}

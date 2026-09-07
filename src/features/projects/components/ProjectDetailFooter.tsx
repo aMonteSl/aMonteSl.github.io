@@ -38,7 +38,7 @@ export function ProjectDetailFooter() {
           <div className="flex flex-wrap items-center gap-2">
             <a
               href={localizeHash('#projects', locale)}
-              className="inline-flex min-h-9 items-center gap-2 rounded-xl border border-[var(--border)]/65 bg-black/12 px-3 text-xs font-semibold text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)]"
+              className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[var(--border)]/65 bg-black/12 px-3.5 text-xs font-semibold text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)] pointer-coarse:min-h-11"
             >
               <ArrowLeftIcon className="h-3.5 w-3.5" />
               <span>{t('links.projects')}</span>
@@ -52,7 +52,7 @@ export function ProjectDetailFooter() {
                 rel={external ? 'noreferrer noopener' : undefined}
                 onClick={!external ? copyEmail : undefined}
                 aria-label={label}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--border)]/65 bg-black/12 text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)]"
+                className="inline-flex size-10 items-center justify-center rounded-xl border border-[var(--border)]/65 bg-black/12 text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)] pointer-coarse:size-11"
               >
                 <Icon className="h-4 w-4" />
               </a>

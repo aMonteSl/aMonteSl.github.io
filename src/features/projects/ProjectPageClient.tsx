@@ -63,25 +63,30 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
     })
   }, [locale, project.slug, projects, router])
 
+  const prevTitle = prev ? getLocalizedProjectTitle(prev, locale) : undefined
+  const nextTitle = next ? getLocalizedProjectTitle(next, locale) : undefined
+
   const nav = (
-    <nav className="sticky top-0 z-30 border-b border-[var(--border)]/55 bg-[var(--bg)]/82 backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-7xl items-center gap-2 px-3 py-2.5 sm:px-5 lg:px-8">
+    <nav className="sticky top-0 z-30 border-b border-[var(--border)]/55 bg-[var(--bg)]/82 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-7xl items-center gap-1.5 px-2 py-2 sm:gap-2 sm:px-5 sm:py-2.5 lg:px-8">
         <Link
           href={localizeHash('#projects', locale)}
-          className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-transparent px-2.5 text-sm font-medium text-[var(--fg-muted)] transition-colors hover:border-[var(--border)]/70 hover:bg-[var(--surface)]/55 hover:text-[var(--fg)]"
+          aria-label={t('back')}
+          className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl border border-transparent px-2.5 text-sm font-medium text-[var(--fg-muted)] transition-colors hover:border-[var(--border)]/70 hover:bg-[var(--surface)]/55 hover:text-[var(--fg)] sm:min-w-0 sm:justify-start"
         >
-          <ArrowLeftIcon className="h-4 w-4" />
+          <ArrowLeftIcon className="h-5 w-5 sm:h-4 sm:w-4" />
           <span className="hidden sm:inline">{t('back')}</span>
         </Link>
 
         {prev && (
           <Link
             href={localizePath(`/projects/${prev.slug}`, locale)}
-            className="hidden min-h-10 max-w-44 items-center gap-1.5 rounded-xl px-2.5 text-xs font-medium text-[var(--fg-muted)] transition-colors hover:bg-[var(--surface)]/55 hover:text-[var(--fg)] md:inline-flex"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-xl px-2 text-xs font-medium text-[var(--fg-muted)] transition-colors hover:bg-[var(--surface)]/55 hover:text-[var(--fg)] md:min-w-0 md:max-w-44 md:justify-start md:px-2.5"
             aria-label={t('navigation.prev')}
+            title={prevTitle}
           >
-            <ChevronLeftIcon className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">{getLocalizedProjectTitle(prev, locale)}</span>
+            <ChevronLeftIcon className="h-4 w-4 shrink-0 md:h-3.5 md:w-3.5" />
+            <span className="hidden truncate md:inline">{prevTitle}</span>
           </Link>
         )}
 
@@ -102,14 +107,14 @@ export function ProjectPageClient({ project }: ProjectPageClientProps) {
         {next && (
           <Link
             href={localizePath(`/projects/${next.slug}`, locale)}
-            className="hidden min-h-10 max-w-44 items-center gap-1.5 rounded-xl px-2.5 text-xs font-medium text-[var(--fg-muted)] transition-colors hover:bg-[var(--surface)]/55 hover:text-[var(--fg)] md:inline-flex"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-xl px-2 text-xs font-medium text-[var(--fg-muted)] transition-colors hover:bg-[var(--surface)]/55 hover:text-[var(--fg)] md:min-w-0 md:max-w-44 md:justify-start md:px-2.5"
             aria-label={t('navigation.next')}
+            title={nextTitle}
           >
-            <span className="truncate">{getLocalizedProjectTitle(next, locale)}</span>
-            <ChevronRightIcon className="h-3.5 w-3.5 shrink-0" />
+            <span className="hidden truncate md:inline">{nextTitle}</span>
+            <ChevronRightIcon className="h-4 w-4 shrink-0 md:h-3.5 md:w-3.5" />
           </Link>
         )}
-
       </div>
     </nav>
   )
