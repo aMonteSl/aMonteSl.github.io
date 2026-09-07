@@ -11,6 +11,9 @@ interface GlowState {
  * useGlowAnimation
  * Creates smooth crossfading glow effects on journey entries
  * One fades out while another fades in for organic feel
+ *
+ * While `enabled` is false no animation frame is requested and every
+ * intensity resets to 0, so an off-screen or hidden timeline costs nothing.
  */
 export function useGlowAnimation(
   entryIds: string[],
@@ -37,8 +40,8 @@ export function useGlowAnimation(
   const phaseStartRef = useRef<number>(0)
 
   const updateGlow = useCallback((timestamp: number) => {
-    if (!enabled || entryIds.length === 0) {
-      animationFrameRef.current = requestAnimationFrame(updateGlow)
+    if (entryIds.length === 0) {
+      animationFrameRef.current = null
       return
     }
 
@@ -54,13 +57,13 @@ export function useGlowAnimation(
 
     setIntensities(prev => {
       const next = new Map(prev)
-      
+
       if (phaseRef.current === 'fadeIn') {
         // Current entry fades in
         const progress = Math.min(elapsed / fadeDuration, 1)
         const eased = easeInOutCubic(progress)
         next.set(currentId, eased)
-        
+
         if (progress >= 1) {
           phaseRef.current = 'hold'
           phaseStartRef.current = timestamp
@@ -68,7 +71,7 @@ export function useGlowAnimation(
       } else if (phaseRef.current === 'hold') {
         // Stay fully lit
         next.set(currentId, 1)
-        
+
         if (elapsed >= holdDuration) {
           phaseRef.current = 'fadeOut'
           phaseStartRef.current = timestamp
@@ -77,10 +80,10 @@ export function useGlowAnimation(
         // Current fades out while next fades in
         const progress = Math.min(elapsed / fadeDuration, 1)
         const eased = easeInOutCubic(progress)
-        
+
         next.set(currentId, 1 - eased)
         next.set(nextId, eased)
-        
+
         if (progress >= 1) {
           next.delete(currentId)
           currentIndexRef.current = nextIndex
@@ -88,26 +91,31 @@ export function useGlowAnimation(
           phaseStartRef.current = timestamp
         }
       }
-      
+
       return next
     })
 
     animationFrameRef.current = requestAnimationFrame(updateGlow)
-  }, [enabled, entryIds, fadeDuration, holdDuration])
+  }, [entryIds, fadeDuration, holdDuration])
 
   useEffect(() => {
-    if (enabled && entryIds.length > 0) {
-      // Reset state
-      lastTimeRef.current = 0
-      currentIndexRef.current = Math.floor(Math.random() * entryIds.length)
-      phaseRef.current = 'fadeIn'
-      
-      animationFrameRef.current = requestAnimationFrame(updateGlow)
+    if (!enabled || entryIds.length === 0) {
+      // Nothing is lit while disabled; keep the same Map instance when already empty
+      setIntensities((prev) => (prev.size === 0 ? prev : new Map()))
+      return
     }
 
+    // Reset state
+    lastTimeRef.current = 0
+    currentIndexRef.current = Math.floor(Math.random() * entryIds.length)
+    phaseRef.current = 'fadeIn'
+
+    animationFrameRef.current = requestAnimationFrame(updateGlow)
+
     return () => {
-      if (animationFrameRef.current) {
+      if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
       }
     }
   }, [enabled, entryIds, updateGlow])

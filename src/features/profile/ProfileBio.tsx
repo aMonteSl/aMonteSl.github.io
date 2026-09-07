@@ -28,7 +28,7 @@ export function ProfileBio({ className }: ProfileBioProps) {
   ]
 
   return (
-    <div className={cn('grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.75fr)] lg:gap-12', className)}>
+    <div className={cn('grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(17rem,0.75fr)] lg:gap-10 xl:gap-12', className)}>
       <motion.div {...fadeInUp(0)} className="min-w-0">
         <div className="max-w-3xl">
           <Kicker>{t('operatingKicker')}</Kicker>

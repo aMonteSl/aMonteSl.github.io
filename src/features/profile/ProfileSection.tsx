@@ -5,7 +5,8 @@ import { motion } from 'framer-motion'
 import { SectionHeader, SectionShell } from '@/components/ui'
 import { ProfileBio } from './ProfileBio'
 import { useTranslations } from '@/i18n'
-import { useMorphNav } from '@/features/morphNav'
+import { SIDEBAR_RECENTER_CLASS, useMorphNav } from '@/features/morphNav'
+import { cn } from '@/lib/utils'
 
 export function ScrollCue() {
   const t = useTranslations('profile.transition')
@@ -31,7 +32,10 @@ export function ScrollCue() {
 
   return (
     <motion.div
-      className="pointer-events-none relative z-10 -mt-8 flex justify-center px-4 sm:-mt-10 lg:-translate-x-[calc(8.5rem+0.75rem)] xl:-translate-x-[calc(8.5rem+1rem)]"
+      className={cn(
+        'pointer-events-none relative z-10 -mt-8 flex justify-center px-4 sm:-mt-10',
+        SIDEBAR_RECENTER_CLASS
+      )}
       animate={{
         opacity: shouldShow ? 1 : 0,
         y: shouldShow ? 0 : -6,

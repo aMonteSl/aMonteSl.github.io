@@ -8,7 +8,13 @@ import { SkillsSection } from '@/features/skills'
 import { TestimonialsSection } from '@/features/testimonials'
 import { CertificationsSection } from '@/features/certifications'
 import { ContactCTASection } from '@/features/contact'
-import { MorphNavProvider, MorphHeader, MorphSidebar } from '@/features/morphNav'
+import {
+  MorphNavProvider,
+  MorphHeader,
+  MorphSidebar,
+  SIDEBAR_CONTENT_OFFSET_CLASS,
+} from '@/features/morphNav'
+import { cn } from '@/lib/utils'
 
 function HomeContent() {
   return (
@@ -18,7 +24,8 @@ function HomeContent() {
       <MorphHeader />
       <MorphSidebar />
 
-      <div className="lg:ml-[17rem] lg:pl-6 xl:pl-8 transition-[margin] duration-300">
+      {/* Makes room for the fixed sidebar from xl; below that the content spans the viewport */}
+      <div className={cn(SIDEBAR_CONTENT_OFFSET_CLASS)}>
         <Hero />
         <ScrollCue />
         <ProfileSection />

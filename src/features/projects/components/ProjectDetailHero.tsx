@@ -28,7 +28,7 @@ export function ProjectDetailHero({ title, summary, images, typeLabel, status, b
           images={images}
           alt={title}
           interval={8000}
-          aspectRatio="aspect-[16/10]"
+          aspectRatio="aspect-[4/3] sm:aspect-[16/10] landscape:max-lg:aspect-[21/9]"
           objectFit="contain"
           showProgress
           showCounter
@@ -56,7 +56,7 @@ export function ProjectDetailHero({ title, summary, images, typeLabel, status, b
           )}
         </div>
 
-        <h1 className="mt-4 text-3xl font-semibold tracking-normal text-[var(--fg)] sm:text-4xl lg:text-3xl">
+        <h1 className="mt-4 text-2xl font-semibold tracking-normal text-[var(--fg)] sm:text-3xl">
           {title}
         </h1>
 
@@ -69,7 +69,7 @@ export function ProjectDetailHero({ title, summary, images, typeLabel, status, b
             href={doi.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="mt-4 inline-flex w-fit rounded-full border border-[var(--accent)]/24 bg-black/16 px-3 py-1.5 font-mono text-[11px] text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)]"
+            className="mt-4 inline-flex min-h-9 w-fit max-w-full items-center break-all rounded-full border border-[var(--accent)]/24 bg-black/16 px-3 py-1.5 font-mono text-[11px] text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)]"
           >
             DOI {doi.code}
           </a>

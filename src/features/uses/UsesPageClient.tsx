@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Container, SectionHeading } from '@/components/ui'
+import { LanguageSwitcher } from '@/features/language'
 import { localizePath, useLocale, useTranslations } from '@/i18n'
 import { USES_ITEMS, USES_CATEGORIES} from '@/content/uses'
 import type { UsesCategory } from '@/content/uses'
@@ -30,20 +31,26 @@ export function UsesPageClient() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[var(--bg)]">
+    <div className="min-h-dvh bg-[var(--bg)]">
       <Container>
         <div className="py-12 sm:py-16 md:py-20">
-          {/* Back link */}
-          <motion.a
-            href={localizePath('/', locale)}
+          {/* Back link + language switcher: this page has no header, so the
+              switcher here is the only way to change language. */}
+          <motion.div
             {...(animate ? fadeInUp(0) : {})}
-            className="inline-flex items-center gap-2 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors mb-10"
+            className="mb-8 flex items-center justify-between gap-3"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            {t('backHome')}
-          </motion.a>
+            <a
+              href={localizePath('/', locale)}
+              className="-ml-2 inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm text-[var(--fg-muted)] transition-colors hover:bg-[var(--surface)]/55 hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+            >
+              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              {t('backHome')}
+            </a>
+            <LanguageSwitcher />
+          </motion.div>
 
           <SectionHeading
             title={t('title')}
@@ -67,12 +74,13 @@ export function UsesPageClient() {
                 </h3>
 
                 {/* Items grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map((item) => {
                     const content = (
                       <motion.div
-                        className="group rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 transition-all duration-200 hover:border-[var(--accent)]/30 hover:shadow-lg hover:shadow-[var(--accent)]/5"
+                        className="group h-full rounded-xl border border-[var(--border)] bg-[var(--card)] p-5 transition-all duration-200 hover:border-[var(--accent)]/30 hover:shadow-lg hover:shadow-[var(--accent)]/5"
                         whileHover={{ y: -2 }}
+                        whileTap={{ scale: 0.985 }}
                         transition={{ duration: DURATION.fast, ease: EASING }}
                       >
                         <div className="flex items-start justify-between gap-3">
@@ -85,7 +93,7 @@ export function UsesPageClient() {
                             </p>
                           </div>
                           {item.url && (
-                            <svg className="w-4 h-4 text-[var(--fg-muted)]/40 group-hover:text-[var(--accent)] transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 text-[var(--fg-muted)]/40 group-hover:text-[var(--accent)] transition-colors shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
                           )}
@@ -93,6 +101,8 @@ export function UsesPageClient() {
                       </motion.div>
                     )
 
+                    // A bare inline <a> as a grid item breaks equal heights, so
+                    // the link is a block that fills its cell.
                     if (item.url) {
                       return (
                         <a
@@ -100,13 +110,18 @@ export function UsesPageClient() {
                           href={item.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          className="block h-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                         >
                           {content}
                         </a>
                       )
                     }
 
-                    return <div key={item.id}>{content}</div>
+                    return (
+                      <div key={item.id} className="h-full">
+                        {content}
+                      </div>
+                    )
                   })}
                 </div>
               </motion.div>

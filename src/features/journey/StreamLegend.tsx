@@ -1,7 +1,8 @@
 'use client'
 
-import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import { useTranslations } from '@/i18n'
+import { cn } from '@/lib/utils'
 import type { JourneyLane } from './types'
 
 interface LegendItem {
@@ -41,23 +42,26 @@ const textColorMap: Record<JourneyLane, string> = {
  * Compact pill-style design with interactive filtering
  */
 export function StreamLegend({ items, visibleLanes, onToggleLane, className }: StreamLegendProps) {
+  const t = useTranslations('journey')
+
   return (
     <div
       className={cn(
         'flex flex-wrap items-center justify-center gap-3 sm:gap-4',
         className
       )}
-      role="list"
-      aria-label="Timeline legend"
+      role="group"
+      aria-label={t('legendLabel')}
     >
       {items.map((item) => {
         const isVisible = !visibleLanes || visibleLanes.has(item.lane)
         return (
           <motion.button
             key={item.lane}
+            type="button"
             onClick={() => onToggleLane?.(item.lane)}
             className={cn(
-              'flex items-center gap-2 px-3 py-1.5 rounded-full',
+              'flex min-h-9 items-center gap-2 rounded-full px-3 py-1.5 pointer-coarse:min-h-11 pointer-coarse:px-4',
               'transition-all duration-300 cursor-pointer',
               isVisible
                 ? 'bg-[var(--card)]/60 ring-1 ring-[var(--border)]/30 hover:ring-[var(--border)]/60'
@@ -66,8 +70,8 @@ export function StreamLegend({ items, visibleLanes, onToggleLane, className }: S
             )}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            role="listitem"
-            title={isVisible ? `Click to hide ${item.label}` : `Click to show ${item.label}`}
+            aria-pressed={isVisible}
+            title={t(isVisible ? 'legendHide' : 'legendShow', { lane: item.label })}
           >
             {/* Color dot */}
             <motion.span

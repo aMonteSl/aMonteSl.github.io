@@ -2,6 +2,7 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useState,
   useEffect,
@@ -9,6 +10,7 @@ import {
 } from 'react'
 import { LayoutGroup } from 'framer-motion'
 import { useScrollProgress } from '@/features/morphNav/useScrollProgress'
+import { SIDEBAR_MEDIA_QUERY } from '@/features/morphNav/layout'
 import { NAV_ITEMS } from '@/lib/constants'
 
 interface MorphNavContextValue {
@@ -24,6 +26,14 @@ interface MorphNavContextValue {
   prefersReducedMotion: boolean
   /** Scroll to a section by ID */
   scrollToSection: (sectionId: string) => void
+  /** Whether the mobile/tablet navigation drawer is open (below the `xl` sidebar breakpoint) */
+  isDrawerOpen: boolean
+  /** Open the navigation drawer */
+  openDrawer: () => void
+  /** Close the navigation drawer */
+  closeDrawer: () => void
+  /** Toggle the navigation drawer */
+  toggleDrawer: () => void
 }
 
 const MorphNavContext = createContext<MorphNavContextValue | null>(null)
@@ -47,6 +57,24 @@ export function MorphNavProvider({
   })
 
   const [activeSection, setActiveSection] = useState('home')
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const openDrawer = useCallback(() => setIsDrawerOpen(true), [])
+  const closeDrawer = useCallback(() => setIsDrawerOpen(false), [])
+  const toggleDrawer = useCallback(() => setIsDrawerOpen((open) => !open), [])
+
+  // The drawer only exists below the sidebar breakpoint: close it as soon as the
+  // fixed sidebar takes over, so a resize never leaves the body scroll-locked.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(SIDEBAR_MEDIA_QUERY)
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsDrawerOpen(false)
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
 
   useEffect(() => {
     const sectionIds = NAV_ITEMS.map(item => item.href.replace('#', ''))
@@ -107,7 +135,8 @@ export function MorphNavProvider({
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      const headerOffset = 76
+      // Matches `scroll-padding-top: 5rem` in globals.css so anchor and button navigation land alike.
+      const headerOffset = 80
       const targetTop = element.getBoundingClientRect().top + window.scrollY - headerOffset
 
       window.scrollTo({
@@ -124,6 +153,10 @@ export function MorphNavProvider({
     activeSection,
     prefersReducedMotion,
     scrollToSection,
+    isDrawerOpen,
+    openDrawer,
+    closeDrawer,
+    toggleDrawer,
   }
 
   return (

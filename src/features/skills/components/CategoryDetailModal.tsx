@@ -40,20 +40,22 @@ export function CategoryDetailModal({ categoryId, onClose }: CategoryDetailModal
         <h3 className="mb-3 text-sm font-medium text-[var(--fg)]">
           {t('categoryModal.distribution')}
         </h3>
-        <div className="grid grid-cols-3 gap-2">
+        {/* Below xs a tile cell is ~50px wide, too narrow for a 10px uppercase "Intermediate", so the tiles
+            become count + label rows; from xs they are the three-up tiles again, compact until sm. */}
+        <div className="grid grid-cols-1 gap-2 xs:grid-cols-3">
           {distribution.map(({ level: distributionLevel, count }) => {
             const distributionTone = getProficiencyTone(distributionLevel)
             return (
               <div
                 key={distributionLevel}
                 className={cn(
-                  'rounded-lg border p-3 text-center',
+                  'flex items-center gap-3 rounded-lg border px-3 py-2 xs:block xs:p-2 xs:text-center sm:p-3',
                   distributionTone.border,
                   distributionTone.bg
                 )}
               >
                 <div className={cn('text-lg font-semibold', distributionTone.text)}>{count}</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.14em] text-[var(--fg-muted)]">
+                <div className="min-w-0 break-words text-[10px] uppercase tracking-[0.06em] text-[var(--fg-muted)] hyphens-auto xs:mt-1 sm:tracking-[0.14em]">
                   {t(`proficiency.${distributionLevel}`)}
                 </div>
               </div>

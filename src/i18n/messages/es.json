@@ -16,7 +16,14 @@
     "testimonials": "Referencias profesionales",
     "certifications": "Certificaciones y Logros",
     "contact": "Conectemos",
-    "emailCopied": "Correo copiado"
+    "emailCopied": "Correo copiado",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación",
+    "menuLabel": "Menú de navegación",
+    "mainNavigation": "Navegación principal",
+    "sidebarNavigation": "Navegación lateral",
+    "goHome": "Ir al inicio",
+    "menu": "Menú"
   },
   "hero": {
     "name": "Adrián Montes Linares",
@@ -37,13 +44,16 @@
       },
       "obt": {
         "title": "OBT",
-        "subtitle": "Herramienta interna desarrollada end-to-end en VBGroup: backend con Express/TypeScript e integraciones cloud; frontend con React + Tailwind. Enfoque en seguridad, automatización y entrega.",
+        "subtitle": "Herramienta interna de VBGroup desarrollada end-to-end: backend en Express/TypeScript con integraciones cloud y frontend en React + Tailwind.",
         "metric": "Herramienta interna"
       },
       "github": "GitHub",
       "docs": "Docs",
       "internal": "Interno",
-      "marketplace": "Marketplace"
+      "marketplace": "Marketplace",
+      "goTo": "Ir al proyecto {index}",
+      "pauseRotation": "Pausar la rotación de proyectos",
+      "resumeRotation": "Reanudar la rotación de proyectos"
     },
     "links": {
       "doi": "DOI"
@@ -66,6 +76,11 @@
         "value": "UPM · en curso",
         "detail": "Telecomunicación · ML y Big Data"
       }
+    },
+    "social": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Correo electrónico"
     }
   },
   "profile": {
@@ -748,7 +763,7 @@
     "selectedMilestone": "Hito seleccionado",
     "ongoing": "Activo",
     "viewMore": "Ver más",
-    "clickYearHint": "Haz clic en un año para ver el detalle mensual",
+    "clickYearHint": "Selecciona un año para ver el detalle mensual",
     "legend": {
       "education": "Formación",
       "work": "Experiencia laboral",
@@ -817,13 +832,14 @@
       }
     },
     "kicker": "Trayectoria técnica",
-    "today": "Hoy"
-  },
-  "development": {
-    "title": "En desarrollo",
-    "message": "¡Hola! Mi portfolio está en construcción. Por ahora solo puedes ver la página principal, pero pronto estará disponible el resto de secciones con mis proyectos, experiencia y más información sobre mí.",
-    "thanks": "Gracias por tu paciencia.",
-    "dismiss": "Entendido"
+    "today": "Hoy",
+    "back": "Volver",
+    "start": "Inicio",
+    "yearDetails": "Ver {year} en detalle",
+    "closeDetails": "Cerrar detalles",
+    "legendLabel": "Leyenda de la línea temporal",
+    "legendHide": "Ocultar {lane}",
+    "legendShow": "Mostrar {lane}"
   },
   "buttons": {
     "view": "Ver",
@@ -1024,6 +1040,19 @@
   "language": {
     "browserHint": "Este sitio está escrito en inglés y español. Tu navegador puede traducirlo a tu idioma.",
     "dismiss": "Cerrar",
-    "skipToContent": "Saltar al contenido"
+    "skipToContent": "Saltar al contenido",
+    "selection": "Selección de idioma",
+    "switchTo": "Cambiar a {language}",
+    "current": "(idioma actual)"
+  },
+  "carousel": {
+    "gallery": "Galería de {title}",
+    "expandedGallery": "{title} — galería ampliada",
+    "imageOf": "{title} — imagen {current} de {total}",
+    "previous": "Imagen anterior",
+    "next": "Imagen siguiente",
+    "goTo": "Ir a la imagen {index}",
+    "close": "Cerrar la galería",
+    "placeholderAlt": "Imagen de relleno"
   }
 }

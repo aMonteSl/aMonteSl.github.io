@@ -91,13 +91,13 @@ export function FeaturedProjectCard({
           href={LINKS.codeXrDoi}
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-3 inline-flex w-fit items-center rounded-full border border-[var(--accent)]/24 bg-black/16 px-3 py-1 text-[11px] font-mono text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)]"
+          className="mt-3 inline-flex min-h-9 w-fit max-w-full items-center break-all rounded-full border border-[var(--accent)]/24 bg-black/16 px-3 py-1 text-[11px] font-mono text-[var(--fg-muted)] transition-colors hover:border-[var(--accent)]/45 hover:text-[var(--fg)]"
           onClick={(event) => event.stopPropagation()}
         >
           DOI 10.1109/VISSOFT67405.2025.00034
         </a>
 
-        <p className="mt-3 text-sm leading-relaxed text-[var(--fg-muted)] lg:line-clamp-5">
+        <p className="mt-3 line-clamp-6 text-sm leading-relaxed text-[var(--fg-muted)] sm:line-clamp-none lg:line-clamp-5">
           {summary}
         </p>
 

@@ -12,9 +12,9 @@ export function Badge({ children, variant = 'default', size = 'sm', className }:
   const baseStyles = 'inline-flex items-center font-medium transition-all duration-200'
 
   const variants = {
-    default: 'bg-card text-fg-muted border border-border',
-    accent: 'bg-accent/20 text-accent border border-accent/30',
-    outline: 'bg-transparent text-fg-muted border border-border hover:border-accent/50'
+    default: 'border border-[var(--border)] bg-[var(--card)] text-[var(--fg-muted)]',
+    accent: 'border border-[var(--accent)]/30 bg-[var(--accent)]/20 text-[var(--accent)]',
+    outline: 'border border-[var(--border)] bg-transparent text-[var(--fg-muted)] hover:border-[var(--accent)]/50'
   }
 
   const sizes = {

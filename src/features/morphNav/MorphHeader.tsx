@@ -4,22 +4,26 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useMorphNav } from '@/features/morphNav/MorphNavProvider'
 import { headerVariants } from '@/features/morphNav/morphVariants'
+import { MORPH_NAV_DRAWER_ID } from '@/features/morphNav/MorphDrawer'
 import { LanguageSwitcher } from '@/features/language'
-import { Avatar } from '@/components/ui'
+import { Avatar, IconButton, MenuIcon } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/lib/constants'
 import { localizePath, useLocale, useTranslations } from '@/i18n'
 
 /**
  * The morphing header that fades out as user scrolls down.
- * Shares layoutId with sidebar elements for smooth transitions.
+ * From `xl` it carries the full section nav; below that, the language switcher
+ * and a hamburger that opens the navigation drawer.
  */
 export function MorphHeader() {
-  const { progress, scrollToSection, activeSection } = useMorphNav()
+  const { progress, scrollToSection, activeSection, isDrawerOpen, toggleDrawer } = useMorphNav()
   const t = useTranslations('nav')
   const { locale } = useLocale()
 
-  // Hide header when fully morphed
+  // Hide header when fully morphed. The faded header stays in the DOM, so it is also
+  // made inert: otherwise its brand link, nav buttons and hamburger would keep taking
+  // focus while invisible (e.g. after the drawer hands focus back to the hamburger).
   const isVisible = progress < 1
 
   // Interpolate styles based on progress
@@ -31,6 +35,7 @@ export function MorphHeader() {
       initial="visible"
       animate={isVisible ? 'visible' : 'hidden'}
       variants={headerVariants}
+      inert={!isVisible}
       style={{
         opacity,
         y: translateY,
@@ -44,12 +49,14 @@ export function MorphHeader() {
           : 'bg-transparent border-transparent'
       )}
     >
-      <div className="container flex h-16 items-center justify-between">
+      {/* Same container as the sections (max-w-7xl) so the header lines up with the content;
+          the old 1200px `.container` left the desktop nav wrapping onto two lines at every width. */}
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         {/* Brand: Avatar + Name with shared layoutId */}
         <Link
           href={localizePath('/', locale)}
-          aria-label="Go to home"
-          className="inline-flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
+          aria-label={t('goHome')}
+          className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] rounded-lg group"
         >
           <motion.div layoutId="profile-avatar">
             <Avatar size="sm" />
@@ -58,15 +65,16 @@ export function MorphHeader() {
             layoutId="profile-name"
             className="font-semibold text-sm sm:text-base text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors duration-200"
           >
-            <span className="hidden lg:inline">Adrián Montes Linares</span>
-            <span className="hidden sm:inline lg:hidden">Adrián Montes</span>
+            {/* The full name lives in the hero h1; the header keeps the short form so the
+                eight nav items, the divider and the language switcher fit in one 1216px row. */}
+            <span className="hidden sm:inline">Adrián Montes</span>
             <span className="sm:hidden">Adrián M.</span>
           </motion.span>
         </Link>
 
         {/* Desktop navigation */}
-        <div className="hidden xl:flex items-center gap-4">
-          <nav className="flex items-center gap-0.5" role="navigation" aria-label="Main navigation">
+        <div className="hidden shrink-0 items-center gap-2.5 xl:flex">
+          <nav className="flex items-center gap-0.5" role="navigation" aria-label={t('mainNavigation')}>
             {NAV_ITEMS.map(({ key, href }) => {
               const sectionId = href.replace('#', '')
               const isActive = activeSection === sectionId
@@ -76,7 +84,7 @@ export function MorphHeader() {
                   key={key}
                   onClick={() => scrollToSection(sectionId)}
                   className={cn(
-                    'relative px-2.5 py-2 text-xs font-medium rounded-lg transition-all duration-200',
+                    'relative whitespace-nowrap px-1.5 py-2 text-xs font-medium rounded-lg transition-all duration-200',
                     'after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:rounded-full after:bg-[var(--accent)] after:transition-all after:duration-200',
                     isActive
                       ? 'text-[var(--fg)] after:w-4 after:opacity-100'
@@ -92,16 +100,22 @@ export function MorphHeader() {
 
           <div className="h-5 w-px bg-[var(--border)]/50" aria-hidden="true" />
 
-          <motion.div layoutId="lang-switch">
-            <LanguageSwitcher />
-          </motion.div>
+          <LanguageSwitcher />
         </div>
 
-        {/* Mobile: only language switcher */}
-        <div className="flex items-center gap-3 md:hidden">
-          <motion.div layoutId="lang-switch-mobile">
-            <LanguageSwitcher />
-          </motion.div>
+        {/* Below xl: language switcher + hamburger opening the navigation drawer */}
+        <div className="flex items-center gap-2 xl:hidden">
+          <LanguageSwitcher />
+          <IconButton
+            type="button"
+            onClick={toggleDrawer}
+            className="h-11 w-11"
+            aria-label={t('openMenu')}
+            aria-expanded={isDrawerOpen}
+            aria-controls={isDrawerOpen ? MORPH_NAV_DRAWER_ID : undefined}
+          >
+            <MenuIcon className="h-6 w-6" />
+          </IconButton>
         </div>
       </div>
     </motion.header>

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { SITE } from '@/lib/constants'
 import { OG_IMAGE } from '@/lib/seo'
@@ -58,6 +58,13 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#040304',
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,7 +73,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#040304" />
         <link
           rel="preload"
           as="image"

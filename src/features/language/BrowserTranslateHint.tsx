@@ -48,14 +48,15 @@ export function BrowserTranslateHint() {
   return (
     <div
       role="note"
-      className="fixed bottom-4 left-4 right-4 z-40 flex items-start gap-3 rounded-xl border border-[var(--accent)]/35 bg-[var(--surface)]/95 px-4 py-3 text-[13px] leading-snug text-[var(--fg-muted)] shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-md sm:left-auto sm:right-6 sm:max-w-sm"
+      // On phones it sits above the floating menu button (56px + 16px gap + 16px margin); from sm it moves to the right corner.
+      className="fixed left-4 right-4 z-40 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] flex items-start gap-3 rounded-xl border border-[var(--accent)]/35 bg-[var(--surface)]/95 px-4 py-3 text-[13px] leading-snug text-[var(--fg-muted)] shadow-[0_18px_50px_rgba(0,0,0,0.35)] backdrop-blur-md sm:left-auto sm:right-6 sm:max-w-sm sm:bottom-[max(1.5rem,env(safe-area-inset-bottom))]"
     >
       <p className="min-w-0 flex-1">{t('browserHint')}</p>
       <button
         type="button"
         onClick={dismiss}
         aria-label={t('dismiss')}
-        className="-mr-1 -mt-1 shrink-0 rounded-md px-2 py-1 text-base leading-none text-[var(--fg-muted)] transition-colors hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+        className="-mr-2 -mt-2 inline-flex size-10 shrink-0 items-center justify-center rounded-md text-base leading-none text-[var(--fg-muted)] transition-colors hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
       >
         <span aria-hidden="true">&times;</span>
       </button>

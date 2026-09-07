@@ -45,7 +45,7 @@ src/
 │   └── sitemap.ts                # SEO sitemap
 │
 ├── components/
-│   ├── ui/                       # Pure presentational (Button, Badge, Card, Modal)
+│   ├── ui/                       # Pure presentational (Button, Badge, Avatar, ImageCarousel)
 │   │   └── *.tsx                 # No data fetching, minimal logic
 │   └── common/                   # Shared layout components (Navbar, Footer, Container)
 │       └── *.tsx
@@ -53,7 +53,6 @@ src/
 ├── features/                     # Domain features (encapsulated behavior + UI)
 │   ├── landing/                  # Hero section components
 │   ├── language/                 # Language switch logic + UI
-│   ├── constructionNotice/       # Scroll guard + modal
 │   └── projects/                 # Project cards, detail views
 │
 ├── i18n/                         # next-intl configuration

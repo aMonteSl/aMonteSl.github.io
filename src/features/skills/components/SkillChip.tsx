@@ -3,6 +3,7 @@
 import type { MouseEvent } from 'react'
 import type { IconType } from 'react-icons'
 import type { ProficiencyLevel } from '@/content/skills'
+import { useTranslations } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { getProficiencyTone } from '../proficiency'
 
@@ -25,13 +26,14 @@ export function SkillChip({
   onClick,
   className,
 }: SkillChipProps) {
+  const t = useTranslations('skills')
   const tone = getProficiencyTone(proficiency)
 
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={`${label}: view details`}
+      aria-label={`${label}: ${t('actions.viewDetails')}`}
       className={cn(
         'group relative flex min-w-0 flex-col items-center gap-1.5 px-3 py-2',
         'rounded-xl bg-[var(--card)]/50',

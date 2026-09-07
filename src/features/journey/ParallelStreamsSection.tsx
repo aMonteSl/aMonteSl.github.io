@@ -1,16 +1,20 @@
 'use client'
 
-import { useState, useMemo, useCallback, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { SectionHeader, SectionShell } from '@/components/ui'
 import { useLocale, useTranslations } from '@/i18n'
+import { useElementWidth } from '@/lib/hooks/useElementWidth'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
 import { shouldAnimate } from '@/lib/motion'
 
 import { StreamCard } from './StreamCard'
 import { StreamLegend } from './StreamLegend'
+import { VerticalTimeline } from './VerticalTimeline'
 import { useGlowAnimation } from './useGlowAnimation'
-import type { JourneyEntry, JourneyLane, JourneyHighlight } from './types'
+import { MARKER_ROW_CLASSES, staggerMarkers, type MarkerRow } from './staggerMarkers'
+import type { ActiveHighlightRef, JourneyEntry, JourneyLane, JourneyHighlight } from './types'
 import {
   clampPercent,
   dateToTimelinePercent as getTimelinePercent,
@@ -20,6 +24,8 @@ import {
   getHighlightDate,
   getVisibleTimelineYears,
   getYearState,
+  isFutureLearningEntry,
+  isPointEntry,
   parseJourneyDate,
   toJourneyDate,
   toLocalDate,
@@ -37,10 +43,37 @@ import {
   CURRENT_DATE,
 } from '@/content/journey'
 
-type ActiveHighlightRef = {
-  entryId: string
-  highlightId: string
+/** Touch-only hit areas for the horizontal layout (tablets at lg+); a mouse never sees them */
+/** Touch (lg+): grows an 8px bar to a 44px-tall target; lane rows are 56px, so rows never overlap */
+const COARSE_HIT = "pointer-coarse:before:absolute pointer-coarse:before:content-[''] pointer-coarse:before:-inset-y-[18px] pointer-coarse:before:-inset-x-1"
+/** Touch (lg+): 24px point events -> 44px, 20px inline highlights -> 40px */
+const COARSE_HIT_DOT = "pointer-coarse:before:absolute pointer-coarse:before:content-[''] pointer-coarse:before:-inset-2.5"
+/** Touch (lg+): 32px achievement markers -> 40px; kept tight so a staggered pair 20-25px apart does not cover its neighbour */
+const COARSE_HIT_MARKER = "pointer-coarse:before:absolute pointer-coarse:before:content-[''] pointer-coarse:before:-inset-1"
+
+/** Resting halo (no glow) of the achievement markers, keyed by the lane they come from */
+const MARKER_HALO: Record<JourneyLane, string> = {
+  education: 'rgba(59, 130, 246, 0.3)',
+  work: 'rgba(16, 185, 129, 0.3)',
+  project: 'rgba(139, 92, 246, 0.3)',
+  achievement: 'rgba(245, 158, 11, 0.3)',
+  learning: 'rgba(236, 72, 153, 0.3)',
 }
+
+/** One marker of the achievements row (a lane highlight or a standalone achievement) */
+type AchievementMarker = {
+  /** Kept identical to the previous per-lane loops so framer never remounts a marker */
+  key: string
+  entryId: string
+  /** `null` for standalone achievement entries */
+  highlightId: string | null
+  lane: JourneyLane
+  percent: number
+  label: string
+  title: string
+}
+
+type MarkerView = 'overview' | 'drilldown'
 
 /** Format date for display */
 function formatPeriod(
@@ -85,18 +118,6 @@ declare global {
 
 function dateToTimelinePercent(date: JourneyDate, timelineEndYear: number): number {
   return getTimelinePercent(date, TIMELINE_START, timelineEndYear)
-}
-
-function isPointEntry(entry: JourneyEntry): boolean {
-  return (
-    entry.startYear === entry.endYear &&
-    entry.startMonth === entry.endMonth &&
-    entry.startDay === entry.endDay
-  )
-}
-
-function isFutureLearningEntry(entry: JourneyEntry, today: JourneyDate): boolean {
-  return entry.lane === 'learning' && toLocalDate(getEntryStartDate(entry)).getTime() > toLocalDate(today).getTime()
 }
 
 function isSameHighlight(a: ActiveHighlightRef | null, b: ActiveHighlightRef): boolean {
@@ -149,17 +170,21 @@ export function ParallelStreamsSection() {
     }),
     [locale],
   )
-  const backLabel = locale === 'es' ? 'Volver' : 'Back'
-  const startLabel = locale === 'es' ? 'Inicio' : 'Start'
+  // The glow only runs where it can be seen: horizontal layout (lg+) with the section on screen
+  const glowRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(glowRef, { amount: 0.05 })
+  const isHorizontal = useMediaQuery('(min-width: 64rem)')
+  // Track width drives the two-row stagger of the achievement markers
+  const [trackMeasureRef, trackWidth] = useElementWidth<HTMLDivElement>()
 
   // Get all entry IDs for glow animation
   const entryIds = useMemo(() => JOURNEY_ENTRIES.map((e) => e.id), [])
-  
-  // Smooth glow animation with crossfade (works in both views)
+
+  // Smooth glow animation with crossfade (overview and drill-down)
   const { getIntensity } = useGlowAnimation(entryIds, {
     fadeDuration: 1500,
     holdDuration: 2500,
-    enabled: animate,
+    enabled: animate && inView && isHorizontal,
   })
 
   // Group entries by lane for rendering
@@ -368,6 +393,7 @@ export function ParallelStreamsSection() {
             type="button"
             className={cn(
               'absolute top-1/2 z-20 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full',
+              COARSE_HIT_DOT,
               'border border-violet-100/70 bg-violet-300 shadow-[0_0_0_3px_rgba(139,92,246,0.22)]',
               'transition-all duration-200 hover:scale-125 hover:bg-violet-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-200',
               isActive && 'scale-125 bg-violet-100 shadow-[0_0_0_5px_rgba(139,92,246,0.32),0_0_18px_rgba(139,92,246,0.55)]'
@@ -412,17 +438,166 @@ export function ParallelStreamsSection() {
     setSelectedHighlight(null)
   }, [])
 
-  const verticalFocusedEntry = useMemo(() => {
-    const focusedId = selectedHighlight?.entryId ?? selectedEntry
-    return focusedId ? JOURNEY_ENTRIES.find((entry) => entry.id === focusedId) ?? null : null
-  }, [selectedEntry, selectedHighlight])
+  /** Clears every hover and selection (close button of the detail sheet) */
+  const clearSelection = useCallback(() => {
+    setSelectedEntry(null)
+    setSelectedHighlight(null)
+    setHoveredEntry(null)
+    setHoveredHighlight(null)
+  }, [])
 
   const getVerticalTop = useCallback((date: JourneyDate) => (
     100 - dateToTimelinePercent(date, timelineEndYear)
   ), [timelineEndYear])
 
+  /** Achievements row (overview): education/work highlights plus standalone achievements */
+  const overviewMarkers = useMemo<AchievementMarker[]>(() => {
+    const markers: AchievementMarker[] = []
+
+    for (const lane of ['education', 'work'] as const) {
+      for (const entry of JOURNEY_ENTRIES.filter((e) => e.lane === lane)) {
+        for (const highlight of entry.highlights ?? []) {
+          const label = t(`entries.${entry.id}.highlights.${highlight.id}`)
+          markers.push({
+            key: `highlight-${entry.id}-${highlight.id}`,
+            entryId: entry.id,
+            highlightId: highlight.id,
+            lane,
+            percent: getHighlightPercent(highlight),
+            label,
+            title: `${label} (${t(`legend.${lane}`)})`,
+          })
+        }
+      }
+    }
+
+    for (const entry of JOURNEY_ENTRIES.filter((e) => e.lane === 'achievement')) {
+      const label = t(`entries.${entry.id}.role`)
+      markers.push({
+        key: entry.id,
+        entryId: entry.id,
+        highlightId: null,
+        lane: 'achievement',
+        percent: getStartPercent(entry),
+        label,
+        title: label,
+      })
+    }
+
+    return markers
+  }, [getHighlightPercent, getStartPercent, t])
+
+  /** Achievements row (drill-down): only the milestones that fall in the selected year */
+  const drillDownMarkers = useMemo<AchievementMarker[]>(() => {
+    if (drillDownYear === null) {
+      return []
+    }
+
+    const markers: AchievementMarker[] = []
+
+    for (const lane of ['education', 'work'] as const) {
+      for (const entry of JOURNEY_ENTRIES.filter((e) => e.lane === lane)) {
+        for (const highlight of (entry.highlights ?? []).filter((h) => h.year === drillDownYear)) {
+          const label = t(`entries.${entry.id}.highlights.${highlight.id}`)
+          markers.push({
+            key: `highlight-${entry.id}-${highlight.id}`,
+            entryId: entry.id,
+            highlightId: highlight.id,
+            lane,
+            percent: monthToPercent(highlight.month ?? 6, highlight.day ?? 15),
+            label,
+            title: `${label} (${monthNames[highlight.month ? highlight.month - 1 : 5]} ${highlight.day || 15}) - ${t(`legend.${lane}`)}`,
+          })
+        }
+      }
+    }
+
+    for (const entry of JOURNEY_ENTRIES.filter((e) => e.lane === 'achievement' && e.startYear === drillDownYear)) {
+      const label = t(`entries.${entry.id}.role`)
+      markers.push({
+        key: `achievement-${entry.id}`,
+        entryId: entry.id,
+        highlightId: null,
+        lane: 'achievement',
+        percent: monthToPercent(entry.startMonth ?? 1, entry.startDay ?? 1),
+        label,
+        title: label,
+      })
+    }
+
+    return markers
+  }, [drillDownYear, monthNames, monthToPercent, t])
+
+  const overviewRows = useMemo(
+    () => staggerMarkers(overviewMarkers.map((marker) => marker.percent), trackWidth),
+    [overviewMarkers, trackWidth],
+  )
+  const drillDownRows = useMemo(
+    () => staggerMarkers(drillDownMarkers.map((marker) => marker.percent), trackWidth),
+    [drillDownMarkers, trackWidth],
+  )
+
+  /** One amber marker of the achievements row; the two views only differ in halo size and entrance */
+  const renderAchievementMarker = (marker: AchievementMarker, row: MarkerRow, view: MarkerView) => {
+    const isDrillDown = view === 'drilldown'
+    const glowIntensity = getIntensity(marker.entryId)
+    const haloStyle = glowIntensity > 0
+      ? {
+          boxShadow: `0 0 ${(isDrillDown ? 20 : 24) * glowIntensity}px ${LANE_COLORS[marker.lane].hex}`,
+          filter: `brightness(${1 + 0.4 * glowIntensity})`,
+        }
+      : { boxShadow: `0 0 ${isDrillDown ? 14 : 16}px ${MARKER_HALO[marker.lane]}` }
+
+    const { entryId, highlightId } = marker
+    const isActive = highlightId !== null
+      ? isHighlightActive(entryId, highlightId)
+      : hoveredEntry === entryId || selectedEntry === entryId
+    const hoverStart = highlightId !== null
+      ? () => handleHighlightHoverStart(entryId, highlightId)
+      : () => handleEntryHoverStart(entryId)
+    const hoverEnd = highlightId !== null
+      ? () => handleHighlightHoverEnd(entryId, highlightId)
+      : () => handleEntryHoverEnd(entryId)
+    const select = (event: { stopPropagation: () => void }) => (
+      highlightId !== null
+        ? handleHighlightClick(entryId, highlightId, event)
+        : handleEntryClick(entryId, event)
+    )
+
+    return (
+      <motion.button
+        key={marker.key}
+        type="button"
+        className={cn(
+          'absolute -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer',
+          MARKER_ROW_CLASSES[row],
+          'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
+          'ring-2 ring-[var(--bg)]',
+          COARSE_HIT_MARKER,
+          isActive && (highlightId !== null
+            ? 'scale-125 ring-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.55)]'
+            : 'scale-125'),
+          'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
+        )}
+        style={{
+          left: `${marker.percent}%`,
+          ...haloStyle,
+        }}
+        initial={isDrillDown ? { scale: 0, opacity: 0 } : animate ? { scale: 0 } : undefined}
+        animate={isDrillDown ? { scale: 1, opacity: 1 } : { scale: 1 }}
+        transition={isDrillDown ? { duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 0.4 } : { delay: 0.6 }}
+        onPointerEnter={hoverStart}
+        onPointerMove={hoverStart}
+        onPointerLeave={hoverEnd}
+        onClick={select}
+        title={marker.title}
+        aria-label={marker.label}
+      />
+    )
+  }
+
   const renderDetailCard = (className = 'mt-10') => (
-    <div className={cn(className, 'min-h-[190px]')}>
+    <div className={cn(className, 'lg:min-h-[190px]')}>
       <AnimatePresence mode="wait">
         {activeEntry ? (
           <motion.div
@@ -431,7 +606,13 @@ export function ParallelStreamsSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="h-full min-h-[190px]"
+            className={cn(
+              'h-full lg:min-h-[190px]',
+              // Below lg the card is an opaque bottom sheet over the map; the scroll box is the card body
+              // (bodyClassName below) so the close button never scrolls out of view with the header
+              'max-lg:rounded-xl max-lg:bg-[var(--bg)]/95 max-lg:shadow-2xl max-lg:shadow-black/30',
+              'max-lg:ring-1 max-lg:ring-[var(--border)]/30'
+            )}
           >
             <StreamCard
               lane={activeEntry.lane}
@@ -459,6 +640,9 @@ export function ParallelStreamsSection() {
               isOngoing={activeEntry.endYear === null}
               ongoingLabel={t('ongoing')}
               moreLabel={t('viewMore')}
+              bodyClassName="max-lg:max-h-[45svh] max-lg:overflow-y-auto max-lg:overscroll-contain max-lg:rounded-xl"
+              onClose={clearSelection}
+              closeLabel={t('closeDetails')}
             />
           </motion.div>
         ) : (
@@ -467,7 +651,7 @@ export function ParallelStreamsSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex min-h-[190px] flex-col items-center justify-center rounded-xl bg-[var(--card)]/10 text-center ring-1 ring-[var(--border)]/10"
+            className="flex min-h-[6rem] flex-col items-center justify-center rounded-xl bg-[var(--card)]/10 text-center ring-1 ring-[var(--border)]/10 lg:min-h-[190px]"
           >
             <div className="w-10 h-10 rounded-full bg-[var(--fg-muted)]/10 flex items-center justify-center mb-3">
               <svg
@@ -488,11 +672,12 @@ export function ParallelStreamsSection() {
     </div>
   )
 
+  // overflow-clip (not hidden) keeps the section from becoming a scroll container, so the mobile detail sheet can stick
   return (
-    <SectionShell id="journey" tone="xr">
+    <SectionShell id="journey" tone="xr" className="overflow-clip">
         <SectionHeader kicker={t('kicker')} title={t('title')} subtitle={t('subtitle')} align="left" />
 
-      <div className="mx-auto max-w-6xl">
+      <div ref={glowRef} className="mx-auto max-w-6xl">
         {/* Legend - Compact pills with filtering */}
         <div className="mb-10 sm:mb-14">
           <StreamLegend 
@@ -510,218 +695,33 @@ export function ParallelStreamsSection() {
           />
         </div>
 
-        {/* Vertical lane timeline for mobile and portrait layouts */}
-        <div className="relative hidden w-full max-md:block max-lg:portrait:block">
-          <div className="mb-4 flex items-center justify-between gap-3 rounded-xl border border-[var(--border)]/20 bg-[var(--card)]/15 px-4 py-3">
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]">
-              {t('today')}
-            </span>
-            <span className="rounded-full border border-[var(--accent)]/35 bg-[var(--accent)]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">
-              {todayLabel}
-            </span>
-          </div>
+        {/* Vertical lane map below lg, in any orientation (both layouts stay in the DOM; CSS switches) */}
+        <VerticalTimeline
+          years={years}
+          yearStates={yearStates}
+          today={today}
+          todayLabel={todayLabel}
+          visibleLanes={visibleLanes}
+          entriesByLane={entriesByLane}
+          hoveredEntry={hoveredEntry}
+          selectedEntry={selectedEntry}
+          selectedHighlight={selectedHighlight}
+          getVerticalTop={getVerticalTop}
+          isHighlightActive={isHighlightActive}
+          onEntryHoverStart={handleEntryHoverStart}
+          onEntryHoverEnd={handleEntryHoverEnd}
+          onEntryClick={handleEntryClick}
+          onHighlightHoverStart={handleHighlightHoverStart}
+          onHighlightHoverEnd={handleHighlightHoverEnd}
+          onHighlightClick={handleHighlightClick}
+          detailCard={renderDetailCard('mt-0')}
+          hasActiveEntry={Boolean(activeEntry)}
+        />
 
-          <motion.div
-            layout
-            className={cn(
-              'relative mb-24 rounded-2xl border border-[var(--border)]/20 bg-[var(--card)]/15',
-              verticalFocusedEntry
-                ? 'grid grid-cols-[3.25rem_minmax(0,1fr)] gap-3 overflow-visible p-3'
-                : 'overflow-hidden p-4'
-            )}
-          >
-            <motion.div
-              layout
-              className={cn(
-                'relative w-full',
-                verticalFocusedEntry
-                  ? 'h-[72vh] min-h-[35rem] max-h-[54rem]'
-                  : 'h-[84vh] min-h-[50rem] max-h-[70rem]'
-              )}
-            >
-              <div className={cn(
-                'absolute inset-y-10 left-0 w-12 transition-opacity duration-200',
-                verticalFocusedEntry && 'pointer-events-none opacity-0'
-              )}>
-                {years.map((year) => {
-                  const state = yearStates.get(year)
-                  return (
-                    <button
-                      key={year}
-                      type="button"
-                      disabled={!state?.isClickable}
-                      onClick={() => handleYearClick(year)}
-                      className={cn(
-                        'absolute right-1 -translate-y-1/2 rounded-full px-2 py-1 text-[0.62rem] font-mono font-semibold transition-colors',
-                        state?.isCurrent
-                          ? 'bg-[var(--accent)]/10 text-[var(--accent)]'
-                          : state?.isPreview
-                            ? 'text-[var(--fg-muted)]/35'
-                            : 'text-[var(--fg-muted)]/65',
-                        state?.isClickable && 'hover:bg-[var(--accent)]/10 hover:text-[var(--accent)]'
-                      )}
-                      style={{ top: `${getVerticalTop({ year, month: 1, day: 1 })}%` }}
-                    >
-                      {year}
-                    </button>
-                  )
-                })}
-              </div>
-
-              <div className={cn('absolute bottom-10 top-10 transition-all duration-300', verticalFocusedEntry ? 'left-0 right-0' : 'left-14 right-1')}>
-                <div className="absolute inset-x-0 top-0 h-px bg-[var(--border)]/12" />
-                <div className="absolute inset-x-0 bottom-0 h-px bg-[var(--border)]/12" />
-                <div
-                  className="group absolute inset-x-0 h-px -translate-y-1/2 bg-[var(--accent)]/55"
-                  style={{ top: `${getVerticalTop(today)}%` }}
-                  title={`${t('today')}: ${todayLabel}`}
-                >
-                  <span className="pointer-events-none absolute right-0 top-1 -translate-y-1/2 rounded-full border border-[var(--accent)]/35 bg-[var(--bg)]/90 px-2 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-100">
-                    {todayLabel}
-                  </span>
-                </div>
-
-                {LANE_ORDER.filter((lane) => visibleLanes.has(lane)).map((lane, laneIndex, laneList) => {
-                  const laneEntries = entriesByLane[lane]
-                  const colors = LANE_COLORS[lane]
-                  const laneIsFocused = verticalFocusedEntry?.lane === lane
-                  const left = laneList.length === 1 ? 50 : (laneIndex / (laneList.length - 1)) * 100
-
-                  return (
-                    <motion.div
-                      key={lane}
-                      layout
-                      className={cn(
-                        'absolute bottom-0 top-0 transition-opacity duration-300',
-                        verticalFocusedEntry && !laneIsFocused ? 'pointer-events-none opacity-0' : 'opacity-100'
-                      )}
-                      style={{ left: verticalFocusedEntry ? '50%' : `${left}%` }}
-                    >
-                              <div className="absolute bottom-0 top-0 w-px -translate-x-1/2 bg-[var(--border)]/18" />
-                      {laneEntries.map((entry) => {
-                        const isActive = hoveredEntry === entry.id || selectedEntry === entry.id || selectedHighlight?.entryId === entry.id
-                        const isPointEvent = isPointEntry(entry)
-                        const startTop = getVerticalTop(getEntryStartDate(entry))
-                        const endTop = getVerticalTop(getEntryEndDate(entry, today))
-                        const top = isPointEvent ? startTop : Math.min(startTop, endTop)
-                        const height = Math.max(Math.abs(startTop - endTop), 2)
-                        const isFutureLearning = isFutureLearningEntry(entry, today)
-
-                        if (isPointEvent) {
-                          return (
-                            <motion.button
-                              key={entry.id}
-                              type="button"
-                              layout
-                              className={cn(
-                                'absolute z-20 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-[var(--bg)] transition-all duration-200 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]',
-                                isFutureLearning ? 'border border-dashed border-pink-200/45 bg-pink-400/30 opacity-70' : colors.bg,
-                                isActive && 'scale-125 shadow-[0_0_18px_rgba(238,174,148,0.45)]'
-                              )}
-                              style={{ top: `${top}%` }}
-                              onPointerEnter={() => handleEntryHoverStart(entry.id)}
-                              onPointerMove={() => handleEntryHoverStart(entry.id)}
-                              onPointerLeave={() => handleEntryHoverEnd(entry.id)}
-                              onClick={(event) => handleEntryClick(entry.id, event)}
-                              aria-label={t(`entries.${entry.id}.role`)}
-                              title={t(`entries.${entry.id}.role`)}
-                            />
-                          )
-                        }
-
-                        return (
-                          <motion.div
-                            key={entry.id}
-                            layout
-                              className={cn(
-                              'absolute z-10 w-2 -translate-x-1/2 cursor-pointer rounded-full transition-all duration-200 hover:w-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]',
-                              colors.bg,
-                              isActive && 'w-3 shadow-[0_0_18px_rgba(238,174,148,0.45)]'
-                            )}
-                            style={{ top: `${top}%`, height: `${height}%` }}
-                            role="button"
-                            tabIndex={0}
-                            onPointerEnter={() => handleEntryHoverStart(entry.id)}
-                            onPointerMove={() => handleEntryHoverStart(entry.id)}
-                            onPointerLeave={() => handleEntryHoverEnd(entry.id)}
-                            onClick={(event) => handleEntryClick(entry.id, event)}
-                            onKeyDown={(event) => {
-                              if (event.key === 'Enter' || event.key === ' ') {
-                                handleEntryClick(entry.id, event)
-                              }
-                            }}
-                            aria-label={t(`entries.${entry.id}.role`)}
-                            title={t(`entries.${entry.id}.role`)}
-                          >
-                            <span className={cn('absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-[var(--bg)]', colors.bg, entry.endYear === null && 'ring-white/60')} />
-                            <span className={cn('absolute bottom-0 left-1/2 h-3 w-3 -translate-x-1/2 translate-y-1/2 rounded-full ring-2 ring-[var(--bg)]', colors.bg)} />
-
-                            {entry.highlights?.map((highlight) => {
-                              const highlightTop = getVerticalTop(getHighlightDate(highlight))
-                              const localTop = clampPercent(((highlightTop - top) / height) * 100)
-                              const isSelected = isHighlightActive(entry.id, highlight.id)
-
-                              return (
-                                <span
-                                  key={highlight.id}
-                                  role="button"
-                                  tabIndex={0}
-                                  className={cn(
-                                    'absolute left-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet-100/70 bg-violet-300 shadow-[0_0_0_2px_rgba(139,92,246,0.2)] transition-all hover:scale-125',
-                                    isSelected && 'scale-125 bg-violet-100 shadow-[0_0_0_5px_rgba(139,92,246,0.32),0_0_18px_rgba(139,92,246,0.55)]'
-                                  )}
-                                  style={{ top: `${localTop}%` }}
-                                  onPointerEnter={(event) => {
-                                    event.stopPropagation()
-                                    handleHighlightHoverStart(entry.id, highlight.id)
-                                  }}
-                                  onPointerMove={(event) => {
-                                    event.stopPropagation()
-                                    handleHighlightHoverStart(entry.id, highlight.id)
-                                  }}
-                                  onPointerLeave={(event) => {
-                                    event.stopPropagation()
-                                    handleHighlightHoverEnd(entry.id, highlight.id)
-                                  }}
-                                  onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
-                                  onKeyDown={(event) => {
-                                    if (event.key === 'Enter' || event.key === ' ') {
-                                      handleHighlightClick(entry.id, highlight.id, event)
-                                    }
-                                  }}
-                                  aria-label={t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                                  title={t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                                />
-                              )
-                            })}
-                          </motion.div>
-                        )
-                      })}
-                    </motion.div>
-                  )
-                })}
-              </div>
-            </motion.div>
-
-            {verticalFocusedEntry && (
-              <motion.div
-                layout
-                initial={{ opacity: 0, x: 18 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 18 }}
-                transition={{ duration: 0.22, ease: 'easeOut' }}
-                className="min-w-0"
-              >
-                {renderDetailCard('mt-0')}
-              </motion.div>
-            )}
-          </motion.div>
-
-          {!verticalFocusedEntry && renderDetailCard()}
-        </div>
-
-        {/* Main Timeline Visualization */}
-        <div className="relative w-full max-md:hidden max-lg:portrait:hidden">
+        {/* Main Timeline Visualization (lg and up) */}
+        <div className="relative w-full max-lg:hidden">
+          {/* Invisible ruler with the track insets; always mounted so the marker stagger survives view switches */}
+          <div ref={trackMeasureRef} aria-hidden="true" className="pointer-events-none absolute inset-x-6 top-0 h-0 sm:inset-x-8" />
           <AnimatePresence mode="wait">
             {drillDownYear === null ? (
               <motion.div
@@ -744,7 +744,7 @@ export function ParallelStreamsSection() {
                           disabled={!state?.isClickable}
                           onClick={() => handleYearClick(year)}
                           className={cn(
-                            'group absolute -translate-x-1/2 rounded-lg px-2 py-1.5 transition-all duration-200',
+                            'group absolute -translate-x-1/2 rounded-lg px-2 py-1.5 transition-all duration-200 pointer-coarse:px-3 pointer-coarse:py-3',
                             state?.isClickable
                               ? 'cursor-pointer hover:bg-[var(--accent)]/10 hover:scale-105'
                               : 'cursor-default',
@@ -757,7 +757,7 @@ export function ParallelStreamsSection() {
                                   : 'text-[var(--fg-muted)]/70 hover:text-[var(--accent)]'
                           )}
                           style={{ left: `${dateToTimelinePercent({ year, month: 1, day: 1 }, timelineEndYear)}%` }}
-                          title={state?.isClickable ? `Ver detalles de ${year}` : `${year}`}
+                          title={state?.isClickable ? t('yearDetails', { year: String(year) }) : `${year}`}
                           aria-disabled={!state?.isClickable}
                         >
                           <span className="text-xs sm:text-sm font-mono">{year}</span>
@@ -806,10 +806,10 @@ export function ParallelStreamsSection() {
 
                   {/* Lanes */}
                   <div className="relative py-6 sm:py-8">
-                    {/* Start label on the left */}
-                    <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-8 flex items-center justify-center pointer-events-none">
+                    {/* Start label in the left gutter */}
+                    <div className="absolute -left-6 top-0 bottom-0 w-6 sm:-left-8 sm:w-8 flex items-center justify-center pointer-events-none">
                       <div className="text-xs font-mono text-[var(--fg-muted)]/40 rotate-180" style={{ writingMode: 'vertical-lr' }}>
-                        {startLabel}
+                        {t('start')}
                       </div>
                     </div>
                     {LANE_ORDER.filter(lane => lane !== 'achievement' && visibleLanes.has(lane)).map((lane, laneIndex) => {
@@ -848,8 +848,9 @@ export function ParallelStreamsSection() {
                                   <motion.div
                                     key={entry.id}
                                     className={cn(
-                                      'absolute top-1/2 -translate-y-1/2 z-10 cursor-pointer',
+                                      'absolute top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer',
                                       'w-5 h-5 sm:w-6 sm:h-6 rounded-full',
+                                      COARSE_HIT_DOT,
                                       isFutureLearning
                                         ? 'border border-dashed border-pink-200/45 bg-pink-400/25 ring-4 ring-pink-400/10 opacity-65 hover:opacity-100'
                                         : [colors.bg, 'ring-2 ring-[var(--bg)]'],
@@ -858,7 +859,7 @@ export function ParallelStreamsSection() {
                                       'transition-all duration-300'
                                     )}
                                     style={{
-                                      left: `calc(${startPercent}% - 12px)`,
+                                      left: `${startPercent}%`,
                                       ...glowStyle,
                                     }}
                                     initial={animate ? { scale: 0, opacity: 0 } : undefined}
@@ -885,6 +886,7 @@ export function ParallelStreamsSection() {
                                   className={cn(
                                     'absolute h-2 rounded-full cursor-pointer z-10',
                                     colors.bg,
+                                    COARSE_HIT,
                                     isActive && 'h-2.5',
                                     hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-40',
                                     'transition-all duration-300'
@@ -956,138 +958,9 @@ export function ParallelStreamsSection() {
                       <div className="absolute inset-x-0 h-full flex items-center">
                         <div className="absolute inset-x-0 h-0.5 bg-[var(--border)]/10 rounded-full" />
 
-                        {/* Highlights from education lane */}
-                        {JOURNEY_ENTRIES.filter(e => e.lane === 'education').map((entry) =>
-                          entry.highlights?.map((highlight) => {
-                            const percent = getHighlightPercent(highlight)
-                            const glowIntensity = getIntensity(entry.id)
-                            const haloColor = LANE_COLORS.education.hex // Blue halo
-                            const isActive = isHighlightActive(entry.id, highlight.id)
+                        {/* Education/work highlights and standalone achievements, staggered on two rows */}
+                        {overviewMarkers.map((marker, index) => renderAchievementMarker(marker, overviewRows[index], 'overview'))}
 
-                            const haloStyle = glowIntensity > 0 ? {
-                              boxShadow: `0 0 ${24 * glowIntensity}px ${haloColor}`,
-                              filter: `brightness(${1 + 0.4 * glowIntensity})`,
-                            } : {
-                              boxShadow: `0 0 16px rgba(59, 130, 246, 0.3)`
-                            }
-
-                            return (
-                              <motion.button
-                                key={`highlight-${entry.id}-${highlight.id}`}
-                                type="button"
-                                className={cn(
-                                  'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
-                                  'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
-                                  'ring-2 ring-[var(--bg)]',
-                                  isActive && 'scale-125 ring-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.55)]',
-                                  'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
-                                )}
-                                style={{
-                                  left: `calc(${percent}% - 12px)`,
-                                  ...haloStyle,
-                                }}
-                                initial={animate ? { scale: 0 } : undefined}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.6 }}
-                                onPointerEnter={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerMove={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerLeave={() => handleHighlightHoverEnd(entry.id, highlight.id)}
-                                onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
-                                title={`${t(`entries.${entry.id}.highlights.${highlight.id}`)} (${t('legend.education')})`}
-                                aria-label={t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                              />
-                            )
-                          })
-                        )}
-
-                        {/* Highlights from work lane */}
-                        {JOURNEY_ENTRIES.filter(e => e.lane === 'work').map((entry) =>
-                          entry.highlights?.map((highlight) => {
-                            const percent = getHighlightPercent(highlight)
-                            const glowIntensity = getIntensity(entry.id)
-                            const haloColor = LANE_COLORS.work.hex // Green halo
-                            const isActive = isHighlightActive(entry.id, highlight.id)
-
-                            const haloStyle = glowIntensity > 0 ? {
-                              boxShadow: `0 0 ${24 * glowIntensity}px ${haloColor}`,
-                              filter: `brightness(${1 + 0.4 * glowIntensity})`,
-                            } : {
-                              boxShadow: `0 0 16px rgba(16, 185, 129, 0.3)`
-                            }
-
-                            return (
-                              <motion.button
-                                key={`highlight-${entry.id}-${highlight.id}`}
-                                type="button"
-                                className={cn(
-                                  'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
-                                  'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
-                                  'ring-2 ring-[var(--bg)]',
-                                  isActive && 'scale-125 ring-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.55)]',
-                                  'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
-                                )}
-                                style={{
-                                  left: `calc(${percent}% - 12px)`,
-                                  ...haloStyle,
-                                }}
-                                initial={animate ? { scale: 0 } : undefined}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.6 }}
-                                onPointerEnter={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerMove={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerLeave={() => handleHighlightHoverEnd(entry.id, highlight.id)}
-                                onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
-                                title={`${t(`entries.${entry.id}.highlights.${highlight.id}`)} (${t('legend.work')})`}
-                                aria-label={t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                              />
-                            )
-                          })
-                        )}
-
-                        {/* Standalone achievements (vissoft, etc) */}
-                        {JOURNEY_ENTRIES.filter(e => e.lane === 'achievement').map((entry) => {
-                          const percent = getHighlightPercent({ 
-                            year: entry.startYear, 
-                            month: entry.startMonth, 
-                            day: entry.startDay 
-                          } as JourneyHighlight)
-                          const glowIntensity = getIntensity(entry.id)
-                          const haloColor = LANE_COLORS.achievement.hex
-
-                          const haloStyle = glowIntensity > 0 ? {
-                            boxShadow: `0 0 ${24 * glowIntensity}px ${haloColor}`,
-                            filter: `brightness(${1 + 0.4 * glowIntensity})`,
-                          } : {
-                            boxShadow: `0 0 16px rgba(245, 158, 11, 0.3)`
-                          }
-
-                          return (
-                            <motion.button
-                              key={entry.id}
-                              type="button"
-                              className={cn(
-                                'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
-                                'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
-                                'ring-2 ring-[var(--bg)]',
-                                (hoveredEntry === entry.id || selectedEntry === entry.id) && 'scale-125',
-                                'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
-                              )}
-                              style={{
-                                left: `calc(${percent}% - 12px)`,
-                                ...haloStyle,
-                              }}
-                              initial={animate ? { scale: 0 } : undefined}
-                              animate={{ scale: 1 }}
-                              transition={{ delay: 0.6 }}
-                              onPointerEnter={() => handleEntryHoverStart(entry.id)}
-                              onPointerMove={() => handleEntryHoverStart(entry.id)}
-                              onPointerLeave={() => handleEntryHoverEnd(entry.id)}
-                              onClick={(event) => handleEntryClick(entry.id, event)}
-                              title={t(`entries.${entry.id}.role`)}
-                              aria-label={t(`entries.${entry.id}.role`)}
-                            />
-                          )
-                        })}
                       </div>
                     </div>
                   </div>
@@ -1111,28 +984,28 @@ export function ParallelStreamsSection() {
                 transition={{ duration: 0.3 }}
               >
                 {/* Header with back button and year */}
-                <div className="flex items-center justify-between mb-6">
+                <div className="mb-6 grid grid-cols-[1fr_auto_1fr] items-center">
                   <button
+                    type="button"
                     onClick={handleBackToOverview}
                     className={cn(
-                      'flex items-center gap-2 px-4 py-2 rounded-lg',
+                      'flex items-center gap-2 justify-self-start rounded-lg px-4 py-2 pointer-coarse:min-h-11',
                       'bg-[var(--card)]/40 ring-1 ring-[var(--border)]/30',
                       'text-sm text-[var(--fg-muted)] hover:text-[var(--fg)]',
                       'transition-colors'
                     )}
                   >
                     <span aria-hidden="true">&larr;</span>
-                    <span>{backLabel}</span>
+                    <span>{t('back')}</span>
                   </button>
                   <h3 className="text-2xl font-bold text-[var(--accent)]">
                     {drillDownYear}
                   </h3>
-                  <div className="w-24" /> {/* Spacer for balance */}
                 </div>
 
-                {/* Month axis */}
+                {/* Month axis (inset to the track, like the grid lines) */}
                 <div className="relative mb-3 h-5">
-                  <div className="absolute inset-x-0 inset-y-0">
+                  <div className="absolute inset-y-0 left-6 right-6 sm:left-8 sm:right-8">
                       {monthNames.map((month, index) => (
                         <span
                           key={month}
@@ -1146,9 +1019,9 @@ export function ParallelStreamsSection() {
                 </div>
 
                 {/* Monthly timeline container */}
-                <div className="relative bg-[var(--card)]/20 rounded-2xl ring-1 ring-[var(--border)]/20 overflow-visible backdrop-blur-sm">
-                  {/* Vertical month grid lines with current month indicator */}
-                  <div className="absolute inset-0 pointer-events-none">
+                <div className="relative bg-[var(--card)]/20 rounded-2xl ring-1 ring-[var(--border)]/20 overflow-visible backdrop-blur-sm px-6 sm:px-8">
+                  {/* Vertical month grid lines with current month indicator (inset to the track) */}
+                  <div className="absolute inset-y-0 left-6 right-6 sm:left-8 sm:right-8 pointer-events-none">
                     <div className="absolute inset-x-0 inset-y-0">
                       {monthNames.map((_, i) => {
                         return (
@@ -1167,7 +1040,7 @@ export function ParallelStreamsSection() {
                           aria-label={`${t('today')}: ${todayLabel}`}
                         >
                           <span className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-[var(--accent)]/55" />
-                          <span className="pointer-events-none absolute -top-7 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full border border-[var(--accent)]/40 bg-[var(--bg)]/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)] opacity-0 shadow-lg shadow-black/20 transition-opacity duration-150 group-hover:opacity-100">
+                          <span className="pointer-events-none absolute -top-7 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap rounded-full border border-[var(--accent)]/40 bg-[var(--bg)]/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)] opacity-0 shadow-lg shadow-black/20 transition-opacity duration-150 group-hover:opacity-100 pointer-coarse:opacity-100">
                             {todayLabel}
                           </span>
                         </div>
@@ -1177,10 +1050,10 @@ export function ParallelStreamsSection() {
 
                   {/* Lanes for drill-down year */}
                   <div className="relative py-6 sm:py-8">
-                    {/* Start label */}
-                    <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-8 flex items-center justify-center pointer-events-none">
+                    {/* Start label in the left gutter */}
+                    <div className="absolute -left-6 top-0 bottom-0 w-6 sm:-left-8 sm:w-8 flex items-center justify-center pointer-events-none">
                       <div className="text-xs font-mono text-[var(--fg-muted)]/40 rotate-180" style={{ writingMode: 'vertical-lr' }}>
-                        {startLabel}
+                        {t('start')}
                       </div>
                     </div>
 
@@ -1219,8 +1092,9 @@ export function ParallelStreamsSection() {
                                   <motion.div
                                     key={entry.id}
                                     className={cn(
-                                      'absolute top-1/2 -translate-y-1/2 z-10 cursor-pointer',
+                                      'absolute top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer',
                                       'w-5 h-5 sm:w-6 sm:h-6 rounded-full',
+                                      COARSE_HIT_DOT,
                                       isFutureLearning
                                         ? 'border border-dashed border-pink-200/45 bg-pink-400/25 ring-4 ring-pink-400/10 opacity-65 hover:opacity-100'
                                         : [colors.bg, 'ring-2 ring-[var(--bg)]'],
@@ -1229,7 +1103,7 @@ export function ParallelStreamsSection() {
                                       'transition-all duration-300'
                                     )}
                                     style={{
-                                      left: `calc(${startPercent}% - 12px)`,
+                                      left: `${startPercent}%`,
                                       ...glowStyle,
                                     }}
                                     initial={{ scale: 0, opacity: 0 }}
@@ -1262,6 +1136,7 @@ export function ParallelStreamsSection() {
                                   className={cn(
                                     'absolute rounded-full cursor-pointer z-10 group',
                                     colors.bg,
+                                    COARSE_HIT,
                                     isActive ? 'h-4 sm:h-4.5 shadow-2xl' : 'h-2.5 sm:h-3',
                                     hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-50',
                                     'transition-all duration-300'
@@ -1333,134 +1208,8 @@ export function ParallelStreamsSection() {
                       <div className="absolute inset-x-0 h-full flex items-center">
                         <div className="absolute inset-x-0 h-0.5 bg-[var(--border)]/10 rounded-full" />
 
-                        {/* Highlights from education lane */}
-                        {JOURNEY_ENTRIES.filter(e => e.lane === 'education').map((entry) =>
-                          entry.highlights?.filter(h => h.year === drillDownYear).map((highlight) => {
-                            const percent = monthToPercent(highlight.month ?? 6, highlight.day ?? 15)
-                            const glowIntensity = getIntensity(entry.id)
-                            const haloColor = LANE_COLORS.education.hex
-                            const isActive = isHighlightActive(entry.id, highlight.id)
-
-                            const haloStyle = glowIntensity > 0 ? {
-                              boxShadow: `0 0 ${20 * glowIntensity}px ${haloColor}`,
-                              filter: `brightness(${1 + 0.4 * glowIntensity})`,
-                            } : {
-                              boxShadow: `0 0 14px rgba(59, 130, 246, 0.3)`
-                            }
-
-                            return (
-                              <motion.button
-                                key={`highlight-${entry.id}-${highlight.id}`}
-                                type="button"
-                                className={cn(
-                                  'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
-                                  'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
-                                  'ring-2 ring-[var(--bg)]',
-                                  isActive && 'scale-125 ring-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.55)]',
-                                  'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
-                                )}
-                                style={{
-                                  left: `calc(${percent}% - 12px)`,
-                                  ...haloStyle,
-                                }}
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 0.4 }}
-                                onPointerEnter={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerMove={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerLeave={() => handleHighlightHoverEnd(entry.id, highlight.id)}
-                                onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
-                                title={`${t(`entries.${entry.id}.highlights.${highlight.id}`)} (${monthNames[highlight.month ? highlight.month - 1 : 5]} ${highlight.day || 15}) - ${t('legend.education')}`}
-                                aria-label={t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                              />
-                            )
-                          })
-                        )}
-
-                        {/* Highlights from work lane */}
-                        {JOURNEY_ENTRIES.filter(e => e.lane === 'work').map((entry) =>
-                          entry.highlights?.filter(h => h.year === drillDownYear).map((highlight) => {
-                            const percent = monthToPercent(highlight.month ?? 6, highlight.day ?? 15)
-                            const glowIntensity = getIntensity(entry.id)
-                            const haloColor = LANE_COLORS.work.hex
-                            const isActive = isHighlightActive(entry.id, highlight.id)
-
-                            const haloStyle = glowIntensity > 0 ? {
-                              boxShadow: `0 0 ${20 * glowIntensity}px ${haloColor}`,
-                              filter: `brightness(${1 + 0.4 * glowIntensity})`,
-                            } : {
-                              boxShadow: `0 0 14px rgba(16, 185, 129, 0.3)`
-                            }
-
-                            return (
-                              <motion.button
-                                key={`highlight-${entry.id}-${highlight.id}`}
-                                type="button"
-                                className={cn(
-                                  'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
-                                  'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
-                                  'ring-2 ring-[var(--bg)]',
-                                  isActive && 'scale-125 ring-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.55)]',
-                                  'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
-                                )}
-                                style={{
-                                  left: `calc(${percent}% - 12px)`,
-                                  ...haloStyle,
-                                }}
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 0.4 }}
-                                onPointerEnter={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerMove={() => handleHighlightHoverStart(entry.id, highlight.id)}
-                                onPointerLeave={() => handleHighlightHoverEnd(entry.id, highlight.id)}
-                                onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
-                                title={`${t(`entries.${entry.id}.highlights.${highlight.id}`)} (${monthNames[highlight.month ? highlight.month - 1 : 5]} ${highlight.day || 15}) - ${t('legend.work')}`}
-                                aria-label={t(`entries.${entry.id}.highlights.${highlight.id}`)}
-                              />
-                            )
-                          })
-                        )}
-
-                        {/* Standalone achievements (hackathon, VISSOFT, ...) that fall in this year */}
-                        {JOURNEY_ENTRIES.filter((entry) => entry.lane === 'achievement' && entry.startYear === drillDownYear).map((entry) => {
-                          const percent = monthToPercent(entry.startMonth ?? 1, entry.startDay ?? 1)
-                          const glowIntensity = getIntensity(entry.id)
-                          const haloColor = LANE_COLORS.achievement.hex
-
-                          const haloStyle = glowIntensity > 0 ? {
-                            boxShadow: `0 0 ${20 * glowIntensity}px ${haloColor}`,
-                            filter: `brightness(${1 + 0.4 * glowIntensity})`,
-                          } : {
-                            boxShadow: `0 0 14px rgba(245, 158, 11, 0.3)`
-                          }
-
-                          return (
-                            <motion.button
-                              key={`achievement-${entry.id}`}
-                              type="button"
-                              className={cn(
-                                'absolute top-1/2 -translate-y-1/2 z-20 cursor-pointer',
-                                'h-7 w-7 rounded-full bg-amber-400 sm:h-8 sm:w-8',
-                                'ring-2 ring-[var(--bg)]',
-                                (hoveredEntry === entry.id || selectedEntry === entry.id) && 'scale-125',
-                                'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
-                              )}
-                              style={{
-                                left: `calc(${percent}% - 12px)`,
-                                ...haloStyle,
-                              }}
-                              initial={{ scale: 0, opacity: 0 }}
-                              animate={{ scale: 1, opacity: 1 }}
-                              transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 0.4 }}
-                              onPointerEnter={() => handleEntryHoverStart(entry.id)}
-                              onPointerMove={() => handleEntryHoverStart(entry.id)}
-                              onPointerLeave={() => handleEntryHoverEnd(entry.id)}
-                              onClick={(event) => handleEntryClick(entry.id, event)}
-                              title={t(`entries.${entry.id}.role`)}
-                              aria-label={t(`entries.${entry.id}.role`)}
-                            />
-                          )
-                        })}
+                        {/* Milestones of this year (education/work highlights and standalone achievements) */}
+                        {drillDownMarkers.map((marker, index) => renderAchievementMarker(marker, drillDownRows[index], 'drilldown'))}
 
                       </div>
                     </div>

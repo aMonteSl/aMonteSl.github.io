@@ -62,3 +62,9 @@ export interface YearMarker {
   isStart?: boolean
   isEnd?: boolean
 }
+
+/** Reference to a highlight that is hovered or selected on the timeline */
+export interface ActiveHighlightRef {
+  entryId: string
+  highlightId: string
+}

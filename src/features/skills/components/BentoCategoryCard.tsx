@@ -84,8 +84,9 @@ export function BentoCategoryCard({
       />
 
       <div className="relative z-10">
-        <div className="mb-4 flex items-start justify-between gap-4">
-          <div className="min-w-0">
+        {/* Below xs the badge stack drops under the title as a row; from xs up it sits on the right as before. */}
+        <div className="mb-4 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+          <div className="min-w-0 grow basis-full xs:basis-0">
           <h3 className="mb-1 text-base font-semibold text-[var(--fg)]">
             {t(titleKey)}
           </h3>
@@ -95,7 +96,7 @@ export function BentoCategoryCard({
             </p>
           )}
           </div>
-          <div className="flex shrink-0 flex-col items-end gap-2">
+          <div className="flex shrink-0 items-center gap-2 xs:flex-col xs:items-end">
             <span className="rounded-full border border-[var(--border)]/80 bg-black/18 px-2 py-1 text-[10px] font-semibold text-[var(--fg-muted)]/65">
               {skills.length}
             </span>

@@ -5,8 +5,13 @@ import { Container, EmailIcon, ExternalLinkIcon, GitHubIcon, LinkedInIcon } from
 import { LINKS, SITE, getCvUrl } from '@/lib/constants'
 import { useEmailCopyFeedback } from '@/lib/hooks/useEmailCopyFeedback'
 import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
-export function Footer() {
+export interface FooterProps {
+  className?: string
+}
+
+export function Footer({ className }: FooterProps = {}) {
   const t = useTranslations('footer')
   const tNav = useTranslations('nav')
   const { locale } = useLocale()
@@ -37,7 +42,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--border)] bg-[var(--card)]/30">
+    <footer className={cn('relative overflow-hidden border-t border-[var(--border)] bg-[var(--card)]/30', className)}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-1/2 h-[14rem] w-[min(42rem,90vw)] -translate-x-1/2 rounded-full bg-[var(--accent)]/4 blur-[120px]" />
       </div>
@@ -56,12 +61,12 @@ export function Footer() {
               <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[var(--fg-muted)]/60">
                 {t('sections.navigation')}
               </h3>
-              <ul className="grid grid-cols-2 gap-x-5 gap-y-2.5">
+              <ul className="grid grid-cols-1 gap-x-5 gap-y-1 xs:grid-cols-2">
                 {navLinks.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="inline-flex min-h-6 items-center text-sm text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
+                      className="inline-flex min-h-9 items-center py-1 text-sm text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
                     >
                       {link.label}
                     </a>
@@ -74,14 +79,14 @@ export function Footer() {
               <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-[var(--fg-muted)]/60">
                 {t('sections.resources')}
               </h3>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1">
                 {resourceLinks.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       target={link.external ? '_blank' : undefined}
                       rel={link.external ? 'noopener noreferrer' : undefined}
-                      className="inline-flex min-h-6 max-w-full items-center gap-1.5 text-sm text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
+                      className="inline-flex min-h-9 max-w-full items-center gap-1.5 py-1 text-sm text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
                     >
                       <span className="min-w-0 truncate">{link.label}</span>
                       {link.external && (
@@ -105,7 +110,7 @@ export function Footer() {
                     target={link.icon !== 'email' ? '_blank' : undefined}
                     rel={link.icon !== 'email' ? 'noopener noreferrer' : undefined}
                     onClick={link.icon === 'email' ? copyEmail : undefined}
-                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--card)] text-[var(--fg-muted)] transition-colors duration-200 hover:border-[var(--accent)]/40 hover:text-[var(--fg)]"
+                    className="flex size-11 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--card)] text-[var(--fg-muted)] transition-colors duration-200 hover:border-[var(--accent)]/40 hover:text-[var(--fg)]"
                     aria-label={link.label}
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
