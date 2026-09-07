@@ -121,13 +121,13 @@ export function TestimonialsSection() {
         }}
       >
         <div className="grid grid-cols-1 gap-4">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {featuredRecommendations.map((recommendation) => (
               <RecommendationCard key={recommendation.id} recommendation={recommendation} featured />
             ))}
           </div>
 
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {secondaryRecommendations.map((recommendation) => (
               <RecommendationCard key={recommendation.id} recommendation={recommendation} />
             ))}

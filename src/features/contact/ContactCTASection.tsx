@@ -41,9 +41,10 @@ export function ContactCTASection() {
             {...fadeInUp()}
           >
             <div className="min-w-0">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-200">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.8)]" />
-                {t('availabilityLabel')}
+              {/* The label wraps to two balanced lines on 320-360px phones instead of overflowing the card. */}
+              <div className="inline-flex max-w-full items-start gap-2 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 text-[11px] font-medium leading-snug text-emerald-200 xs:text-xs">
+                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300 shadow-[0_0_12px_rgba(110,231,183,0.8)]" aria-hidden="true" />
+                <span className="min-w-0 text-balance">{t('availabilityLabel')}</span>
               </div>
 
               <p className="mt-5 max-w-2xl text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
