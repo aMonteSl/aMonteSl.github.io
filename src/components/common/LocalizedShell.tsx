@@ -1,6 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
+import { MotionConfig } from 'framer-motion'
 import { Footer } from '@/components/common/Footer'
 import { I18nProvider, useTranslations, type Locale } from '@/i18n'
 import { BrowserTranslateHint, LocalePreferenceGate } from '@/features/language'
@@ -31,13 +32,16 @@ export function LocalizedShell({
 }: LocalizedShellProps) {
   return (
     <I18nProvider locale={locale}>
-      <LocalePreferenceGate />
-      <SkipToContentLink />
-      <main id="main-content">
-        {children}
-      </main>
-      {showFooter && <Footer className={footerClassName} />}
-      <BrowserTranslateHint />
+      {/* Visitors who ask for reduced motion get every framer transform/layout animation disabled at once */}
+      <MotionConfig reducedMotion="user">
+        <LocalePreferenceGate />
+        <SkipToContentLink />
+        <main id="main-content">
+          {children}
+        </main>
+        {showFooter && <Footer className={footerClassName} />}
+        <BrowserTranslateHint />
+      </MotionConfig>
     </I18nProvider>
   )
 }

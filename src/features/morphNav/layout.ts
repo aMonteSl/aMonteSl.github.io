@@ -11,6 +11,9 @@ export const SIDEBAR_WIDTH_CLASS = 'w-[17rem]'
 /** Applied to the home content and footer at xl+ (17rem sidebar + 2rem gutter). */
 export const SIDEBAR_CONTENT_OFFSET_CLASS = 'xl:ml-[17rem] xl:pl-8'
 
+/** Below xl the floating menu button (56px, bottom-left) would cover the end of the page; this clears it. */
+export const FLOATING_MENU_CLEARANCE_CLASS = 'max-xl:pb-[calc(5rem+env(safe-area-inset-bottom))]'
+
 /** Re-centres a viewport-centred element inside the offset column: (17rem + 2rem) / 2. */
 export const SIDEBAR_RECENTER_CLASS = 'xl:-translate-x-[9.5rem]'
 

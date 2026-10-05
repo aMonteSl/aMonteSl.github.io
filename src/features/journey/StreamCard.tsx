@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { Badge, CloseIcon } from '@/components/ui'
 import type { JourneyLane } from './types'
@@ -106,6 +106,7 @@ export function StreamCard({
   onClose,
   closeLabel,
 }: StreamCardProps) {
+  const reduceMotion = useReducedMotion()
   const Wrapper = link ? 'a' : 'div'
   const wrapperProps = link
     ? { href: link, target: '_blank', rel: 'noopener noreferrer' }
@@ -119,7 +120,7 @@ export function StreamCard({
         accentMap[lane],
         'ring-1 ring-[var(--border)]/30',
         'backdrop-blur-sm',
-        'transition-all duration-300',
+        'transition-shadow duration-300',
         link && ['cursor-pointer hover:ring-[var(--border)]/50 hover:shadow-xl', glowMap[lane]],
         className
       )}
@@ -154,9 +155,10 @@ export function StreamCard({
             </span>
             {isOngoing && (
               <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-xs font-medium">
-                <motion.span 
+                {/* Opacity loops are not covered by MotionConfig, so reduced motion keeps the dot still */}
+                <motion.span
                   className="w-1.5 h-1.5 rounded-full bg-emerald-400"
-                  animate={{ opacity: [1, 0.4, 1] }}
+                  animate={reduceMotion ? undefined : { opacity: [1, 0.4, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
                 {ongoingLabel}

@@ -1,13 +1,12 @@
 'use client'
 
 import { useState, useMemo, useCallback, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
 import { SectionHeader, SectionShell } from '@/components/ui'
 import { useLocale, useTranslations } from '@/i18n'
 import { useElementWidth } from '@/lib/hooks/useElementWidth'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 import { cn } from '@/lib/utils'
-import { shouldAnimate } from '@/lib/motion'
 
 import { StreamCard } from './StreamCard'
 import { StreamLegend } from './StreamLegend'
@@ -123,7 +122,8 @@ function isSameHighlight(a: ActiveHighlightRef | null, b: ActiveHighlightRef): b
 export function ParallelStreamsSection() {
   const t = useTranslations('journey')
   const { locale } = useLocale()
-  const animate = shouldAnimate()
+  // Transforms are already handled by <MotionConfig reducedMotion="user">; this covers the JS glow and opacity loops
+  const reduceMotion = useReducedMotion()
   const today = useJourneyToday()
   const years = useMemo(
     () => getVisibleTimelineYears(JOURNEY_ENTRIES, today, TIMELINE_START, TIMELINE_END),
@@ -155,6 +155,12 @@ export function ParallelStreamsSection() {
   const glowRef = useRef<HTMLDivElement>(null)
   const inView = useInView(glowRef, { amount: 0.05 })
   const isHorizontal = useMediaQuery('(min-width: 64rem)')
+  // The overview entrance (bars, nodes, markers) waits until the horizontal timeline scrolls into view, once.
+  // The ref sits on the always-mounted lg+ wrapper so switching views never detaches the observer.
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const hasEntered = useInView(timelineRef, { once: true, amount: 0.2 })
+  // Same visibility rule as the glow: the ongoing pulse never loops off screen or in the vertical layout
+  const pulseOngoing = hasEntered && inView && isHorizontal && !reduceMotion
   // Track width drives the two-row stagger of the achievement markers
   const [trackMeasureRef, trackWidth] = useElementWidth<HTMLDivElement>()
 
@@ -165,7 +171,7 @@ export function ParallelStreamsSection() {
   const { getIntensity } = useGlowAnimation(entryIds, {
     fadeDuration: 1500,
     holdDuration: 2500,
-    enabled: animate && inView && isHorizontal,
+    enabled: !reduceMotion && inView && isHorizontal,
   })
 
   // Group entries by lane for rendering
@@ -387,12 +393,13 @@ export function ParallelStreamsSection() {
               'absolute top-1/2 z-20 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full',
               COARSE_HIT_DOT,
               'border border-violet-100/70 bg-violet-300 shadow-[0_0_0_3px_rgba(139,92,246,0.22)]',
-              'transition-all duration-200 hover:scale-125 hover:bg-violet-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-200',
+              'transition-[scale,background-color,box-shadow] duration-200 hover:scale-125 hover:bg-violet-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-200',
               isActive && 'scale-125 bg-violet-100 shadow-[0_0_0_5px_rgba(139,92,246,0.32),0_0_18px_rgba(139,92,246,0.55)]'
             )}
             style={{ left: `${localPercent}%` }}
-            initial={animate ? { scale: 0, opacity: 0 } : undefined}
-            animate={{ scale: 1, opacity: 1 }}
+            initial={{ scale: 0, opacity: 0 }}
+            // Drill-down highlights mount on click; overview ones wait for the timeline entrance
+            animate={drillYear !== undefined || hasEntered ? { scale: 1, opacity: 1 } : undefined}
             transition={{ duration: 0.45, ease: 'easeOut', delay: 0.5 }}
             onClick={(event) => handleHighlightClick(entry.id, highlight.id, event)}
             onPointerEnter={() => handleHighlightHoverStart(entry.id, highlight.id)}
@@ -403,7 +410,7 @@ export function ParallelStreamsSection() {
           />
         )
       })
-  }, [animate, getHighlightPercent, handleHighlightClick, handleHighlightHoverEnd, handleHighlightHoverStart, isHighlightActive, monthToPercent, t])
+  }, [getHighlightPercent, handleHighlightClick, handleHighlightHoverEnd, handleHighlightHoverStart, hasEntered, isHighlightActive, monthToPercent, t])
 
   /** Handle year click for drill-down */
   const handleYearClick = useCallback((year: number) => {
@@ -569,14 +576,14 @@ export function ParallelStreamsSection() {
           isActive && (highlightId !== null
             ? 'scale-125 ring-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.55)]'
             : 'scale-125'),
-          'transition-all duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
+          'transition-[scale,box-shadow,filter] duration-300 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200'
         )}
         style={{
           left: `${marker.percent}%`,
           ...haloStyle,
         }}
-        initial={isDrillDown ? { scale: 0, opacity: 0 } : animate ? { scale: 0 } : undefined}
-        animate={isDrillDown ? { scale: 1, opacity: 1 } : { scale: 1 }}
+        initial={isDrillDown ? { scale: 0, opacity: 0 } : { scale: 0 }}
+        animate={isDrillDown ? { scale: 1, opacity: 1 } : hasEntered ? { scale: 1 } : undefined}
         transition={isDrillDown ? { duration: 0.7, ease: [0.34, 1.56, 0.64, 1], delay: 0.4 } : { delay: 0.6 }}
         onPointerEnter={hoverStart}
         onPointerMove={hoverStart}
@@ -706,7 +713,7 @@ export function ParallelStreamsSection() {
         />
 
         {/* Main Timeline Visualization (lg and up) */}
-        <div className="relative w-full max-lg:hidden">
+        <div ref={timelineRef} className="relative w-full max-lg:hidden">
           {/* Invisible ruler with the track insets; always mounted so the marker stagger survives view switches */}
           <div ref={trackMeasureRef} aria-hidden="true" className="pointer-events-none absolute inset-x-6 top-0 h-0 sm:inset-x-8" />
           <AnimatePresence mode="wait">
@@ -785,7 +792,7 @@ export function ParallelStreamsSection() {
                       title={`${t('today')}: ${todayLabel}`}
                       aria-hidden="true"
                     >
-                      <span className="absolute -top-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full border border-[var(--accent)]/40 bg-[var(--bg)]/80 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                      <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-[var(--accent)]/40 bg-[var(--bg)]/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
                         {todayLabel}
                       </span>
                     </div>
@@ -844,14 +851,14 @@ export function ParallelStreamsSection() {
                                         : [colors.bg, 'ring-2 ring-[var(--bg)]'],
                                       isActive && 'scale-125',
                                       hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-40',
-                                      'transition-all duration-300'
+                                      'transition-[scale,opacity,box-shadow,filter] duration-300'
                                     )}
                                     style={{
                                       left: `${startPercent}%`,
                                       ...glowStyle,
                                     }}
-                                    initial={animate ? { scale: 0, opacity: 0 } : undefined}
-                                    animate={{ scale: 1, opacity: 1 }}
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    animate={hasEntered ? { scale: 1, opacity: 1 } : undefined}
                                     transition={{ 
                                       duration: 0.8,
                                       ease: [0.25, 0.46, 0.45, 0.94],
@@ -877,15 +884,15 @@ export function ParallelStreamsSection() {
                                     COARSE_HIT,
                                     isActive && 'h-2.5',
                                     hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-40',
-                                    'transition-all duration-300'
+                                    'transition-[height,opacity,box-shadow,filter] duration-300'
                                   )}
                                   style={{
                                     left: `${startPercent}%`,
                                     width: `${endPercent - startPercent}%`,
                                     ...glowStyle,
                                   }}
-                                  initial={animate ? { scaleX: 0, opacity: 0, originX: 0 } : undefined}
-                                  animate={{ scaleX: 1, opacity: 1 }}
+                                  initial={{ scaleX: 0, opacity: 0, originX: 0 }}
+                                  animate={hasEntered ? { scaleX: 1, opacity: 1 } : undefined}
                                   transition={{
                                     duration: 1,
                                     ease: [0.25, 0.46, 0.45, 0.94],
@@ -904,14 +911,14 @@ export function ParallelStreamsSection() {
                                       colors.bg,
                                       'ring-2 ring-[var(--bg)]'
                                     )}
-                                    initial={animate ? { scale: 0, opacity: 0 } : undefined}
-                                    animate={{ scale: 1, opacity: 1 }}
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    animate={hasEntered ? { scale: 1, opacity: 1 } : undefined}
                                     transition={{ duration: 0.6, ease: 'easeOut', delay: laneIndex * 0.15 + 0.4 }}
                                   />
 
                                   {renderEntryInlineHighlights(entry, startPercent, endPercent)}
 
-                                  {/* End node */}
+                                  {/* End node; an ongoing entry pulses only while pulseOngoing, otherwise it settles at rest */}
                                   <motion.div
                                     className={cn(
                                       'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2',
@@ -920,15 +927,18 @@ export function ParallelStreamsSection() {
                                     isOngoing && 'ring-2 ring-white/60',
                                       !isOngoing && 'ring-2 ring-[var(--bg)]'
                                     )}
-                                    initial={animate ? { scale: 0, opacity: 0 } : undefined}
+                                    initial={{ scale: 0, opacity: 0 }}
                                     animate={
-                                      isOngoing
-                                        ? { scale: [1, 1.2, 1], opacity: 1 }
-                                        : { scale: 1, opacity: 1 }
+                                      !hasEntered
+                                        ? undefined
+                                        : isOngoing && pulseOngoing
+                                          // A soft breathing scale; the node itself stays fully visible
+                                          ? { scale: [1, 1.2, 1], opacity: 1 }
+                                          : { scale: 1, opacity: 1 }
                                     }
                                     transition={
-                                      isOngoing
-                                        ? { repeat: Infinity, duration: 1.5, delay: 0.6 }
+                                      isOngoing && pulseOngoing
+                                        ? { scale: { repeat: Infinity, duration: 1.8, ease: 'easeInOut', delay: 0.6 }, opacity: { duration: 0.6, ease: 'easeOut', delay: laneIndex * 0.15 + 0.5 } }
                                         : { duration: 0.6, ease: 'easeOut', delay: laneIndex * 0.15 + 0.5 }
                                     }
                                   />
@@ -1088,7 +1098,7 @@ export function ParallelStreamsSection() {
                                         : [colors.bg, 'ring-2 ring-[var(--bg)]'],
                                       isActive && 'scale-150 shadow-lg',
                                       hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-50',
-                                      'transition-all duration-300'
+                                      'transition-[scale,opacity,box-shadow,filter] duration-300'
                                     )}
                                     style={{
                                       left: `${startPercent}%`,
@@ -1127,7 +1137,7 @@ export function ParallelStreamsSection() {
                                     COARSE_HIT,
                                     isActive ? 'h-4 sm:h-4.5 shadow-2xl' : 'h-2.5 sm:h-3',
                                     hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-50',
-                                    'transition-all duration-300'
+                                    'transition-[height,opacity,box-shadow,filter] duration-300'
                                   )}
                                   style={{
                                     left: `${startPercent}%`,
@@ -1143,8 +1153,8 @@ export function ParallelStreamsSection() {
                                   onClick={(event) => handleEntryClick(entry.id, event)}
                                   title={`${t(`entries.${entry.id}.role`)} - ${getPeriodLabel(entry)}`}
                                 >
-                                  {/* Animated pulse for recent events */}
-                                  {isRecent && !isActive && (
+                                  {/* Animated pulse for recent events (an opacity loop, so MotionConfig does not stop it) */}
+                                  {isRecent && !isActive && !reduceMotion && (
                                     <motion.div
                                       className="absolute inset-0 rounded-full"
                                       style={{ backgroundColor: colors.hex }}

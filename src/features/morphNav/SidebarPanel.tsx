@@ -75,7 +75,8 @@ export function SidebarPanel({ inDrawer = false }: SidebarPanelProps) {
           aria-label={t('goHome')}
         >
           <div className="relative rounded-full ring-2 ring-[var(--accent)]/20 group-hover:ring-[var(--accent)]/50 transition-colors duration-300">
-            <Avatar size="lg" className={inDrawer ? '!h-24 !w-24' : '!h-20 !w-20'} />
+            {/* Short laptop screens (≤800px tall, e.g. 1366×768) get a smaller portrait so the whole rail fits */}
+            <Avatar size="lg" className={inDrawer ? '!h-24 !w-24' : '!h-20 !w-20 [@media(max-height:50rem)]:!h-16 [@media(max-height:50rem)]:!w-16'} />
           </div>
         </motion.button>
         <h2 className={cn('font-semibold leading-tight text-[var(--fg)]', inDrawer ? 'text-base' : 'text-sm')}>
@@ -158,7 +159,7 @@ export function SidebarPanel({ inDrawer = false }: SidebarPanelProps) {
                     'group relative flex w-full items-center gap-3 rounded-xl text-left font-medium transition-colors duration-200',
                     inDrawer
                       ? 'min-h-11 px-3 py-2.5 text-sm'
-                      : 'min-h-9 px-3 py-1.5 text-xs pointer-coarse:min-h-11',
+                      : 'min-h-9 px-3 py-1.5 text-xs pointer-coarse:min-h-11 [@media(max-height:50rem)]:min-h-8 [@media(max-height:50rem)]:py-1',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]',
                     isActive
                       ? 'border border-[var(--accent)]/25 bg-[var(--accent)]/10 text-[var(--fg)]'

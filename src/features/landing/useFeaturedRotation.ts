@@ -1,114 +1,113 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
+import { useMotionValue } from 'framer-motion'
 import { CAROUSEL_ROTATION_INTERVAL_MS } from '@/lib/timing'
+import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
 
 const ROTATION_INTERVAL_MS = CAROUSEL_ROTATION_INTERVAL_MS
 
+/**
+ * Why a transient pause was requested:
+ * - `interaction`: pointer hover or keyboard focus inside the card. Shown as paused (bar turns warning).
+ * - `offscreen`: the card is scrolled out of view. Silent: the clock just waits, the bar keeps its colour.
+ */
+export type RotationPauseSource = 'interaction' | 'offscreen'
+
 export function useFeaturedRotation<T>(items: readonly T[]) {
+  const total = items.length
   const [activeIndex, setActiveIndex] = useState(0)
-  // Hover/focus/tab-visibility pauses are transient; the user toggle sticks until pressed again.
-  const [isHoverPaused, setIsHoverPaused] = useState(false)
+  // Interaction/off-screen/tab-visibility pauses are transient; the user toggle sticks until pressed again.
+  const [isInteractionPaused, setIsInteractionPaused] = useState(false)
   const [isUserPaused, setIsUserPaused] = useState(false)
-  const [progress, setProgress] = useState(0)
+  const [isOffscreen, setIsOffscreen] = useState(false)
+  const [isTabHidden, setIsTabHidden] = useState(false)
+  // Reactive: the rotation stops (and restarts) as soon as the OS setting changes.
+  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
+  // The bar's 0-1 progress lives in a motion value so it animates without re-rendering the Hero every frame.
+  const progress = useMotionValue(0)
   const elapsedRef = useRef(0)
   const startTimeRef = useRef(0)
-  const rafIdRef = useRef<number | null>(null)
-  const isPaused = isHoverPaused || isUserPaused
 
-  // Check for reduced motion preference
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const isPaused = isInteractionPaused || isUserPaused
+  const isRunning = !isPaused && !isOffscreen && !isTabHidden && !prefersReducedMotion && total > 1
 
-  const resetClock = useCallback((time = performance.now()) => {
-    elapsedRef.current = 0
-    startTimeRef.current = time
-    setProgress(0)
+  const goToIndex = useCallback(
+    (index: number) => {
+      elapsedRef.current = 0
+      startTimeRef.current = performance.now()
+      progress.set(0)
+      setActiveIndex(index)
+    },
+    [progress]
+  )
+
+  const pause = useCallback((source: RotationPauseSource = 'interaction') => {
+    if (source === 'offscreen') setIsOffscreen(true)
+    else setIsInteractionPaused(true)
   }, [])
 
-  const goToIndex = useCallback((index: number) => {
-    resetClock()
-    setActiveIndex(index)
-  }, [resetClock])
-
-  const pause = useCallback(() => {
-    setIsHoverPaused(true)
-  }, [])
-
-  const resume = useCallback(() => {
-    setIsHoverPaused(false)
+  const resume = useCallback((source: RotationPauseSource = 'interaction') => {
+    if (source === 'offscreen') setIsOffscreen(false)
+    else setIsInteractionPaused(false)
   }, [])
 
   const togglePause = useCallback(() => {
     if (isUserPaused) {
       // Resuming must always resume: drop any transient pause that may be lingering (focus left inside the card,
-      // a synthesized mouseenter on touch) instead of leaving the bar red and frozen until the user taps elsewhere.
-      setIsHoverPaused(false)
+      // a synthesized mouseenter on touch) instead of leaving the bar paused and frozen until the user taps elsewhere.
+      setIsInteractionPaused(false)
       setIsUserPaused(false)
       return
     }
     setIsUserPaused(true)
   }, [isUserPaused])
 
-  // Handle autoplay and progress from the same clock so the bar matches rotation.
+  // Autoplay and progress share one clock so the bar matches the rotation. Only the slide change touches React state.
   useEffect(() => {
-    if (prefersReducedMotion || items.length <= 1) {
-      setProgress(0)
-      return
-    }
+    if (!isRunning) return
 
-    if (isPaused) {
-      if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current)
-        rafIdRef.current = null
-      }
-      return
-    }
-
+    let rafId = 0
     startTimeRef.current = performance.now() - elapsedRef.current
 
-    const animate = (time: number) => {
-      const elapsed = time - startTimeRef.current
-      elapsedRef.current = elapsed
+    const tick = (time: number) => {
+      const elapsed = Math.max(0, time - startTimeRef.current)
 
       if (elapsed >= ROTATION_INTERVAL_MS) {
-        resetClock(time)
-        setActiveIndex((prev) => (prev + 1) % items.length)
-        setProgress(0)
-        rafIdRef.current = requestAnimationFrame(animate)
-        return
-      }
-
-      setProgress(elapsed / ROTATION_INTERVAL_MS)
-      rafIdRef.current = requestAnimationFrame(animate)
-    }
-
-    rafIdRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current)
-        rafIdRef.current = null
-      }
-    }
-  }, [isPaused, items.length, prefersReducedMotion, resetClock])
-
-  // Handle visibility change - pause when tab is hidden
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        pause()
+        elapsedRef.current = 0
+        startTimeRef.current = time
+        progress.set(0)
+        setActiveIndex((prev) => (prev + 1) % total)
       } else {
-        resume()
+        elapsedRef.current = elapsed
+        progress.set(elapsed / ROTATION_INTERVAL_MS)
       }
+
+      rafId = requestAnimationFrame(tick)
     }
 
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [isRunning, total, progress])
+
+  // Without autoplay the bar has nothing to count down.
+  useEffect(() => {
+    if (prefersReducedMotion || total <= 1) {
+      elapsedRef.current = 0
+      progress.set(0)
+    }
+  }, [prefersReducedMotion, total, progress])
+
+  // Hold the clock while the tab is hidden so returning to it does not skip a slide.
+  useEffect(() => {
+    const handleVisibilityChange = () => setIsTabHidden(document.hidden)
+
+    handleVisibilityChange()
     document.addEventListener('visibilitychange', handleVisibilityChange)
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
-  }, [pause, resume])
+  }, [])
 
   return {
     activeIndex,
@@ -121,6 +120,6 @@ export function useFeaturedRotation<T>(items: readonly T[]) {
     isUserPaused,
     progress,
     intervalMs: ROTATION_INTERVAL_MS,
-    total: items.length,
+    total,
   }
 }
