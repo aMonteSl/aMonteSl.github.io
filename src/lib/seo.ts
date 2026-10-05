@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { LINKS, SITE } from '@/lib/constants'
 import { localizePath, type Locale } from '@/i18n'
 import { getLocalizedProjectTitle, type Project } from '@/features/projects'
+import { isUpcomingEntry } from '@/features/journey/timelineMath'
+import { BUILD_DATE, CURRENT_ROLE_ID, JOURNEY_ENTRIES } from '@/content/journey'
 import enMessages from '@/i18n/messages/en.json'
 import esMessages from '@/i18n/messages/es.json'
 
@@ -11,7 +13,21 @@ const messages = {
 } as const
 
 export const OG_IMAGE = '/images/og/portfolio.png'
-export const LAST_MODIFIED = '2026-09-07'
+export const LAST_MODIFIED = '2026-10-05'
+
+const PERSON_SUMMARY =
+  "Telematics Engineer (URJC, 2026) and Master's student in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data. Author of Code-XR, an open-source VS Code extension for XR software visualization published at IEEE VISSOFT 2025."
+
+/** Person description for the build date: the daily rebuild flips it once the current role starts */
+function getPersonDescription(): string {
+  const currentRole = JOURNEY_ENTRIES.find((entry) => entry.id === CURRENT_ROLE_ID)
+
+  if (currentRole && isUpcomingEntry(currentRole, BUILD_DATE)) {
+    return `${PERSON_SUMMARY} Former Cloud & Systems N2 intern at SATEC, joining a URJC research project on dependencies in complex collections of software modules as a Specialist Technician in October 2026.`
+  }
+
+  return `${PERSON_SUMMARY} Specialist Technician in a URJC research project on dependencies in complex collections of software modules; former Cloud & Systems N2 intern at SATEC.`
+}
 
 const localeMeta = {
   en: {
@@ -178,8 +194,7 @@ export function buildHomeJsonLd(locale: Locale): Record<string, unknown> {
         givenName: 'Adrián',
         familyName: 'Montes Linares',
         jobTitle: ['Telematics Engineer', 'Software Engineer'],
-        description:
-          "Telematics Engineer (URJC, 2026) and Master's student in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data. Author of Code-XR, an open-source VS Code extension for XR software visualization published at IEEE VISSOFT 2025. Cloud & Systems N2 intern at SATEC.",
+        description: getPersonDescription(),
         url: SITE.url,
         email: LINKS.email,
         image: absoluteUrl('/images/profile/hero-320.jpg'),

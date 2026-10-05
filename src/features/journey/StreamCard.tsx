@@ -30,6 +30,10 @@ interface StreamCardProps {
   isOngoing?: boolean
   /** Localized ongoing status label */
   ongoingLabel?: string
+  /** Has this entry not started yet? */
+  isUpcoming?: boolean
+  /** Localized upcoming status label */
+  upcomingLabel?: string
   /** Localized external link label */
   moreLabel?: string
   /** Additional className for the card surface */
@@ -94,6 +98,8 @@ export function StreamCard({
   link,
   isOngoing = false,
   ongoingLabel = 'Active',
+  isUpcoming = false,
+  upcomingLabel = 'Upcoming',
   moreLabel = 'View more',
   className,
   bodyClassName,
@@ -154,6 +160,12 @@ export function StreamCard({
                   transition={{ duration: 1.5, repeat: Infinity }}
                 />
                 {ongoingLabel}
+              </span>
+            )}
+            {isUpcoming && (
+              <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-dashed border-emerald-400/40 text-emerald-300 text-xs font-medium">
+                <span className="w-1.5 h-1.5 rounded-full border border-emerald-300" aria-hidden="true" />
+                {upcomingLabel}
               </span>
             )}
           </div>

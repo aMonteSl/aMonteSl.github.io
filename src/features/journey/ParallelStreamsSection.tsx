@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
+import { useState, useMemo, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { SectionHeader, SectionShell } from '@/components/ui'
 import { useLocale, useTranslations } from '@/i18n'
@@ -13,6 +13,7 @@ import { StreamCard } from './StreamCard'
 import { StreamLegend } from './StreamLegend'
 import { VerticalTimeline } from './VerticalTimeline'
 import { useGlowAnimation } from './useGlowAnimation'
+import { useJourneyToday } from './useJourneyToday'
 import { MARKER_ROW_CLASSES, staggerMarkers, type MarkerRow } from './staggerMarkers'
 import type { ActiveHighlightRef, JourneyEntry, JourneyLane, JourneyHighlight } from './types'
 import {
@@ -24,10 +25,8 @@ import {
   getHighlightDate,
   getVisibleTimelineYears,
   getYearState,
-  isFutureLearningEntry,
   isPointEntry,
-  parseJourneyDate,
-  toJourneyDate,
+  isUpcomingEntry,
   toLocalDate,
   type JourneyDate,
 } from './timelineMath'
@@ -40,7 +39,6 @@ import {
   LANE_CONFIG,
   TIMELINE_START,
   TIMELINE_END,
-  CURRENT_DATE,
 } from '@/content/journey'
 
 /** Touch-only hit areas for the horizontal layout (tablets at lg+); a mouse never sees them */
@@ -110,29 +108,12 @@ function formatPeriod(
   return `${start} - ${end}`
 }
 
-declare global {
-  interface Window {
-    __JOURNEY_TODAY__?: string
-  }
-}
-
 function dateToTimelinePercent(date: JourneyDate, timelineEndYear: number): number {
   return getTimelinePercent(date, TIMELINE_START, timelineEndYear)
 }
 
 function isSameHighlight(a: ActiveHighlightRef | null, b: ActiveHighlightRef): boolean {
   return Boolean(a && a.entryId === b.entryId && a.highlightId === b.highlightId)
-}
-
-function useJourneyToday(): JourneyDate {
-  const [today, setToday] = useState<JourneyDate>(CURRENT_DATE)
-
-  useEffect(() => {
-    const queryToday = new URLSearchParams(window.location.search).get('journeyToday') ?? undefined
-    setToday(parseJourneyDate(window.__JOURNEY_TODAY__) ?? parseJourneyDate(queryToday) ?? toJourneyDate(new Date()))
-  }, [])
-
-  return today
 }
 
 /**
@@ -219,6 +200,15 @@ export function ParallelStreamsSection() {
   }, [locale])
 
   const todayLabel = useMemo(() => formatHighlightDate(today), [formatHighlightDate, today])
+
+  /** Period shown for an entry; one that has not started yet shows its start date instead */
+  const getPeriodLabel = useCallback((entry: JourneyEntry) => {
+    if (isUpcomingEntry(entry, today)) {
+      return t('startsOn', { date: formatHighlightDate(getEntryStartDate(entry)) })
+    }
+
+    return formatPeriod(entry.startYear, entry.startMonth, entry.endYear, entry.endMonth, t('present'), locale)
+  }, [formatHighlightDate, locale, t, today])
 
   const activeHighlight = useMemo(() => {
     if (!activeEntry || !activeHighlightRef || activeEntry.id !== activeHighlightRef.entryId) {
@@ -337,10 +327,12 @@ export function ParallelStreamsSection() {
       endMonth = entry.endMonth ?? 12
       endDay = entry.endDay ?? 31
     } else if (entry.endYear === null) {
-      if (year === today.year) {
-        endMonth = today.month
-        endDay = today.day
-      } else if (year < today.year) {
+      // Open entries run until today, or end on their start date while they have not started
+      const openEnd = getEntryEndDate(entry, today)
+      if (year === openEnd.year) {
+        endMonth = openEnd.month
+        endDay = openEnd.day
+      } else if (year < openEnd.year) {
         endMonth = 12
         endDay = 31
       } else {
@@ -618,14 +610,7 @@ export function ParallelStreamsSection() {
               lane={activeEntry.lane}
               title={t(`entries.${activeEntry.id}.role`)}
               organization={t(`entries.${activeEntry.id}.org`)}
-              period={formatPeriod(
-                activeEntry.startYear,
-                activeEntry.startMonth,
-                activeEntry.endYear,
-                activeEntry.endMonth,
-                t('present'),
-                locale
-              )}
+              period={getPeriodLabel(activeEntry)}
               description={t(`entries.${activeEntry.id}.desc`)}
               highlights={activeEntry.highlights?.map((h) => ({
                 id: h.id,
@@ -637,8 +622,10 @@ export function ParallelStreamsSection() {
               activeHighlightLabel={t('selectedMilestone')}
               tags={activeEntry.tags}
               link={activeEntry.link}
-              isOngoing={activeEntry.endYear === null}
+              isOngoing={activeEntry.endYear === null && !isUpcomingEntry(activeEntry, today)}
               ongoingLabel={t('ongoing')}
+              isUpcoming={isUpcomingEntry(activeEntry, today)}
+              upcomingLabel={t('upcoming')}
               moreLabel={t('viewMore')}
               bodyClassName="max-lg:max-h-[45svh] max-lg:overflow-y-auto max-lg:overscroll-contain max-lg:rounded-xl"
               onClose={clearSelection}
@@ -832,12 +819,13 @@ export function ParallelStreamsSection() {
                               const endPercent = getEndPercent(entry)
                               const isOngoing = entry.endYear === null
                               const isActive = hoveredEntry === entry.id || selectedEntry === entry.id
-                              const isPointEvent = isPointEntry(entry)
-                              const isFutureLearning = isFutureLearningEntry(entry, today)
+                              const isUpcoming = isUpcomingEntry(entry, today)
+                              // Entries that have not started yet collapse to a planned marker on their start date
+                              const isPointEvent = isPointEntry(entry) || isUpcoming
                               const glowIntensity = getIntensity(entry.id)
 
                               // Dynamic glow style
-                              const glowStyle = !isFutureLearning && glowIntensity > 0 ? {
+                              const glowStyle = !isUpcoming && glowIntensity > 0 ? {
                                 boxShadow: `0 0 ${20 * glowIntensity}px ${colors.hex}`,
                                 filter: `brightness(${1 + 0.3 * glowIntensity})`,
                               } : {}
@@ -851,8 +839,8 @@ export function ParallelStreamsSection() {
                                       'absolute top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer',
                                       'w-5 h-5 sm:w-6 sm:h-6 rounded-full',
                                       COARSE_HIT_DOT,
-                                      isFutureLearning
-                                        ? 'border border-dashed border-pink-200/45 bg-pink-400/25 ring-4 ring-pink-400/10 opacity-65 hover:opacity-100'
+                                      isUpcoming
+                                        ? [colors.planned, 'opacity-65 hover:opacity-100']
                                         : [colors.bg, 'ring-2 ring-[var(--bg)]'],
                                       isActive && 'scale-125',
                                       hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-40',
@@ -873,7 +861,7 @@ export function ParallelStreamsSection() {
                                     onPointerMove={() => handleEntryHoverStart(entry.id)}
                                     onPointerLeave={() => handleEntryHoverEnd(entry.id)}
                                     onClick={(event) => handleEntryClick(entry.id, event)}
-                                    title={`${t(`entries.${entry.id}.role`)} - ${formatPeriod(entry.startYear, entry.startMonth, entry.endYear, entry.endMonth, t('present'), locale)}`}
+                                    title={`${t(`entries.${entry.id}.role`)} - ${getPeriodLabel(entry)}`}
                                     aria-label={t(`entries.${entry.id}.role`)}
                                   />
                                 )
@@ -1078,12 +1066,12 @@ export function ParallelStreamsSection() {
 
                               const { startPercent, endPercent } = range
                               const isActive = hoveredEntry === entry.id || selectedEntry === entry.id
-                              const isPointEvent = isPointEntry(entry)
-                              const isFutureLearning = isFutureLearningEntry(entry, today)
+                              const isUpcoming = isUpcomingEntry(entry, today)
+                              const isPointEvent = isPointEntry(entry) || isUpcoming
 
                               if (isPointEvent) {
                                 const glowIntensity = getIntensity(entry.id)
-                                const glowStyle = !isFutureLearning && glowIntensity > 0 ? {
+                                const glowStyle = !isUpcoming && glowIntensity > 0 ? {
                                   boxShadow: `0 0 ${16 * glowIntensity}px ${colors.hex}`,
                                   filter: `brightness(${1 + 0.25 * glowIntensity})`,
                                 } : {}
@@ -1095,8 +1083,8 @@ export function ParallelStreamsSection() {
                                       'absolute top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 cursor-pointer',
                                       'w-5 h-5 sm:w-6 sm:h-6 rounded-full',
                                       COARSE_HIT_DOT,
-                                      isFutureLearning
-                                        ? 'border border-dashed border-pink-200/45 bg-pink-400/25 ring-4 ring-pink-400/10 opacity-65 hover:opacity-100'
+                                      isUpcoming
+                                        ? [colors.planned, 'opacity-65 hover:opacity-100']
                                         : [colors.bg, 'ring-2 ring-[var(--bg)]'],
                                       isActive && 'scale-150 shadow-lg',
                                       hoveredEntry && !isActive && glowIntensity === 0 && 'opacity-50',
@@ -1113,7 +1101,7 @@ export function ParallelStreamsSection() {
                                     onPointerMove={() => handleEntryHoverStart(entry.id)}
                                     onPointerLeave={() => handleEntryHoverEnd(entry.id)}
                                     onClick={(event) => handleEntryClick(entry.id, event)}
-                                    title={`${t(`entries.${entry.id}.role`)} - ${formatPeriod(entry.startYear, entry.startMonth, entry.endYear, entry.endMonth, t('present'), locale)}`}
+                                    title={`${t(`entries.${entry.id}.role`)} - ${getPeriodLabel(entry)}`}
                                     aria-label={t(`entries.${entry.id}.role`)}
                                   />
                                 )
@@ -1153,7 +1141,7 @@ export function ParallelStreamsSection() {
                                   onPointerMove={() => handleEntryHoverStart(entry.id)}
                                   onPointerLeave={() => handleEntryHoverEnd(entry.id)}
                                   onClick={(event) => handleEntryClick(entry.id, event)}
-                                  title={`${t(`entries.${entry.id}.role`)} - ${formatPeriod(entry.startYear, entry.startMonth, entry.endYear, entry.endMonth, t('present'), locale)}`}
+                                  title={`${t(`entries.${entry.id}.role`)} - ${getPeriodLabel(entry)}`}
                                 >
                                   {/* Animated pulse for recent events */}
                                   {isRecent && !isActive && (

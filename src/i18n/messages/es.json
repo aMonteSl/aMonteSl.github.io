@@ -29,11 +29,14 @@
     "name": "Adrián Montes Linares",
     "headline": "Ingeniero Telemático · Estudiante del Máster en Ingeniería de Telecomunicación",
     "headlineSub": "Sistemas, Cloud, Full-Stack y herramientas XR",
-    "aboutMe": "Ingeniero Telemático por la URJC, titulado en enero de 2026, con experiencia en desarrollo software, sistemas y visualización de datos. Autor de Code-XR, extensión open source para VS Code publicada en IEEE VISSOFT 2025, orientada al análisis visual de métricas de código en entornos XR. Actualmente cursando el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data, compaginándolo con prácticas extracurriculares en Cloud & Sistemas N2 de SATEC, con interés en analítica de software, repositorios de código e investigación aplicada.",
+    "aboutMe": "Ingeniero Telemático por la URJC, titulado en enero de 2026, con experiencia en desarrollo software, sistemas y visualización de datos. Autor de Code-XR, extensión open source para VS Code publicada en IEEE VISSOFT 2025, orientada al análisis visual de métricas de código en entornos XR. Actualmente cursando el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data, compaginándolo con un puesto de Técnico Especialista en un proyecto de investigación de la URJC sobre dependencias en colecciones complejas de módulos software, tras unas prácticas extracurriculares en Cloud & Sistemas N2 de SATEC. Interesado en analítica de software, repositorios de código e investigación aplicada.",
+    "aboutMeUpcoming": "Ingeniero Telemático por la URJC, titulado en enero de 2026, con experiencia en desarrollo software, sistemas y visualización de datos. Autor de Code-XR, extensión open source para VS Code publicada en IEEE VISSOFT 2025, orientada al análisis visual de métricas de código en entornos XR. Actualmente cursando el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data. Tras unas prácticas extracurriculares en Cloud & Sistemas N2 de SATEC, se incorpora el 8 de octubre de 2026 como Técnico Especialista a un proyecto de investigación de la URJC sobre dependencias en colecciones complejas de módulos software. Interesado en analítica de software, repositorios de código e investigación aplicada.",
     "ctaProjects": "Ver Proyectos",
     "ctaResume": "Descargar CV",
     "availabilityLabel": "Actualmente activo",
-    "availabilityText": "Prácticas en SATEC, desde mar 2026",
+    "availabilityLabelUpcoming": "Próxima incorporación",
+    "availabilityText": "Investigación en la URJC, desde oct 2026",
+    "availabilityTextUpcoming": "Investigación en la URJC, a partir del 8 oct",
     "location": "Madrid, ES",
     "featuredProject": {
       "badge": "Destacado",
@@ -63,8 +66,13 @@
     "metrics": {
       "current": {
         "label": "Actual",
-        "value": "Cloud & Sistemas N2",
-        "detail": "SATEC · desde mar 2026"
+        "value": "Técnico Especialista",
+        "detail": "Investigación URJC · desde oct 2026"
+      },
+      "upcoming": {
+        "label": "Próximamente",
+        "value": "Técnico Especialista",
+        "detail": "Investigación URJC · a partir del 8 oct 2026"
       },
       "research": {
         "label": "Investigación",
@@ -90,10 +98,12 @@
     "name": "Adrián Montes Linares",
     "role": "Ingeniero Telemático y estudiante del Máster en Ingeniería de Telecomunicación (UPM), con experiencia en Cloud, Sistemas N2, desarrollo Full-Stack y visualización XR de software",
     "bio1": "Soy Ingeniero Telemático por la Universidad Rey Juan Carlos, titulado en enero de 2026. Mi perfil combina desarrollo software, sistemas, operación cloud y visualización de datos, con un enfoque práctico en herramientas mantenibles y documentación clara.",
-    "bio2": "Actualmente compagino el máster en la UPM con prácticas extracurriculares en SATEC dentro de Cloud & Sistemas N2, donde trabajo con requests, incidencias, operación de infraestructura, máquinas virtuales, parcheo de vulnerabilidades, acceso SSH/RDP y herramientas como Nagios, AMS, Veeam Backup, NetApp y VMware.",
+    "bio2": "Actualmente compagino el máster en la UPM con un puesto de Técnico Especialista en el proyecto de investigación de la URJC «Dependencias en colecciones complejas de módulos software» (PID2022-139551NB-I00), financiado por la Agencia Estatal de Investigación. Antes, de marzo a septiembre de 2026, hice prácticas extracurriculares en SATEC dentro de Cloud & Sistemas N2, donde trabajé con requests, incidencias, operación de infraestructura, máquinas virtuales, parcheo de vulnerabilidades, acceso SSH/RDP y herramientas como Nagios, AMS, Veeam Backup, NetApp y VMware.",
+    "bio2Upcoming": "El 8 de octubre de 2026 me incorporo como Técnico Especialista al proyecto de investigación de la URJC «Dependencias en colecciones complejas de módulos software» (PID2022-139551NB-I00), financiado por la Agencia Estatal de Investigación, y lo compaginaré con el máster en la UPM. Hasta septiembre de 2026 hice prácticas extracurriculares en SATEC dentro de Cloud & Sistemas N2, donde trabajé con requests, incidencias, operación de infraestructura, máquinas virtuales, parcheo de vulnerabilidades, acceso SSH/RDP y herramientas como Nagios, AMS, Veeam Backup, NetApp y VMware.",
     "stats": {
       "experience": "Experiencia",
-      "experienceValue": "SATEC Cloud & Sistemas N2, prácticas Full-Stack en VBGroup, Code-XR, VISSOFT 2025",
+      "experienceValue": "Investigación en la URJC (Técnico Especialista), SATEC Cloud & Sistemas N2, prácticas Full-Stack en VBGroup, Code-XR, VISSOFT 2025",
+      "experienceValueUpcoming": "SATEC Cloud & Sistemas N2, prácticas Full-Stack en VBGroup, Code-XR, VISSOFT 2025",
       "education": "Formación",
       "educationValue": "Ingeniería Telemática (URJC, ene 2026) · Máster en Ingeniería de Telecomunicación en la UPM, en curso desde sep 2026",
       "focus": "Enfoque actual",
@@ -107,6 +117,8 @@
     "operatingKicker": "Perfil operativo",
     "bio3": "Antes, durante mis prácticas curriculares en VBGroup, trabajé como Desarrollador Full-Stack Junior en OBT, una plataforma interna construida con Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite y Tailwind. En paralelo curso el Máster Universitario en Ingeniería de Telecomunicación en la UPM, con intensificación en Aprendizaje Automático y Big Data.",
     "pills": {
+      "research": "Investigación URJC · Técnico Especialista",
+      "researchUpcoming": "Próximamente: investigación URJC",
       "satec": "SATEC Cloud & Sistemas N2",
       "vbgroup": "Prácticas Full-Stack en VBGroup",
       "upm": "Máster UPM · ML y Big Data",
@@ -762,6 +774,8 @@
     "hoverHint": "Selecciona un elemento para ver detalles",
     "selectedMilestone": "Hito seleccionado",
     "ongoing": "Activo",
+    "upcoming": "Próximamente",
+    "startsOn": "Comienza el {date}",
     "viewMore": "Ver más",
     "clickYearHint": "Selecciona un año para ver el detalle mensual",
     "legend": {
@@ -823,12 +837,17 @@
       "satecCloud": {
         "role": "Ingeniero de Sistemas N2 / Cloud",
         "org": "SATEC (Prácticas extracurriculares)",
-        "desc": "Prácticas extracurriculares centradas en sistemas, soporte N2, entornos cloud, operación de infraestructura y documentación profesional. Comenzaron el 14 de marzo de 2026, se renovaron en septiembre de 2026 y actualmente las compagino con el máster en la UPM."
+        "desc": "Prácticas extracurriculares centradas en sistemas, soporte N2, entornos cloud, operación de infraestructura y documentación profesional. Del 14 de marzo al 28 de septiembre de 2026."
       },
       "masterTelecomUPM": {
         "role": "Máster Universitario en Ingeniería de Telecomunicación",
         "org": "Universidad Politécnica de Madrid (UPM)",
-        "desc": "Máster oficial en la UPM, iniciado en septiembre de 2026, con intensificación en Aprendizaje Automático y Big Data dentro de Ingeniería de Telecomunicación. Lo compagino con las prácticas extracurriculares en Cloud & Sistemas N2 de SATEC."
+        "desc": "Máster oficial en la UPM, iniciado en septiembre de 2026, con intensificación en Aprendizaje Automático y Big Data dentro de Ingeniería de Telecomunicación. Lo compagino con un puesto de Técnico Especialista en un proyecto de investigación de la URJC a partir de octubre de 2026."
+      },
+      "urjcResearch": {
+        "role": "Técnico Especialista (Investigación)",
+        "org": "Universidad Rey Juan Carlos (URJC)",
+        "desc": "Técnico Especialista en el proyecto de investigación «Dependencias en colecciones complejas de módulos software» (PID2022-139551NB-I00), financiado por la Agencia Estatal de Investigación (AEI) y dirigido por Jesús M. González Barahona y Francisco Gortázar. A partir del 8 de octubre de 2026, compaginado con el máster en la UPM."
       }
     },
     "kicker": "Trayectoria técnica",

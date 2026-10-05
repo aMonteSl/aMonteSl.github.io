@@ -18,9 +18,13 @@ function isPastHalfOfYear(today) {
   return dateToYearPercent(today) > 50;
 }
 
+function isUpcomingEntry(entry, today) {
+  return toLocalDate(getEntryStartDate(entry)).getTime() > toLocalDate(today).getTime();
+}
+
 function getEntryEndDate(entry, today) {
   if (entry.endYear === null) {
-    return today;
+    return isUpcomingEntry(entry, today) ? getEntryStartDate(entry) : today;
   }
 
   return {
@@ -158,5 +162,16 @@ const planned2028Entries = [
 assert(getVisibleTimelineYears(planned2028Entries, beforeHalf, 2020, 2026).at(-1) === 2028, 'Timeline must grow through 2028 when 2028 is scheduled.');
 
 assert(hasScheduledContentInYear(baseEntries, 2027, nextYear), 'Ongoing entries must occupy the current new year.');
+
+const upcomingRole = { id: 'urjcResearch', startYear: 2026, startMonth: 10, startDay: 8, endYear: null };
+const beforeStart = { year: 2026, month: 10, day: 5 };
+const onStart = { year: 2026, month: 10, day: 8 };
+const afterStart = { year: 2026, month: 11, day: 2 };
+const sameDate = (a, b) => a.year === b.year && a.month === b.month && a.day === b.day;
+
+assert(isUpcomingEntry(upcomingRole, beforeStart), 'An open entry starting after today must be upcoming.');
+assert(sameDate(getEntryEndDate(upcomingRole, beforeStart), getEntryStartDate(upcomingRole)), 'An upcoming open entry must end on its start date, never before it.');
+assert(!isUpcomingEntry(upcomingRole, onStart), 'An entry must stop being upcoming on its start date.');
+assert(sameDate(getEntryEndDate(upcomingRole, afterStart), afterStart), 'A started open entry must run until today.');
 
 console.log('Journey timeline checks passed.');

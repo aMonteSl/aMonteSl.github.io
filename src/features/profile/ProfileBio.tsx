@@ -5,6 +5,8 @@ import { fadeInUp } from '@/lib/motion'
 import { useTranslations } from '@/i18n'
 import { cn } from '@/lib/utils'
 import { DividerLine, Kicker, MetricTile, StatusPill, Surface } from '@/components/ui'
+import { CURRENT_ROLE_ID } from '@/content/journey'
+import { useEntryPhase } from '@/features/journey'
 
 interface ProfileBioProps {
   className?: string
@@ -12,16 +14,19 @@ interface ProfileBioProps {
 
 export function ProfileBio({ className }: ProfileBioProps) {
   const t = useTranslations('profile')
+  // Copy about the current role switches on its start date (see useEntryPhase)
+  const isRoleUpcoming = useEntryPhase(CURRENT_ROLE_ID) === 'upcoming'
 
   const pills = [
-    { label: t('pills.satec'), tone: 'success' as const },
+    { label: t(isRoleUpcoming ? 'pills.researchUpcoming' : 'pills.research'), tone: 'success' as const },
+    { label: t('pills.satec'), tone: 'accent' as const },
     { label: t('pills.vbgroup'), tone: 'accent' as const },
     { label: t('pills.upm'), tone: 'xr' as const },
     { label: t('pills.english'), tone: 'success' as const },
   ]
 
   const stats = [
-    { label: t('stats.experience'), value: t('stats.experienceValue') },
+    { label: t('stats.experience'), value: t(isRoleUpcoming ? 'stats.experienceValueUpcoming' : 'stats.experienceValue') },
     { label: t('stats.education'), value: t('stats.educationValue') },
     { label: t('stats.focus'), value: t('stats.focusValue') },
     { label: t('stats.languages'), value: t('stats.languagesValue') },
@@ -51,7 +56,7 @@ export function ProfileBio({ className }: ProfileBioProps) {
 
           <div className="space-y-5 text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
             <p>{t('bio1')}</p>
-            <p>{t('bio2')}</p>
+            <p>{t(isRoleUpcoming ? 'bio2Upcoming' : 'bio2')}</p>
             <p>{t('bio3')}</p>
           </div>
 
