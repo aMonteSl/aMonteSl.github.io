@@ -1,4 +1,5 @@
 import { JourneyEntry, LaneConfig } from '@/features/journey/types'
+import { parseJourneyDate, type JourneyDate } from '@/features/journey/timelineMath'
 import { LINKS } from '@/lib/constants'
 
 /**
@@ -118,9 +119,25 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
     startYear: 2026,
     startMonth: 3,
     startDay: 14,
-    endYear: null,
+    endYear: 2026,
+    endMonth: 9,
+    endDay: 28,
     tags: ['Cloud', 'Systems', 'N2 Support', 'Infrastructure'],
     link: 'https://www.satec.es',
+  },
+  {
+    id: 'urjcResearch',
+    type: 'work',
+    lane: 'work',
+    roleKey: 'journey.entries.urjcResearch.role',
+    orgKey: 'journey.entries.urjcResearch.org',
+    descKey: 'journey.entries.urjcResearch.desc',
+    startYear: 2026,
+    startMonth: 10,
+    startDay: 8,
+    endYear: null,
+    tags: ['Research', 'Software Ecosystems', 'Dependencies', 'Open Source'],
+    link: 'https://www.urjc.es',
   },
 
   // === PROJECT (Lane 3) ===
@@ -200,11 +217,20 @@ export const JOURNEY_ENTRIES: JourneyEntry[] = [
 /** Timeline boundaries */
 export const TIMELINE_START = 2020
 export const TIMELINE_END = 2026
-export const CURRENT_DATE = {
+
+/**
+ * "Today" the static HTML is prerendered with: the build date (Madrid time) injected by
+ * next.config.ts, identical in the server and client bundles so hydration never mismatches.
+ * The visitor's real date replaces it after hydration (see useJourneyToday).
+ */
+export const BUILD_DATE: JourneyDate = parseJourneyDate(process.env.NEXT_PUBLIC_BUILD_DATE) ?? {
   year: 2026,
-  month: 9,
-  day: 7,
-} as const
+  month: 10,
+  day: 5,
+}
+
+/** Work entry the hero and profile describe as the current (or upcoming) role */
+export const CURRENT_ROLE_ID = 'urjcResearch'
 
 /** Convert a date to a decimal year (for precise positioning) */
 export function dateToDecimalYear(year: number, month?: number, day?: number): number {

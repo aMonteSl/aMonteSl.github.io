@@ -10,8 +10,8 @@ import {
   getEntryEndDate,
   getEntryStartDate,
   getHighlightDate,
-  isFutureLearningEntry,
   isPointEntry,
+  isUpcomingEntry,
   type JourneyDate,
   type TimelineYearState,
 } from './timelineMath'
@@ -174,12 +174,13 @@ export function VerticalTimeline({
                       hoveredEntry === entry.id ||
                       selectedEntry === entry.id ||
                       selectedHighlight?.entryId === entry.id
-                    const isPointEvent = isPointEntry(entry)
+                    const isUpcoming = isUpcomingEntry(entry, today)
+                    // Entries that have not started yet collapse to a planned marker on their start date
+                    const isPointEvent = isPointEntry(entry) || isUpcoming
                     const startTop = getVerticalTop(getEntryStartDate(entry))
                     const endTop = getVerticalTop(getEntryEndDate(entry, today))
                     const top = isPointEvent ? startTop : Math.min(startTop, endTop)
                     const height = Math.max(Math.abs(startTop - endTop), 2)
-                    const isFutureLearning = isFutureLearningEntry(entry, today)
                     const label = t(`entries.${entry.id}.role`)
 
                     if (isPointEvent) {
@@ -190,9 +191,7 @@ export function VerticalTimeline({
                           className={cn(
                             'absolute z-20 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-[var(--bg)] transition-all duration-200 hover:scale-125 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]',
                             HIT_AREA_POINT,
-                            isFutureLearning
-                              ? 'border border-dashed border-pink-200/45 bg-pink-400/30 opacity-70'
-                              : colors.bg,
+                            isUpcoming ? [colors.planned, 'opacity-70'] : colors.bg,
                             isActive && 'scale-125 shadow-[0_0_18px_rgba(238,174,148,0.45)]'
                           )}
                           style={{ top: `${top}%` }}

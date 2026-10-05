@@ -78,7 +78,8 @@ export function getEntryStartDate(entry: JourneyEntry): JourneyDate {
 
 export function getEntryEndDate(entry: JourneyEntry, today: JourneyDate): JourneyDate {
   if (entry.endYear === null) {
-    return today
+    // An open entry that has not started yet ends where it starts, never before it
+    return isUpcomingEntry(entry, today) ? getEntryStartDate(entry) : today
   }
 
   return {
@@ -105,9 +106,9 @@ export function isPointEntry(entry: JourneyEntry): boolean {
   )
 }
 
-/** Learning entries scheduled after today render as planned (dashed) items */
-export function isFutureLearningEntry(entry: JourneyEntry, today: JourneyDate): boolean {
-  return entry.lane === 'learning' && toLocalDate(getEntryStartDate(entry)).getTime() > toLocalDate(today).getTime()
+/** Entries that start after today render as planned (dashed) markers on their start date */
+export function isUpcomingEntry(entry: JourneyEntry, today: JourneyDate): boolean {
+  return toLocalDate(getEntryStartDate(entry)).getTime() > toLocalDate(today).getTime()
 }
 
 export function isPastHalfOfYear(today: JourneyDate): boolean {

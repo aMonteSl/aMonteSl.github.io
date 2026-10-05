@@ -29,11 +29,14 @@
     "name": "Adrián Montes Linares",
     "headline": "Telematics Engineer · Master's student in Telecommunications Engineering",
     "headlineSub": "Systems, Cloud, Full-Stack and XR developer tools",
-    "aboutMe": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently enrolled in the Master's Degree in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data, while continuing an extracurricular Cloud & Systems N2 internship at SATEC. Interested in software analytics, code repositories, and applied research.",
+    "aboutMe": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently enrolled in the Master's Degree in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data, while working as a Specialist Technician on a URJC research project on dependencies in complex collections of software modules, after an extracurricular Cloud & Systems N2 internship at SATEC. Interested in software analytics, code repositories, and applied research.",
+    "aboutMeUpcoming": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently enrolled in the Master's Degree in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data. After an extracurricular Cloud & Systems N2 internship at SATEC, joining a URJC research project on dependencies in complex collections of software modules as a Specialist Technician on October 8, 2026. Interested in software analytics, code repositories, and applied research.",
     "ctaProjects": "View Projects",
     "ctaResume": "Download CV",
     "availabilityLabel": "Currently active",
-    "availabilityText": "SATEC internship, since Mar 2026",
+    "availabilityLabelUpcoming": "Starting soon",
+    "availabilityText": "URJC research, since Oct 2026",
+    "availabilityTextUpcoming": "URJC research, from Oct 8",
     "location": "Madrid, ES",
     "featuredProject": {
       "badge": "Featured",
@@ -63,8 +66,13 @@
     "metrics": {
       "current": {
         "label": "Current",
-        "value": "Cloud & Systems N2",
-        "detail": "SATEC · since Mar 2026"
+        "value": "Specialist Technician",
+        "detail": "URJC research · since Oct 2026"
+      },
+      "upcoming": {
+        "label": "Upcoming",
+        "value": "Specialist Technician",
+        "detail": "URJC research · from Oct 8, 2026"
       },
       "research": {
         "label": "Research",
@@ -90,10 +98,12 @@
     "name": "Adrián Montes Linares",
     "role": "Telematics Engineer and Master's student in Telecommunications Engineering (UPM), with experience in Cloud, Systems N2, Full-Stack development, and XR software visualization",
     "bio1": "I am a Telematics Engineer from Universidad Rey Juan Carlos, graduated in January 2026. My profile combines software development, systems, cloud operations, and data visualization, with a practical focus on maintainable tools and clear documentation.",
-    "bio2": "I am currently combining the master's degree at UPM with an extracurricular internship at SATEC in Cloud & Systems N2, where I work on support requests, incidents, infrastructure operation, virtual machines, vulnerability patching, SSH/RDP access, and tools such as Nagios, AMS, Veeam Backup, NetApp, and VMware.",
+    "bio2": "I currently combine the master's degree at UPM with a Specialist Technician position in the URJC research project “Dependencies in complex collections of software modules” (PID2022-139551NB-I00), funded by the Spanish State Research Agency. Before that, from March to September 2026, I completed an extracurricular internship at SATEC in Cloud & Systems N2, where I worked on support requests, incidents, infrastructure operation, virtual machines, vulnerability patching, SSH/RDP access, and tools such as Nagios, AMS, Veeam Backup, NetApp, and VMware.",
+    "bio2Upcoming": "On October 8, 2026, I join the URJC research project “Dependencies in complex collections of software modules” (PID2022-139551NB-I00), funded by the Spanish State Research Agency, as a Specialist Technician, combining it with the master's degree at UPM. Until September 2026, I completed an extracurricular internship at SATEC in Cloud & Systems N2, where I worked on support requests, incidents, infrastructure operation, virtual machines, vulnerability patching, SSH/RDP access, and tools such as Nagios, AMS, Veeam Backup, NetApp, and VMware.",
     "stats": {
       "experience": "Experience",
-      "experienceValue": "SATEC Cloud & Systems N2, VBGroup Full-Stack internship, Code-XR, VISSOFT 2025",
+      "experienceValue": "URJC research (Specialist Technician), SATEC Cloud & Systems N2, VBGroup Full-Stack internship, Code-XR, VISSOFT 2025",
+      "experienceValueUpcoming": "SATEC Cloud & Systems N2, VBGroup Full-Stack internship, Code-XR, VISSOFT 2025",
       "education": "Education",
       "educationValue": "Telematics Engineering (URJC, Jan 2026) · Master's in Telecommunications Engineering at UPM, in progress since Sep 2026",
       "focus": "Current Focus",
@@ -107,6 +117,8 @@
     "operatingKicker": "Operating profile",
     "bio3": "Before that, during my curricular internship at VBGroup, I worked as a Junior Full-Stack Developer on OBT, an internal platform built with Express.js, TypeScript, Cosmos DB, Azure Blob Storage, React, Vite, and Tailwind. I am now enrolled in the Master's Degree in Telecommunications Engineering at UPM, following the Machine Learning and Big Data specialization.",
     "pills": {
+      "research": "URJC research · Specialist Technician",
+      "researchUpcoming": "Upcoming: URJC research",
       "satec": "SATEC Cloud & Systems N2",
       "vbgroup": "VBGroup Full-Stack internship",
       "upm": "UPM Master's · ML & Big Data",
@@ -762,6 +774,8 @@
     "hoverHint": "Select an item to view details",
     "selectedMilestone": "Selected milestone",
     "ongoing": "Active",
+    "upcoming": "Upcoming",
+    "startsOn": "Starts {date}",
     "viewMore": "View more",
     "clickYearHint": "Select a year to see monthly details",
     "legend": {
@@ -823,12 +837,17 @@
       "satecCloud": {
         "role": "Systems N2 / Cloud Engineer",
         "org": "SATEC (Extracurricular Internship)",
-        "desc": "Extracurricular internship focused on systems, N2 support, cloud environments, infrastructure operation, and professional documentation. Started on March 14, 2026, renewed in September 2026, and currently combined with the master's degree at UPM."
+        "desc": "Extracurricular internship focused on systems, N2 support, cloud environments, infrastructure operation, and professional documentation. From March 14 to September 28, 2026."
       },
       "masterTelecomUPM": {
         "role": "Master's Degree in Telecommunications Engineering",
         "org": "Universidad Politécnica de Madrid (UPM)",
-        "desc": "Official master's degree at UPM, started in September 2026, following the Machine Learning and Big Data specialization within Telecommunications Engineering. Combined with the extracurricular Cloud & Systems N2 internship at SATEC."
+        "desc": "Official master's degree at UPM, started in September 2026, following the Machine Learning and Big Data specialization within Telecommunications Engineering. Combined with a Specialist Technician position in a URJC research project from October 2026."
+      },
+      "urjcResearch": {
+        "role": "Specialist Technician (Research)",
+        "org": "Universidad Rey Juan Carlos (URJC)",
+        "desc": "Specialist Technician in the research project “Dependencies in complex collections of software modules” (PID2022-139551NB-I00), funded by the Spanish State Research Agency (AEI) and led by Jesús M. González Barahona and Francisco Gortázar. From October 8, 2026, combined with the master's degree at UPM."
       }
     },
     "kicker": "Career stream",

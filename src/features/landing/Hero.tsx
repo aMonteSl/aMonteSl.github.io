@@ -20,6 +20,8 @@ import { useTranslations, useLocale } from '@/i18n'
 import { SOCIAL_LINKS, getCvUrl } from '@/lib/constants'
 import { useEmailCopyFeedback } from '@/lib/hooks/useEmailCopyFeedback'
 import { FEATURED_PROJECTS } from '@/content/featuredProjects'
+import { CURRENT_ROLE_ID } from '@/content/journey'
+import { useEntryPhase } from '@/features/journey'
 import { useFeaturedRotation } from './useFeaturedRotation'
 import { FeaturedProjectCard } from './FeaturedProjectCard'
 
@@ -58,6 +60,9 @@ export function Hero() {
   } = useFeaturedRotation(FEATURED_PROJECTS)
   const cvUrl = getCvUrl(locale)
   const { copiedEmail, copyEmail } = useEmailCopyFeedback()
+  // Copy about the current role switches on its start date (see useEntryPhase)
+  const isRoleUpcoming = useEntryPhase(CURRENT_ROLE_ID) === 'upcoming'
+  const roleMetric = isRoleUpcoming ? 'metrics.upcoming' : 'metrics.current'
   const socialLabels: Record<SocialKey, string> = {
     github: t('social.github'),
     linkedin: t('social.linkedin'),
@@ -126,14 +131,14 @@ export function Hero() {
           <motion.div {...(animate ? fadeInUp(0.1) : {})} className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <StatusPill tone="success">
               <BriefcaseIcon className="h-3.5 w-3.5" />
-              {t('availabilityLabel')}
+              {t(isRoleUpcoming ? 'availabilityLabelUpcoming' : 'availabilityLabel')}
             </StatusPill>
-            <StatusPill tone="muted">{t('availabilityText')}</StatusPill>
+            <StatusPill tone="muted">{t(isRoleUpcoming ? 'availabilityTextUpcoming' : 'availabilityText')}</StatusPill>
             <StatusPill tone="xr">{t('location')}</StatusPill>
           </motion.div>
 
           <motion.p {...(animate ? fadeInUp(0.12) : {})} className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
-            {t('aboutMe')}
+            {t(isRoleUpcoming ? 'aboutMeUpcoming' : 'aboutMe')}
           </motion.p>
 
           <motion.div {...(animate ? fadeInUp(0.14) : {})} className="relative mt-8 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
@@ -173,7 +178,7 @@ export function Hero() {
           </motion.div>
 
           <motion.div {...(animate ? fadeInUp(0.18) : {})} className="mt-8 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
-            <MetricTile label={t('metrics.current.label')} value={t('metrics.current.value')} detail={t('metrics.current.detail')} />
+            <MetricTile label={t(`${roleMetric}.label`)} value={t(`${roleMetric}.value`)} detail={t(`${roleMetric}.detail`)} />
             <MetricTile label={t('metrics.research.label')} value={t('metrics.research.value')} detail={t('metrics.research.detail')} />
             <MetricTile label={t('metrics.next.label')} value={t('metrics.next.value')} detail={t('metrics.next.detail')} />
           </motion.div>

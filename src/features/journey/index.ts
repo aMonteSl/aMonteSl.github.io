@@ -8,6 +8,7 @@ export { VerticalTimeline } from './VerticalTimeline'
 
 // Hooks
 export { useGlowAnimation } from './useGlowAnimation'
+export { useEntryPhase, useJourneyToday, type EntryPhase } from './useJourneyToday'
 
 // Layout helpers
 export { MARKER_MIN_GAP_PX, MARKER_ROW_CLASSES, staggerMarkers } from './staggerMarkers'
