@@ -18,6 +18,7 @@ import { useTranslations, useLocale } from '@/i18n'
 import { SOCIAL_LINKS, getCvUrl } from '@/lib/constants'
 import { useEmailCopyFeedback } from '@/lib/hooks/useEmailCopyFeedback'
 import { FEATURED_PROJECTS } from '@/content/featuredProjects'
+import { SIDEBAR_BLEED_CLASS } from '@/features/morphNav/layout'
 import { CURRENT_ROLE_ID } from '@/content/journey'
 import { useEntryPhase } from '@/features/journey'
 import { useFeaturedRotation } from './useFeaturedRotation'
@@ -67,7 +68,7 @@ export function Hero() {
   }
 
   return (
-    <SectionShell id="home" className="flex min-h-[calc(100svh-4rem)] items-center pt-24 lg:pt-28" tone="xr">
+    <SectionShell id="home" className={`flex min-h-[calc(100svh-4rem)] items-center pt-24 lg:pt-28 ${SIDEBAR_BLEED_CLASS}`} tone="xr">
       <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10 xl:gap-14">
         {/* CSS entrance (.hero-enter): the first screen is visible before hydration */}
         <div className="hero-enter order-2 flex flex-col items-center [animation-delay:160ms] lg:order-1">

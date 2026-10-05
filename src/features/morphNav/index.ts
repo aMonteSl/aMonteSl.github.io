@@ -8,6 +8,7 @@ export { useScrollProgress } from './useScrollProgress'
 export {
   SIDEBAR_WIDTH_CLASS,
   SIDEBAR_CONTENT_OFFSET_CLASS,
+  SIDEBAR_BLEED_CLASS,
   SIDEBAR_RECENTER_CLASS,
   SIDEBAR_MEDIA_QUERY,
 } from './layout'

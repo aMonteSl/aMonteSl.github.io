@@ -11,6 +11,12 @@ export const SIDEBAR_WIDTH_CLASS = 'w-[17rem]'
 /** Applied to the home content and footer at xl+ (17rem sidebar + 2rem gutter). */
 export const SIDEBAR_CONTENT_OFFSET_CLASS = 'xl:ml-[17rem] xl:pl-8'
 
+/**
+ * Lets the hero cancel that offset and span the viewport at xl: the sidebar is still hidden while the
+ * hero is on screen, so the hero centres under the header instead of leaving an empty 19rem band.
+ */
+export const SIDEBAR_BLEED_CLASS = 'xl:-ml-[19rem]'
+
 /** Below xl the floating menu button (56px, bottom-left) would cover the end of the page; this clears it. */
 export const FLOATING_MENU_CLEARANCE_CLASS = 'max-xl:pb-[calc(5rem+env(safe-area-inset-bottom))]'
 

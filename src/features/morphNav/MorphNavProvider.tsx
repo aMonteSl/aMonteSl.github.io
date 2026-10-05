@@ -13,9 +13,17 @@ import { useScrollProgress } from '@/features/morphNav/useScrollProgress'
 import { SIDEBAR_MEDIA_QUERY } from '@/features/morphNav/layout'
 import { NAV_ITEMS } from '@/lib/constants'
 
+/** Scroll positions (px) where the header starts handing over to the sidebar and where it is done */
+export interface MorphRange {
+  start: number
+  end: number
+}
+
 interface MorphNavContextValue {
   /** Scroll progress from 0 (header) to 1 (sidebar) */
   progress: number
+  /** Scroll range of the morph; the desktop sidebar fades in over the same range */
+  morphRange: MorphRange
   /** Whether sidebar is fully visible */
   isMorphed: boolean
   /** Whether currently transitioning */
@@ -51,10 +59,47 @@ export function MorphNavProvider({
   morphStart = 100,
   morphEnd = 400,
 }: MorphNavProviderProps) {
-  const { progress, isMorphed, isMorphing, prefersReducedMotion } = useScrollProgress({
-    start: morphStart,
-    end: morphEnd,
-  })
+  // From xl the hero spans the viewport (the sidebar is hidden while it is on screen), so the header only
+  // hands over to the sidebar once the hero is almost gone; otherwise the sidebar would cover its left column.
+  // Below xl the fixed props drive the header fade and the floating menu button.
+  const [desktopRange, setDesktopRange] = useState<MorphRange | null>(null)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(SIDEBAR_MEDIA_QUERY)
+    const hero = document.getElementById('home')
+
+    const measure = () => {
+      if (!mediaQuery.matches || !hero) {
+        setDesktopRange(null)
+        return
+      }
+
+      // Done when the hero's bottom edge reaches the 64px header; the crossfade covers the 30% of the
+      // viewport before that, by which point the hero's left column has scrolled out of view.
+      const heroBottom = hero.offsetTop + hero.offsetHeight
+      const end = Math.max(morphEnd, Math.round(heroBottom - 64))
+      const start = Math.max(morphStart, Math.round(end - Math.max(200, window.innerHeight * 0.3)))
+
+      setDesktopRange((current) => (
+        current?.start === start && current.end === end ? current : { start, end }
+      ))
+    }
+
+    measure()
+    const resizeObserver = new ResizeObserver(measure)
+    if (hero) resizeObserver.observe(hero)
+    window.addEventListener('resize', measure)
+    mediaQuery.addEventListener('change', measure)
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', measure)
+      mediaQuery.removeEventListener('change', measure)
+    }
+  }, [morphStart, morphEnd])
+
+  const morphRange: MorphRange = desktopRange ?? { start: morphStart, end: morphEnd }
+  const { progress, isMorphed, isMorphing, prefersReducedMotion } = useScrollProgress(morphRange)
 
   const [activeSection, setActiveSection] = useState('home')
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -148,6 +193,7 @@ export function MorphNavProvider({
 
   const contextValue: MorphNavContextValue = {
     progress,
+    morphRange,
     isMorphed,
     isMorphing,
     activeSection,
