@@ -19,9 +19,12 @@ const typeTone = {
 function RecommendationCard({
   recommendation,
   featured = false,
+  delay = 0,
 }: {
   recommendation: Recommendation
   featured?: boolean
+  /** Entrance delay (s), staggers the cards of a row */
+  delay?: number
 }) {
   const t = useTranslations('testimonials')
 
@@ -29,10 +32,10 @@ function RecommendationCard({
     <motion.article
       className={cn(
         'relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)]/75 bg-[var(--card)]/58 p-5 shadow-[0_20px_70px_rgba(0,0,0,0.18)]',
-        'transition-all duration-200 hover:-translate-y-1 hover:border-[var(--accent)]/35 hover:bg-[var(--card)]/70',
+        'transition-[border-color,background-color] duration-200 hover:border-[var(--accent)]/35 hover:bg-[var(--card)]/70',
         featured && 'md:p-6 lg:min-h-[21rem]'
       )}
-      {...fadeInUp()}
+      {...fadeInUp(delay)}
     >
       <div className="mb-5 flex min-h-10 flex-wrap items-start justify-between gap-3">
         <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--accent)]/25 bg-[var(--accent)]/10 text-[var(--accent)]">
@@ -110,30 +113,21 @@ export function TestimonialsSection() {
         <SectionHeader kicker={t('kicker')} title={t('title')} subtitle={t('subtitle')} align="left" />
       </motion.div>
 
-      <motion.div
-        className="mx-auto max-w-6xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-        variants={{
-          visible: { transition: { staggerChildren: 0.1 } },
-          hidden: {},
-        }}
-      >
+      <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {featuredRecommendations.map((recommendation) => (
-              <RecommendationCard key={recommendation.id} recommendation={recommendation} featured />
+            {featuredRecommendations.map((recommendation, index) => (
+              <RecommendationCard key={recommendation.id} recommendation={recommendation} featured delay={index * 0.08} />
             ))}
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {secondaryRecommendations.map((recommendation) => (
-              <RecommendationCard key={recommendation.id} recommendation={recommendation} />
+            {secondaryRecommendations.map((recommendation, index) => (
+              <RecommendationCard key={recommendation.id} recommendation={recommendation} delay={index * 0.08} />
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </SectionShell>
   )
 }

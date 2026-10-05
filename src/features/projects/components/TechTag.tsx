@@ -151,7 +151,7 @@ export function TechTag({ tech, className = '' }: TechTagProps) {
         aria-hidden="true"
       />
       <span
-        className="text-[10px] text-[var(--fg-muted)] leading-none whitespace-nowrap group-hover:text-[var(--fg)] transition-colors"
+        className="text-[11px] text-[var(--fg-muted)] leading-none whitespace-nowrap group-hover:text-[var(--fg)] transition-colors"
         translate="no"
       >
         {tech}

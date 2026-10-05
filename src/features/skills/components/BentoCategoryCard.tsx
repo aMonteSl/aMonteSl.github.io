@@ -6,6 +6,7 @@ import { useTranslations } from '@/i18n'
 import { getSkillIcon } from '../skillIconMap'
 import { SkillChip } from './SkillChip'
 import { cn } from '@/lib/utils'
+import { fadeInUp } from '@/lib/motion'
 import { getCategoryProficiency, getProficiencyTone } from '../proficiency'
 import { SkillLevelBadge } from './SkillLevelBadge'
 
@@ -44,16 +45,13 @@ export function BentoCategoryCard({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
+      {...fadeInUp(index * 0.05)}
       className={cn(
-        'group relative cursor-pointer rounded-2xl p-5',
+        'group @container relative flex cursor-pointer flex-col rounded-2xl p-5',
         'bg-[var(--surface)]/50 backdrop-blur-md',
         'border',
         'hover:bg-[var(--surface-strong)]/55',
-        'transition-all duration-300',
+        'transition-[background-color,border-color] duration-300',
         'shadow-lg shadow-black/10',
         'focus-visible:outline-none focus-visible:ring-2',
         categoryTone.border,
@@ -83,10 +81,10 @@ export function BentoCategoryCard({
         }}
       />
 
-      <div className="relative z-10">
-        {/* Below xs the badge stack drops under the title as a row; from xs up it sits on the right as before. */}
+      <div className="relative z-10 flex flex-1 flex-col">
+        {/* Narrow cards drop the badge stack under the title as a row; wide cards keep it on the right. */}
         <div className="mb-4 flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
-          <div className="min-w-0 grow basis-full xs:basis-0">
+          <div className="min-w-0 grow basis-full @sm:basis-0">
           <h3 className="mb-1 text-base font-semibold text-[var(--fg)]">
             {t(titleKey)}
           </h3>
@@ -96,7 +94,7 @@ export function BentoCategoryCard({
             </p>
           )}
           </div>
-          <div className="flex shrink-0 items-center gap-2 xs:flex-col xs:items-end">
+          <div className="flex shrink-0 items-center gap-2 @sm:flex-col @sm:items-end">
             <span className="rounded-full border border-[var(--border)]/80 bg-black/18 px-2 py-1 text-[10px] font-semibold text-[var(--fg-muted)]/65">
               {skills.length}
             </span>
@@ -104,7 +102,7 @@ export function BentoCategoryCard({
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="mb-4 flex flex-wrap gap-2">
           {skills.map((skillId) => {
             const skill = SKILLS[skillId]
             const Icon = getSkillIcon(skill.iconKey)
@@ -123,7 +121,7 @@ export function BentoCategoryCard({
           })}
         </div>
 
-        <div className="mt-4 border-t border-[var(--border)]/35 pt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--fg-muted)]/60 transition-colors group-hover:text-[var(--accent)]">
+        <div className="mt-auto border-t border-[var(--border)]/35 pt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--fg-muted)]/60 transition-colors group-hover:text-[var(--accent)]">
           {t('actions.viewCategory')}
         </div>
       </div>

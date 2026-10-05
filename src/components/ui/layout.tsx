@@ -40,7 +40,7 @@ export function SectionShell({
         className
       )}
     >
-      <div className={cn('mx-auto w-full px-4 sm:px-6 lg:px-8', sectionSizes[size], innerClassName)}>
+      <div className={cn('mx-auto w-full px-gutter', sectionSizes[size], innerClassName)}>
         {children}
       </div>
     </section>
@@ -57,13 +57,14 @@ export interface SectionHeaderProps {
 
 export function SectionHeader({ kicker, title, subtitle, align = 'center', className }: SectionHeaderProps) {
   return (
-    <div className={cn('mb-10 sm:mb-12', align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl', className)}>
+    // Left-aligned headers share the sections' max-w-6xl content column so they line up with the cards below
+    <div className={cn('mb-10 sm:mb-12', align === 'center' ? 'mx-auto max-w-3xl text-center' : 'mx-auto w-full max-w-6xl', className)}>
       {kicker && <Kicker className={align === 'center' ? 'justify-center' : undefined}>{kicker}</Kicker>}
       <h2 className="mt-3 text-2xl font-semibold tracking-normal text-[var(--fg)] sm:text-3xl lg:text-4xl">
         {title}
       </h2>
       {subtitle && (
-        <p className={cn('mt-4 text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base', align === 'center' && 'mx-auto max-w-2xl')}>
+        <p className={cn('mt-4 text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base', align === 'center' ? 'mx-auto max-w-2xl' : 'max-w-3xl')}>
           {subtitle}
         </p>
       )}

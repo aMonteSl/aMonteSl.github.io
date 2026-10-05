@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { SITE } from '@/lib/constants'
 import { OG_IMAGE } from '@/lib/seo'
@@ -58,6 +59,13 @@ export const metadata: Metadata = {
   },
 }
 
+// Self-hosted at build time so every device renders the same typeface (no system-font fallback)
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -71,14 +79,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
+        {/* The hero portrait (Avatar size="hero") is the largest image on the first screen */}
         <link
           rel="preload"
           as="image"
-          imageSrcSet="/images/profile/hero-196.avif 1x, /images/profile/hero-196@2x.avif 2x"
-          imageSizes="196px"
-          href="/images/profile/hero-196.avif"
+          type="image/avif"
+          imageSrcSet="/images/profile/hero-320.avif 1x, /images/profile/hero-320@2x.avif 2x"
+          href="/images/profile/hero-320.avif"
         />
       </head>
       <body className="antialiased" suppressHydrationWarning>

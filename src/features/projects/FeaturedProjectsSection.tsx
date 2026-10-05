@@ -1,11 +1,9 @@
 'use client'
 
 import { useMemo } from 'react'
-import { motion } from 'framer-motion'
 import { SectionHeader, SectionShell } from '@/components/ui'
 import { useTranslations, useLocale } from '@/i18n'
 import { getLocalizedProjects } from './data'
-import { EASING } from '@/lib/motion'
 import { FeaturedProjectCard } from './components/FeaturedProjectCard'
 import { SecondaryProjectCard } from './components/SecondaryProjectCard'
 import { SecondaryProjectsGrid } from './components/SecondaryProjectsGrid'
@@ -46,15 +44,7 @@ export function FeaturedProjectsSection() {
 
         <SecondaryProjectsGrid className="mt-5 sm:mt-6">
           {secondaryProjects.map((project, index) => (
-            <motion.div
-              key={project.slug}
-              layout
-              className="h-full"
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.35, ease: EASING, delay: index * 0.04 }}
-            >
+            <div key={project.slug} className="h-full">
               <SecondaryProjectCard
                 slug={project.slug}
                 title={project.title}
@@ -69,7 +59,7 @@ export function FeaturedProjectsSection() {
                 demoUrl={project.demoUrl}
                 index={index + 1}
               />
-            </motion.div>
+            </div>
           ))}
         </SecondaryProjectsGrid>
       </div>

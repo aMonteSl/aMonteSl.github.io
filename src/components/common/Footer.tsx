@@ -66,7 +66,7 @@ export function Footer({ className }: FooterProps = {}) {
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="inline-flex min-h-9 items-center py-1 text-sm text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
+                      className="inline-flex min-h-9 items-center py-1 text-sm pointer-coarse:min-h-11 text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
                     >
                       {link.label}
                     </a>
@@ -86,7 +86,7 @@ export function Footer({ className }: FooterProps = {}) {
                       href={link.href}
                       target={link.external ? '_blank' : undefined}
                       rel={link.external ? 'noopener noreferrer' : undefined}
-                      className="inline-flex min-h-9 max-w-full items-center gap-1.5 py-1 text-sm text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
+                      className="inline-flex min-h-9 max-w-full items-center gap-1.5 py-1 text-sm pointer-coarse:min-h-11 text-[var(--fg-muted)] transition-colors duration-200 hover:text-[var(--fg)]"
                     >
                       <span className="min-w-0 truncate">{link.label}</span>
                       {link.external && (
