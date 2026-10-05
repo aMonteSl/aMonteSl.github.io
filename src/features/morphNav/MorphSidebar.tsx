@@ -12,15 +12,14 @@ import { cn } from '@/lib/utils'
  * Below `xl` the same content lives in the drawer rendered by `MorphDrawer`.
  */
 export function MorphSidebar() {
-  const { isMorphed, prefersReducedMotion } = useMorphNav()
+  const { isMorphed, prefersReducedMotion, morphRange } = useMorphNav()
 
   // Use Framer Motion's useScroll for smooth scroll-based animations
   const { scrollY, scrollYProgress } = useScroll()
 
-  // Transform scroll position to sidebar reveal values
-  // Sidebar starts appearing at 120px and is fully visible at 520px
-  const sidebarOpacity = useTransform(scrollY, [120, 520], [0, 1])
-  const sidebarX = useTransform(scrollY, [120, 520], [-24, 0])
+  // The sidebar fades in over the same range the header fades out (see MorphNavProvider)
+  const sidebarOpacity = useTransform(scrollY, [morphRange.start, morphRange.end], [0, 1])
+  const sidebarX = useTransform(scrollY, [morphRange.start, morphRange.end], [-24, 0])
   const pageProgressScale = useTransform(scrollYProgress, [0, 1], [0.02, 1])
 
   return (
