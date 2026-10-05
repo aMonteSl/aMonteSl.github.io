@@ -1,5 +1,6 @@
 'use client'
 
+import { useId, useState } from 'react'
 import {
   ArrowRightIcon,
   Avatar,
@@ -15,6 +16,7 @@ import {
   Surface,
 } from '@/components/ui'
 import { useTranslations, useLocale } from '@/i18n'
+import { cn } from '@/lib/utils'
 import { SOCIAL_LINKS, getCvUrl } from '@/lib/constants'
 import { useEmailCopyFeedback } from '@/lib/hooks/useEmailCopyFeedback'
 import { FEATURED_PROJECTS } from '@/content/featuredProjects'
@@ -25,6 +27,9 @@ import { useFeaturedRotation } from './useFeaturedRotation'
 import { FeaturedProjectCard } from './FeaturedProjectCard'
 
 type SocialKey = (typeof SOCIAL_LINKS)[number]['key']
+
+const METRIC_TILE_CLASS = 'lg:short:p-3'
+const METRIC_DETAIL_CLASS = 'lg:short:max-xl:hidden'
 
 function BriefcaseIcon({ className }: { className?: string }) {
   return (
@@ -58,6 +63,10 @@ export function Hero() {
   } = useFeaturedRotation(FEATURED_PROJECTS)
   const cvUrl = getCvUrl(locale)
   const { copiedEmail, copyEmail } = useEmailCopyFeedback()
+  // On short screens (`short`: ≤900px tall) the long bio is clamped so the whole hero fits the first screen;
+  // the full text stays in the DOM for screen readers and search engines.
+  const [isBioExpanded, setIsBioExpanded] = useState(false)
+  const bioId = useId()
   // Copy about the current role switches on its start date (see useEntryPhase)
   const isRoleUpcoming = useEntryPhase(CURRENT_ROLE_ID) === 'upcoming'
   const roleMetric = isRoleUpcoming ? 'metrics.upcoming' : 'metrics.current'
@@ -68,12 +77,17 @@ export function Hero() {
   }
 
   return (
-    <SectionShell id="home" className={`flex min-h-[calc(100svh-4rem)] items-center pt-24 lg:pt-28 ${SIDEBAR_BLEED_CLASS}`} tone="xr">
+    <SectionShell
+      id="home"
+      // From lg the hero owns the first screen: content is centred between the 64px header and the fold
+      className={`flex min-h-[calc(100svh-4rem)] items-center pt-24 lg:min-h-svh lg:pt-28 lg:pb-16 lg:short:pt-20 lg:short:pb-8 ${SIDEBAR_BLEED_CLASS}`}
+      tone="xr"
+    >
       <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10 xl:gap-14">
         {/* CSS entrance (.hero-enter): the first screen is visible before hydration */}
         <div className="hero-enter order-2 flex flex-col items-center [animation-delay:160ms] lg:order-1">
-          <Surface variant="xr" className="technical-frame w-full max-w-md p-5 sm:p-6">
-            <div className="mb-5 flex items-center justify-between gap-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]/55">
+          <Surface variant="xr" className="technical-frame w-full max-w-md p-5 sm:p-6 lg:short:p-5">
+            <div className="mb-5 flex items-center justify-between gap-4 text-[10px] lg:short:mb-3 font-semibold uppercase tracking-[0.18em] text-[var(--fg-muted)]/55">
               <span>XR FIELD</span>
               <span>MD-ES / 2026</span>
             </div>
@@ -85,11 +99,17 @@ export function Hero() {
             >
               <div className="absolute -inset-6 rounded-full border border-[var(--accent)]/20" />
               <div className="relative overflow-hidden rounded-full border border-[var(--accent)]/28 bg-black/30 p-2 shadow-2xl shadow-black/35">
-                <Avatar size="hero" loading="eager" fetchPriority="high" />
+                {/* From lg the portrait scales with the viewport height (138px at 657px tall, capped at 224px) */}
+                <Avatar
+                  size="hero"
+                  loading="eager"
+                  fetchPriority="high"
+                  className="lg:!h-[clamp(8rem,21svh,14rem)] lg:!w-[clamp(8rem,21svh,14rem)]"
+                />
               </div>
             </div>
 
-            <DividerLine className="my-6" />
+            <DividerLine className="my-6 lg:short:my-4" />
 
             <FeaturedProjectCard
               projects={FEATURED_PROJECTS}
@@ -111,19 +131,19 @@ export function Hero() {
           </div>
 
           <h1
-            className="hero-enter mt-4 [animation-delay:40ms] max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-normal text-[var(--fg)] sm:text-5xl md:text-6xl xl:text-7xl"
+            className="hero-enter mt-4 [animation-delay:40ms] max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-normal text-[var(--fg)] sm:text-5xl md:text-6xl lg:mt-3 lg:text-[clamp(2.75rem,7svh,4.5rem)]"
             translate="no"
           >
             {t('name')}
           </h1>
 
           <h2
-            className="hero-enter mt-4 [animation-delay:80ms] max-w-2xl text-balance text-base font-medium leading-relaxed text-[var(--fg-muted)] sm:text-lg"
+            className="hero-enter mt-4 [animation-delay:80ms] lg:short:mt-3 max-w-2xl text-balance text-base font-medium leading-relaxed text-[var(--fg-muted)] sm:text-lg"
           >
             {t('headline')}
           </h2>
 
-          <div className="hero-enter mt-6 flex [animation-delay:120ms] flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <div className="hero-enter mt-6 flex [animation-delay:120ms] lg:short:mt-4 flex-wrap items-center justify-center gap-3 lg:justify-start">
             <StatusPill tone="success">
               <BriefcaseIcon className="h-3.5 w-3.5" />
               {t(isRoleUpcoming ? 'availabilityLabelUpcoming' : 'availabilityLabel')}
@@ -132,7 +152,7 @@ export function Hero() {
             <StatusPill tone="xr">{t('location')}</StatusPill>
           </div>
 
-          <div className="hero-enter relative mt-7 flex [animation-delay:160ms] flex-wrap items-center justify-center gap-3 lg:justify-start">
+          <div className="hero-enter relative mt-7 flex [animation-delay:160ms] lg:short:mt-5 flex-wrap items-center justify-center gap-3 lg:justify-start">
             <LinkButton href={cvUrl} download rel="noopener">
               {t('ctaResume')}
               <ArrowRightIcon className="h-4 w-4" />
@@ -168,14 +188,34 @@ export function Hero() {
             </span>
           </div>
 
-          <p className="hero-enter mt-8 [animation-delay:200ms] max-w-2xl text-pretty text-left text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base">
-            {t(isRoleUpcoming ? 'aboutMeUpcoming' : 'aboutMe')}
-          </p>
+          <div className="hero-enter mt-8 w-full max-w-2xl text-left [animation-delay:200ms] lg:short:mt-5">
+            <p
+              id={bioId}
+              className={cn(
+                'text-pretty text-sm leading-relaxed text-[var(--fg-muted)] sm:text-base',
+                !isBioExpanded && 'short:line-clamp-4 lg:short:line-clamp-3'
+              )}
+            >
+              {t(isRoleUpcoming ? 'aboutMeUpcoming' : 'aboutMe')}
+            </p>
+            {/* Only short screens clamp the bio, so only they need the toggle */}
+            <button
+              type="button"
+              onClick={() => setIsBioExpanded((expanded) => !expanded)}
+              aria-expanded={isBioExpanded}
+              aria-controls={bioId}
+              className="mt-1 hidden min-h-9 items-center gap-1 rounded-lg text-sm font-semibold text-[var(--accent)] transition-colors hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] short:inline-flex pointer-coarse:min-h-11"
+            >
+              {t(isBioExpanded ? 'readLess' : 'readMore')}
+              <ArrowRightIcon className={cn('h-3.5 w-3.5 transition-transform duration-200', isBioExpanded ? '-rotate-90' : 'rotate-90')} />
+            </button>
+          </div>
 
-          <div className="hero-enter mt-8 grid [animation-delay:240ms] w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
-            <MetricTile label={t(`${roleMetric}.label`)} value={t(`${roleMetric}.value`)} detail={t(`${roleMetric}.detail`)} />
-            <MetricTile label={t('metrics.research.label')} value={t('metrics.research.value')} detail={t('metrics.research.detail')} />
-            <MetricTile label={t('metrics.next.label')} value={t('metrics.next.value')} detail={t('metrics.next.detail')} />
+          <div className="hero-enter mt-8 grid [animation-delay:240ms] w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 lg:short:mt-5">
+            {/* Short lg/laptop screens: tighter tiles; below xl the narrow columns would wrap the detail onto two lines */}
+            <MetricTile label={t(`${roleMetric}.label`)} value={t(`${roleMetric}.value`)} detail={t(`${roleMetric}.detail`)} className={METRIC_TILE_CLASS} detailClassName={METRIC_DETAIL_CLASS} />
+            <MetricTile label={t('metrics.research.label')} value={t('metrics.research.value')} detail={t('metrics.research.detail')} className={METRIC_TILE_CLASS} detailClassName={METRIC_DETAIL_CLASS} />
+            <MetricTile label={t('metrics.next.label')} value={t('metrics.next.value')} detail={t('metrics.next.detail')} className={METRIC_TILE_CLASS} detailClassName={METRIC_DETAIL_CLASS} />
           </div>
         </div>
       </div>

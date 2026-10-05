@@ -108,14 +108,16 @@ export interface MetricTileProps {
   value: string
   detail?: string
   className?: string
+  /** Extra classes for the detail line (e.g. hiding it where vertical space is tight) */
+  detailClassName?: string
 }
 
-export function MetricTile({ label, value, detail, className }: MetricTileProps) {
+export function MetricTile({ label, value, detail, className, detailClassName }: MetricTileProps) {
   return (
     <Surface variant="flat" className={cn('p-4', className)}>
       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--fg-muted)]/58">{label}</p>
       <p className="mt-2 text-sm font-semibold leading-snug text-[var(--fg)]">{value}</p>
-      {detail && <p className="mt-2 text-xs leading-relaxed text-[var(--fg-muted)]/78">{detail}</p>}
+      {detail && <p className={cn('mt-2 text-xs leading-relaxed text-[var(--fg-muted)]/78', detailClassName)}>{detail}</p>}
     </Surface>
   )
 }
