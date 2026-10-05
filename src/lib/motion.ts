@@ -10,94 +10,22 @@ export const DURATION = {
   fast: 0.18,
   base: 0.24,
   slow: 0.32,
+  /** Scroll-in entrances: long enough to read as a glide, short enough to never block reading */
+  enter: 0.55,
 } as const
 
 // Common animation variants
+// Reduced motion is handled globally by <MotionConfig reducedMotion="user"> (LocalizedShell),
+// so these props are always passed and the server and client render the same markup.
 export const fadeInUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 12 },
+  initial: { opacity: 0, y: 16 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: DURATION.base, ease: EASING, delay },
-  viewport: { once: true, margin: '0px 0px -10% 0px' }
+  transition: { duration: DURATION.enter, ease: EASING_OUT, delay },
+  viewport: { once: true, margin: '0px 0px -8% 0px' }
 })
-
-export const fadeIn = (delay = 0) => ({
-  initial: { opacity: 0 },
-  whileInView: { opacity: 1 },
-  transition: { duration: DURATION.base, ease: EASING, delay },
-  viewport: { once: true, margin: '0px 0px -10% 0px' }
-})
-
-// Hover interactions
-export const hoverLift = {
-  whileHover: {
-    y: -2,
-    transition: { duration: DURATION.fast, ease: EASING_OUT }
-  },
-  whileTap: {
-    scale: 0.98,
-    transition: { duration: DURATION.fast, ease: EASING }
-  }
-}
-
-export const hoverScale = {
-  whileHover: {
-    scale: 1.03,
-    transition: { duration: DURATION.fast, ease: EASING_OUT }
-  },
-  whileTap: {
-    scale: 0.98,
-    transition: { duration: DURATION.fast, ease: EASING }
-  }
-}
-
-// Avatar specific animations
-export const avatarHover = {
-  whileHover: {
-    y: -2,
-    scale: 1,
-    rotateZ: 0,
-    transition: { duration: DURATION.base, ease: EASING }
-  },
-  whileFocus: {
-    y: -2,
-    scale: 1,
-    rotateZ: 0,
-    transition: { duration: DURATION.base, ease: EASING }
-  }
-}
 
 // Respect reduced motion preference
 export const shouldAnimate = (): boolean => {
   if (typeof window === 'undefined') return true
   return !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
-
-// Route transition overlay variants
-export const overlayVariants = {
-  default: {
-    hidden: {
-      opacity: 0,
-      transition: {
-        duration: 0.2,
-        ease: EASING_OUT,
-      },
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.25,
-        ease: EASING,
-      },
-    },
-  },
-  reduced: {
-    hidden: {
-      opacity: 0,
-      transition: { duration: 0.05 },
-    },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.05 },
-    },
-  },
 }

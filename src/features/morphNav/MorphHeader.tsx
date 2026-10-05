@@ -42,7 +42,8 @@ export function MorphHeader() {
         pointerEvents: isVisible ? 'auto' : 'none',
       }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-40 w-full transition-colors duration-300',
+        // Top inset keeps the bar clear of the status bar / island when installed as an app
+        'fixed top-0 left-0 right-0 z-40 w-full pt-[env(safe-area-inset-top)] transition-colors duration-300',
         'border-b backdrop-blur-md',
         progress > 0.1
           ? 'bg-[var(--bg)]/80 border-[var(--border)]/50 shadow-sm'
@@ -51,7 +52,7 @@ export function MorphHeader() {
     >
       {/* Same container as the sections (max-w-7xl) so the header lines up with the content;
           the old 1200px `.container` left the desktop nav wrapping onto two lines at every width. */}
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-3 px-gutter">
         {/* Brand: Avatar + Name with shared layoutId */}
         <Link
           href={localizePath('/', locale)}
@@ -84,7 +85,8 @@ export function MorphHeader() {
                   key={key}
                   onClick={() => scrollToSection(sectionId)}
                   className={cn(
-                    'relative whitespace-nowrap px-1.5 py-2 text-xs font-medium rounded-lg transition-all duration-200',
+                    // Touch screens at xl (iPad Pro landscape) get a 44px-tall target
+                    'relative whitespace-nowrap px-1.5 py-2 text-xs font-medium rounded-lg transition-colors duration-200 pointer-coarse:min-h-11',
                     'after:absolute after:bottom-0.5 after:left-1/2 after:-translate-x-1/2 after:h-0.5 after:rounded-full after:bg-[var(--accent)] after:transition-all after:duration-200',
                     isActive
                       ? 'text-[var(--fg)] after:w-4 after:opacity-100'

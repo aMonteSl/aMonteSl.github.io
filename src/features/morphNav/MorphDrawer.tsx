@@ -109,7 +109,7 @@ export function MorphDrawer() {
             variants={floatingButtonVariants}
             onClick={openDrawer}
             className={cn(
-              'fixed left-4 z-40 bottom-[max(1rem,env(safe-area-inset-bottom))] xl:hidden',
+              'fixed left-[max(1rem,env(safe-area-inset-left))] z-40 bottom-[max(1rem,env(safe-area-inset-bottom))] xl:hidden',
               'flex h-14 w-14 items-center justify-center rounded-full shadow-lg shadow-black/40',
               'border border-[var(--accent)]/30 bg-[var(--accent)] text-[#120d0b]',
               'transition-transform hover:scale-105 active:scale-95'
@@ -147,7 +147,7 @@ export function MorphDrawer() {
               variants={drawerVariants}
               onKeyDown={handleDrawerKeyDown}
               className={cn(
-                'fixed inset-y-0 left-0 z-50 flex w-[min(88vw,22rem)] max-w-[22rem] flex-col overflow-hidden xl:hidden',
+                'fixed inset-y-0 left-0 z-50 flex w-[min(88vw,22rem)] max-w-[22rem] flex-col overflow-hidden pt-[env(safe-area-inset-top)] pl-[env(safe-area-inset-left)] xl:hidden',
                 'border-r border-[var(--border)]/80 bg-[var(--bg)]',
                 'shadow-2xl shadow-black/60'
               )}
@@ -159,7 +159,7 @@ export function MorphDrawer() {
                 ref={closeButtonRef}
                 type="button"
                 onClick={closeDrawer}
-                className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)]/70 bg-[var(--card)]/70 text-[var(--fg-muted)] transition-colors hover:bg-[var(--card)] hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
+                className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--border)]/70 bg-[var(--card)]/70 text-[var(--fg-muted)] transition-colors hover:bg-[var(--card)] hover:text-[var(--fg)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)]"
                 aria-label={t('closeMenu')}
               >
                 <CloseIcon className="h-5 w-5" />

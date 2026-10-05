@@ -6,7 +6,7 @@ import type { IconType } from 'react-icons'
 import { FaAward, FaCode, FaLanguage, FaUniversity } from 'react-icons/fa'
 import { CheckIcon, ClockIcon, ExternalLinkIcon, PinIcon, SectionHeader, SectionShell } from '@/components/ui'
 import { localizePath, useLocale } from '@/i18n'
-import { EASING, DURATION, fadeInUp } from '@/lib/motion'
+import { fadeInUp } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 import { CERTIFICATIONS } from '@/content/certifications'
 import { getTechIcon } from '@/features/projects/components/TechTag'
@@ -93,16 +93,7 @@ export function CertificationsSection() {
           <SectionHeader kicker={t('kicker')} title={t('title')} subtitle={t('subtitle')} align="left" />
         </motion.div>
 
-        <motion.div
-          className="mx-auto grid max-w-6xl grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.75fr)]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.12 } },
-            hidden: {},
-          }}
-        >
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.75fr)]">
           <CertificationStatusPanel status="completed" items={groupedByStatus.completed} />
 
           <div className="grid min-w-0 gap-5">
@@ -112,7 +103,7 @@ export function CertificationsSection() {
                 <CertificationStatusPanel key={status} status={status} items={groupedByStatus[status]} compact />
               ))}
           </div>
-        </motion.div>
+        </div>
     </SectionShell>
   )
 }
@@ -200,15 +191,13 @@ function CertificationCard({
   const href = cert.linkType === 'internal' && cert.link ? localizePath(cert.link, locale) : cert.link
 
   return (
-    <motion.article
+    <article
       className={cn(
-        'group flex min-h-full flex-col rounded-xl border border-[var(--border)]/75 bg-black/16 p-4 transition-all duration-200',
+        'group flex min-h-full flex-col rounded-xl border border-[var(--border)]/75 bg-black/16 p-4 transition-[border-color,background-color,box-shadow] duration-200',
         'hover:border-[var(--accent)]/32 hover:bg-[var(--card)]/68 hover:shadow-[0_18px_55px_rgba(0,0,0,0.22)]',
         // Fixed heights only align cards once they sit side by side; on phones they would leave empty bands.
         compact ? 'md:min-h-[11rem]' : 'md:min-h-[13rem]'
       )}
-      whileHover={{ y: -2 }}
-      transition={{ duration: DURATION.fast, ease: EASING }}
     >
       <div className="mb-3 flex min-w-0 items-start justify-between gap-3 md:min-h-[4.25rem]">
         <div className="min-w-0">
@@ -259,6 +248,6 @@ function CertificationCard({
           </motion.a>
         </div>
       )}
-    </motion.article>
+    </article>
   )
 }

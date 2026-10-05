@@ -1,8 +1,21 @@
 'use client'
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { forwardRef, useRef, useMemo, useLayoutEffect } from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useRef,
+  useMemo,
+  useLayoutEffect,
+} from 'react'
 import { Color, Mesh, PlaneGeometry, ShaderMaterial } from 'three'
+
+/** The silk is a soft, slow, low-frequency pattern: 30fps is indistinguishable from 60 and halves the GPU work. */
+const FRAME_INTERVAL_MS = 1000 / 30
+/** Slack so a 60Hz display (16.7ms frames) renders every second frame instead of every third. */
+const FRAME_INTERVAL_SLACK_MS = 2
+/** Longest step the shader clock may take; a longer gap (tab switch, hitch) must not jump the pattern. */
+const MAX_FRAME_DELTA_S = 0.1
 
 const hexToNormalizedRGB = (hex: string): [number, number, number] => {
   hex = hex.replace('#', '')
@@ -93,9 +106,10 @@ const SilkPlane = forwardRef<SilkMesh, SilkPlaneProps>(function SilkPlane({ unif
     }
   }, [ref, viewport])
 
+  // Time advances by real elapsed time, so the motion keeps the same speed at any frame rate.
   useFrame((_, delta) => {
     if (ref && typeof ref === 'object' && 'current' in ref && ref.current) {
-      ref.current.material.uniforms.uTime.value += 0.1 * delta
+      ref.current.material.uniforms.uTime.value += 0.1 * Math.min(delta, MAX_FRAME_DELTA_S)
     }
   })
 
@@ -113,6 +127,32 @@ const SilkPlane = forwardRef<SilkMesh, SilkPlaneProps>(function SilkPlane({ unif
 })
 
 SilkPlane.displayName = 'SilkPlane'
+
+/**
+ * Drives the on-demand frameloop at ~30fps. requestAnimationFrame stops while the tab is hidden,
+ * so nothing renders in the background.
+ */
+function FrameRateLimiter() {
+  const invalidate = useThree((state) => state.invalidate)
+
+  useEffect(() => {
+    let rafId = 0
+    let lastFrameTime = -Infinity
+
+    const tick = (time: number) => {
+      if (time - lastFrameTime >= FRAME_INTERVAL_MS - FRAME_INTERVAL_SLACK_MS) {
+        lastFrameTime = time
+        invalidate()
+      }
+      rafId = requestAnimationFrame(tick)
+    }
+
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [invalidate])
+
+  return null
+}
 
 interface SilkProps {
   speed?: number
@@ -144,19 +184,19 @@ const Silk = ({
   )
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100vw',
-        height: '100vh',
-        zIndex: -1,
-        pointerEvents: 'none'
-      }}
-      aria-hidden="true"
-    >
-      <Canvas dpr={[1, 2]} frameloop="always" style={{ width: '100%', height: '100%' }}>
+    // inset-x-0 rather than 100vw keeps the canvas off the desktop scrollbar. The height stays 100vh (the large
+    // viewport on mobile) because a bottom-anchored fixed box follows the toolbars, and every canvas resize
+    // reallocates the drawing buffer.
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[-1] h-screen" aria-hidden="true">
+      <Canvas
+        // A soft, 15%-alpha pattern seen through blurred surfaces gains nothing from retina resolution or MSAA.
+        // R3F merges `gl` over its defaults, so alpha stays true and the body gradient keeps showing through.
+        dpr={1}
+        gl={{ antialias: false, powerPreference: 'low-power' }}
+        frameloop="demand"
+        style={{ width: '100%', height: '100%' }}
+      >
+        <FrameRateLimiter />
         <SilkPlane ref={meshRef} uniforms={uniforms} />
       </Canvas>
     </div>

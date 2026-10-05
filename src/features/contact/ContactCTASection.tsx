@@ -26,16 +26,7 @@ export function ContactCTASection() {
           <div className="absolute left-1/2 top-1/2 h-[22rem] w-[min(42rem,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--accent)]/5 blur-[110px]" />
         </div>
 
-        <motion.div
-          className="overflow-hidden rounded-2xl border border-[var(--border)]/80 bg-[var(--card)]/50 shadow-[0_26px_90px_rgba(0,0,0,0.22)]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
-            hidden: {},
-          }}
-        >
+        <div className="overflow-hidden rounded-2xl border border-[var(--border)]/80 bg-[var(--card)]/50 shadow-[0_26px_90px_rgba(0,0,0,0.22)]">
           <motion.div
             className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:p-10"
             {...fadeInUp()}
@@ -112,7 +103,7 @@ export function ContactCTASection() {
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </SectionShell>
   )

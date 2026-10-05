@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ImageCarousel } from '@/components/ui'
-import { fadeInUp, shouldAnimate } from '@/lib/motion'
+import { fadeInUp } from '@/lib/motion'
 import { localizePath, useLocale, useTranslations } from '@/i18n'
 import { TechTag } from './TechTag'
 import { ProjectCardLinks, type ProjectCardLink } from './ProjectCardLinks'
@@ -44,7 +44,6 @@ export function SecondaryProjectCard({
   index,
 }: SecondaryProjectCardProps) {
   const router = useRouter()
-  const animate = shouldAnimate()
   const t = useTranslations('projects')
   const { locale } = useLocale()
   const detailHref = localizePath(`/projects/${slug}`, locale)
@@ -62,7 +61,7 @@ export function SecondaryProjectCard({
 
   return (
     <motion.article
-      {...(animate ? fadeInUp(0.12 + index * 0.05) : {})}
+      {...fadeInUp(0.12 + index * 0.05)}
       onClick={() => router.push(detailHref)}
       onPointerEnter={() => router.prefetch(detailHref)}
       onFocus={() => router.prefetch(detailHref)}

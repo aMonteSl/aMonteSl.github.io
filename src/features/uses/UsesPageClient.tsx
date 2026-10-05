@@ -7,7 +7,7 @@ import { LanguageSwitcher } from '@/features/language'
 import { localizePath, useLocale, useTranslations } from '@/i18n'
 import { USES_ITEMS, USES_CATEGORIES} from '@/content/uses'
 import type { UsesCategory } from '@/content/uses'
-import { fadeInUp, shouldAnimate, EASING, DURATION } from '@/lib/motion'
+import { fadeInUp, EASING, DURATION } from '@/lib/motion'
 
 const CATEGORY_ICONS: Record<UsesCategory, string> = {
   editor: 'ED',
@@ -21,7 +21,6 @@ const CATEGORY_ICONS: Record<UsesCategory, string> = {
 export function UsesPageClient() {
   const t = useTranslations('uses')
   const { locale } = useLocale()
-  const animate = shouldAnimate()
 
   const groupedItems = useMemo(() => {
     return USES_CATEGORIES.map((category) => ({
@@ -37,7 +36,7 @@ export function UsesPageClient() {
           {/* Back link + language switcher: this page has no header, so the
               switcher here is the only way to change language. */}
           <motion.div
-            {...(animate ? fadeInUp(0) : {})}
+            {...fadeInUp(0)}
             className="mb-8 flex items-center justify-between gap-3"
           >
             <a
@@ -63,7 +62,7 @@ export function UsesPageClient() {
             {groupedItems.map(({ category, items }, catIndex) => (
               <motion.div
                 key={category}
-                {...(animate ? fadeInUp(catIndex * 0.05) : {})}
+                {...fadeInUp(catIndex * 0.05)}
               >
                 {/* Category header */}
                 <h3 className="text-lg sm:text-xl font-semibold text-[var(--fg)] mb-6 flex items-center gap-3">

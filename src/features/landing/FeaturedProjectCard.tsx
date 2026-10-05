@@ -1,11 +1,13 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
+import { motion, type MotionValue } from 'framer-motion'
 import { ExternalLinkIcon, GitHubIcon, PauseIcon, PlayIcon } from '@/components/ui'
 import { useLocale, useTranslations } from '@/i18n'
 import type { FeaturedProject } from '@/content/featuredProjects'
 import { marketplaceStats } from '@/content/marketplaceStats.generated'
 import { cn } from '@/lib/utils'
+import type { RotationPauseSource } from './useFeaturedRotation'
 
 function DoiIcon({ className }: { className?: string }) {
   return (
@@ -22,14 +24,18 @@ function DoiIcon({ className }: { className?: string }) {
 interface FeaturedProjectCardProps {
   projects: readonly FeaturedProject[]
   activeIndex: number
-  progress: number
+  /** Time elapsed on the active slide, 0-1. A motion value so the bar animates without re-rendering. */
+  progress: MotionValue<number>
   isPaused: boolean
   isUserPaused: boolean
   onDotClick: (index: number) => void
   onTogglePause: () => void
-  /** Transient pause while the pointer hovers the card or keyboard focus is inside it. */
-  onPause: () => void
-  onResume: () => void
+  /**
+   * Transient pause: `interaction` (default) while the pointer hovers the card or keyboard focus is inside it,
+   * `offscreen` while the card is scrolled out of view.
+   */
+  onPause: (source?: RotationPauseSource) => void
+  onResume: (source?: RotationPauseSource) => void
 }
 
 /**
@@ -54,7 +60,7 @@ interface FeaturedLinkProps {
 }
 
 function FeaturedSeparator() {
-  return <span className="h-3 w-px bg-white/15" aria-hidden />
+  return <span className="h-3 w-px bg-[var(--fg-muted)]/20" aria-hidden />
 }
 
 function FeaturedLink({ href, label, icon, title }: FeaturedLinkProps) {
@@ -179,22 +185,39 @@ export function FeaturedProjectCard({
   const t = useTranslations('hero')
   const total = projects.length
   const pauseLabel = isUserPaused ? t('featuredProject.resumeRotation') : t('featuredProject.pauseRotation')
+  const rootRef = useRef<HTMLDivElement>(null)
+
+  // Hold the rotation while the card is scrolled out of view: nobody is watching it advance.
+  useEffect(() => {
+    const node = rootRef.current
+    if (!node || typeof IntersectionObserver === 'undefined') return
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) onResume('offscreen')
+      else onPause('offscreen')
+    })
+    observer.observe(node)
+    return () => {
+      observer.disconnect()
+      onResume('offscreen')
+    }
+  }, [onPause, onResume])
 
   return (
-    <div className="relative w-full">
+    <div ref={rootRef} className="relative w-full">
       <div className="absolute -top-3 right-4 z-10">
         <div className="relative">
-          <div className="rounded-t-md border border-b-0 border-white/10 bg-white/5 px-3 py-1 ring-1 ring-white/10 backdrop-blur-md">
+          <div className="rounded-t-md border border-b-0 border-[var(--border)]/80 bg-[var(--surface)]/55 px-3 py-1 ring-1 ring-[var(--border)]/40 backdrop-blur-md">
             <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--accent)]">
               {t('featuredProject.badge')}
             </span>
           </div>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-white/5" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-[var(--surface)]/55" />
         </div>
       </div>
 
       <div
-        className="relative flex min-h-[15.75rem] w-full flex-col rounded-xl border border-white/10 bg-white/5 shadow-lg ring-1 ring-white/10"
+        className="relative flex min-h-[15.75rem] w-full flex-col rounded-xl border border-[var(--border)]/80 bg-[var(--surface)]/55 shadow-lg ring-1 ring-[var(--border)]/40"
         // Real hover only: taps synthesize mouseenter without a matching mouseleave, which would leave the card paused.
         onPointerEnter={(event) => {
           if (event.pointerType === 'mouse') onPause()
@@ -205,7 +228,7 @@ export function FeaturedProjectCard({
         onFocus={(event) => {
           if (isKeyboardFocus(event.target)) onPause()
         }}
-        onBlur={onResume}
+        onBlur={() => onResume()}
       >
         {/* Stacked grid: every project shares the same cell, so the card is as tall as the tallest one at any width. */}
         <div className="grid min-h-0 flex-1 grid-cols-1 p-4 pt-5 sm:p-5 sm:pt-6">
@@ -220,14 +243,14 @@ export function FeaturedProjectCard({
         </div>
 
         {total > 1 && (
-          <div className="relative flex h-11 shrink-0 items-center justify-center border-t border-white/10">
+          <div className="relative flex h-11 shrink-0 items-center justify-center border-t border-[var(--border)]/80">
             <div className="absolute left-0 right-0 top-0 h-0.5 overflow-hidden bg-black/20" aria-hidden>
-              <div
+              <motion.div
                 className={cn(
                   'h-full origin-left transition-colors duration-200',
-                  isPaused ? 'bg-red-500' : 'bg-[var(--accent)]'
+                  isPaused ? 'bg-[var(--warning)]' : 'bg-[var(--accent)]'
                 )}
-                style={{ transform: `scaleX(${Math.min(1, Math.max(0, progress))})` }}
+                style={{ scaleX: progress }}
               />
             </div>
 
@@ -247,7 +270,7 @@ export function FeaturedProjectCard({
                       aria-hidden
                       className={cn(
                         'h-2 w-2 rounded-full transition-all duration-200',
-                        isActive ? 'scale-110 bg-[var(--accent)]' : 'bg-white/20 group-hover:bg-white/40'
+                        isActive ? 'scale-110 bg-[var(--accent)]' : 'bg-[var(--fg-muted)]/25 group-hover:bg-[var(--fg-muted)]/45'
                       )}
                     />
                   </button>

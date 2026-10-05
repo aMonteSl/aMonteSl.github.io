@@ -62,7 +62,8 @@ export function StreamLegend({ items, visibleLanes, onToggleLane, className }: S
             onClick={() => onToggleLane?.(item.lane)}
             className={cn(
               'flex min-h-9 items-center gap-2 rounded-full px-3 py-1.5 pointer-coarse:min-h-11 pointer-coarse:px-4',
-              'transition-all duration-300 cursor-pointer',
+              // No transform here: framer drives the hover/tap scale
+              'transition-[opacity,background-color,box-shadow] duration-300 cursor-pointer',
               isVisible
                 ? 'bg-[var(--card)]/60 ring-1 ring-[var(--border)]/30 hover:ring-[var(--border)]/60'
                 : 'bg-[var(--card)]/30 ring-1 ring-[var(--border)]/10 opacity-50',
