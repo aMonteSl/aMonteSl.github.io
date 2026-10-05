@@ -6,6 +6,13 @@
 }
 
 /*
+ * Viewport-height variant: laptop screens once browser chrome is subtracted
+ * (1366x768 -> ~657px, 1536x864 -> ~750px, 1440x900 -> ~790px) and most phones.
+ * The hero uses it to fit its first screen. Combine with breakpoints: `lg:short:mt-4`.
+ */
+@custom-variant short (@media (max-height: 56.25rem));
+
+/*
  * Page gutter (16/24/32px) that also clears landscape notches: the viewport uses
  * viewport-fit=cover, so content would otherwise slide under the notch.
  */

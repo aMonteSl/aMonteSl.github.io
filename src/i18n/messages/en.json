@@ -31,6 +31,8 @@
     "headlineSub": "Systems, Cloud, Full-Stack and XR developer tools",
     "aboutMe": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently enrolled in the Master's Degree in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data, while working as a Specialist Technician on a URJC research project on dependencies in complex collections of software modules, after an extracurricular Cloud & Systems N2 internship at SATEC. Interested in software analytics, code repositories, and applied research.",
     "aboutMeUpcoming": "Telematics Engineer from URJC, graduated in January 2026, with experience in software development, systems, and data visualization. Author of Code-XR, an open-source VS Code extension published at IEEE VISSOFT 2025, focused on visual analysis of code metrics in XR environments. Currently enrolled in the Master's Degree in Telecommunications Engineering at UPM, specializing in Machine Learning and Big Data. After an extracurricular Cloud & Systems N2 internship at SATEC, joining a URJC research project on dependencies in complex collections of software modules as a Specialist Technician on October 8, 2026. Interested in software analytics, code repositories, and applied research.",
+    "readMore": "Read more",
+    "readLess": "Show less",
     "ctaProjects": "View Projects",
     "ctaResume": "Download CV",
     "availabilityLabel": "Currently active",
